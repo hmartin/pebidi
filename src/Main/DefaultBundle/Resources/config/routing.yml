@@ -1,0 +1,3 @@
+main_default_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: MainDefaultBundle:Default:index }
