@@ -1,4 +1,4 @@
-Wreadme
+
 home page: Enter your email to get your own bilingual dictionary
 input go personal home (with email save)
 
@@ -8,8 +8,4 @@ input
 when input display definition/translation
  
 Training (beta) 
-
-Tables:
-- user (id, email)
-- word (id, word, definition)
-- translation (user_id, word_id, translation)
+table point

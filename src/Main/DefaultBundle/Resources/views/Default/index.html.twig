@@ -1,5 +1,16 @@
-{% extends '::layout.html.twig' %}
+{% extends 'MainDefaultBundle::layout.html.twig' %}
 
-{% block body %}
-Hello {{ name }}!
+{% block content %}
+    <h1>Get your Personal Bilingual Dictionary</h1>
+    <p class="lead">You just have to enter your email, then you can save words you just have learn.</p>
+    <p class="lead">
+    <form class="form-inline" role="form" action="{{ path('betaUse') }}" method="post">
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail2">Email address</label>
+            <input class="form-control input-lg" type="email" name="email" placeholder="Email Address">
+        </div>
+        <button type="submit"  class="btn btn-success input-lg" >Go!</button>
+    </form>
+    </p>
+    <p class="lead">PeBiDi permits you to don't forget all essential word</p>
 {% endblock %}

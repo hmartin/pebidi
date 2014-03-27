@@ -23,7 +23,8 @@
         "braincrafted/bootstrap-bundle": "~2.0",
         "twbs/bootstrap": "3.0.*",
         "jquery/jquery":  "1.10.*",
-        "gedmo/doctrine-extensions": "dev-master"
+        "gedmo/doctrine-extensions": "dev-master",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
 
     },
     "scripts": {

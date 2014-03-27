@@ -1,0 +1,12 @@
+{% extends 'MainDefaultBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Welcome!</h1>
+    <p class="lead">Enter a new word:</p>
+    <p class="lead">
+    <form class="form-inline" role="form" action="{{ path('dictionary', { 'id': dictionary.id }) }}" method="post">
+        {{ form_widget(form, {'form_type': 'horizontal'}) }}
+        <button type="submit"  class="btn btn-success input-lg" >Save!</button>
+    </form>
+    </p>
+{% endblock %}

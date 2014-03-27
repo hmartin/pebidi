@@ -1,5 +1,7 @@
+
 main_default:
-    resource: "@MainDefaultBundle/Resources/config/routing.yml"
+    resource: "@MainDefaultBundle/Controller/"
+    type:     annotation
     prefix:   /
 
 fos_user_security:
