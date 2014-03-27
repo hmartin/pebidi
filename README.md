@@ -1,4 +1,4 @@
-readme
+Wreadme
 home page: Enter your email to get your own bilingual dictionary
 input go personal home (with email save)
 
@@ -11,5 +11,5 @@ Training (beta)
 
 Tables:
 - user (id, email)
-- word (id, word)
+- word (id, word, definition)
 - translation (user_id, word_id, translation)

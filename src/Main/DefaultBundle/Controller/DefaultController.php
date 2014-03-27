@@ -6,8 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
+    /**
+     * @Template
+     */
     public function indexAction($name)
     {
-        return $this->render('MainDefaultBundle:Default:index.html.twig', array('name' => $name));
+        return array('name' => $name);
     }
 }
