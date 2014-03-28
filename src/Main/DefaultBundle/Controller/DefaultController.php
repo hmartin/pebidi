@@ -16,15 +16,18 @@ class DefaultController extends Controller
      * @Template
      */
     public function indexAction()
-    {
+    {        
+        if ($request->getSession()->has('id')){
+            return $this->redirect($this->generateUrl('newWord', array('id' => $request->getSession()->get('id')) ));
+        }
         return array();
     }
 
     /**
-     * @Route("/d/{id}", name="dictionary" )
+     * @Route("/w/{id}", name="newWord" )
      * @Template
      */
-    public function dictionaryAction(Request $request, $id)
+    public function newWordAction(Request $request, $id)
     {
         $params = array();
 
@@ -49,11 +52,10 @@ class DefaultController extends Controller
                 $this->persistAndFlush($t);
             }
 
-            return $this->redirect($this->generateUrl('dictionary', array('id' => base_convert($d->getId(), 10, 23)) ));
+            return $this->redirect($this->generateUrl('dictionary', array('id' => $d->getConvertId()) ));
         }
         $params['dictionary'] = $d;
         $params['form'] = $form->createView();
-
 
         return $params;
     }
@@ -74,8 +76,9 @@ class DefaultController extends Controller
             $d->setUser($u);
             $d->setLang('en');
             $this->persistAndFlush($d);
+            $request->getSession()->set('id', $d->getConvertId());
 
-            return $this->redirect($this->generateUrl('dictionary', array('id' => base_convert($d->getId(), 10, 23)) ));
+            return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
         }
 
         //return $this->redirect($this->generateUrl('default'));

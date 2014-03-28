@@ -63,6 +63,10 @@ class Dictionary
     {
         return $this->id;
     }
+    
+    public function getConvertId() {
+        return base_convert($this->id, 10, 23);
+    }
 
     /**
      * Set lang
