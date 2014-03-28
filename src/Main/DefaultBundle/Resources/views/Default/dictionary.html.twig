@@ -6,7 +6,7 @@
     <p class="lead">
     <form class="form-inline" role="form" action="{{ path('dictionary', { 'id': dictionary.id }) }}" method="post">
         {{ form_row(form.word) }}
-        {{ _self.information_prototype(form.translation.1) }}
+        {{ _self.information_prototype(form.translations.1) }}
         {{ form_rest(form) }}
         <button type="submit"  class="btn btn-success input-lg" >Save!</button>
     </form>
