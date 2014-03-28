@@ -1,0 +1,11 @@
+{% extends 'MainDefaultBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Your PeDiBi</h1>
+    <p class="lead">
+    {% for word in words %}
+    {{ word.word }}
+    {% endfor %}
+    </p>
+    
+{% endblock %}
