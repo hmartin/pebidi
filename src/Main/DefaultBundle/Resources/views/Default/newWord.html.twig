@@ -15,7 +15,7 @@
         <button type="submit"  class="btn btn-success input-lg" >Save!</button>
     </form>
     </p>
-    <p class="lead"><a href="{{ path('dictionary') }}" >View your dictionary</a></p>
+    <p class="lead"><a href="{{ path('dictionary', { 'id': dictionary.id }) }}" >View your dictionary</a></p>
     <p class="lead">Do a test</p>
 {% endblock %}
 
