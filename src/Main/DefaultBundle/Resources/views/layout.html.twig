@@ -21,11 +21,15 @@
 
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand">PeBiDi</h3>
+                    <h2 class="masthead-brand"><a href="{{ path('default') }}" >PeBiDi</a></h2>
                     <ul class="nav masthead-nav">
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#">Features</a></li>
                         <li><a href="#">Contact</a></li>
+                        <li>
+                            {% if dictionary is defined %}
+                                If you aren't {{ dictionary.user.truncateEmail }}<br><a href="{{ path('clearCookies') }}" >Click Here</a></li>
+                            {% endif %}
                     </ul>
                 </div>
             </div>
@@ -37,7 +41,7 @@
 
             <div class="mastfoot">
                 <div class="inner">
-                    <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                    <p>Develop by <a href="http://izidot.com">Izidot</a>, Follow us on <a href="https://facebook.com">Facebook</a>.</p>
                 </div>
             </div>
 

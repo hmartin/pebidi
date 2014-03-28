@@ -11,16 +11,27 @@ use Main\DefaultBundle\Form as f;
 
 class DefaultController extends Controller
 {
+
+
     /**
      * @Route("/", name="default" )
      * @Template
      */
-    public function indexAction()
-    {        
-        if ($request->getSession()->has('id')){
-            return $this->redirect($this->generateUrl('newWord', array('id' => $request->getSession()->get('id')) ));
+    public function indexAction(Request $request)
+    {
+        if ($this->get('cookie')->has('id')) {
+            return $this->redirect($this->generateUrl('newWord', array('id' => $this->get('cookie')->get('id')) ));
         }
         return array();
+    }
+
+    /**
+     * @Route("/cc", name="clearCookies" )
+     */
+    public function clearCookiesAction()
+    {
+        $this->get('cookie')->remove('id');
+        return $this->redirect($this->generateUrl('default'));
     }
 
     /**
@@ -30,6 +41,7 @@ class DefaultController extends Controller
     public function newWordAction(Request $request, $id)
     {
         $params = array();
+        $this->get('cookie')->setCookie('id', $id);
 
         $d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find( base_convert($id, 23, 10) );
         $w = new e\Word();
@@ -41,15 +53,15 @@ class DefaultController extends Controller
 
         if ($form->isValid()) {
             $w->addDictionary($d);
-            $this->persistAndFlush($w);
+            $this->get('persist')->persistAndFlush($w);
             foreach( $w->getTranslations() as $t ) {
                 $t->setWord( $w );
                 $t->setDictionary($d);
-                $this->persistAndFlush($t);
+                $this->get('persist')->persistAndFlush($t);
             }
             foreach( $w->getDictionaries() as $d ) {
                 $d->addWord( $w );
-                $this->persistAndFlush($t);
+                $this->get('persist')->persistAndFlush($t);
             }
 
             return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
@@ -71,11 +83,12 @@ class DefaultController extends Controller
             $u->setEmail($request->request->get('email'));
             $u->setUsername($request->request->get('email'));
             $u->setPassword($request->request->get('email'));
-            $this->persistAndFlush($u);
+            $this->get('persist')->persistAndFlush($u);
             $d = new e\Dictionary();
             $d->setUser($u);
             $d->setLang('en');
-            $this->persistAndFlush($d);
+
+            $this->get('persist')->persistAndFlush($d);
             $request->getSession()->set('id', $d->getConvertId());
 
             return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
@@ -84,11 +97,4 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('default'));
     }
 
-
-    private function persistAndFlush($obj) {
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($obj);
-        $em->flush();
-    }
 }

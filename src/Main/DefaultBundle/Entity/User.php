@@ -28,6 +28,11 @@ class User extends BaseUser
      */
     protected $dictionaries;
 
+    public function getTruncateEmail() {
+        $a = explode('@', $this->email);
+        return $a['0'].'@...';
+    }
+
     /**
      * Get id
      *

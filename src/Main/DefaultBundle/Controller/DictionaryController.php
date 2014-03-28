@@ -22,11 +22,4 @@ class DictionaryController extends Controller
         $params['words'] = $d->getWords();
         return $params;
     }
-
-    private function persistAndFlush($obj) {
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($obj);
-        $em->flush();
-    }
 }
