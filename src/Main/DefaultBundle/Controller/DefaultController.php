@@ -52,7 +52,7 @@ class DefaultController extends Controller
                 $this->persistAndFlush($t);
             }
 
-            return $this->redirect($this->generateUrl('dictionary', array('id' => $d->getConvertId()) ));
+            return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
         }
         $params['dictionary'] = $d;
         $params['form'] = $form->createView();
@@ -81,7 +81,7 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
         }
 
-        //return $this->redirect($this->generateUrl('default'));
+        return $this->redirect($this->generateUrl('default'));
     }
 
 
