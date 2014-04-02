@@ -16,17 +16,22 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $open = 1;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Dictionary", mappedBy="user")
+     */
+    protected $dictionaries;
 
     public function __construct()
     {
         parent::__construct();
         // your own logic
     }
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Dictionary", mappedBy="user")
-     */
-    protected $dictionaries;
 
     public function getTruncateEmail() {
         $a = explode('@', $this->email);
@@ -75,4 +80,9 @@ class User extends BaseUser
     {
         return $this->dictionaries;
     }
+    
+    public function getDefaultDictionary() {
+        return $this->dictionaries['0'];
+    }
+        
 }

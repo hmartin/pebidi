@@ -22,7 +22,7 @@ class CookieService
     {
         $response = new Response();
         $response->headers->setCookie(new Cookie($name, $value));
-        $response->send();
+        $response->sendHeaders();
     }
 
     public function has($name)

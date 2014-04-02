@@ -77,12 +77,19 @@ class DefaultController extends Controller
      */
     public function betaUseAction(Request $request)
     {
-        if ($request->request->get('email')) {
-            //todo test email, test dictionary if create one, else redirect dictionary
+        if ($email = $request->request->get('email')) {
+            //todo redeirect close dictionary         
+            if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
+                if($u->getOpen()) {
+                    $d = $u->getDefaultDictionary();
+                    return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));                       
+                }
+            }
+            
             $u = new e\User();
-            $u->setEmail($request->request->get('email'));
-            $u->setUsername($request->request->get('email'));
-            $u->setPassword($request->request->get('email'));
+            $u->setEmail($email);
+            $u->setUsername($email);
+            $u->setPassword($email);
             $this->get('persist')->persistAndFlush($u);
             $d = new e\Dictionary();
             $d->setUser($u);
@@ -93,8 +100,6 @@ class DefaultController extends Controller
 
             return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
         }
-
-        return $this->redirect($this->generateUrl('default'));
     }
 
 }
