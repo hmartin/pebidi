@@ -9,3 +9,5 @@ web/bundles/*
 
 composer.lock
 .idea/*
+.codio
+.settings

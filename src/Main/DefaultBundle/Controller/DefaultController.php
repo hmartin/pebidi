@@ -91,6 +91,7 @@ class DefaultController extends Controller
             $u->setUsername($email);
             $u->setPassword($email);
             $this->get('persist')->persistAndFlush($u);
+            // create personal
             $d = new e\Dictionary();
             $d->setUser($u);
             $d->setLang('en');
@@ -100,6 +101,7 @@ class DefaultController extends Controller
 
             return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
         }
+        throw new \Exception('Something went wrong!');
     }
 
 }
