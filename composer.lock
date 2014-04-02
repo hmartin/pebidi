@@ -692,12 +692,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817"
+                "reference": "98953461473facd3bcb486b88cdd87bc5120b218"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f8e9255eedc91bc53195de288c9fe640719b2817",
-                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/98953461473facd3bcb486b88cdd87bc5120b218",
+                "reference": "98953461473facd3bcb486b88cdd87bc5120b218",
                 "shasum": ""
             },
             "require": {
@@ -752,7 +752,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-03-18 08:55:34"
+            "time": "2014-04-01 09:27:17"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -760,12 +760,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
-                "reference": "c57b1bbdb783b69265c1dad40388a5f65a33bdc6"
+                "reference": "1dc1e7418b147e3760c155bd8b22e067dbe677d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/c57b1bbdb783b69265c1dad40388a5f65a33bdc6",
-                "reference": "c57b1bbdb783b69265c1dad40388a5f65a33bdc6",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/1dc1e7418b147e3760c155bd8b22e067dbe677d1",
+                "reference": "1dc1e7418b147e3760c155bd8b22e067dbe677d1",
                 "shasum": ""
             },
             "require": {
@@ -832,7 +832,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2014-03-25 17:56:44"
+            "time": "2014-03-27 15:45:55"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1395,21 +1395,20 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.2.1",
+            "version": "v1.0.1",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Icu.git",
-                "reference": "98e197da54df1f966dd5e8a4992135703569c987"
+                "reference": "fdba214b1e087c149843bde976263c53ac10c975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/98e197da54df1f966dd5e8a4992135703569c987",
-                "reference": "98e197da54df1f966dd5e8a4992135703569c987",
+                "url": "https://api.github.com/repos/symfony/Icu/zipball/fdba214b1e087c149843bde976263c53ac10c975",
+                "reference": "fdba214b1e087c149843bde976263c53ac10c975",
                 "shasum": ""
             },
             "require": {
-                "lib-icu": ">=4.4",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -1439,7 +1438,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-10-04 10:06:38"
+            "time": "2013-10-04 09:12:07"
         },
         {
             "name": "symfony/monolog-bundle",
