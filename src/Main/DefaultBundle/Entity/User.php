@@ -85,4 +85,27 @@ class User extends BaseUser
         return $this->dictionaries['0'];
     }
         
+
+    /**
+     * Set open
+     *
+     * @param integer $open
+     * @return User
+     */
+    public function setOpen($open)
+    {
+        $this->open = $open;
+
+        return $this;
+    }
+
+    /**
+     * Get open
+     *
+     * @return integer 
+     */
+    public function getOpen()
+    {
+        return $this->open;
+    }
 }
