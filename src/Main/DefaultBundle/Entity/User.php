@@ -35,7 +35,8 @@ class User extends BaseUser
 
     public function getTruncateEmail() {
         $a = explode('@', $this->email);
-        return $a['0'].'@...';
+        $b = explode('.', $a['1']);
+        return $a['0'].'@....'.$b['1'];
     }
 
     /**

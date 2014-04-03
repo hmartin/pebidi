@@ -43,33 +43,36 @@ class DefaultController extends Controller
         $params = array();
         $this->get('cookie')->setCookie('id', $id);
 
-        $d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find( base_convert($id, 23, 10) );
-        $w = new e\Word();
-        $t = new e\Translation();
-        $w->addTranslation($t);
-        $wt = new f\WordType();
-        $form = $this->createForm($wt, $w);
-        $form->handleRequest($request);
+        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find( base_convert($id, 23, 10) )) 
+        {
+            $w = new e\Word();
+            $t = new e\Translation();
+            $w->addTranslation($t);
+            $wt = new f\WordType();
+            $form = $this->createForm($wt, $w);
+            $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $w->addDictionary($d);
-            $this->get('persist')->persistAndFlush($w);
-            foreach( $w->getTranslations() as $t ) {
-                $t->setWord( $w );
-                $t->setDictionary($d);
-                $this->get('persist')->persistAndFlush($t);
-            }
-            foreach( $w->getDictionaries() as $d ) {
-                $d->addWord( $w );
-                $this->get('persist')->persistAndFlush($t);
-            }
+            if ($form->isValid()) {
+                $w->addDictionary($d);
+                $this->get('persist')->persistAndFlush($w);
+                foreach( $w->getTranslations() as $t ) {
+                    $t->setWord( $w );
+                    $t->setDictionary($d);
+                    $this->get('persist')->persistAndFlush($t);
+                }
+                foreach( $w->getDictionaries() as $d ) {
+                    $d->addWord( $w );
+                    $this->get('persist')->persistAndFlush($t);
+                }
 
-            return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
+                return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
+            }
+            $params['dictionary'] = $d;
+            $params['form'] = $form->createView();
+
+            return $params;
         }
-        $params['dictionary'] = $d;
-        $params['form'] = $form->createView();
-
-        return $params;
+        return $this->redirect($this->generateUrl('default'));
     }
 
     /**

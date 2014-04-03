@@ -45,6 +45,6 @@ class CookieService
     {
         $response = new Response();
         $response->headers->clearCookie($name);
-        $response->send();
+        $response->sendHeaders();
     }
 }
