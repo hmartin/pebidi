@@ -45,6 +45,15 @@ class DefaultController extends Controller
 
         if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find( base_convert($id, 23, 10) )) 
         {
+            if ($d->getPrivate()) {
+                if ($u = $this->getUser()) {
+                    if ($d->getUser() != $u ) {
+                        return $this->redirect($this->generateUrl('private'));
+                    }
+                } else {
+                    return $this->redirect($this->generateUrl('static', array('template' => 'pleaseLogin'));
+                }
+            }
             $w = new e\Word();
             $t = new e\Translation();
             $w->addTranslation($t);
@@ -76,35 +85,12 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/betaUse", name="betaUse" )
+     * @Route("/s/{template}", name="static" )
+     * @Template
      */
-    public function betaUseAction(Request $request)
-    {
-        if ($email = $request->request->get('email')) {
-            //todo redeirect close dictionary         
-            if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
-                if($u->getOpen()) {
-                    $d = $u->getDefaultDictionary();
-                    return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));                       
-                }
-            }
-            
-            $u = new e\User();
-            $u->setEmail($email);
-            $u->setUsername($email);
-            $u->setPassword($email);
-            $this->get('persist')->persistAndFlush($u);
-            // create personal
-            $d = new e\Dictionary();
-            $d->setUser($u);
-            $d->setLang('en');
-
-            $this->get('persist')->persistAndFlush($d);
-            $request->getSession()->set('id', $d->getConvertId());
-
-            return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
-        }
-        throw new \Exception('Something went wrong!');
+    public function newWordAction($template)
+    {    
+        return $this->render('MainDefaultBundle:Static:'.$template.'.html.twig', array();
     }
 
 }

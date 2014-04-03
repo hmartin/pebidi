@@ -1,0 +1,8 @@
+{% extends 'MainDefaultBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>This dictionary is private, if it's yours please login</h1>
+    <p class="lead">
+    {% render controller("FOSUserBundle:Security:login") %}
+    </p>
+{% endblock %}

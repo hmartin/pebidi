@@ -20,7 +20,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="integer")
      */
-    protected $open = 1;
+    protected $private = 0;
     
     /**
      * @ORM\OneToMany(targetEntity="Dictionary", mappedBy="user")
@@ -84,29 +84,5 @@ class User extends BaseUser
     
     public function getDefaultDictionary() {
         return $this->dictionaries['0'];
-    }
-        
-
-    /**
-     * Set open
-     *
-     * @param integer $open
-     * @return User
-     */
-    public function setOpen($open)
-    {
-        $this->open = $open;
-
-        return $this;
-    }
-
-    /**
-     * Get open
-     *
-     * @return integer 
-     */
-    public function getOpen()
-    {
-        return $this->open;
     }
 }
