@@ -11,8 +11,6 @@ use Main\DefaultBundle\Form as f;
 
 class DefaultController extends Controller
 {
-
-
     /**
      * @Route("/", name="default" )
      * @Template
@@ -48,7 +46,7 @@ class DefaultController extends Controller
             if ($d->getPrivate()) {
                 if ($u = $this->getUser()) {
                     if ($d->getUser() != $u ) {
-                        return $this->redirect($this->generateUrl('private'));
+                        return $this->redirect($this->generateUrl('static', array('template' => 'private'));
                     }
                 } else {
                     return $this->redirect($this->generateUrl('static', array('template' => 'pleaseLogin'));
