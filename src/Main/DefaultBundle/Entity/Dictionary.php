@@ -207,4 +207,27 @@ class Dictionary
     {
         return $this->translations;
     }
+
+    /**
+     * Set private
+     *
+     * @param integer $private
+     * @return Dictionary
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+
+        return $this;
+    }
+
+    /**
+     * Get private
+     *
+     * @return integer 
+     */
+    public function getPrivate()
+    {
+        return $this->private;
+    }
 }

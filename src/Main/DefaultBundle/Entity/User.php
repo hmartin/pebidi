@@ -85,4 +85,27 @@ class User extends BaseUser
     public function getDefaultDictionary() {
         return $this->dictionaries['0'];
     }
+
+    /**
+     * Set private
+     *
+     * @param integer $private
+     * @return User
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+
+        return $this;
+    }
+
+    /**
+     * Get private
+     *
+     * @return integer 
+     */
+    public function getPrivate()
+    {
+        return $this->private;
+    }
 }

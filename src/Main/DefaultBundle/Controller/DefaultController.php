@@ -12,7 +12,16 @@ use Main\DefaultBundle\Form as f;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="default" )
+     * @Route("/", name="_default")
+     * @Template()
+     */
+    public function initAction()
+    {
+        return $this->redirect($this->generateUrl('default', array( '_locale' => 'fr' )));
+    }
+
+    /**
+     * @Route("/{_locale}", name="default" )
      * @Template
      */
     public function indexAction(Request $request)
@@ -24,7 +33,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/cc", name="clearCookies" )
+     * @Route("/{_locale}/cc", name="clearCookies" )
      */
     public function clearCookiesAction()
     {
@@ -33,7 +42,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/w/{id}", name="newWord" )
+     * @Route("/{_locale}/w/{id}", name="newWord" )
      * @Template
      */
     public function newWordAction(Request $request, $id)
@@ -46,10 +55,10 @@ class DefaultController extends Controller
             if ($d->getPrivate()) {
                 if ($u = $this->getUser()) {
                     if ($d->getUser() != $u ) {
-                        return $this->redirect($this->generateUrl('static', array('template' => 'private'));
+                        return $this->redirect($this->generateUrl('static', array('template' => 'private')));
                     }
                 } else {
-                    return $this->redirect($this->generateUrl('static', array('template' => 'pleaseLogin'));
+                    return $this->redirect($this->generateUrl('static', array('template' => 'pleaseLogin')));
                 }
             }
             $w = new e\Word();
@@ -83,12 +92,12 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/s/{template}", name="static" )
+     * @Route("/{_locale}/s/{template}", name="static" )
      * @Template
      */
-    public function newWordAction($template)
+    public function staticAction($template)
     {    
-        return $this->render('MainDefaultBundle:Static:'.$template.'.html.twig', array();
+        return $this->render('MainDefaultBundle:Static:'.$template.'.html.twig', array());
     }
 
 }

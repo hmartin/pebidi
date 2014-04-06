@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f12a0279-42f3-4f6c-abbc-c1e0d61084fc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Service/CookieService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Service/PersistService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DictionaryController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DictionaryController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/UserController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/UserController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/layout.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/config/services.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/newWord.html.twig" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/newWord.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="persodic.iws" />
@@ -32,46 +34,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DefaultController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php">
+      <file leaf-file-name="config.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="33" selection-start="2701" selection-end="2701" vertical-scroll-proportion="0.6395881" vertical-offset="641" max-vertical-offset="1515">
+            <state line="41" column="21" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1155">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="newWord.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/newWord.html.twig">
+      <file leaf-file-name="routing.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="48" selection-start="48" selection-end="48" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="465">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/layout.html.twig">
+      <file leaf-file-name="UserController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="55" selection-start="1034" selection-end="1034" vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="900">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="30" selection-start="405" selection-end="405" vertical-scroll-proportion="-8.75" vertical-offset="90" max-vertical-offset="1245">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DictionaryController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DictionaryController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="5" selection-start="755" selection-end="755" vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="390">
+            <state line="16" column="26" selection-start="429" selection-end="429" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="675">
               <folding />
             </state>
           </provider>
@@ -80,10 +64,8 @@
       <file leaf-file-name="CookieService.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Service/CookieService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="45" selection-start="1074" selection-end="1074" vertical-scroll-proportion="-28.75" vertical-offset="0" max-vertical-offset="825">
-              <folding>
-                <element signature="e#46#96#0" expanded="true" />
-              </folding>
+            <state line="46" column="45" selection-start="1081" selection-end="1081" vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="825">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -91,7 +73,7 @@
       <file leaf-file-name="services.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/config/services.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="30" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+            <state line="9" column="30" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="240">
               <folding>
                 <marker date="1396027677338" expanded="true" signature="73:288" placeholder="services:" />
                 <marker date="1396027677338" expanded="true" signature="261:287" placeholder="arguments:" />
@@ -103,7 +85,7 @@
       <file leaf-file-name="PersistService.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Service/PersistService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="43" selection-start="254" selection-end="254" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="375">
+            <state line="15" column="43" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="375">
               <folding />
             </state>
           </provider>
@@ -121,7 +103,25 @@
       <file leaf-file-name="index.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="48" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="315">
+            <state line="14" column="55" selection-start="691" selection-end="691" vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="315">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="messages.en.yml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/translations/messages.en.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="76" selection-start="269" selection-end="269" vertical-scroll-proportion="0.08356546" vertical-offset="0" max-vertical-offset="718">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="messages.fr.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/translations/messages.fr.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="40" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
               <folding />
             </state>
           </provider>
@@ -148,8 +148,6 @@
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/Public/css/main.css" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/public/css/main.css" />
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Form/WordType.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Form/TranslationType.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php" />
@@ -161,12 +159,17 @@
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Service/Persist.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Service/PersistService.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/config/services.yml" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DictionaryController.php" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/newWord.html.twig" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Service/CookieService.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/layout.html.twig" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/newWord.html.twig" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DictionaryController.php" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/translations/messages.fr.yml" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/translations/messages.en.yml" />
       </list>
     </option>
   </component>
@@ -174,8 +177,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="49" />
     <option name="y" value="24" />
-    <option name="width" value="1871" />
-    <option name="height" value="1026" />
+    <option name="width" value="1551" />
+    <option name="height" value="846" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -377,6 +380,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Default" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persodic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persodic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DefaultBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="translations" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -613,7 +646,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="24" width="1871" height="1026" extended-state="6" />
+    <frame x="49" y="24" width="1551" height="846" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -627,7 +660,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24951644" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -657,6 +690,79 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="33" selection-start="2848" selection-end="2848" vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="1425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/newWord.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="48" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="22" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="7" selection-start="389" selection-end="389" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1410">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DictionaryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="5" selection-start="755" selection-end="755" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="465">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Service/CookieService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="45" selection-start="1081" selection-end="1081" vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="825">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="30" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="240">
+          <folding>
+            <marker date="1396027677338" expanded="true" signature="73:288" placeholder="services:" />
+            <marker date="1396027677338" expanded="true" signature="261:287" placeholder="arguments:" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Service/PersistService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="43" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Form/WordType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="86" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="690">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="48" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="27" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1455">
           <folding />
         </state>
@@ -664,37 +770,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="11" selection-start="234" selection-end="234" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="240">
-          <folding />
-        </state>
+        <state line="10" column="11" selection-start="234" selection-end="234" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="240" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="25" selection-start="25" selection-end="25" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-          <folding />
-        </state>
+        <state line="0" column="25" selection-start="25" selection-end="25" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="34" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="2340">
-          <folding />
-        </state>
+        <state line="45" column="34" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="2340" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Form/TranslationType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="9" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="675">
-          <folding />
-        </state>
+        <state line="18" column="9" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="675" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="58" selection-start="515" selection-end="515" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2640">
-          <folding />
-        </state>
+        <state line="26" column="58" selection-start="515" selection-end="515" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2640" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php">
@@ -743,26 +839,9 @@
         <state line="3" column="42" selection-start="105" selection-end="105" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="21" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1155" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/public/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="29" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2490">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="48" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="315">
           <folding />
         </state>
       </provider>
@@ -776,16 +855,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Form/TranslationType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="9" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="675">
-          <folding />
-        </state>
+        <state line="18" column="9" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="675" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="34" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="2340">
-          <folding />
-        </state>
+        <state line="45" column="34" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="2340" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php">
@@ -797,31 +872,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="58" selection-start="515" selection-end="515" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2640">
-          <folding />
-        </state>
+        <state line="26" column="58" selection-start="515" selection-end="515" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2640" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="25" selection-start="25" selection-end="25" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869" />
+      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="25" selection-start="25" selection-end="25" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="11" selection-start="234" selection-end="234" vertical-scroll-proportion="-6.0" vertical-offset="0" max-vertical-offset="240">
-          <folding />
-        </state>
+        <state line="10" column="11" selection-start="234" selection-end="234" vertical-scroll-proportion="-6.0" vertical-offset="0" max-vertical-offset="240" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Service/PersistService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="43" selection-start="254" selection-end="254" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="375">
+        <state line="15" column="43" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="375">
           <folding />
         </state>
       </provider>
@@ -836,46 +905,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DictionaryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="5" selection-start="755" selection-end="755" vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="390">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/newWord.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="48" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="874">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="30" selection-start="405" selection-end="405" vertical-scroll-proportion="-8.75" vertical-offset="90" max-vertical-offset="1245">
+        <state line="44" column="7" selection-start="840" selection-end="840" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1755">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Service/CookieService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="45" selection-start="1074" selection-end="1074" vertical-scroll-proportion="-28.75" vertical-offset="0" max-vertical-offset="825">
-          <folding>
-            <element signature="e#46#96#0" expanded="true" />
-          </folding>
+        <state line="46" column="45" selection-start="1081" selection-end="1081" vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="825">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/layout.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="55" selection-start="1034" selection-end="1034" vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="900">
+        <state line="32" column="159" selection-start="1463" selection-end="1463" vertical-scroll-proportion="-13.916667" vertical-offset="146" max-vertical-offset="915">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/newWord.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="156" selection-start="630" selection-end="630" vertical-scroll-proportion="0.26431718" vertical-offset="0" max-vertical-offset="825">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="21" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1155">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DictionaryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="26" selection-start="429" selection-end="429" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="390">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="26" selection-start="429" selection-end="429" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="718">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="33" selection-start="2701" selection-end="2701" vertical-scroll-proportion="0.6395881" vertical-offset="641" max-vertical-offset="1515">
+        <state line="23" column="25" selection-start="633" selection-end="633" vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="1560">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/translations/messages.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="40" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="718">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="55" selection-start="691" selection-end="691" vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/translations/messages.en.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="76" selection-start="269" selection-end="269" vertical-scroll-proportion="0.08356546" vertical-offset="0" max-vertical-offset="718">
           <folding />
         </state>
       </provider>

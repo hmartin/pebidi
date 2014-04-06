@@ -12,7 +12,7 @@ use Main\DefaultBundle\Form as f;
 class DictionaryController extends Controller
 {
     /**
-     * @Route("/d/{id}", name="dictionary" )
+     * @Route("/{_locale}/d/{id}", name="dictionary" )
      * @Template
      */
     public function dictionaryAction(Request $request, $id)

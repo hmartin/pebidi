@@ -39,6 +39,11 @@ class Dictionary
      * @ORM\Column(type="string", length=255)
      */
     protected $lang;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $private = 0;
 
     /**
      * @Gedmo\Timestampable(on="create")

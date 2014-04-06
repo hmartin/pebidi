@@ -27,6 +27,11 @@
                         <li>If it's not your email: {{ dictionary.user.truncateEmail }}<br><a href="{{ path('clearCookies') }}" >Click Here</a></li>
                         {% endif %}
                     </ul>
+                    {% if app.request.locale == 'fr' %}
+                        <b>fr</b>&nbsp;-&nbsp;<a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">en</a>
+                    {% else  %}
+                        <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'}))}}">fr</a>&nbsp;-&nbsp;<b>en</b>
+                    {% endif %}
                 </div>
             </div>
 

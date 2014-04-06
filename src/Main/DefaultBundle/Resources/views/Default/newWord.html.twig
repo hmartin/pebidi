@@ -10,13 +10,37 @@
         </div>
         <div class="form-group">
         {{ _self.information_prototype(form.translations.0) }}
+            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Some help"><span class="glyphicon glyphicon-help"></span></button>
         </div>
         {{ form_rest(form) }}
         <button type="submit"  class="btn btn-success input-lg" >Save!</button>
     </form>
     </p>
     <p class="lead"><a href="{{ path('dictionary', { 'id': dictionary.id }) }}" >View your dictionary</a></p>
-    <p class="lead">Do a test</p>
+    <p class="lead">
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Do a test
+    </button>
+    </p>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% macro information_prototype(translation) %}

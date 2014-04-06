@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     
     /**
-     * @Route("/betaUse", name="betaUse" )
+     * @Route("/{_locale}/betaUse", name="betaUse" )
      */
     public function betaUseAction(Request $request)
     {
