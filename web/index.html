@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PeBidi - Personal Bilingual Dictionary</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  </head>
+  <body>
+
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h2 class="masthead-brand"><a href="{{ path('default') }}" >PeBiDi</a></h2>
+                    <ul class="nav masthead-nav">                        
+                         if dictionary is defined 
+                        <li>If it's not your email:  dictionary.user.truncateEmail <br><a href="{{ path('clearCookies') }}" >Click Here</a></li>
+                         endif 
+                    </ul>
+                     if app.request.locale == 'fr' 
+                        <b>fr</b>&nbsp;-&nbsp;<a href="  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))">en</a>
+                     else  
+                        <a href="  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'}))">fr</a>&nbsp;-&nbsp;<b>en</b>
+                     endif %
+                </div>
+            </div>
+
+            <div ng-view class="inner cover">--</div>
+
+            <div class="mastfoot">
+                <div class="inner">
+                    <p>Develop by <a href="http://izidot.com">Izidot</a>, Follow us on <a href="https://facebook.com">Facebook</a>.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+      
+  </body>
+</html>
