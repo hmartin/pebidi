@@ -1,8 +1,11 @@
+api:
+    type:     rest
+    resource: Main\DefaultBundle\Controller\ApiUserController
 
-main_default:
-    resource: "@MainDefaultBundle/Controller/"
-    type:     annotation
-    prefix:   /
+apiWord:
+    type:     rest
+    resource: Main\DefaultBundle\Controller\ApiWordController
+
 
 
 fos_user_security:

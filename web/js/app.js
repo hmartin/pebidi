@@ -1,9 +1,10 @@
 'use strict';
 
-var API_URL = '/api.php/';
+var API_URL = '/api_dev.php/';
 
 var mainApp = angular.module('mainApp', [
   'ngRoute',
+  'ngAnimate',
   'pascalprecht.translate',
 
   'mainControllers'
@@ -12,10 +13,14 @@ var mainApp = angular.module('mainApp', [
 mainApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/', {
-        templateUrl: 'partials/home.html',
-        controller: 'HomeCtrl'
-      }).
+        when('/', {
+            templateUrl: 'partials/home.html',
+            controller: 'HomeCtrl'
+        }).
+        when('/addWord/:id', {
+            templateUrl: 'partials/addWord.html',
+            controller: 'HomeCtrl'
+        }).
       otherwise({
         redirectTo: '/'
       });

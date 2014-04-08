@@ -21,7 +21,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{_locale}", name="default" )
+     * @Route("/{_locale}", name="default", requirements={"_locale" = "en|fr|de"} )
      * @Template
      */
     public function indexAction(Request $request)
