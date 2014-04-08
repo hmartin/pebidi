@@ -1,6 +1,6 @@
 'use strict';
 
-/* App Module */
+var API_URL = '/api.php/';
 
 var mainApp = angular.module('mainApp', [
   'ngRoute',

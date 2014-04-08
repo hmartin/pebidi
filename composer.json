@@ -20,6 +20,10 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
 
+        "friendsofsymfony/rest-bundle": "@dev",
+        "jms/serializer-bundle": "@dev",
+        "nelmio/api-doc-bundle": "@dev",
+        
         "braincrafted/bootstrap-bundle": "~2.0",
         "twbs/bootstrap": "3.0.*",
         "jquery/jquery":  "1.10.*",

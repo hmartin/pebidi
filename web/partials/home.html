@@ -4,7 +4,7 @@
     <form class="form-inline" ng-submit="processForm()">
         <div class="form-group">
             <label class="sr-only" for="exampleInputEmail2">{{ 'email.address'|translate  }}</label>
-            <input class="form-control input-lg" type="email" name="email" placeholder="Email Address">
+            <input class="form-control input-lg" ng-model="formData.email" type="email" name="email" placeholder="Email Address">
         </div>
         <button type="submit"  class="btn btn-success input-lg" >{{ 'go'|translate  }}</button>
     </form>
