@@ -2,8 +2,8 @@
   }
 
   .view-animate.ng-enter {
-      -webkit-transition: 500ms linear all;
-      transition: 500ms linear all;
+      -webkit-transition: 400ms linear all;
+      transition: 400ms linear all;
       opacity: 0;
   }
 
