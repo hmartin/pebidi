@@ -50,6 +50,12 @@ class Dictionary
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
+
+    public function getJsonArray() {
+        return array( 'id' => $this->getConvertId(),
+        'countWord' => count($this->getWords()));
+    }
+
     /**
      * Constructor
      */

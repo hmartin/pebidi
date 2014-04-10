@@ -1,11 +1,11 @@
 
-app.service('dictionaryService', function() {
-  var dictionary;
+app.service('dictionaryService', function () {
+    var dictionary;
 
-  addProduct = function(newObj) {
-      productList.push(newObj);
-  };
-  getProducts = function(){
-      return productList;
-  };
+    this.set = function (dic) {
+        dictionary = dic;
+    };
+    this.get = function () {
+        return dictionary;
+    };
 });

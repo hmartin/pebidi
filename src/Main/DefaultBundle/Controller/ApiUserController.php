@@ -13,8 +13,6 @@ use Main\DefaultBundle\Form as f;
 
 class ApiUserController extends FOSRestController
 {
-
-
     /**
      * @Rest\View()
      */
@@ -24,23 +22,21 @@ class ApiUserController extends FOSRestController
             
             if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
                 $d = $u->getDefaultDictionary();
-                return array('dic' => $d);
+            } else {
+                $u = new e\User();
+                $u->setEmail($email);
+                $u->setUsername($email);
+                $u->setPassword($email);
+                $this->get('persist')->persistAndFlush($u);
+                // create personal
+                $d = new e\Dictionary();
+                $d->setUser($u);
+                $d->setLang('en');
+
+                $this->get('persist')->persistAndFlush($d);
             }
-            
-            $u = new e\User();
-            $u->setEmail($email);
-            $u->setUsername($email);
-            $u->setPassword($email);
-            $this->get('persist')->persistAndFlush($u);
-            // create personal
-            $d = new e\Dictionary();
-            $d->setUser($u);
-            $d->setLang('en');
 
-            $this->get('persist')->persistAndFlush($d);
-            $request->getSession()->set('id', $d->getConvertId());
-
-            return array('dic' => $d);
+            return array('dic' => $d->getJsonArray());
         }
         throw new \Exception('Something went wrong!');
     }

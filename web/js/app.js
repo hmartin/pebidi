@@ -5,7 +5,9 @@ var API_URL = '/api_dev.php/';
 var app = angular.module('app', [
   'ngRoute',
   'ngAnimate',
+    'ngCookies',
   'pascalprecht.translate',
+  'ui.bootstrap'
 
 ]);
 
@@ -18,7 +20,7 @@ app.config(['$routeProvider',
         }).
         when('/addWord/:id', {
             templateUrl: 'partials/addWord.html',
-            controller: 'HomeCtrl'
+            controller: 'WordCtrl'
         }).
       otherwise({
         redirectTo: '/'

@@ -1,20 +1,20 @@
-<h1>Welcome!</h1>
+<h1>Welcome! {{ dic.id }}</h1>
 <p class="lead">Enter a new word:</p>
 <p class="lead">
-<form role="form" action="{{ path('newWord', { 'id': dictionary.id }) }}" method="post">
+<form  ng-submit="processForm()">
     <div class="form-group">
-        <input>
+        <input class="form-control" ng-model="formData.word" type="text" name="word" placeholder="{{ 'addword.word'|translate  }}" required>
     </div>
     <div class="form-group">
-        <input>
-        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Some help"><span class="glyphicon glyphicon-help"></span></button>
+        <input class="form-control" ng-model="formData.translation" type="text" name="word" placeholder="{{ 'addword.translation'|translate  }}">
+        <a href="" tooltip-placement="top" tooltip="Some help!"><span class="glyphicon glyphicon-question-sign"></span></a>
     </div>
     <button type="submit"  class="btn btn-success input-lg" >Save!</button>
 </form>
 </p>
-<p class="lead"><a href="{{ path('dictionary', { 'id': dictionary.id }) }}" >View your dictionary</a></p>
+<p class="lead"><a href="{{ path('dictionary', { 'id': dictionary.id }) }}" >View your dictionary ({{ dic.countWord }})</a></p>
 <p class="lead">
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        Do a test
+        {{ 'addword.doATest'|translate  }}
     </button>
 </p>

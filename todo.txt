@@ -7,3 +7,22 @@ Evry open user create open dictionary
 when user register, he become private, like all his dictionaries
 
 after close user can open dictionary
+
+
+set cookies*
+api add words*
+clear cookies
+display dic
+create initial dic
+create account
+auto redirect if cookies
+create test
+algo test
+create initial dic
+create account
+
+
+
+other:
+translate
+help
