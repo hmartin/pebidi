@@ -24,7 +24,7 @@ class ApiUserController extends FOSRestController
             
             if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
                 $d = $u->getDefaultDictionary();
-                return array('id' => $d->getConvertId());
+                return array('dic' => $d);
             }
             
             $u = new e\User();
@@ -40,7 +40,7 @@ class ApiUserController extends FOSRestController
             $this->get('persist')->persistAndFlush($d);
             $request->getSession()->set('id', $d->getConvertId());
 
-            return array('id' => $d->getConvertId());
+            return array('dic' => $d);
         }
         throw new \Exception('Something went wrong!');
     }

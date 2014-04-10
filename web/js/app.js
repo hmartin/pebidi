@@ -2,15 +2,14 @@
 
 var API_URL = '/api_dev.php/';
 
-var mainApp = angular.module('mainApp', [
+var app = angular.module('app', [
   'ngRoute',
   'ngAnimate',
   'pascalprecht.translate',
 
-  'mainControllers'
 ]);
 
-mainApp.config(['$routeProvider',
+app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
         when('/', {
@@ -26,7 +25,7 @@ mainApp.config(['$routeProvider',
       });
   }]);
 
-mainApp.config(function ($translateProvider) {
+app.config(function ($translateProvider) {
   $translateProvider.translations('en', {
         'slogan': 'Get your Personal Bilingual Dictionary',
         'homepage.explication1': 'You just have to enter your email, then you can save words you just have learn.',
