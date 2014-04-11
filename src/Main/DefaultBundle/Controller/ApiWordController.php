@@ -19,7 +19,7 @@ class ApiWordController extends FOSRestController
     public function postNewWordAction(Request $request)
     {
 
-        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
+        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
         {
             $w = new e\Word();
             $w->setWord( $request->request->get('word') );
@@ -36,4 +36,24 @@ class ApiWordController extends FOSRestController
         }
         throw new \Exception('Something went wrong!');
     }
+   
+    /**
+     * @Rest\View()
+     */
+    public function getWordsAction(Request $request)
+    {
+        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
+        {
+            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
+                ->leftJoin('d.translation', 't')
+                ->leftJoin('t.word', 't')
+                ->select('w.word, t.translation')
+                ->where('d.id = ?')
+                ->setParameter('id', $d->getId());
+            $query = $qb->getQuery();
+            $results = $query->getResults();
+            return array('words' => $results);
+        }
+        throw new \Exception('Something went wrong!');
+    }    
 }

@@ -1,0 +1,7 @@
+<h1>{{ 'yourDictionary'|translate  }}</h1>
+<input type="search" ng-model="q" placeholder="filter words..." />
+<ul class="example-animate-container">
+    <li class="animate-repeat" ng-repeat="word in words | filter:q">
+      [{{$index + 1}}] {{word.word}} : {{word.translation}}
+    </li>
+</ul>
