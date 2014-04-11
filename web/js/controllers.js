@@ -23,10 +23,13 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, diction
                 $scope.formData.translation ='';
             });
         };
-});
+})
 
-app.controller('langCtrl', function ($scope, $http, $location, $translate, dictionaryService) {
+.controller('rootCtrl', function ($scope, $http, $location, $translate, dictionaryService) {
     $scope.changeLanguage = function (key) {
         $translate.use(key);
     };
-});
+    $scope.$watch(function() { return $cookies.dic;}, function(newValue) {        
+        $scope.dic = angular.fromJson($cookies.dic);
+    });
+})

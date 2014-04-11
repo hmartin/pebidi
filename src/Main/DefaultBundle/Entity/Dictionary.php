@@ -51,11 +51,13 @@ class Dictionary
      */
     private $created;
 
+
     public function getJsonArray() {
         return array( 'id' => $this->getConvertId(),
-        'countWord' => count($this->getWords()));
+        'countWord' => count($this->getWords()),
+        'encrypt' => $this->getUser()->getBitEmail()
+                    );
     }
-
     /**
      * Constructor
      */

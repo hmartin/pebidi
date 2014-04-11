@@ -33,7 +33,7 @@ class User extends BaseUser
         // your own logic
     }
 
-    public function getTruncateEmail() {
+    public function getBitEmail() {
         $a = explode('@', $this->email);
         $b = explode('.', $a['1']);
         return $a['0'].'@....'.$b['1'];
