@@ -11,12 +11,12 @@ after close user can open dictionary
 
 set cookies*
 api add words*
-clear cookies
-display dic
+!clear cookies
+!display dic
 create initial dic
 create account
-auto redirect if cookies
-create test
+!auto redirect if cookies
+!create test
 algo test
 create initial dic
 create account
@@ -24,5 +24,5 @@ create account
 
 
 other:
-translate
+!translate
 help

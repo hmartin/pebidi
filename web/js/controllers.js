@@ -25,7 +25,7 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, diction
         };
 })
 
-.controller('rootCtrl', function ($scope, $http, $location, $translate, dictionaryService) {
+.controller('rootCtrl', function ($scope, $http, $cookies, $translate) {
     $scope.changeLanguage = function (key) {
         $translate.use(key);
     };

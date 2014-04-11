@@ -55,7 +55,7 @@ class Dictionary
     public function getJsonArray() {
         return array( 'id' => $this->getConvertId(),
         'countWord' => count($this->getWords()),
-        'encrypt' => $this->getUser()->getBitEmail()
+        'bitEmail' => $this->getUser()->getBitEmail()
                     );
     }
     /**
