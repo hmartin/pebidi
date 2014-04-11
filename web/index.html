@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PeBidi - Personal Bilingual Dictionary</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link href="css/animate.css" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
@@ -30,8 +30,8 @@
                     <div class="inner">
                         <h2 class="masthead-brand"><a href="#/" >PeBiDi</a></h2>
                         <div class="nav masthead-nav" >
-                            It's dictionary of: {{ dic.bitEmail }}
-                                <br><a ng-click="clearCookies()">Click Here</a>
+                            {{ 'dictionaryOf'|translate  }} {{ dic.bitEmail }}
+                                <br><a ng-click="clearCookies()">{{ 'clickHere'|translate  }}</a>
                         </div>    
                         <div>
                             <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href="" ng-click="changeLanguage('en')">en</a> 

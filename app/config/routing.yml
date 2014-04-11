@@ -6,6 +6,10 @@ apiWord:
     type:     rest
     resource: Main\DefaultBundle\Controller\ApiWordController
 
+apiTest:
+    type:     rest
+    resource: Main\DefaultBundle\Controller\ApiTestController
+
 
 
 fos_user_security:

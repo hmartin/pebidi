@@ -1,7 +1,5 @@
-
-
 app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
-    if($cookies.dic) {
+    if ($cookies.dic) {
         $scope.dic = angular.fromJson($cookies.dic);
         $location.path('/addWord/' + $scope.dic.id);
     }
@@ -16,35 +14,44 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, diction
 })
 
 
-.controller('WordCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
-    $scope.dic = angular.fromJson($cookies.dic);
+    .controller('WordCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
         $scope.processForm = function () {
             $scope.formData.id = $scope.dic.id;
-            $http.post(API_URL + 'news/words.json',$scope.formData ).success(function (data) {
+            $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
                 $scope.dic = data.dic;
                 $cookies.dic = angular.toJson(data.dic);
-                $scope.formData.word ='';
-                $scope.formData.translation ='';
+                $scope.formData.word = '';
+                $scope.formData.translation = '';
             });
         };
-})
+    })
+    .controller('TestCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
+        $scope.processForm = function () {
+            $scope.formData.id = $scope.dic.id;
+            $http.post(API_URL + 'creates/tests.json', $scope.formData).success(function (data) {
+                $scope.words = data.words;
+            });
+        };
 
-.controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
-    $scope.dic = angular.fromJson($cookies.dic);
-    $http.get(API_URL + 'words.json',$scope.dic.id ).success(function (data) {
-         $scope.words = data;
-    });
-})
+    })
 
-.controller('rootCtrl', function ($scope, $http, $cookies, $translate) {
-    $scope.changeLanguage = function (key) {
-        $translate.use(key);
-    };
-    $scope.clearCookies = function () {
-        delete $cookies['dic'];
-        $location.path('/');
-    };
-    $scope.$watch(function() { return $cookies.dic;}, function(newValue) {        
-        $scope.dic = angular.fromJson($cookies.dic);
-    });
-})
+    .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
+        $http.post(API_URL + 'words.json', $cookies.dic).success(function (data) {
+            $scope.words = data;
+        });
+    })
+
+    .controller('rootCtrl', function ($scope, $http, $cookies, $translate, $location) {
+        $scope.changeLanguage = function (key) {
+            $translate.use(key);
+        };
+        $scope.clearCookies = function () {
+            delete $cookies['dic'];
+            $location.path('/');
+        };
+        $scope.$watch(function () {
+            return $cookies.dic;
+        }, function (newValue) {
+            $scope.dic = angular.fromJson($cookies.dic);
+        });
+    })
