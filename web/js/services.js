@@ -8,4 +8,12 @@ app.service('dictionaryService', function () {
     this.get = function () {
         return dictionary;
     };
+})
+.service('wordsRetriever', function () {
+    
+    this.getWords = function (typed) {      
+        $http.post(API_URL + 'get/tests.json', {'typed':typed}).success(function (data) {
+                return data.words;
+            });
+    };
 });

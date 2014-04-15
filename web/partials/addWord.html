@@ -7,6 +7,8 @@
     </div>
     <div class="form-group">
         <input class="form-control" ng-model="formData.translation" type="text" name="word" placeholder="{{ 'addWord.translation'|translate  }}">
+        
+      <autocomplete ng-model="yourchoice" data="words" on-type="updatesWords"></autocomplete>
         <a href="" tooltip-placement="top" tooltip="Some help!"><span class="glyphicon glyphicon-question-sign"></span></a>
     </div>
     <button type="submit"  class="btn btn-success input-lg" >{{ 'save'|translate  }}</button>

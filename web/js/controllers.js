@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
+app.controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
     if ($cookies.dic) {
         $scope.dic = angular.fromJson($cookies.dic);
         $location.path('/addWord/' + $scope.dic.id);
@@ -14,7 +14,18 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, diction
 })
 
 
-    .controller('WordCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
+    .controller('WordCtrl', function ($scope, $http, $location, $cookies, wordRetriever){
+        $scope.words = [];
+
+        // gives another movie array on change
+        $scope.updateMovies = function(typed){
+            // MovieRetriever could be some service returning a promise
+            $scope.newWords = wordRetriever.getWords(typed);
+            $scope.newWords.then(function(data){
+              $scope.words = data;
+            });
+        }
+        
         $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
             $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
@@ -25,7 +36,7 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, diction
             });
         };
     })
-    .controller('TestCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
+    .controller('TestCtrl', function ($scope, $http, $location, $cookies) {
         $scope.processForm = function () {
             $scope.formData.id = $scope.dic.id;
             $http.post(API_URL + 'creates/tests.json', $scope.formData).success(function (data) {
@@ -35,7 +46,7 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, diction
 
     })
 
-    .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
+    .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {
         $http.post(API_URL + 'words.json', $cookies.dic).success(function (data) {
             $scope.words = data;
         });

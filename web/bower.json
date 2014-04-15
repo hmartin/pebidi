@@ -1,30 +1,18 @@
 {
-
-  "name": "angular-seed",
-
-  "description": "A starter project for AngularJS",
-
-  "version": "0.0.0",
-
-  "homepage": "https://github.com/angular/angular-seed",
-
-  "license": "MIT",
-
+  "name": "Personal biligual dictionary",
+  "description": "Personal biligual dictionary",
+  "version": "1.0.0",
   "private": true,
 
   "dependencies": {
+      "angular": "1.2.x",
+      "angular-mocks": "~1.2.15",
+      "bootstrap": "~3.1.1",
 
-    "angular": "1.2.x",
-
-    "angular-mocks": "~1.2.15",
-
-    "bootstrap": "~3.1.1",
-
-    "angular-route": "~1.2.15",
-    "angular-animate": "*",
+      "angular-route": "~1.2.15",
+      "angular-animate": "*",
       "angular-bootstrap": "*",
-      "angular-cookies": "*"
-
+      "angular-cookies": "*",
+      "allmighty-autocomplete": "*"
   }
-
 }
