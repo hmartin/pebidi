@@ -15,7 +15,7 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies, diction
 
 
     .controller('WordCtrl', function ($scope, $http, $location, $cookies, dictionaryService) {
-        $scope.processForm = function () {
+        $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
             $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
                 $scope.dic = data.dic;

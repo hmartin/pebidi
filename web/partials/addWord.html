@@ -1,7 +1,7 @@
 <h1>{{ 'welcome'|translate  }}</h1>
 <p class="lead">{{ 'addWord.newWord'|translate  }}</p>
 <p class="lead">
-<form  ng-submit="processForm()">
+<form  ng-submit="processWord()">
     <div class="form-group">
         <input class="form-control" ng-model="formData.word" type="text" name="word" placeholder="{{ 'addWord.word'|translate  }}" required>
     </div>

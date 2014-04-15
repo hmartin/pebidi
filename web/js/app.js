@@ -19,7 +19,7 @@ app.config(['$routeProvider',
             }).
             when('/addWord/:id', {
                 templateUrl: 'partials/addWord.html',
-                controller: 'HomeCtrl'
+                controller: 'WordCtrl'
             }).
             when('/createTest', {
                 templateUrl: 'partials/createTest.html',
