@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f12a0279-42f3-4f6c-abbc-c1e0d61084fc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/WordEn.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/partials/addWord.html" afterPath="$PROJECT_DIR$/web/partials/addWord.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/controllers.js" afterPath="$PROJECT_DIR$/web/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/partials/createTest.html" afterPath="$PROJECT_DIR$/web/partials/createTest.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.html" afterPath="$PROJECT_DIR$/web/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todo.txt" afterPath="$PROJECT_DIR$/todo.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/partials/questions.html" afterPath="$PROJECT_DIR$/web/partials/questions.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/services.js" afterPath="$PROJECT_DIR$/web/js/services.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="persodic.iws" />
@@ -34,43 +38,25 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="33" selection-start="504" selection-end="504" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="1350">
+            <state line="8" column="19" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1365">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApiWordController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ApiWordController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="55" selection-start="865" selection-end="865" vertical-scroll-proportion="-6.7916665" vertical-offset="167" max-vertical-offset="900">
+            <state line="65" column="5" selection-start="2104" selection-end="2104" vertical-scroll-proportion="0.708238" vertical-offset="281" max-vertical-offset="1155">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="7" selection-start="835" selection-end="835" vertical-scroll-proportion="-26.875" vertical-offset="0" max-vertical-offset="1740">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Translation.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Translation.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="59" selection-start="439" selection-end="439" vertical-scroll-proportion="0.41066283" vertical-offset="0" max-vertical-offset="2310">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="todo.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/todo.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="26" selection-start="260" selection-end="260" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+            <state line="21" column="60" selection-start="424" selection-end="440" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="2310">
               <folding />
             </state>
           </provider>
@@ -79,7 +65,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="42" selection-start="253" selection-end="253" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="960">
+            <state line="17" column="76" selection-start="958" selection-end="958" vertical-scroll-proportion="-7.0416665" vertical-offset="86" max-vertical-offset="975">
               <folding />
             </state>
           </provider>
@@ -88,8 +74,19 @@
       <file leaf-file-name="controllers.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="26" selection-start="655" selection-end="666" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
+            <state line="43" column="40" selection-start="1639" selection-end="1639" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1125">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WordEn.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/WordEn.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="45" selection-start="221" selection-end="221" vertical-scroll-proportion="-3.0416667" vertical-offset="47" max-vertical-offset="1440">
+              <folding>
+                <element signature="e#44#76#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -97,16 +94,7 @@
       <file leaf-file-name="ApiTestController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="5" selection-start="480" selection-end="480" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="660">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routing.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="51" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="555">
+            <state line="31" column="46" selection-start="1081" selection-end="1081" vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="555">
               <folding />
             </state>
           </provider>
@@ -115,7 +103,25 @@
       <file leaf-file-name="addWord.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/partials/addWord.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="29" selection-start="137" selection-end="137" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="480">
+            <state line="5" column="145" selection-start="329" selection-end="329" vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="510">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createTest.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/partials/createTest.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="29" selection-start="333" selection-end="333" vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="285">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="questions.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/partials/questions.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="24" selection-start="85" selection-end="85" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="315">
               <folding />
             </state>
           </provider>
@@ -165,22 +171,25 @@
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/web/css/animate.css" />
         <option value="$PROJECT_DIR$/web/partials/home.html" />
-        <option value="$PROJECT_DIR$/web/js/services.js" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiUserController.php" />
-        <option value="$PROJECT_DIR$/web/bower.json" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php" />
         <option value="$PROJECT_DIR$/web/css/main.css" />
         <option value="$PROJECT_DIR$/web/partials/dictionary.html" />
-        <option value="$PROJECT_DIR$/web/partials/createTest.html" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php" />
         <option value="$PROJECT_DIR$/todo.txt" />
-        <option value="$PROJECT_DIR$/web/index.html" />
-        <option value="$PROJECT_DIR$/web/js/controllers.js" />
-        <option value="$PROJECT_DIR$/web/partials/addWord.html" />
-        <option value="$PROJECT_DIR$/web/js/app.js" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php" />
+        <option value="$PROJECT_DIR$/web/js/services.js" />
+        <option value="$PROJECT_DIR$/web/bower.json" />
+        <option value="$PROJECT_DIR$/web/js/app.js" />
+        <option value="$PROJECT_DIR$/web/index.html" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/EnWord.php" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/WordEn.php" />
+        <option value="$PROJECT_DIR$/web/partials/addWord.html" />
+        <option value="$PROJECT_DIR$/web/partials/questions.html" />
+        <option value="$PROJECT_DIR$/web/js/controllers.js" />
+        <option value="$PROJECT_DIR$/web/partials/createTest.html" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" />
       </list>
     </option>
   </component>
@@ -188,8 +197,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="49" />
     <option name="y" value="24" />
-    <option name="width" value="1551" />
-    <option name="height" value="846" />
+    <option name="width" value="1871" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -217,7 +226,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -340,85 +348,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="angular-cookies" />
+              <option name="myItemId" value="angular-bootstrap" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -455,6 +385,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="DefaultBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persodic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persodic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DefaultBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persodic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persodic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DefaultBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -544,6 +530,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -556,6 +543,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Main/DefaultBundle/Entity" />
       <recent name="$PROJECT_DIR$/src/Main/DefaultBundle/Controller" />
       <recent name="$PROJECT_DIR$/web/partials" />
       <recent name="$PROJECT_DIR$/src/Main/DefaultBundle/Service" />
@@ -588,7 +576,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="24" width="1551" height="846" extended-state="6" />
+    <frame x="49" y="24" width="1871" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -602,15 +590,15 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2488717" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2485302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -630,16 +618,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="11" selection-start="234" selection-end="234" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="240" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="34" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="2340" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Form/TranslationType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="9" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="675" />
@@ -780,11 +758,6 @@
         <state line="2989" column="1" selection-start="55916" selection-end="55973" vertical-scroll-proportion="0.0" vertical-offset="44195" max-vertical-offset="86865" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="12" selection-start="146" selection-end="146" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="0" selection-start="1207" selection-end="3083" vertical-scroll-proportion="0.12471396" vertical-offset="461" max-vertical-offset="1560" />
@@ -800,16 +773,6 @@
         <state line="37" column="0" selection-start="1163" selection-end="1218" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="720" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="540" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="58" selection-start="515" selection-end="515" vertical-scroll-proportion="0.017162472" vertical-offset="345" max-vertical-offset="2610" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="57" column="17" selection-start="1281" selection-end="1281" vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="3705" />
@@ -817,42 +780,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="19" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2550">
-          <folding />
-        </state>
+        <state line="12" column="19" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2550" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/partials/dictionary.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="81" selection-start="411" selection-end="411" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="180">
-          <folding />
-        </state>
+        <state line="5" column="81" selection-start="411" selection-end="411" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="180" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/partials/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="25" selection-start="121" selection-end="147" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="225">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/partials/createTest.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="39" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="390">
-          <folding />
-        </state>
+        <state line="2" column="25" selection-start="121" selection-end="147" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="225" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="51" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="5" selection-start="480" selection-end="480" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="660">
           <folding />
         </state>
       </provider>
@@ -864,51 +807,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/index.html">
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="42" selection-start="253" selection-end="253" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="960">
+        <state line="44" column="7" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1755">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
+    <entry file="file://$PROJECT_DIR$/web/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="26" selection-start="655" selection-end="666" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
+        <state line="11" column="14" selection-start="214" selection-end="214" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/partials/addWord.html">
+    <entry file="file://$PROJECT_DIR$/web/bower.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="29" selection-start="137" selection-end="137" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="480">
+        <state line="15" column="7" selection-start="378" selection-end="400" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="360">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="33" selection-start="504" selection-end="504" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="1350">
+        <state line="8" column="19" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1365">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php">
+    <entry file="file://$PROJECT_DIR$/web/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="55" selection-start="865" selection-end="865" vertical-scroll-proportion="-6.7916665" vertical-offset="167" max-vertical-offset="900">
+        <state line="17" column="76" selection-start="958" selection-end="958" vertical-scroll-proportion="-7.0416665" vertical-offset="86" max-vertical-offset="975">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php">
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="7" selection-start="835" selection-end="835" vertical-scroll-proportion="-26.875" vertical-offset="0" max-vertical-offset="1740">
+        <state line="21" column="19" selection-start="392" selection-end="418" vertical-scroll-proportion="-10.625" vertical-offset="30" max-vertical-offset="2610">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="59" selection-start="439" selection-end="439" vertical-scroll-proportion="0.41066283" vertical-offset="0" max-vertical-offset="2310">
+        <state line="21" column="60" selection-start="424" selection-end="440" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="2310">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/WordEn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="45" selection-start="221" selection-end="221" vertical-scroll-proportion="-3.0416667" vertical-offset="47" max-vertical-offset="1440">
+          <folding>
+            <element signature="e#44#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/partials/addWord.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="145" selection-start="329" selection-end="329" vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="40" selection-start="1639" selection-end="1639" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/partials/questions.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="24" selection-start="85" selection-end="85" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/partials/createTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="29" selection-start="333" selection-end="333" vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="285">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="46" selection-start="1081" selection-end="1081" vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="555">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="5" selection-start="2104" selection-end="2104" vertical-scroll-proportion="0.708238" vertical-offset="281" max-vertical-offset="1155">
           <folding />
         </state>
       </provider>

@@ -15,17 +15,20 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
 
 
     .controller('WordCtrl', function ($scope, $http, $location, $cookies, wordRetriever){
-        $scope.words = [];
+        $scope.getWords = function(val) {
+            return $http.get(API_URL + 'auto/complete/words.json', {
+                params: {
+                    word: val
+                }
+            }).then(function(res){
+                    var words = [];
+                    angular.forEach(res.data.words, function(item){
+                        words.push(item.lemma);
+                    });
+                    return words;
+                });
+            };
 
-        // gives another movie array on change
-        $scope.updateMovies = function(typed){
-            // MovieRetriever could be some service returning a promise
-            $scope.newWords = wordRetriever.getWords(typed);
-            $scope.newWords.then(function(data){
-              $scope.words = data;
-            });
-        }
-        
         $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
             $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
@@ -37,13 +40,12 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
         };
     })
     .controller('TestCtrl', function ($scope, $http, $location, $cookies) {
-        $scope.processForm = function () {
-            $scope.formData.id = $scope.dic.id;
-            $http.post(API_URL + 'creates/tests.json', $scope.formData).success(function (data) {
+        $scope.nbquestion = 20;
+        $scope.startTest = function () {
+            $http.post(API_URL + 'creates/tests.json', {'id':$scope.dic.id, 'nbQuestion':$scope.nbquestion}).success(function (data) {
                 $scope.words = data.words;
             });
         };
-
     })
 
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {

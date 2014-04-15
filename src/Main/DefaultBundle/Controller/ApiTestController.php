@@ -20,18 +20,16 @@ class ApiTestController extends FOSRestController
     {
         if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
         {
-            $w = new e\Word();
-            $w->setWord( $request->request->get('word') );
-            $this->get('persist')->persistAndFlush($w);
-            $d->addWord($w);
-            $this->get('persist')->persistAndFlush($d);
-            $t = new e\Translation();
-            $t->setDictionary($d);
-            $t->setTranslation( $request->request->get('translation') );
-            $t->setWord($w);
-            $this->get('persist')->persistAndFlush($t);
+            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
+                ->leftJoin('d.translations', 't')
+                ->leftJoin('t.word', 'w')
+                ->select('w.word, t.translation')
+                ->where('d.id = :id')
+                ->setParameter(':id', $d->getId());
 
-            return array('dic' => $d->getJsonArray());
+            $results = $qb->getQuery()->getResult();
+
+            return array('words' => $results);
         }
         throw new \Exception('Something went wrong!');
     }

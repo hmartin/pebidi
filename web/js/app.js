@@ -6,6 +6,7 @@ var app = angular.module('app', [
     'ngRoute',
     'ngAnimate',
     'ngCookies',
+    'ui.bootstrap',
     'pascalprecht.translate',
 
 ]);

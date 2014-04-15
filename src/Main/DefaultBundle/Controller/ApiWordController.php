@@ -56,5 +56,22 @@ class ApiWordController extends FOSRestController
             return array('words' => $results);
         }
         throw new \Exception('Something went wrong!');
-    }    
+    }
+
+
+    /**
+     * @Rest\View()
+     */
+    public function getAutoCompleteWordsAction(Request $request)
+    {
+        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:WordEn')->createQueryBuilder('wen')
+            ->select('wen.lemma')
+            ->where('wen.lemma LIKE :lemma')
+            ->setMaxResults(12)
+            ->setParameter(':lemma', $request->query->get('word').'%');
+
+        $results = $qb->getQuery()->getResult();
+
+        return array('words' => $results);
+    }
 }
