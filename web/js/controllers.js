@@ -23,7 +23,7 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
             }).then(function(res){
                     var words = [];
                     angular.forEach(res.data.words, function(item){
-                        words.push(item.lemma);
+                        words.push(item.word);
                     });
                     return words;
                 });
