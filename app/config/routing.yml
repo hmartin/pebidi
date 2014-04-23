@@ -11,6 +11,10 @@ apiTest:
     resource: Main\DefaultBundle\Controller\ApiTestController
 
 
+main_default:
+    resource: "@MainDefaultBundle/Resources/config/routing.yml"
+    prefix:   /
+
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
