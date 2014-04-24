@@ -107,9 +107,13 @@ class DefaultController extends Controller
     public function createWordEnAction(Request $request)
     {
         $ts = $this->getDoctrine()->getRepository('MainDefaultBundle:TranslationEn')->findAll();
+        $em = $this->getDoctrine();
         foreach($ts as $t) {
-            $ts = $this->getDoctrine()->getRepository('MainDefaultBundle:TranslationEn')->findAll();
+            $w = $this->getDoctrine()->getRepository('MainDefaultBundle:WordEn')->find(array('word' => $t->getLemma()));
+            $t->setWord($w);
+            $em->persist($w);
         }
+        $this->em->flush();
     }
 
 }

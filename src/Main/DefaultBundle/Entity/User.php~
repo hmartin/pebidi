@@ -33,7 +33,7 @@ class User extends BaseUser
         // your own logic
     }
 
-    public function getTruncateEmail() {
+    public function getBitEmail() {
         $a = explode('@', $this->email);
         $b = explode('.', $a['1']);
         return $a['0'].'@....'.$b['1'];
@@ -84,5 +84,28 @@ class User extends BaseUser
     
     public function getDefaultDictionary() {
         return $this->dictionaries['0'];
+    }
+
+    /**
+     * Set private
+     *
+     * @param integer $private
+     * @return User
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+
+        return $this;
+    }
+
+    /**
+     * Get private
+     *
+     * @return integer 
+     */
+    public function getPrivate()
+    {
+        return $this->private;
     }
 }

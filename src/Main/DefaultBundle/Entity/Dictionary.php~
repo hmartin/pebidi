@@ -50,6 +50,14 @@ class Dictionary
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
+
+
+    public function getJsonArray() {
+        return array( 'id' => $this->getConvertId(),
+        'countWord' => count($this->getWords()),
+        'bitEmail' => $this->getUser()->getBitEmail()
+                    );
+    }
     /**
      * Constructor
      */
@@ -206,5 +214,28 @@ class Dictionary
     public function getTranslations()
     {
         return $this->translations;
+    }
+
+    /**
+     * Set private
+     *
+     * @param integer $private
+     * @return Dictionary
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+
+        return $this;
+    }
+
+    /**
+     * Get private
+     *
+     * @return integer 
+     */
+    public function getPrivate()
+    {
+        return $this->private;
     }
 }
