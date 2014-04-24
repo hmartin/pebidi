@@ -1,18 +1,18 @@
-app.controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
-    if ($cookies.dic) {
-        $scope.dic = angular.fromJson($cookies.dic);
-        $location.path('/addWord/' + $scope.dic.id);
-    }
-    $scope.processForm = function () {
-        $http.post(API_URL + 'emails/onlies.json', $scope.formData).success(function (data) {
-            if (data.dic) {
-                $cookies.dic = angular.toJson(data.dic);
-                $location.path('/addWord/' + data.dic.id);
-            }
-        });
-    };
-})
-
+app
+    .controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
+        if ($cookies.dic) {
+            $scope.dic = angular.fromJson($cookies.dic);
+            $location.path('/addWord/' + $scope.dic.id);
+        }
+        $scope.processForm = function () {
+            $http.post(API_URL + 'emails/onlies.json', $scope.formData).success(function (data) {
+                if (data.dic) {
+                    $cookies.dic = angular.toJson(data.dic);
+                    $location.path('/addWord/' + data.dic.id);
+                }
+            });
+        };
+    })
 
     .controller('WordCtrl', function ($scope, $http, $location, $cookies, wordRetriever){
         $scope.getWords = function(val) {
@@ -39,13 +39,34 @@ app.controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
             });
         };
     })
+
     .controller('TestCtrl', function ($scope, $http, $location, $cookies) {
         $scope.nbquestion = 20;
-        $scope.startTest = function () {
+        $scope.startTest = function () {         
+            $location.path('/questions');
             $http.post(API_URL + 'creates/tests.json', {'id':$scope.dic.id, 'nbQuestion':$scope.nbquestion}).success(function (data) {
                 $scope.words = data.words;
+                $scope.i = 1;
+                $scope.word = data.words[$scope.i];
             });
         };
+        
+        
+        $scope.getAnswer = function () {
+            $scope.step = 2;
+            
+        };
+        $scope.saveResult = function () {
+            $scope.i++
+            $scope.word = data.words[$scope.i];
+            $scope.step = 1;
+            if ($scope.i == $scope.nbquestion) {
+                //saveResult
+                //redirect congrat
+            }
+            
+        };
+        $scope.progress = $scope.i * 100 / $scope.nbquestion;
     })
 
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {

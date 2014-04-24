@@ -24,6 +24,16 @@ class Word
     protected $word;
 
     /**
+     * @ORM\Column(type="string", length=5)
+     */
+    protected $lang;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $certified = 0;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Dictionary", mappedBy="words")
      **/
     private $dictionaries;
