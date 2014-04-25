@@ -41,14 +41,22 @@ app
     })
 
     .controller('TestCtrl', function ($scope, $http, $location, $cookies) {
-        $scope.nbquestion = 20;
-        $scope.startTest = function () {         
-            $location.path('/questions');
+        $scope.nbquestion = 20;$scope.word = [];
+        $scope.word.word = 'iojoi';
+        $scope.step = 1;
+        $scope.progress = 1*100/$scope.nbquestion;
+        $scope.startTest = function () {
             $http.post(API_URL + 'creates/tests.json', {'id':$scope.dic.id, 'nbQuestion':$scope.nbquestion}).success(function (data) {
-                $scope.words = data.words;
+
+                $scope.word.words = data.words;
                 $scope.i = 1;
-                $scope.word = data.words[$scope.i];
+                $scope.step = 1;
+                //$scope.word = data.words[$scope.i];
+                $scope.word.word = '000';
+                alert($scope.word.word);
+                $location.path('/questions');
             });
+            $scope.word.word = '111';
         };
         
         
@@ -58,7 +66,7 @@ app
         };
         $scope.saveResult = function () {
             $scope.i++
-            $scope.word = data.words[$scope.i];
+            $scope.word = $scope.word.words[$scope.i];
             $scope.step = 1;
             if ($scope.i == $scope.nbquestion) {
                 //saveResult

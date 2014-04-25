@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table()
+ * @ORM\Table(indexes={@ORM\Index(name="word_idx", columns={"word"})})
  * @ORM\Entity
  */
 class Word
@@ -54,6 +54,10 @@ class Word
     public function __construct()
     {
         $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->word;
     }
 
     /**
@@ -176,5 +180,64 @@ class Word
     public function getDictionaries()
     {
         return $this->dictionaries;
+    }
+
+    /**
+     * Set lang
+     *
+     * @param string $lang
+     * @return Word
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Get lang
+     *
+     * @return string 
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
+     * Set certified
+     *
+     * @param integer $certified
+     * @return Word
+     */
+    public function setCertified($certified)
+    {
+        $this->certified = $certified;
+
+        return $this;
+    }
+
+    /**
+     * Get certified
+     *
+     * @return integer 
+     */
+    public function getCertified()
+    {
+        return $this->certified;
+    }
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return Word
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }

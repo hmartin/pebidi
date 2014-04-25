@@ -21,10 +21,14 @@ class ApiWordController extends FOSRestController
 
         if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
         {
-            $w = new e\Word();
-            $w->setWord( $request->request->get('word') );
-            $this->get('persist')->persistAndFlush($w);
+            if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $request->request->get('word')))) {
+                $w = new e\Word();
+                $w->setWord( $request->request->get('word') );
+                $w->setLang('en');
+                $this->get('persist')->persistAndFlush($w);
+            }
             $d->addWord($w);
+
             $this->get('persist')->persistAndFlush($d);
             $t = new e\Translation();
             $t->setDictionary($d);
@@ -64,7 +68,7 @@ class ApiWordController extends FOSRestController
      */
     public function getAutoCompleteWordsAction(Request $request)
     {
-        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:WordEn')->createQueryBuilder('wen')
+        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('wen')
             ->where('wen.word LIKE :word')
             ->setMaxResults(12)
             ->setParameter(':word', $request->query->get('word').'%');

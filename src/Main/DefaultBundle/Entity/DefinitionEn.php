@@ -19,10 +19,10 @@ class DefinitionEn
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WordEn", inversedBy="definitions",cascade={"persist"})
-     * @ORM\JoinColumn(name="wordEn_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Word", inversedBy="definitions",cascade={"persist"})
+     * @ORM\JoinColumn(name="word_id", referencedColumnName="id")
      */
-    protected $wordEn;
+    protected $word;
 
     /**
      * @ORM\Column(type="integer")
@@ -426,26 +426,27 @@ class DefinitionEn
         return $this->sampleset;
     }
 
+
     /**
-     * Set wordEn
+     * Set word
      *
-     * @param \Main\DefaultBundle\Entity\WordEn $wordEn
+     * @param \Main\DefaultBundle\Entity\Word $word
      * @return DefinitionEn
      */
-    public function setWordEn(\Main\DefaultBundle\Entity\WordEn $wordEn = null)
+    public function setWord(\Main\DefaultBundle\Entity\Word $word = null)
     {
-        $this->wordEn = $wordEn;
+        $this->word = $word;
 
         return $this;
     }
 
     /**
-     * Get wordEn
+     * Get word
      *
-     * @return \Main\DefaultBundle\Entity\WordEn 
+     * @return \Main\DefaultBundle\Entity\Word 
      */
-    public function getWordEn()
+    public function getWord()
     {
-        return $this->wordEn;
+        return $this->word;
     }
 }

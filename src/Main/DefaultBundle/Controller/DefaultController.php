@@ -100,20 +100,4 @@ class DefaultController extends Controller
         return $this->render('MainDefaultBundle:Static:'.$template.'.html.twig', array());
     }
 
-    /**
-     * @Route("/createWordEn", name="createWordEn")
-     * @Template
-     */
-    public function createWordEnAction(Request $request)
-    {
-        $ts = $this->getDoctrine()->getRepository('MainDefaultBundle:TranslationEn')->findAll();
-        $em = $this->getDoctrine();
-        foreach($ts as $t) {
-            $w = $this->getDoctrine()->getRepository('MainDefaultBundle:WordEn')->find(array('word' => $t->getLemma()));
-            $t->setWord($w);
-            $em->persist($w);
-        }
-        $this->em->flush();
-    }
-
 }
