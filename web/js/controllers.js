@@ -40,23 +40,17 @@ app
         };
     })
 
-    .controller('TestCtrl', function ($scope, $http, $location, $cookies) {
-        $scope.nbquestion = 20;$scope.word = [];
-        $scope.word.word = 'iojoi';
+    .controller('TestCtrl', function ($scope, $rootScope, $http, $location, $cookies) {
+        $scope.nbquestion = 20;
         $scope.step = 1;
-        $scope.progress = 1*100/$scope.nbquestion;
+        $scope.i = 1;
+        
         $scope.startTest = function () {
             $http.post(API_URL + 'creates/tests.json', {'id':$scope.dic.id, 'nbQuestion':$scope.nbquestion}).success(function (data) {
-
-                $scope.word.words = data.words;
-                $scope.i = 1;
-                $scope.step = 1;
-                //$scope.word = data.words[$scope.i];
-                $scope.word.word = '000';
-                alert($scope.word.word);
+                $rootScope.words = angular.toJson(data.words);
+                $rootScope.word = data.words[$scope.i];
                 $location.path('/questions');
             });
-            $scope.word.word = '111';
         };
         
         
@@ -66,15 +60,14 @@ app
         };
         $scope.saveResult = function () {
             $scope.i++
-            $scope.word = $scope.word.words[$scope.i];
+            $scope.word = $rootScope.words[$scope.i];
             $scope.step = 1;
             if ($scope.i == $scope.nbquestion) {
                 //saveResult
                 //redirect congrat
             }
-            
+            $scope.progress = $scope.i * 100 / $scope.nbquestion;
         };
-        $scope.progress = $scope.i * 100 / $scope.nbquestion;
     })
 
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {

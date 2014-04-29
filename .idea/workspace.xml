@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f12a0279-42f3-4f6c-abbc-c1e0d61084fc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Command/OneShotCommand.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/WordEn.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/DefinitionEn.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/DefinitionEn.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/controllers.js" afterPath="$PROJECT_DIR$/web/js/controllers.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/partials/questions.html" afterPath="$PROJECT_DIR$/web/partials/questions.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="persodic.iws" />
@@ -53,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controllers.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="controllers.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="49" selection-start="1782" selection-end="1782" vertical-scroll-proportion="0.0" vertical-offset="232" max-vertical-offset="1560">
+            <state line="46" column="8" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.37639198" vertical-offset="352" max-vertical-offset="1455">
               <folding />
             </state>
           </provider>
@@ -107,10 +99,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="questions.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="questions.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/partials/questions.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="22" selection-start="139" selection-end="139" vertical-scroll-proportion="0.06864989" vertical-offset="0" max-vertical-offset="874">
+            <state line="4" column="36" selection-start="153" selection-end="153" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="495">
               <folding />
             </state>
           </provider>
@@ -521,11 +513,11 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -806,16 +798,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
+    <entry file="file://$PROJECT_DIR$/web/partials/questions.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="49" selection-start="1782" selection-end="1782" vertical-scroll-proportion="0.0" vertical-offset="232" max-vertical-offset="1560">
+        <state line="4" column="36" selection-start="153" selection-end="153" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="495">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/partials/questions.html">
+    <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="22" selection-start="139" selection-end="139" vertical-scroll-proportion="0.06864989" vertical-offset="0" max-vertical-offset="874">
+        <state line="46" column="8" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.37639198" vertical-offset="352" max-vertical-offset="1455">
           <folding />
         </state>
       </provider>
