@@ -24,7 +24,7 @@ app.config(['$routeProvider',
             }).
             when('/createTest', {
                 templateUrl: 'partials/createTest.html',
-                controller: 'TestCtrl'
+                controller: 'CreateTestCtrl'
             }).
             when('/questions', {
                 templateUrl: 'partials/questions.html',
