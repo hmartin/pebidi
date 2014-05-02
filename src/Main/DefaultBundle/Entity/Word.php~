@@ -14,6 +14,7 @@ class Word
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -225,5 +226,18 @@ class Word
     public function getCertified()
     {
         return $this->certified;
+    }
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return Word
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }

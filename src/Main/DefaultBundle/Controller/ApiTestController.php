@@ -23,13 +23,19 @@ class ApiTestController extends FOSRestController
             $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
                 ->leftJoin('d.translations', 't')
                 ->leftJoin('t.word', 'w')
-                ->select('w.word, t.translation')
+                ->select('w.id, w.word, t.translation')
                 ->where('d.id = :id')
                 ->setParameter(':id', $d->getId());
 
+
             $results = $qb->getQuery()->getResult();
 
-            return array('words' => $results);
+            $t = new e\Test();
+            $t->setDictionary($d);
+            $this->get('persist')->persistAndFlush($t);
+
+
+            return array('id' => $t, 'words' => $results);
         }
         throw new \Exception('Something went wrong!');
     }
@@ -39,18 +45,20 @@ class ApiTestController extends FOSRestController
      */
     public function postSaveResultAction(Request $request)
     {
-        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
+        $points = $request->request->get('points');
+        if ($t = $this->getDoctrine()->getRepository('MainDefaultBundle:Test')->find($request->request->get('id')))
         {
-            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
-                ->leftJoin('d.translations', 't')
-                ->leftJoin('t.word', 'w')
-                ->select('w.word, t.translation')
-                ->where('d.id = :id')
-                ->setParameter(':id', $d->getId());
+            foreach($points as $pt) {
+                $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find($pt['wid']);
+                $p = new e\Point();
+                $p->setPoint($pt['p']);
+                $p->setWord($w);
+                $p->setTest($t);
+                $this->get('persist')->persistAndFlush($p);
 
-            $results = $qb->getQuery()->getResult();
+            }
 
-            return array('words' => $results);
+            return array();
         }
         throw new \Exception('Something went wrong!');
     }

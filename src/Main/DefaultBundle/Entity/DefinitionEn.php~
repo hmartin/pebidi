@@ -426,4 +426,27 @@ class DefinitionEn
         return $this->sampleset;
     }
 
+
+    /**
+     * Set word
+     *
+     * @param \Main\DefaultBundle\Entity\Word $word
+     * @return DefinitionEn
+     */
+    public function setWord(\Main\DefaultBundle\Entity\Word $word = null)
+    {
+        $this->word = $word;
+
+        return $this;
+    }
+
+    /**
+     * Get word
+     *
+     * @return \Main\DefaultBundle\Entity\Word 
+     */
+    public function getWord()
+    {
+        return $this->word;
+    }
 }

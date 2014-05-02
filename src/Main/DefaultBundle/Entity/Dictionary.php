@@ -29,11 +29,16 @@ class Dictionary
      * @ORM\JoinTable(name="DictionariesWord")
      **/
     private $words;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Translation", mappedBy="dictionary")
      */
     protected $translations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Test", mappedBy="dictionary")
+     */
+    protected $tests;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -237,5 +242,38 @@ class Dictionary
     public function getPrivate()
     {
         return $this->private;
+    }
+
+    /**
+     * Add tests
+     *
+     * @param \Main\DefaultBundle\Entity\Test $tests
+     * @return Dictionary
+     */
+    public function addTest(\Main\DefaultBundle\Entity\Test $tests)
+    {
+        $this->tests[] = $tests;
+
+        return $this;
+    }
+
+    /**
+     * Remove tests
+     *
+     * @param \Main\DefaultBundle\Entity\Test $tests
+     */
+    public function removeTest(\Main\DefaultBundle\Entity\Test $tests)
+    {
+        $this->tests->removeElement($tests);
+    }
+
+    /**
+     * Get tests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTests()
+    {
+        return $this->tests;
     }
 }

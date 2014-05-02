@@ -41,33 +41,49 @@ app
     })
 
     .controller('CreateTestCtrl', function ($scope, testService) {
-        $scope.nbquestion = 20;
-        $scope.startTest = testService.createTest($scope.dic.id, $scope.nbquestion);
+        if ( $scope.dic.countWord > 20) {
+            $scope.nbquestion = 20;
+        } else {
+            $scope.nbquestion = $scope.dic.countWord;
+        }
+        $scope.startTest = function () {
+            testService.createTest($scope.dic.id, $scope.nbquestion);
+        }
     })
 
     .controller('TestCtrl', function ($scope, $rootScope, $http, $location, $cookies, testService) {
         $scope.step = 1;
-        $scope.i = 0;
-        
+        $scope.points = [];
+        $scope.i = 0;$scope.progress = 0;
+
         $scope.words = testService.words;
+
         $scope.word = $scope.words[$scope.i];
-        
+
         $scope.getAnswer = function () {
-            $scope.step = 2;        
+            $scope.step = 2;
         };
-        $scope.saveResult = function () {
-            $scope.i++
+        $scope.saveResult = function (p) {
+            $scope.i++;
+            $scope.progress = ($scope.i) * 100 / testService.nbQuestion;
+            $scope.point = {};$scope.point.wid = $scope.word.id;$scope.point.p=p;
+            $scope.points.push($scope.point);
+
+            if ($scope.i == testService.nbQuestion) {
+                console.log($scope.points);
+                testService.saveResults($scope.points);
+                $location.path('/congrats');
+            }
+            console.log(testService.nbQuestion);
+
             $scope.word = $scope.words[$scope.i];
             $scope.step = 1;
-            if ($scope.i == $scope.nbquestion) {
-                testsService.saveResults();
-                //saveResult
-                //redirect congrat
-            }
-            $scope.progress = $scope.i * 100 / $scope.nbquestion;
+
         };
     })
 
+    .controller('CongratsTestCtrl', function ($scope, testService) {
+    })
 
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {
         $http.post(API_URL + 'words.json', $cookies.dic).success(function (data) {

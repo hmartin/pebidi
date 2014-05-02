@@ -2,8 +2,8 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2 align-center">
-        ({{ i }})<h2>{{ word.word }}</h2>
-        
+        ({{ i+1 }})<h2>{{ word.word }}</h2>
+
     <div class="row" ng-if="step == 1">
         <div class="col-md-8 col-md-offset-2 align-center">
             <button ng-click="getAnswer()" class="btn btn-success input-lg">{{ 'getAnswer'|translate }}</button>

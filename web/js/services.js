@@ -11,19 +11,22 @@ app.service('dictionaryService', function () {
 })
 .service('testService', function ($http, $location) {
     this.words = {};
+    this.nbQuestion = 0;
+        this.id = 0;
 
     this.createTest = function (id, question) {
-        $http.post(API_URL + 'creates/tests/json', {id: id, nbQuestion: question})
+        this.nbQuestion = question;
+        $http.post(API_URL + 'creates/tests.json', {id: id, nbQuestion: question})
             .success(function (data) {
-                this.words = angular.toJson(data.words);
+                this.words = data.words;
+                this.id = data.id;
                 $location.path('/questions');
             }.bind(this));
     }
-    this.saveResult = function (id, question) {
-        $http.post(API_URL + 'creates/tests/json', {id: id, nbQuestion: question})
+    this.saveResults = function (points) {
+        $http.post(API_URL + 'saves/results.json', {id: this.id, points:points})
             .success(function (data) {
-                this.words = angular.toJson(data.words);
-                $location.path('/questions');
+                this.globalScore = data.globalScore;
             }.bind(this));
     }
 })

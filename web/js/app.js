@@ -30,6 +30,10 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/questions.html',
                 controller: 'TestCtrl'
             }).
+            when('/congrats', {
+                templateUrl: 'partials/congrats.html',
+                controller: 'CongratsTestCtrl'
+            }).
             when('/dictionary/:id', {
                 templateUrl: 'partials/dictionary.html',
                 controller: 'DictionnaryCtrl'

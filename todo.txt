@@ -16,10 +16,15 @@ api add words*
 !auto redirect if cookies*
 create initial dic
 create account
-!create test
+!create test*
+save test result
 algo test
 create initial dic
 create account
+check value and redirect if null
+add list of word
+css dictionary
+stat dictionary
 
 
 

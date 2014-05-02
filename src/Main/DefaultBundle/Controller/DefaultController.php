@@ -29,6 +29,10 @@ class DefaultController extends Controller
         if ($this->get('cookie')->has('id')) {
             return $this->redirect($this->generateUrl('newWord', array('id' => $this->get('cookie')->get('id')) ));
         }
+        $d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
+        $d = $this->getDoctrine()->getRepository('MainDefaultBundle:word')->find(1);
+        $d = $this->getDoctrine()->getRepository('MainDefaultBundle:test')->find(1);
+        $d = $this->getDoctrine()->getRepository('MainDefaultBundle:point')->find(1);
         return array();
     }
 

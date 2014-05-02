@@ -29,11 +29,16 @@ class Dictionary
      * @ORM\JoinTable(name="DictionariesWord")
      **/
     private $words;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Translation", mappedBy="dictionary")
      */
     protected $translations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Test", mappedBy="dictionary")
+     */
+    protected $tests;
 
     /**
      * @ORM\Column(type="string", length=255)

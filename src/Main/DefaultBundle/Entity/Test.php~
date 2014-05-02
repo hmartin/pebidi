@@ -1,0 +1,39 @@
+<?php
+namespace Main\DefaultBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+/**
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Test
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="translations",cascade={"persist"})
+     * @ORM\JoinColumn(name="dictionary_id", referencedColumnName="id")
+     */
+    protected $dictionary;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Point", mappedBy="test")
+     */
+    protected $points;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+
+//type, score, nbQuestion
+}
