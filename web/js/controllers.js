@@ -6,6 +6,24 @@ app
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'emails/onlies.json', $scope.formData).success(function (data) {
+                //if dic.id => user exist
+                if (data.dic) {
+                    $cookies.dic = angular.toJson(data.dic);
+                    $location.path('/addWord/' + data.dic.id);
+                } else {
+                    $location.path('/addWord/' + data.dic.id);
+                }
+            });
+        };
+    })
+
+    .controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
+        if ($cookies.dic) {
+            $scope.dic = angular.fromJson($cookies.dic);
+            $location.path('/addWord/' + $scope.dic.id);
+        }
+        $scope.processForm = function () {
+            $http.post(API_URL + 'emails/onlies.json', $scope.formData).success(function (data) {
                 if (data.dic) {
                     $cookies.dic = angular.toJson(data.dic);
                     $location.path('/addWord/' + data.dic.id);

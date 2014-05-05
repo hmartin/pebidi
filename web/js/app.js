@@ -18,6 +18,10 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/home.html',
                 controller: 'HomeCtrl'
             }).
+            when('/createDic', {
+                templateUrl: 'partials/createDic.html',
+                controller: 'CreateDicCtrl'
+            }).
             when('/addWord/:id', {
                 templateUrl: 'partials/addWord.html',
                 controller: 'WordCtrl'
