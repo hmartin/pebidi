@@ -11,9 +11,17 @@ app
                     $cookies.dic = angular.toJson(data.dic);
                     $location.path('/addWord/' + data.dic.id);
                 } else {
-                    $location.path('/addWord/' + data.dic.id);
+                    $cookies.user_id = angular.toJson(data.uid);
+                    $location.path('/createDic/');
                 }
             });
+        };
+    })
+
+    .controller('CreateDicCtrl', function ($scope, $http, $location, $cookies, dicService) {
+        //type, orign Lang, dest Lang
+        $scope.processForm = function () {
+            dicService.create();
         };
     })
 

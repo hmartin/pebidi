@@ -39,3 +39,15 @@ app.service('dictionaryService', function () {
             });
     };
 });
+
+.service('dicService', function ($http, $location) {
+    
+    this.create = function (typed) {      
+            $http.post(API_URL + 'creates/dics.json', $scope.formData).success(function (data) {
+                if (data.dic) {
+                    $cookies.dic = angular.toJson(data.dic);
+                    $location.path('/addWord/' + data.dic.id);
+                }
+            });
+    };
+});
