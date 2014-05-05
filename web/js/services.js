@@ -38,7 +38,7 @@ app.service('dictionaryService', function () {
                 return data.words;
             });
     };
-});
+})
 
 .service('dicService', function ($http, $location) {
     

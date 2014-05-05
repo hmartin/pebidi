@@ -1,11 +1,41 @@
 <h1>{{'createDictionary'|translate }}</h1>
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2 align-center">
-        <h2>
-            {{'createDictionary'|translate }}: biligne/Classic
-            (si bilige) votre langue: select
-            Langue apprise: select
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                {{'createDictionary'|translate }}:
+
+            </div>
+            <div class="col-md-4">
+                <select class="form-control">
+                    <option>Biligue</option>
+                    <option>Classic</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                Votre langue:
+            </div>
+            <div class="col-md-4">
+                <select class="form-control">
+                    <option>Biligue</option>
+                    <option>Classic</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                Langue apprise:
+            </div>
+            <div class="col-md-4">
+                <select class="form-control">
+                    <option>Biligue</option>
+                    <option>Classic</option>
+                </select>
+            </div>
+        </div>
     <button ng-click="startTest()" class="btn btn-success input-lg">{{ 'start'|translate }}</button>
     </div>
 </div>

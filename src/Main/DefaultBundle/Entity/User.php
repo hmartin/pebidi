@@ -83,7 +83,10 @@ class User extends BaseUser
     }
     
     public function getDefaultDictionary() {
-        return $this->dictionaries['0'];
+        if (isset($this->dictionaries['0'])) {
+            return $this->dictionaries['0'];
+        }
+        return false;
     }
 
     /**
