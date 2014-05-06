@@ -11,7 +11,7 @@ app
                     $cookies.dic = angular.toJson(data.dic);
                     $location.path('/addWord/' + data.dic.id);
                 } else {
-                    $cookies.user_id = angular.toJson(data.uid);
+                    $cookies.uid = angular.toJson(data.uid);
                     $location.path('/createDic/');
                 }
             });
@@ -19,9 +19,13 @@ app
     })
 
     .controller('CreateDicCtrl', function ($scope, $http, $location, $cookies, dicService) {
+        $scope.lang = ['de', 'en', 'es', 'fr'];
+        $scope.count = $scope.lang.lenght;
+        $scope.ip = 0;
+        $scope.ia = 1;
         //type, orign Lang, dest Lang
-        $scope.processForm = function () {
-            dicService.create();
+        $scope.createDic = function () {
+            dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
         };
     })
 
@@ -105,6 +109,7 @@ app
     .controller('rootCtrl', function ($scope, $http, $cookies, $translate, $location) {
         $scope.changeLanguage = function (key) {
             $translate.use(key);
+            $cookies.lang = key;
         };
         $scope.clearCookies = function () {
             delete $cookies['dic'];

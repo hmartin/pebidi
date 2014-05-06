@@ -21,18 +21,19 @@ class ApiUserController extends FOSRestController
         if ($email = $request->request->get('email')) {
 
             if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
-                if ($d = $u->getDefaultDictionary()) {
-                    return array('dic' => $d->getJsonArray());
-                }
+
             } else {
                 $u = new e\User();
                 $u->setEmail($email);
                 $u->setUsername($email);
                 $u->setPassword($email);
                 $this->get('persist')->persistAndFlush($u);
-            }
-
-            return array('uid' => $u->getId());
+            }          
+            $params = array('uid' => $u->getId());
+                if ($d = $u->getDefaultDictionary()) {
+                    $params['dic'] = $d->getJsonArray();
+                }
+            return $params;
         }
         throw new \Exception('Something went wrong!');
     }
@@ -43,13 +44,14 @@ class ApiUserController extends FOSRestController
      */
     public function postCreateDicAction(Request $request)
     {
-        if ($id = $request->request->get('id')) {
+        if ($id = $request->request->get('uid')) {
             if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($id)) {
                 $d = new e\Dictionary();
                 $d->setUser($u);
-                $d->setLang('en');
-
+                $d->setLang($request->request->get('destLang'));
+                $d->setOriginLang($request->request->get('originLang'));
                 $this->get('persist')->persistAndFlush($d);
+                
                 return array('dic' => $d->getJsonArray());
             }
 

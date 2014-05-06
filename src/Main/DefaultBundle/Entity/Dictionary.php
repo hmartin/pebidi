@@ -43,6 +43,11 @@ class Dictionary
     /**
      * @ORM\Column(type="string", length=255)
      */
+    protected $originLang;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     protected $lang;
     
     /**

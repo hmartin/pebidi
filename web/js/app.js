@@ -69,7 +69,11 @@ app.config(function ($translateProvider) {
         'questionTest': 'MCQ',
         'start': 'Start!',
         'numberOfQuestion': 'Number of question',
-        'knowledge': 'Knowledge'
+        'knowledge': 'Knowledge',
+        'fr': 'French',
+        'es': 'Spanish',
+        'en': 'English',
+        'de': 'German'
     });
     $translateProvider.translations('fr', {
         'dictionaryOf': 'Dictionnaire de:',
