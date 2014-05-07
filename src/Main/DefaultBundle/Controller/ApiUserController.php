@@ -51,10 +51,23 @@ class ApiUserController extends FOSRestController
                 $d->setLang($request->request->get('destLang'));
                 $d->setOriginLang($request->request->get('originLang'));
                 $this->get('persist')->persistAndFlush($d);
-                
+
                 return array('dic' => $d->getJsonArray());
             }
 
+        }
+        throw new \Exception('Something went wrong!');
+    }
+
+    /**
+     * @Rest\View()
+     */
+    public function postGetDicAction(Request $request)
+    {
+        if ($id = $request->request->get('id')) {
+            if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($id)) {
+                return array('dic' => $d->getJsonArray());
+            }
         }
         throw new \Exception('Something went wrong!');
     }

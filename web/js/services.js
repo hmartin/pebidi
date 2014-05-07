@@ -41,13 +41,21 @@ app.service('dictionaryService', function () {
 })
 
 .service('dicService', function ($http, $location, $cookies) {
-    
-    this.create = function (langOrigin, langDest) {      
-        $http.post(API_URL + 'creates/dics.json', {uid:$cookies.uid, langOrigin: langOrigin, langDest:langDest}).success(function (data) {
+
+        this.create = function (originLang, destLang) {
+            $http.post(API_URL + 'creates/dics.json', {uid:$cookies.uid, originLang: originLang, destLang:destLang}).success(function (data) {
                 if (data.dic) {
                     $cookies.dic = angular.toJson(data.dic);
                     $location.path('/addWord/' + data.dic.id);
                 }
             });
-    };
+        };
+        this.get = function (id) {
+            $http.post(API_URL + 'gets/dics.json', {id:id}).success(function (data) {
+                if (data.dic) {
+                    $cookies.dic = angular.toJson(data.dic);
+                    return data.dic;
+                }
+            });
+        };
 });

@@ -21,11 +21,16 @@ class User extends BaseUser
      * @ORM\Column(type="integer")
      */
     protected $private = 0;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Dictionary", mappedBy="user")
      */
     protected $dictionaries;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Test", mappedBy="user")
+     */
+    protected $tests;
 
     public function __construct()
     {
@@ -110,5 +115,38 @@ class User extends BaseUser
     public function getPrivate()
     {
         return $this->private;
+    }
+
+    /**
+     * Add tests
+     *
+     * @param \Main\DefaultBundle\Entity\Test $tests
+     * @return User
+     */
+    public function addTest(\Main\DefaultBundle\Entity\Test $tests)
+    {
+        $this->tests[] = $tests;
+
+        return $this;
+    }
+
+    /**
+     * Remove tests
+     *
+     * @param \Main\DefaultBundle\Entity\Test $tests
+     */
+    public function removeTest(\Main\DefaultBundle\Entity\Test $tests)
+    {
+        $this->tests->removeElement($tests);
+    }
+
+    /**
+     * Get tests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTests()
+    {
+        return $this->tests;
     }
 }

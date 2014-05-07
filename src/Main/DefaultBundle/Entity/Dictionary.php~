@@ -43,6 +43,11 @@ class Dictionary
     /**
      * @ORM\Column(type="string", length=255)
      */
+    protected $originLang;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     protected $lang;
     
     /**
@@ -242,5 +247,61 @@ class Dictionary
     public function getPrivate()
     {
         return $this->private;
+    }
+
+    /**
+     * Add tests
+     *
+     * @param \Main\DefaultBundle\Entity\Test $tests
+     * @return Dictionary
+     */
+    public function addTest(\Main\DefaultBundle\Entity\Test $tests)
+    {
+        $this->tests[] = $tests;
+
+        return $this;
+    }
+
+    /**
+     * Remove tests
+     *
+     * @param \Main\DefaultBundle\Entity\Test $tests
+     */
+    public function removeTest(\Main\DefaultBundle\Entity\Test $tests)
+    {
+        $this->tests->removeElement($tests);
+    }
+
+    /**
+     * Get tests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTests()
+    {
+        return $this->tests;
+    }
+
+    /**
+     * Set originLang
+     *
+     * @param string $originLang
+     * @return Dictionary
+     */
+    public function setOriginLang($originLang)
+    {
+        $this->originLang = $originLang;
+
+        return $this;
+    }
+
+    /**
+     * Get originLang
+     *
+     * @return string 
+     */
+    public function getOriginLang()
+    {
+        return $this->originLang;
     }
 }

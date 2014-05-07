@@ -281,4 +281,27 @@ class Dictionary
     {
         return $this->tests;
     }
+
+    /**
+     * Set originLang
+     *
+     * @param string $originLang
+     * @return Dictionary
+     */
+    public function setOriginLang($originLang)
+    {
+        $this->originLang = $originLang;
+
+        return $this;
+    }
+
+    /**
+     * Get originLang
+     *
+     * @return string 
+     */
+    public function getOriginLang()
+    {
+        return $this->originLang;
+    }
 }

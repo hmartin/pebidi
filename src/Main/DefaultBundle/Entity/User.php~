@@ -21,11 +21,16 @@ class User extends BaseUser
      * @ORM\Column(type="integer")
      */
     protected $private = 0;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Dictionary", mappedBy="user")
      */
     protected $dictionaries;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Test", mappedBy="user")
+     */
+    protected $tests;
 
     public function __construct()
     {
@@ -83,7 +88,10 @@ class User extends BaseUser
     }
     
     public function getDefaultDictionary() {
-        return $this->dictionaries['0'];
+        if (isset($this->dictionaries['0'])) {
+            return $this->dictionaries['0'];
+        }
+        return false;
     }
 
     /**

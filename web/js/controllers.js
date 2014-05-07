@@ -29,7 +29,10 @@ app
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $cookies, wordRetriever){
+    .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, dicService){
+        if ($routeParams.id != $scope.dic.id) {
+            dicService.get($routeParams.id);
+        }
         $scope.getWords = function(val) {
             return $http.get(API_URL + 'auto/complete/words.json', {
                 params: {
@@ -119,5 +122,10 @@ app
             return $cookies.dic;
         }, function (newValue) {
             $scope.dic = angular.fromJson($cookies.dic);
+        });
+        $scope.$watch(function () {
+            return $cookies.uid;
+        }, function (newValue) {
+            $scope.uid = angular.fromJson($cookies.uid);
         });
     })

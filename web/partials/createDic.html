@@ -6,27 +6,23 @@
             <div class="col-md-4 col-md-offset-2">
                 Votre langue:
             </div>
-            <div class="col-md-4">
-                
-        <a href="" ng-click="ip = ((ip + 3)%4)" ><span class="glyphicon glyphicon-chevron-left"></span></a>
-            &nbsp;{{ lang[ip] }}&nbsp;
-        <a href="" ng-click="ip = ((ip + 1)%4)" ><span class="glyphicon glyphicon-chevron-right"></span></a>
-            </div>
+            <div class="col-md-1"><a href="" ng-click="ip = ((ip + 3)%4)" ><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+            <div class="col-md-2">{{ lang[ip]|translate }}</div>
+            <div class="col-md-1"><a href="" ng-click="ip = ((ip + 1)%4)" ><span class="glyphicon glyphicon-chevron-right"></span></a></div>
         </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-2">
                 Langue apprise:
             </div>
-        <a href="" ng-click="ia = ((ia + 3)%4)" ><span class="glyphicon glyphicon-chevron-left"></span></a>
-            &nbsp;{{ lang[ia]|translate }}&nbsp;
-        <a href="" ng-click="ia = ((ia + 1)%4)" ><span class="glyphicon glyphicon-chevron-right"></span></a>
+            <div class="col-md-1"><a href="" ng-click="ia = ((ia + 3)%4)" ><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+            <div class="col-md-2">{{ lang[ia]|translate }}</div>
+            <div class="col-md-1"><a href="" ng-click="ia = ((ia + 1)%4)" ><span class="glyphicon glyphicon-chevron-right"></span></a></div>
         </div>
-        <br>
-        
+
         <div class="row">
             <div>
-    <button ng-click="createDic()" class="btn btn-success input-lg">{{ 'createDic'|translate }}</button>
-                </div>
+                <button ng-click="createDic()" class="btn btn-success input-lg">{{ 'createDic'|translate }}</button>
+            </div>
         </div>
     </div>
 </div>

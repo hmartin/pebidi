@@ -25,6 +25,12 @@ class Test
     protected $dictionary;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tests")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
+    /**
      * @ORM\OneToMany(targetEntity="Point", mappedBy="test")
      */
     protected $points;
@@ -131,5 +137,28 @@ class Test
     public function getPoints()
     {
         return $this->points;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Main\DefaultBundle\Entity\User $user
+     * @return Test
+     */
+    public function setUser(\Main\DefaultBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Main\DefaultBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

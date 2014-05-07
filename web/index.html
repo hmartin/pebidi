@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="css/main.css">
     <link href="css/animate.css" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
@@ -25,35 +25,40 @@
     <script src="js/services.js"></script>
 </head>
 <body ng-controller="rootCtrl">
-    <div class="site-wrapper">
-        <div class="site-wrapper-inner">
-            <div class="cover-container">
-                <div class="masthead clearfix">
-                    <div class="inner">
-                        <h2 class="masthead-brand"><a href="#/" >PeBiDi</a></h2>
-                        <div class="nav masthead-nav" >
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h2 class="masthead-brand"><a href="#/" >PeBiDi</a></h2>
+                    <div class="nav masthead-nav" >
+                        <div ng-if="dic.id == uid" class="animate-if">
                             {{ 'dictionaryOf'|translate  }} {{ dic.bitEmail }}
-                                <br><a ng-click="clearCookies()">{{ 'clickHere'|translate  }}</a>
-                        </div>    
-                        <div>
-                            <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href="" ng-click="changeLanguage('en')">en</a> 
                         </div>
+                        <div ng-if="dic.id != uid" class="animate-if">
+                            It's your dictionary
+                        </div>
+                        <br><a ng-click="clearCookies()">{{ 'signOut'|translate  }}</a>
+                    </div>
+                    <div>
+                        <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href="" ng-click="changeLanguage('en')">en</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="inner cover">
-                    <div class="view-animate-container">
-                        <div ng-view class="view-animate"></div>
-                    </div>
+            <div class="inner cover">
+                <div class="view-animate-container">
+                    <div ng-view class="view-animate"></div>
                 </div>
-                
-                <div class="mastfoot">
-                    <div class="inner">
-                        <p>Develop by <a href="http://izidot.com">Izidot</a>, Follow us on <a href="https://facebook.com">Facebook</a>.</p>
-                    </div>
+            </div>
+
+            <div class="mastfoot">
+                <div class="inner">
+                    <p>Develop by <a href="http://izidot.com">Izidot</a>, Follow us on <a href="https://facebook.com">Facebook</a>.</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

@@ -1,9 +1,8 @@
 New user is open (private=0)
 Evry open user create open dictionary
-
 when user register, he become private, like all his dictionaries
 
-after close user can open dictionary
+if cookies uid
 
 
 set cookies*
@@ -14,7 +13,8 @@ auto redirect if cookies*
 create test*
 save test result*
 
-create initial diccheck value and redirect if null
+create initial dic
+check value and redirect if null
 congrats page
 display and calculate score
 add list of word
