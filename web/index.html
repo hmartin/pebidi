@@ -35,10 +35,12 @@
                         <div ng-if="dic.id == uid" class="animate-if">
                             {{ 'dictionaryOf'|translate  }} {{ dic.bitEmail }}
                         </div>
+                        <div ng-if="uid" class="animate-if">
                         <div ng-if="dic.id != uid" class="animate-if">
                             It's your dictionary
-                        </div>
                         <br><a ng-click="clearCookies()">{{ 'signOut'|translate  }}</a>
+                        </div>
+                        
                     </div>
                     <div>
                         <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href="" ng-click="changeLanguage('en')">en</a>
