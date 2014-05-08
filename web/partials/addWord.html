@@ -1,5 +1,6 @@
 <h1>{{ 'welcome'|translate  }}</h1>
 <p class="lead">{{ 'addWord.newWord'|translate  }}</p>
+        <div ng-if="dic">
 <p class="lead">
 <form  ng-submit="processWord()">
     <div class="form-group has-feedback">
@@ -16,13 +17,11 @@
 </p>
 
 <div class="row">
+    <div ng-include="'blocs/countWord.html'"></div>
     <div class="col-md-6">
-        <h2>{{ dic.countWord }} Words</h2>
-        <a class="btn btn-primary btn-lg" ng-href="#/dictionary/{{ dic.id }}" >{{ 'yourDictionary'|translate  }}</a>
-    </div>
-    <div class="col-md-6">
-        <h2>39.6% {{ 'knowledge'|translate  }}</h2>
+        <div ng-include="'blocs/knowledge.html'"></div>
         <a class="btn btn-primary btn-lg" ng-href="#/createTest" >{{ 'addWord.doATest'|translate  }}</a>
     </div>
 </div>
-Your dicId is {{ dic.id }}
+Your dicId is {{ dic.id}}
+        </div>

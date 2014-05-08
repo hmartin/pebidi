@@ -2,6 +2,11 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2 align-center">
-        <h2>back to home / do another test / do it again / add package of words / test result / total result /</h2>
+        <h2>do it again / add package of words / test result</h2>
+
+        <a class="btn btn-primary btn-lg" ng-href="#/" >{{ 'goHome'|translate  }}</a>
+        <a class="btn btn-primary btn-lg" ng-href="#/createTest" >{{ 'doAnotherTest'|translate  }}</a>
+
+        {{ 'globalResult'|translate  }}: <div ng-include="'blocs/knowledge.html'"></div>
     </div>
 </div>

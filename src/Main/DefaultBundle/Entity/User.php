@@ -28,6 +28,11 @@ class User extends BaseUser
     protected $dictionaries;
 
     /**
+     * @ORM\OneToMany(targetEntity="DictionaryScore", mappedBy="user")
+     */
+    protected $dictionaryScores;
+
+    /**
      * @ORM\OneToMany(targetEntity="Test", mappedBy="user")
      */
     protected $tests;
@@ -148,5 +153,38 @@ class User extends BaseUser
     public function getTests()
     {
         return $this->tests;
+    }
+
+    /**
+     * Add dictionaryScores
+     *
+     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores
+     * @return User
+     */
+    public function addDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores)
+    {
+        $this->dictionaryScores[] = $dictionaryScores;
+
+        return $this;
+    }
+
+    /**
+     * Remove dictionaryScores
+     *
+     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores
+     */
+    public function removeDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores)
+    {
+        $this->dictionaryScores->removeElement($dictionaryScores);
+    }
+
+    /**
+     * Get dictionaryScores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDictionaryScores()
+    {
+        return $this->dictionaryScores;
     }
 }

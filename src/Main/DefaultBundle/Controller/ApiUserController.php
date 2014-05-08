@@ -28,16 +28,15 @@ class ApiUserController extends FOSRestController
                 $u->setUsername($email);
                 $u->setPassword($email);
                 $this->get('persist')->persistAndFlush($u);
-            }          
+            }
             $params = array('uid' => $u->getId());
-                if ($d = $u->getDefaultDictionary()) {
-                    $params['dic'] = $d->getJsonArray();
-                }
+            if ($d = $u->getDefaultDictionary()) {
+                $params['dic'] = $d->getJsonArray();
+            }
             return $params;
         }
         throw new \Exception('Something went wrong!');
     }
-
 
     /**
      * @Rest\View()
@@ -51,10 +50,13 @@ class ApiUserController extends FOSRestController
                 $d->setLang($request->request->get('destLang'));
                 $d->setOriginLang($request->request->get('originLang'));
                 $this->get('persist')->persistAndFlush($d);
+                $ds = new e\DictionaryScore();
+                $ds->setUser($u);
+                $ds->setDictionary($d);
+                $this->get('persist')->persistAndFlush($ds);
 
                 return array('dic' => $d->getJsonArray());
             }
-
         }
         throw new \Exception('Something went wrong!');
     }
@@ -70,5 +72,19 @@ class ApiUserController extends FOSRestController
             }
         }
         throw new \Exception('Something went wrong!');
+    }
+
+    /**
+     * @Rest\View()
+     */
+    public function getScoreAction(Request $request)
+    {
+        if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->query->get('uid')) and
+            $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->query->get('did'), 23, 10) ))
+        {
+            $a = array('user' => $u, 'dictionary' => $d);
+            $ds = $this->getDoctrine()->getRepository('MainDefaultBundle:DictionaryScore')->findOneBy($a);
+            return array('score' => $ds->getScore());
+        }
     }
 }

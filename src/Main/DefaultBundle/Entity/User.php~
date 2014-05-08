@@ -28,6 +28,11 @@ class User extends BaseUser
     protected $dictionaries;
 
     /**
+     * @ORM\OneToMany(targetEntity="DictionaryScore", mappedBy="user")
+     */
+    protected $dictionaryScores;
+
+    /**
      * @ORM\OneToMany(targetEntity="Test", mappedBy="user")
      */
     protected $tests;
@@ -115,5 +120,71 @@ class User extends BaseUser
     public function getPrivate()
     {
         return $this->private;
+    }
+
+    /**
+     * Add tests
+     *
+     * @param \Main\DefaultBundle\Entity\Test $tests
+     * @return User
+     */
+    public function addTest(\Main\DefaultBundle\Entity\Test $tests)
+    {
+        $this->tests[] = $tests;
+
+        return $this;
+    }
+
+    /**
+     * Remove tests
+     *
+     * @param \Main\DefaultBundle\Entity\Test $tests
+     */
+    public function removeTest(\Main\DefaultBundle\Entity\Test $tests)
+    {
+        $this->tests->removeElement($tests);
+    }
+
+    /**
+     * Get tests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTests()
+    {
+        return $this->tests;
+    }
+
+    /**
+     * Add dictionaryScores
+     *
+     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores
+     * @return User
+     */
+    public function addDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores)
+    {
+        $this->dictionaryScores[] = $dictionaryScores;
+
+        return $this;
+    }
+
+    /**
+     * Remove dictionaryScores
+     *
+     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores
+     */
+    public function removeDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores)
+    {
+        $this->dictionaryScores->removeElement($dictionaryScores);
+    }
+
+    /**
+     * Get dictionaryScores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDictionaryScores()
+    {
+        return $this->dictionaryScores;
     }
 }

@@ -18,24 +18,19 @@ class ApiTestController extends FOSRestController
      */
     public function postCreateTestAction(Request $request)
     {
-        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
+        if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->request->get('uid')) and
+            $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ) and
+            $nb = $request->request->get('nbQuestion'))
         {
-            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
-                ->leftJoin('d.translations', 't')
-                ->leftJoin('t.word', 'w')
-                ->select('w.id, w.word, t.translation')
-                ->where('d.id = :id')
-                ->setParameter(':id', $d->getId());
-
-
-            $results = $qb->getQuery()->getResult();
+            $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest($nb, $d, $u);
 
             $t = new e\Test();
             $t->setDictionary($d);
+            $t->setNbQuestion($nb);
+            $t->setUser($u);
             $this->get('persist')->persistAndFlush($t);
 
-
-            return array('id' => $t, 'words' => $results);
+            return array('id' => $t->getId(), 'words' => $results);
         }
         throw new \Exception('Something went wrong!');
     }
@@ -48,6 +43,7 @@ class ApiTestController extends FOSRestController
         $points = $request->request->get('points');
         if ($t = $this->getDoctrine()->getRepository('MainDefaultBundle:Test')->find($request->request->get('id')))
         {
+            $s = $i = 0;
             foreach($points as $pt) {
                 $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find($pt['wid']);
                 $p = new e\Point();
@@ -55,8 +51,15 @@ class ApiTestController extends FOSRestController
                 $p->setWord($w);
                 $p->setTest($t);
                 $this->get('persist')->persistAndFlush($p);
-
+                $s = $s + $pt['p'];$i++;
             }
+            $t->setScore($s*100/$i);
+            $this->get('persist')->persistAndFlush($t);
+            $a = array('user' => $t->getUser()->getId(), 'dictionary' => $t->getDictionary()->getId());
+            $ds = $this->getDoctrine()->getRepository('MainDefaultBundle:DictionaryScore')->findOneBy($a);
+            $a = array('uid' => $t->getUser()->getId(), 'did' => $t->getDictionary()->getId());
+            $ds->setScore($this->getDoctrine()->getRepository('MainDefaultBundle:Test')->getAvgScore($a));
+            $this->get('persist')->persistAndFlush($ds);
 
             return array();
         }

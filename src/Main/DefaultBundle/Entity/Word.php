@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(indexes={@ORM\Index(name="word_idx", columns={"word"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Main\DefaultBundle\Repository\WordRepository")
  */
 class Word
 {
@@ -37,11 +37,21 @@ class Word
      * @ORM\ManyToMany(targetEntity="Dictionary", mappedBy="words")
      **/
     private $dictionaries;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Translation", mappedBy="word",cascade={"persist"})
      */
     protected $translations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Definition", mappedBy="word",cascade={"persist"})
+     */
+    protected $definitions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Point", mappedBy="word",cascade={"persist"})
+     */
+    protected $points;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -239,5 +249,71 @@ class Word
         $this->id = $id;
 
         return $this;
+    }
+
+    /**
+     * Add definitions
+     *
+     * @param \Main\DefaultBundle\Entity\Definition $definitions
+     * @return Word
+     */
+    public function addDefinition(\Main\DefaultBundle\Entity\Definition $definitions)
+    {
+        $this->definitions[] = $definitions;
+
+        return $this;
+    }
+
+    /**
+     * Remove definitions
+     *
+     * @param \Main\DefaultBundle\Entity\Definition $definitions
+     */
+    public function removeDefinition(\Main\DefaultBundle\Entity\Definition $definitions)
+    {
+        $this->definitions->removeElement($definitions);
+    }
+
+    /**
+     * Get definitions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDefinitions()
+    {
+        return $this->definitions;
+    }
+
+    /**
+     * Add points
+     *
+     * @param \Main\DefaultBundle\Entity\Point $points
+     * @return Word
+     */
+    public function addPoint(\Main\DefaultBundle\Entity\Point $points)
+    {
+        $this->points[] = $points;
+
+        return $this;
+    }
+
+    /**
+     * Remove points
+     *
+     * @param \Main\DefaultBundle\Entity\Point $points
+     */
+    public function removePoint(\Main\DefaultBundle\Entity\Point $points)
+    {
+        $this->points->removeElement($points);
+    }
+
+    /**
+     * Get points
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPoints()
+    {
+        return $this->points;
     }
 }

@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Main\DefaultBundle\Repository\DictionaryRepository")
  */
 class Dictionary
 {
@@ -36,6 +36,11 @@ class Dictionary
     protected $translations;
 
     /**
+     * @ORM\OneToMany(targetEntity="DictionaryScore", mappedBy="dictionary")
+     */
+    protected $dictionaryScores;
+
+    /**
      * @ORM\OneToMany(targetEntity="Test", mappedBy="dictionary")
      */
     protected $tests;
@@ -49,6 +54,11 @@ class Dictionary
      * @ORM\Column(type="string", length=255)
      */
     protected $lang;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    protected $score = 0;
     
     /**
      * @ORM\Column(type="integer")
@@ -61,11 +71,11 @@ class Dictionary
      */
     private $created;
 
-
     public function getJsonArray() {
         return array( 'id' => $this->getConvertId(),
         'countWord' => count($this->getWords()),
-        'bitEmail' => $this->getUser()->getBitEmail()
+        'bitEmail' => $this->getUser()->getBitEmail(),
+        'score' => $this->getScore()
                     );
     }
     /**
@@ -303,5 +313,61 @@ class Dictionary
     public function getOriginLang()
     {
         return $this->originLang;
+    }
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     * @return Dictionary
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer 
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * Add dictionaryScores
+     *
+     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores
+     * @return Dictionary
+     */
+    public function addDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores)
+    {
+        $this->dictionaryScores[] = $dictionaryScores;
+
+        return $this;
+    }
+
+    /**
+     * Remove dictionaryScores
+     *
+     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores
+     */
+    public function removeDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores)
+    {
+        $this->dictionaryScores->removeElement($dictionaryScores);
+    }
+
+    /**
+     * Get dictionaryScores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDictionaryScores()
+    {
+        return $this->dictionaryScores;
     }
 }

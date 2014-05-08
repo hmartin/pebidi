@@ -6,6 +6,7 @@ var app = angular.module('app', [
     'ngRoute',
     'ngAnimate',
     'ngCookies',
+    'ngSanitize',
     'ui.bootstrap',
     'pascalprecht.translate',
 
@@ -25,6 +26,10 @@ app.config(['$routeProvider',
             when('/addWord/:id', {
                 templateUrl: 'partials/addWord.html',
                 controller: 'WordCtrl'
+            }).
+            when('/addGroupWord', {
+                templateUrl: 'partials/addGroupWord.html',
+                controller: 'AddGroupWordCtrl'
             }).
             when('/createTest', {
                 templateUrl: 'partials/createTest.html',

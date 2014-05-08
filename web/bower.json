@@ -13,6 +13,7 @@
       "angular-animate": "*",
       "angular-bootstrap": "*",
       "angular-cookies": "*",
-      "allmighty-autocomplete": "*"
+      "allmighty-autocomplete": "*",
+      "angular-sanitize": "*"
   }
 }

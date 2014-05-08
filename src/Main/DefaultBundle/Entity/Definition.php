@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(indexes={@ORM\Index(name="lemma_idx", columns={"lemma"})})
  * @ORM\Entity
  */
-class DefinitionEn
+class Definition
 {
     /**
      * @ORM\Id

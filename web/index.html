@@ -20,9 +20,11 @@
     <script src="bower_components/angular-translate/angular-translate.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <script src="js/filters.js"></script>
 </head>
 <body ng-controller="rootCtrl">
 <div class="site-wrapper">
@@ -32,15 +34,17 @@
                 <div class="inner">
                     <h2 class="masthead-brand"><a href="#/" >PeBiDi</a></h2>
                     <div class="nav masthead-nav" >
+                        dic.id:{{dic.id}}/uid:{{uid}}
                         <div ng-if="dic.id == uid" class="animate-if">
-                            {{ 'dictionaryOf'|translate  }} {{ dic.bitEmail }}
+                            It's your dictionary
                         </div>
                         <div ng-if="uid" class="animate-if">
-                        <div ng-if="dic.id != uid" class="animate-if">
-                            It's your dictionary
-                        <br><a ng-click="clearCookies()">{{ 'signOut'|translate  }}</a>
+                            <div ng-if="dic.id != uid" class="animate-if">
+                                {{ 'dictionaryOf'|translate  }} {{ dic.bitEmail }}
+                            </div>
+                            <br><a ng-click="clearCookies()">{{ 'signOut'|translate  }}</a>
                         </div>
-                        
+
                     </div>
                     <div>
                         <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href="" ng-click="changeLanguage('en')">en</a>

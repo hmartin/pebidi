@@ -1,17 +1,16 @@
 app
     .controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
-        if ($cookies.dic) {
+        if ($cookies.dic && $cookies.uid) {
             $scope.dic = angular.fromJson($cookies.dic);
             $location.path('/addWord/' + $scope.dic.id);
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
-                //if dic.id => user exist
+                $cookies.uid = angular.toJson(data.uid);
                 if (data.hasOwnProperty('dic')) {
                     $cookies.dic = angular.toJson(data.dic);
                     $location.path('/addWord/' + data.dic.id);
                 } else {
-                    $cookies.uid = angular.toJson(data.uid);
                     $location.path('/createDic/');
                 }
             });
@@ -29,10 +28,16 @@ app
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, dicService){
-        if ($routeParams.id != $scope.dic.id) {
+    .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, dicService, userService){
+        $scope.formData = {};
+        if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             dicService.get($routeParams.id);
         }
+
+        $scope.$watch('dic', function() {
+            userService.getScore($scope.dic.id);
+        });
+
         $scope.getWords = function(val) {
             return $http.get(API_URL + 'auto/complete/words.json', {
                 params: {
@@ -103,6 +108,14 @@ app
     .controller('CongratsTestCtrl', function ($scope, testService) {
     })
 
+    .controller('AddGroupWordCtrl', function ($scope, testService) {
+        $scope.groupsWords = [
+            {'id':1, 'title':'Basic', 'description':'The most basic word (car, house, dog...)'},
+            {'id':2, 'title':'Business', 'description':'The most basic word (car, house, dog...)'},
+            {'id':3, 'title':'Travel', 'description':'The most basic word (car, house, dog...)'}
+        ];
+    })
+
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {
         $http.post(API_URL + 'words.json', $cookies.dic).success(function (data) {
             $scope.words = data;
@@ -116,6 +129,7 @@ app
         };
         $scope.clearCookies = function () {
             delete $cookies['dic'];
+            delete $cookies['uid'];
             $location.path('/');
         };
         $scope.$watch(function () {
@@ -127,5 +141,10 @@ app
             return $cookies.uid;
         }, function (newValue) {
             $scope.uid = angular.fromJson($cookies.uid);
+        });
+        $scope.$watch(function () {
+            return $cookies.score;
+        }, function (newValue) {
+            $scope.score = angular.fromJson($cookies.score);
         });
     })

@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Main\DefaultBundle\Repository\TestRepository")
  */
 class Test
 {
@@ -34,6 +34,16 @@ class Test
      * @ORM\OneToMany(targetEntity="Point", mappedBy="test")
      */
     protected $points;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $score;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $nbQuestion;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -160,5 +170,51 @@ class Test
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     * @return Test
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer 
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * Set nbQuestion
+     *
+     * @param integer $nbQuestion
+     * @return Test
+     */
+    public function setNbQuestion($nbQuestion)
+    {
+        $this->nbQuestion = $nbQuestion;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQuestion
+     *
+     * @return integer 
+     */
+    public function getNbQuestion()
+    {
+        return $this->nbQuestion;
     }
 }

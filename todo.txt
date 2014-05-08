@@ -4,7 +4,7 @@ when user register, he become private, like all his dictionaries
 
 if cookies uid
 
-
+v1 main:
 set cookies*
 api add words*
 clear cookies*
@@ -12,18 +12,23 @@ display dic*
 auto redirect if cookies*
 create test*
 save test result*
+create initial dic*
+display and calculate score*
+algo v1 test*
+display answer*
 
-create initial dic
+congrats page+
+add list of word+
 check value and redirect if null
-congrats page
-display and calculate score
-add list of word
-css dictionary
+css dictionary, css global
 stat dictionary
-create account
-algo test
 
-
-other:
+v1 other:
 !translate*
 help
+
+v2:
+create account
+create groupWord
+algo v2 test
+multiple dic
