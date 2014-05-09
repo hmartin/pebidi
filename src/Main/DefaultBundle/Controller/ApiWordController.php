@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Main\DefaultBundle\Entity as e;
 use Main\DefaultBundle\Form as f;
+use Symfony\Component\DomCrawler\Crawler;
 
 class ApiWordController extends FOSRestController
 {
@@ -79,5 +80,26 @@ class ApiWordController extends FOSRestController
         $results = $qb->getQuery()->getResult();
 
         return array('words' => $results);
+    }
+    
+    public getTradFromWordReference($o, $d, $word) {
+        $html = file_get_content('http://www.wordreference.com/'.$o.$d.'/'.$word);
+        
+        $crawler = new Crawler($html);
+        $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
+        {
+          $word = $node
+            ->filter('em')
+            ->reduce(function (Crawler $node, $i) {
+                // filter even nodes
+                return false;
+            })->nodeValue;
+            $em
+            ->filter('em')
+            ->first()->nodeValue;
+            return array('word' => $word, 'em' => $em);
+        });
+        var_dump($a);exit;
+        
     }
 }

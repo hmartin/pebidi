@@ -46,6 +46,32 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/test", name="default", requirements={"_locale" = "en|fr|de"} )
+     * @Template
+     */
+    public function testAction(Request $request)
+    {
+        $html = file_get_content('http://www.wordreference.com/fren/car');
+        
+        $crawler = new Crawler($html);
+        $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
+        {
+          $word = $node
+            ->filter('em')
+            ->reduce(function (Crawler $node, $i) {
+                // filter even nodes
+                return false;
+            })->nodeValue;
+            $em
+            ->filter('em')
+            ->first()->nodeValue;
+            return array('word' => $word, 'em' => $em);
+        });
+        var_dump($a);exit;
+    }
+    
+
+    /**
      * @Route("/{_locale}/cc", name="clearCookies" )
      */
     public function clearCookiesAction()
