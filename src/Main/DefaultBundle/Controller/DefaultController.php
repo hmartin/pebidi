@@ -55,8 +55,8 @@ class DefaultController extends Controller
         $html = \file_get_contents('http://www.wordreference.com/fren/car');
         
         $crawler = new Crawler($html);
-        echo $crawler->filter('table')->first()->text();
-        echo $crawler->filter('#articleWRD > table')->first()->text();
+        var_dump ($crawler->filter('table')->first());
+        var_dump ($crawler->filter('#articleWRD > table')->first());
         $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
         {
           echo '--'.$node->nodeValue;
