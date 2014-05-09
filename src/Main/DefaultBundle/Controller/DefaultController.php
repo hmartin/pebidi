@@ -51,7 +51,7 @@ class DefaultController extends Controller
      */
     public function testAction(Request $request)
     {
-        $html = \file_get_content('http://www.wordreference.com/fren/car');
+        $html = \file_get_contents('http://www.wordreference.com/fren/car');
         
         $crawler = new Crawler($html);
         $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
