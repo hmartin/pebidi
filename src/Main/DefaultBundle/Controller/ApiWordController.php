@@ -69,9 +69,12 @@ class ApiWordController extends FOSRestController
     public function getAutoCompleteWordsAction(Request $request)
     {
         $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('wen')
+            ->select('w.word')
+            ->addSelect('LENGHT(w.word) AS l')
             ->where('wen.word LIKE :word')
-            ->setMaxResults(12)
-            ->setParameter(':word', $request->query->get('word').'%');
+            ->setMaxResults(8)
+            ->setParameter(':word', $request->query->get('word').'%')
+            ->orderBy('l', 'ASC');
 
         $results = $qb->getQuery()->getResult();
 
