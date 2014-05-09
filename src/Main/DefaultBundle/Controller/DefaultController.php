@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Main\DefaultBundle\Entity as e;
 use Main\DefaultBundle\Form as f;
+use Symfony\Component\DomCrawler\Crawler;
 
 class DefaultController extends Controller
 {
