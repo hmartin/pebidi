@@ -55,8 +55,8 @@ class DefaultController extends Controller
         $html = \file_get_contents('http://www.dict66.com/translate/fr-en/car');
         var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
-        var_dump ($crawler->filter('table')->first());echo '<br><br><br>';
-        var_dump ($crawler->filter('#articleWRD > table')->first());echo '<br><br><br>';
+        var_dump ($crawler->filter('#result-item-target')->first());echo '<br><br><br>';
+        var_dump ($crawler->filter('#result-item-target > .wordentry')->first());echo '<br><br><br>';
         $a = $crawler->filter('#result-item-target > .wordentry')->each(function ($node, $i)
         {
             return $node->text();
