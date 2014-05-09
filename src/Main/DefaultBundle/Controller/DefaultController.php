@@ -55,8 +55,8 @@ class DefaultController extends Controller
         $html = \file_get_contents('http://www.wordreference.com/fren/car');
         
         $crawler = new Crawler($html);
-        echo $crawler->filter('table')->first()->nodeValue;
-        echo $crawler->filter('#articleWRD > table')->first()->nodeValue;
+        echo $crawler->filter('table')->first()->text();
+        echo $crawler->filter('#articleWRD > table')->first()->text();
         $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
         {
           echo '--'.$node->nodeValue;
@@ -65,10 +65,10 @@ class DefaultController extends Controller
             ->reduce(function (Crawler $node, $i) {
                 // filter even nodes
                 return false;
-            })->nodeValue;
+            })->text();
             $em
             ->filter('em')
-            ->first()->nodeValue;
+            ->first()->text();
             return array('word' => $word, 'em' => $em);
         });
         var_dump($a);exit;
