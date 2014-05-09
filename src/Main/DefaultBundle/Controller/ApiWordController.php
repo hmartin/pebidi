@@ -82,7 +82,7 @@ class ApiWordController extends FOSRestController
         return array('words' => $results);
     }
     
-    public getTradFromWordReference($o, $d, $word) {
+    public function getTradFromWordReference($o, $d, $word) {
         $html = file_get_content('http://www.wordreference.com/'.$o.$d.'/'.$word);
         
         $crawler = new Crawler($html);
