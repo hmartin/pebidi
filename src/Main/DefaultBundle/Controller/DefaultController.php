@@ -57,7 +57,8 @@ class DefaultController extends Controller
         $crawler = new Crawler($html);
         $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
         {
-          $word = $node
+          echo $node->nodeValue;
+            $word = $node
             ->filter('em')
             ->reduce(function (Crawler $node, $i) {
                 // filter even nodes
