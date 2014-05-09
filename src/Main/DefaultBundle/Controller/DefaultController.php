@@ -52,24 +52,14 @@ class DefaultController extends Controller
      */
     public function testAction(Request $request)
     {
-        $html = \file_get_contents('http://www.wordreference.com/fren/car');
+        $html = \file_get_contents('http://www.dict66.com/translate/fr-en/car');
         var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
         var_dump ($crawler->filter('table')->first());echo '<br><br><br>';
         var_dump ($crawler->filter('#articleWRD > table')->first());echo '<br><br><br>';
-        $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
+        $a = $crawler->filter('#result-item-target > .wordentry')->each(function ($node, $i)
         {
-          echo '--'.$node->nodeValue;
-            $word = $node
-            ->filter('em')
-            ->reduce(function (Crawler $node, $i) {
-                // filter even nodes
-                return false;
-            })->text();
-            $em
-            ->filter('em')
-            ->first()->text();
-            return array('word' => $word, 'em' => $em);
+            return $node->text();
         });
         echo '<br><br><br>';
         var_dump($a);exit;
