@@ -53,10 +53,10 @@ class DefaultController extends Controller
     public function testAction(Request $request)
     {
         $html = \file_get_contents('http://www.wordreference.com/fren/car');
-        
+        var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
-        var_dump ($crawler->filter('table')->first());
-        var_dump ($crawler->filter('#articleWRD > table')->first());
+        var_dump ($crawler->filter('table')->first());echo '<br><br><br>';
+        var_dump ($crawler->filter('#articleWRD > table')->first());echo '<br><br><br>';
         $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
         {
           echo '--'.$node->nodeValue;
@@ -71,6 +71,7 @@ class DefaultController extends Controller
             ->first()->text();
             return array('word' => $word, 'em' => $em);
         });
+        echo '<br><br><br>';
         var_dump($a);exit;
     }
     
