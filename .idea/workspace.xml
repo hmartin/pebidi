@@ -2,62 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f12a0279-42f3-4f6c-abbc-c1e0d61084fc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/DictionaryScore.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Query/GroupConcat.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/partials/addGroupWord.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/blocs/countWord.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/filters.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/blocs/knowledge.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/trim.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/DefinitionEn.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Definition.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/.bower.json" afterPath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/.bower.json" afterPath="$PROJECT_DIR$/web/bower_components/jquery/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiUserController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiUserController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiGroupWordController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/GroupWord.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Test.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Test.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php" afterPath="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/partials/addWord.html" afterPath="$PROJECT_DIR$/web/partials/addWord.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/exports/amd.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/exports/amd.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower.json" afterPath="$PROJECT_DIR$/web/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/bower.json" afterPath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/bower.json" afterPath="$PROJECT_DIR$/web/bower_components/jquery/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/partials/congrats.html" afterPath="$PROJECT_DIR$/web/partials/congrats.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/controllers.js" afterPath="$PROJECT_DIR$/web/js/controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/css.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/data.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/defaultDisplay.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/css/defaultDisplay.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/partials/dictionary.html" afterPath="$PROJECT_DIR$/web/partials/dictionary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/effects.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/effects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/event.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/event.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.html" afterPath="$PROJECT_DIR$/web/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.min.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.min.map" afterPath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.min.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/load.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/load.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/partials/questions.html" afterPath="$PROJECT_DIR$/web/partials/questions.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core/ready.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/core/ready.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/selector-native.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/selector-native.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/services.js" afterPath="$PROJECT_DIR$/web/js/services.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/sizzle/dist/sizzle.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/sizzle/dist/sizzle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/sizzle/dist/sizzle.min.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/sizzle/dist/sizzle.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/sizzle/dist/sizzle.min.map" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/sizzle/dist/sizzle.min.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/support.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/css/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/support.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todo.txt" afterPath="$PROJECT_DIR$/todo.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/ui-bootstrap-tpls.js" afterPath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/ui-bootstrap-tpls.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" afterPath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/ui-bootstrap.js" afterPath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/ui-bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/ui-bootstrap.min.js" afterPath="$PROJECT_DIR$/web/bower_components/angular-bootstrap/ui-bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/attributes/val.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/attributes/val.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/xhr.js" afterPath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/xhr.js" />
     </list>
     <ignored path="persodic.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,55 +32,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="17" selection-start="147" selection-end="147" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1680">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bower.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/bower.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="28" selection-start="436" selection-end="436" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="375">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="services.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/services.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="49" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="1170">
+            <state line="40" column="39" selection-start="1426" selection-end="1430" vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1170">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="todo.txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="todo.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/todo.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="17" selection-start="383" selection-end="383" vertical-scroll-proportion="0.33407572" vertical-offset="0" max-vertical-offset="898">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="questions.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/partials/questions.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="12" selection-start="522" selection-end="522" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="525">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="filters.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/js/filters.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="35" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+            <state line="18" column="0" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
               <folding />
             </state>
           </provider>
@@ -137,36 +53,74 @@
       <file leaf-file-name="DefaultController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="10" selection-start="783" selection-end="783" vertical-scroll-proportion="-12.666667" vertical-offset="41" max-vertical-offset="1950">
+            <state line="54" column="0" selection-start="1964" selection-end="2601" vertical-scroll-proportion="-15.0" vertical-offset="360" max-vertical-offset="2325">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WordRepository.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Repository/WordRepository.php">
+      <file leaf-file-name="ApiWordController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="46" selection-start="611" selection-end="619" vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="675">
+            <state line="54" column="32" selection-start="1966" selection-end="1966" vertical-scroll-proportion="0.79405034" vertical-offset="26" max-vertical-offset="1530">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupConcat.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Query/GroupConcat.php">
+      <file leaf-file-name="controllers.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="44" selection-start="983" selection-end="983" vertical-scroll-proportion="-22.5" vertical-offset="0" max-vertical-offset="855">
+            <state line="115" column="52" selection-start="4112" selection-end="4118" vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="2340">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dictionary.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/partials/dictionary.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="0" selection-start="129" selection-end="433" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="195">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addGroupWord.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/partials/addGroupWord.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="73" selection-start="102" selection-end="113" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="225">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiGroupWordController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiGroupWordController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="32" selection-start="681" selection-end="681" vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="600">
               <folding>
-                <element signature="e#7#381#0" expanded="true" />
+                <element signature="e#51#99#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/index.html">
+      <file leaf-file-name="routing.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="50" selection-start="1356" selection-end="1356" vertical-scroll-proportion="-13.75" vertical-offset="0" max-vertical-offset="1140">
+            <state line="10" column="52" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="690">
+              <folding>
+                <marker date="1399716242431" expanded="true" signature="178:278" placeholder="apiGroupWord:" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiTestController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="12" selection-start="828" selection-end="931" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="1035">
               <folding />
             </state>
           </provider>
@@ -185,8 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/translations/messages.en.yml" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/web/css/animate.css" />
         <option value="$PROJECT_DIR$/web/partials/home.html" />
         <option value="$PROJECT_DIR$/web/css/main.css" />
@@ -195,11 +147,9 @@
         <option value="$PROJECT_DIR$/web/partials/createTest.html" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/WordEn.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/TranslationEn.php" />
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Command/oneShotCommand.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/DefinitionEn.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Command/OneShotCommand.php" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Resources/views/Default/index.html.twig" />
         <option value="$PROJECT_DIR$/web/api_dev.php" />
         <option value="$PROJECT_DIR$/app/config/config_dev.yml" />
@@ -220,10 +170,8 @@
         <option value="$PROJECT_DIR$/web/blocs/knowledge.html" />
         <option value="$PROJECT_DIR$/web/js/services.js" />
         <option value="$PROJECT_DIR$/web/partials/congrats.html" />
-        <option value="$PROJECT_DIR$/web/js/controllers.js" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Definition.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php" />
         <option value="$PROJECT_DIR$/src/Main/Query/GroupConcat.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/web/partials/addWord.html" />
@@ -232,10 +180,16 @@
         <option value="$PROJECT_DIR$/web/index.html" />
         <option value="$PROJECT_DIR$/web/partials/questions.html" />
         <option value="$PROJECT_DIR$/web/js/filters.js" />
-        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Repository/WordRepository.php" />
         <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Query/GroupConcat.php" />
         <option value="$PROJECT_DIR$/todo.txt" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Entity/GroupWord.php" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/app/config/routing.yml" />
+        <option value="$PROJECT_DIR$/web/js/controllers.js" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiGroupWordController.php" />
+        <option value="$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php" />
       </list>
     </option>
   </component>
@@ -272,6 +226,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -337,46 +292,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persodic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="angular-sanitize" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -598,7 +513,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -628,11 +542,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Main/DefaultBundle/Controller" />
+      <recent name="$PROJECT_DIR$/src/Main/DefaultBundle/Entity" />
       <recent name="$PROJECT_DIR$/web/js" />
       <recent name="$PROJECT_DIR$/web/blocs" />
-      <recent name="$PROJECT_DIR$/src/Main/DefaultBundle/Entity" />
       <recent name="$PROJECT_DIR$/web/partials" />
-      <recent name="$PROJECT_DIR$/app/config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Main/DefaultBundle" />
@@ -682,11 +596,11 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -706,16 +620,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Resources/translations/messages.en.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="76" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/animate.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="22" selection-start="126" selection-end="126" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bower_components/bootstrap/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="12.6" vertical-offset="315" max-vertical-offset="2685" />
@@ -746,11 +650,6 @@
         <state line="2" column="25" selection-start="121" selection-end="147" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="225" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="15" selection-start="371" selection-end="371" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/partials/createTest.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="29" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="285" />
@@ -759,11 +658,6 @@
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Command/OneShotCommand.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="107" selection-start="834" selection-end="876" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="615" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="55" selection-start="1074" selection-end="1074" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1275" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/app_dev.php">
@@ -808,23 +702,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/blocs/countWord.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="6" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="135">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/partials/dictionary.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="3" selection-start="437" selection-end="437" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="195">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/partials/addGroupWord.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="20" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="874">
-          <folding />
-        </state>
+        <state line="3" column="6" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="135" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Point.php">
@@ -836,16 +714,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Translation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="27" selection-start="476" selection-end="688" vertical-scroll-proportion="-9.375" vertical-offset="90" max-vertical-offset="2310">
-          <folding />
-        </state>
+        <state line="23" column="27" selection-start="476" selection-end="688" vertical-scroll-proportion="-9.375" vertical-offset="90" max-vertical-offset="2310" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="7" selection-start="1826" selection-end="1826" vertical-scroll-proportion="-54.375" vertical-offset="0" max-vertical-offset="2925">
-          <folding />
-        </state>
+        <state line="88" column="7" selection-start="1826" selection-end="1826" vertical-scroll-proportion="-54.375" vertical-offset="0" max-vertical-offset="2925" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Test.php">
@@ -864,32 +738,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Repository/DictionaryScoreRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Repository/TestRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="92" selection-start="614" selection-end="614" vertical-scroll-proportion="-13.75" vertical-offset="0" max-vertical-offset="480">
-          <folding>
-            <marker date="1399542578603" expanded="true" signature="-1:-1" placeholder="SELECT (sum(..." />
-          </folding>
-        </state>
+        <state line="22" column="92" selection-start="614" selection-end="614" vertical-scroll-proportion="-13.75" vertical-offset="0" max-vertical-offset="480" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/blocs/knowledge.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="60" selection-start="61" selection-end="61" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="105">
-          <folding />
-        </state>
+        <state line="1" column="60" selection-start="61" selection-end="61" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="105" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/partials/congrats.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="60" selection-start="170" selection-end="170" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
+        <state line="4" column="60" selection-start="170" selection-end="170" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="255" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Dictionary.php">
@@ -899,55 +763,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiUserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="9" selection-start="2773" selection-end="2831" vertical-scroll-proportion="-30.791666" vertical-offset="431" max-vertical-offset="1350">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="12" selection-start="828" selection-end="931" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="1035">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Repository/DictionaryRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Definition.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="16" selection-start="284" selection-end="284" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="6840">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="6" selection-start="1753" selection-end="1753" vertical-scroll-proportion="-22.5" vertical-offset="720" max-vertical-offset="4875">
-          <folding>
-            <element signature="e#44#76#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="11" column="16" selection-start="284" selection-end="284" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="6840" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="12" selection-start="1529" selection-end="1529" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="38" selection-start="1466" selection-end="1466" vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="2325">
-          <folding />
-        </state>
+        <state line="58" column="12" selection-start="1529" selection-end="1529" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/partials/addWord.html">
@@ -966,28 +794,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bower.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="28" selection-start="436" selection-end="436" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="375">
-          <folding />
-        </state>
+        <state line="16" column="28" selection-start="436" selection-end="436" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="375" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="50" selection-start="1356" selection-end="1356" vertical-scroll-proportion="-13.75" vertical-offset="0" max-vertical-offset="1140">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="49" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="1170">
+        <state line="22" column="50" selection-start="1356" selection-end="1356" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="1140">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/partials/questions.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="12" selection-start="522" selection-end="522" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="525">
+        <state line="13" column="12" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="525">
           <folding />
         </state>
       </provider>
@@ -999,32 +818,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="10" selection-start="783" selection-end="783" vertical-scroll-proportion="-12.666667" vertical-offset="41" max-vertical-offset="1950">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Repository/WordRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="46" selection-start="611" selection-end="619" vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="675">
+        <state line="23" column="46" selection-start="611" selection-end="619" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="675">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Query/GroupConcat.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="44" selection-start="983" selection-end="983" vertical-scroll-proportion="-22.5" vertical-offset="0" max-vertical-offset="855">
+        <state line="36" column="44" selection-start="983" selection-end="983" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="855">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/Word.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="27" selection-start="1698" selection-end="1698" vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="5445">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Entity/GroupWord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="174" column="0" selection-start="3029" selection-end="3029" vertical-scroll-proportion="-68.083336" vertical-offset="946" max-vertical-offset="3330">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiUserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="9" selection-start="2773" selection-end="2831" vertical-scroll-proportion="-30.791666" vertical-offset="431" max-vertical-offset="1350">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiTestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="12" selection-start="828" selection-end="931" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="0" selection-start="1964" selection-end="2601" vertical-scroll-proportion="-15.0" vertical-offset="360" max-vertical-offset="2325">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="52" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="690">
           <folding>
-            <element signature="e#7#381#0" expanded="true" />
+            <marker date="1399716242431" expanded="true" signature="178:278" placeholder="apiGroupWord:" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="39" selection-start="1426" selection-end="1430" vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/partials/dictionary.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="129" selection-end="433" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/partials/addGroupWord.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="73" selection-start="102" selection-end="113" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="52" selection-start="4112" selection-end="4118" vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="2340">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/todo.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="17" selection-start="383" selection-end="383" vertical-scroll-proportion="0.33407572" vertical-offset="0" max-vertical-offset="898">
+        <state line="18" column="0" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiGroupWordController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="32" selection-start="681" selection-end="681" vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="600">
+          <folding>
+            <element signature="e#51#99#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DefaultBundle/Controller/ApiWordController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="32" selection-start="1966" selection-end="1966" vertical-scroll-proportion="0.79405034" vertical-offset="26" max-vertical-offset="1530">
           <folding />
         </state>
       </provider>

@@ -108,12 +108,13 @@ app
     .controller('CongratsTestCtrl', function ($scope, testService) {
     })
 
-    .controller('AddGroupWordCtrl', function ($scope, testService) {
-        $scope.groupsWords = [
-            {'id':1, 'title':'Basic', 'description':'The most basic word (car, house, dog...)'},
-            {'id':2, 'title':'Business', 'description':'The most basic word (car, house, dog...)'},
-            {'id':3, 'title':'Travel', 'description':'The most basic word (car, house, dog...)'}
-        ];
+    .controller('AddGroupWordCtrl', function ($scope, $http, $location, $cookies) {
+        $http.get(API_URL + 'words/group.json', {
+                params: { lang: 'en'
+                }
+            }).success(function(data){
+                    $scope.groupsWords = data.groups;
+                });
     })
 
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {

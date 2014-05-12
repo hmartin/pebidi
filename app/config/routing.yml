@@ -6,6 +6,10 @@ apiWord:
     type:     rest
     resource: Main\DefaultBundle\Controller\ApiWordController
 
+apiGroupWord:
+    type:     rest
+    resource: Main\DefaultBundle\Controller\ApiGroupWordController
+
 apiTest:
     type:     rest
     resource: Main\DefaultBundle\Controller\ApiTestController

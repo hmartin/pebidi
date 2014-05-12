@@ -52,7 +52,7 @@ class ApiWordController extends FOSRestController
             $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
                 ->leftJoin('d.translations', 't')
                 ->leftJoin('t.word', 'w')
-                ->select('w.word, t.translation')
+                ->select('w.id, w.word, t.translation')
                 ->where('d.id = :id')
                 ->setParameter(':id', $d->getId());
 
@@ -83,23 +83,21 @@ class ApiWordController extends FOSRestController
     }
     
     public function getTradFromWordReference($o, $d, $word) {
-        $html = file_get_content('http://www.wordreference.com/'.$o.$d.'/'.$word);
-        
+        $html = \file_get_contents('http://www.dict66.com/translate/fr-en/car');
+        //var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
-        $a = $crawler->filter('#articleWRD > table')->first()->filter('.ToWrd')->each(function ($node, $i)
+
+        $a = $crawler->filter('.translation-results tbody > tr')->each(function ($node, $i)
         {
-          $word = $node
-            ->filter('em')
-            ->reduce(function (Crawler $node, $i) {
-                // filter even nodes
-                return false;
-            })->nodeValue;
-            $em
-            ->filter('em')
-            ->first()->nodeValue;
-            return array('word' => $word, 'em' => $em);
+            $o = $node->filter('.result-item-source > .wordentry')->each(function ($node, $i) {
+                return $node->text();
+            });
+            $d = $node->filter('.result-item-target > .wordentry')->each(function ($node, $i) {
+                return $node->text();
+            });
+            return array('origin' => $o, 'dest' => $d);
         });
-        var_dump($a);exit;
         
     }
+
 }

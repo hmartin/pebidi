@@ -39,6 +39,11 @@ class Word
     private $dictionaries;
 
     /**
+     * @ORM\ManyToMany(targetEntity="GroupWord", mappedBy="words")
+     **/
+    private $groupsWords;
+
+    /**
      * @ORM\OneToMany(targetEntity="Translation", mappedBy="word",cascade={"persist"})
      */
     protected $translations;
@@ -282,5 +287,38 @@ class Word
     public function getDefinitions()
     {
         return $this->definitions;
+    }
+
+    /**
+     * Add points
+     *
+     * @param \Main\DefaultBundle\Entity\Point $points
+     * @return Word
+     */
+    public function addPoint(\Main\DefaultBundle\Entity\Point $points)
+    {
+        $this->points[] = $points;
+
+        return $this;
+    }
+
+    /**
+     * Remove points
+     *
+     * @param \Main\DefaultBundle\Entity\Point $points
+     */
+    public function removePoint(\Main\DefaultBundle\Entity\Point $points)
+    {
+        $this->points->removeElement($points);
+    }
+
+    /**
+     * Get points
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPoints()
+    {
+        return $this->points;
     }
 }

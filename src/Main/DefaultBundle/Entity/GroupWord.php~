@@ -1,0 +1,53 @@
+<?php
+namespace Main\DefaultBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+/**
+ * @ORM\Table()
+ * @ORM\Entity()
+ */
+class GroupWord
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="dictionaries")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Word", inversedBy="groupsWords")
+     * @ORM\JoinTable(name="GroupWordWord")
+     **/
+    private $words;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $lang;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+}

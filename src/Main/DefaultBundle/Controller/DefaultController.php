@@ -47,7 +47,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/test", name="default", requirements={"_locale" = "en|fr|de"} )
+     * @Route("/{_locale}/test", name="test", requirements={"_locale" = "en|fr|de"} )
      * @Template
      */
     public function testAction(Request $request)
@@ -55,13 +55,18 @@ class DefaultController extends Controller
         $html = \file_get_contents('http://www.dict66.com/translate/fr-en/car');
         //var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
-        var_dump ($crawler->filter('.result-item-target')->first());echo '<br><br><br>';
-        var_dump ($crawler->filter('.result-item-target > .wordentry')->first());echo '<br><br><br>';
-        $a = $crawler->filter('.result-item-target > .wordentry')->each(function ($node, $i)
+
+        $a = $crawler->filter('.translation-results tbody > tr')->each(function ($node, $i)
         {
-            return $node->text();
+            $o = $node->filter('.result-item-source > .wordentry')->each(function ($node, $i) {
+                return $node->text();
+            });
+            $d = $node->filter('.result-item-target > .wordentry')->each(function ($node, $i) {
+                return $node->text();
+            });
+            return array('origin' => $o, 'dest' => $d);
         });
-        echo '<br><br><br>';
+        echo '<pre><br><br><br>';
         var_dump($a);exit;
     }
     
