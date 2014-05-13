@@ -19,6 +19,8 @@ display answer*
 
 congrats page+
 add list of word+
+good display dic66 (ou pompage)
+pb test +5/-5
 check value and redirect if null
 css dictionary, css global
 stat dictionary
@@ -28,7 +30,9 @@ v1 other:
 help
 
 v2:
+Create & Edit best translation
 create account
 create groupWord
 algo v2 test
 multiple dic
+Add translate languages (de, es)

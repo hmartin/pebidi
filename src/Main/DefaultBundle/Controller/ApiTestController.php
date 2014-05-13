@@ -30,7 +30,7 @@ class ApiTestController extends FOSRestController
             $t->setUser($u);
             $this->get('persist')->persistAndFlush($t);
 
-            return array('id' => $t->getId(), 'words' => $results);
+            return array('id' => $t->getId(), 'words' => shuffle($results);
         }
         throw new \Exception('Something went wrong!');
     }
