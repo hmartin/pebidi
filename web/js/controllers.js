@@ -69,6 +69,15 @@ app
         } else {
             $scope.nbquestion = $scope.dic.countWord;
         }
+        
+        $scope.changeNbQuestion = function (n) {
+            $scope.nbquestion = $scope.nbquestion + n;
+            if ($scope.nbquestion < 1 ) {
+                $scope.nbquestion = 1;
+            } else if ($scope.nbquestion > $scope.dic.countWord-1) {
+            $scope.nbquestion = $scope.dic.countWord;
+            }
+        }
         $scope.startTest = function () {
             testService.createTest($scope.dic.id, $scope.nbquestion);
         }
