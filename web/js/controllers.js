@@ -124,6 +124,15 @@ app
             }).success(function(data){
                     $scope.groupsWords = data.groups;
                 });
+        
+        $scope.addGroupWord = function (id) {
+            $scope.data = {};
+            $scope.data.did = $scope.dic.id;
+            $scope.data.gwid = id;
+            $http.post(API_URL + 'adds/groups/words.json', $scope.data).success(function (data) {
+                // success
+            });
+        };
     })
 
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {

@@ -30,6 +30,23 @@ class ApiGroupWordController extends FOSRestController
 
             return array('groups' => $results);
         }
-        throw new \Exception('Something went wrong!');
+        throw new \Exception('groupWord went wrong!');
+    }
+    
+    /**
+     * @Rest\View()
+     */
+    public function postAddGroupWordAction(Request $request)
+    {
+        if ($gw = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->find($request->query->get('wgid'))
+            and $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->query->get('did'))) 
+        {
+            
+            $d->setWords(array_merge($gw->getWords(), $d->getWords()));           
+            $this->get('persist')->persistAndFlush($t);
+
+            return array();
+        }
+        throw new \Exception('AddGroupWord went wrong!');
     }
 }
