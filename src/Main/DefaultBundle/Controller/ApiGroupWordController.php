@@ -22,7 +22,7 @@ class ApiGroupWordController extends FOSRestController
         if ($l = $request->query->get('lang'))
         {
             $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->createQueryBuilder('g')
-                ->select('d.id, g.title, g.description')
+                ->select('g.id, g.title, g.description')
                 ->where('g.lang = :lang')
                 ->setParameter('lang', $l);
 
@@ -38,12 +38,14 @@ class ApiGroupWordController extends FOSRestController
      */
     public function postAddGroupWordAction(Request $request)
     {
-        if ($gw = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->find($request->query->get('wgid'))
-            and $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->query->get('did'))) 
+        if ($gw = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->find($request->request->get('gwid'))
+            and $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->request->get('did')))
         {
-            
-            $d->setWords(array_merge($gw->getWords(), $d->getWords()));           
-            $this->get('persist')->persistAndFlush($t);
+
+            foreach($gw->getWords() as $w) {
+                $d->setWord($w);
+            }
+            $this->get('persist')->persistAndFlush($d);
 
             return array();
         }
