@@ -16,14 +16,15 @@ create initial dic*
 display and calculate score*
 algo v1 test*
 display answer*
+add list of word (a tester)
+pb test +5/-5 (a tester)
 
-congrats page+
-add list of word+
+congrats page (a tester)
+stat dictionary (a tester)
+view group word / add word (a tester)
 good display dic66 (ou pompage)
-pb test +5/-5
 check value and redirect if null
 css dictionary, css global
-stat dictionary
 
 v1 other:
 !translate*
@@ -36,3 +37,4 @@ create groupWord
 algo v2 test
 multiple dic
 Add translate languages (de, es)
+Add teacher/ Friends 

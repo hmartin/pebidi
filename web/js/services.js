@@ -1,4 +1,4 @@
-app
+ app
     .service('dictionaryService', function () {
         var dictionary;
 
@@ -15,6 +15,7 @@ app
         this.nbQuestion = 0;
         this.id = 0;
         this.did = 0;
+        this.score = 0;
 
         this.createTest = function (did, question) {
             this.nbQuestion = question;
@@ -32,6 +33,12 @@ app
                     this.globalScore = data.globalScore;
                     userService.getScore(this.did);
                 }.bind(this));
+            s = 0;i = 0;
+            points.forEach(function(element) {
+                this.score = this.score + element.pt;
+                i = i+1;
+            });
+            this.score = this.score * 100 / i;
         }
     })
 

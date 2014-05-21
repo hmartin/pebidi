@@ -3,8 +3,8 @@ t<h1>{{ 'addGroupWord'|translate }}</h1>
     <div class="col-md-3 col-md-offset-3">{{group.title}}</div>
     <div class="col-md-4">{{group.description}}</div>
     <div class="col-md-1 col-md-offset-1">
-        <button class="glyphicon glyphicon-add" tooltip="{{ 'addGroupWord'|translate }}" ng-click="addGroupWord(group.id)"></button>
-        <span class="glyphicon glyphicon-eye-open"  ng-click="addGroupWord(group.id)"></span>{{ 'view'|translate }}
+        <span class="glyphicon glyphicon-add" tooltip="{{ 'addGroupWord'|translate }}" ng-click="addGroupWord(group.id)"></span>
+        <span class="glyphicon glyphicon-eye-open"  ng-click="viewGroupWord(group.id)"></span>
     </div>
 </div>
 <div ng-include="'blocs/countWord.html'"></div>

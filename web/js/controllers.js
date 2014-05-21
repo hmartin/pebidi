@@ -118,12 +118,11 @@ app
     })
 
     .controller('AddGroupWordCtrl', function ($scope, $http, $location, $cookies) {
-        $http.get(API_URL + 'words/group.json', {
-                params: { lang: 'en'
-                }
-            }).success(function(data){
+        $http
+            .get(API_URL + 'words/group.json', { params: { lang: 'en' } })
+            .success(function(data){
                     $scope.groupsWords = data.groups;
-                });
+            });
         
         $scope.addGroupWord = function (id) {
             $scope.data = {};
@@ -133,12 +132,26 @@ app
                 // success
             });
         };
+        
+        $scope.viewGroupWord = function (id) {
+            $location.path('/viewWords/group/' + id);
+        };
     })
 
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {
+        if ($routeParams.type) {
+        $http
+        .get(API_URL + 'words/group.json', { params: { id: $routeParams.id, type : $routeParams.type } })
+            .success(function(data){
+                    $scope.words = data.words;
+            });
+            
+        } 
+        else {
         $http.post(API_URL + 'words.json', $cookies.dic).success(function (data) {
             $scope.words = data;
-        });
+        });            
+        }
     })
 
     .controller('rootCtrl', function ($scope, $http, $cookies, $translate, $location) {
