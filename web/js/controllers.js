@@ -28,41 +28,41 @@ app
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, dicService, userService){
+    .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, dicService, userService) {
         $scope.formData = {};
-        
-    $scope.$item = 0;
-    $scope.$model = 0;
-    $scope.$label = 0;
+
+        $scope.$item = 0;
+        $scope.$model = 0;
+        $scope.$label = 0;
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             dicService.get($routeParams.id);
         }
 
-        $scope.$watch('dic', function() {
+        $scope.$watch('dic', function () {
             userService.getScore($scope.dic.id);
         });
 
-        $scope.getWords = function(val) {
+        $scope.getWords = function (val) {
             return $http.get(API_URL + 'auto/complete/words.json', {
                 params: {
                     word: val
                 }
-            }).then(function(res){
+            }).then(function (res) {
                     var words = [];
-                    angular.forEach(res.data.words, function(item){
+                    angular.forEach(res.data.words, function (item) {
                         words.push(item.word);
                     });
                     return words;
                 });
-            };
- $scope.onSelect = function ($item, $model, $label) {
-    $scope.$item = $item;
-    $scope.$model = $model;
-    $scope.$label = $label;
+        };
+        $scope.onSelect = function ($item, $model, $label) {
+            $scope.$item = $item;
+            $scope.$model = $model;
+            $scope.$label = $label;
 
 
-};
-        
+        };
+
         $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
             $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
@@ -75,18 +75,18 @@ app
     })
 
     .controller('CreateTestCtrl', function ($scope, testService) {
-        if ( $scope.dic.countWord > 20) {
+        if ($scope.dic.countWord > 20) {
             $scope.nbquestion = 20;
         } else {
             $scope.nbquestion = $scope.dic.countWord;
         }
-        
+
         $scope.changeNbQuestion = function (n) {
             $scope.nbquestion = $scope.nbquestion + n;
-            if ($scope.nbquestion < 1 ) {
+            if ($scope.nbquestion < 1) {
                 $scope.nbquestion = 1;
-            } else if ($scope.nbquestion > $scope.dic.countWord-1) {
-            $scope.nbquestion = $scope.dic.countWord;
+            } else if ($scope.nbquestion > $scope.dic.countWord - 1) {
+                $scope.nbquestion = $scope.dic.countWord;
             }
         }
         $scope.startTest = function () {
@@ -97,7 +97,8 @@ app
     .controller('TestCtrl', function ($scope, $rootScope, $http, $location, $cookies, testService) {
         $scope.step = 1;
         $scope.points = [];
-        $scope.i = 0;$scope.progress = 0;
+        $scope.i = 0;
+        $scope.progress = 0;
 
         $scope.words = testService.words;
 
@@ -109,15 +110,15 @@ app
         $scope.saveResult = function (p) {
             $scope.i++;
             $scope.progress = ($scope.i) * 100 / testService.nbQuestion;
-            $scope.point = {};$scope.point.wid = $scope.word.id;$scope.point.p=p;
+            $scope.point = {};
+            $scope.point.wid = $scope.word.id;
+            $scope.point.p = p;
             $scope.points.push($scope.point);
 
             if ($scope.i == testService.nbQuestion) {
-                console.log($scope.points);
                 testService.saveResults($scope.points);
                 $location.path('/congrats');
             }
-            console.log(testService.nbQuestion);
 
             $scope.word = $scope.words[$scope.i];
             $scope.step = 1;
@@ -129,16 +130,16 @@ app
         $scope.doItAgain = function () {
             testService.doItAgain();
         }
-        $scope.score = testService.score;
+        $scope.testScore = testService.getTestScore();
     })
 
     .controller('AddGroupWordCtrl', function ($scope, $http, $location, $cookies) {
         $http
             .get(API_URL + 'words/group.json', { params: { lang: 'en' } })
-            .success(function(data){
-                    $scope.groupsWords = data.groups;
+            .success(function (data) {
+                $scope.groupsWords = data.groups;
             });
-        
+
         $scope.addGroupWord = function (id) {
             $scope.data = {};
             $scope.data.did = $scope.dic.id;
@@ -147,7 +148,7 @@ app
                 // success
             });
         };
-        
+
         $scope.viewGroupWord = function (id) {
             $location.path('/viewWords/group/' + id);
         };
@@ -155,21 +156,21 @@ app
 
     .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies, $routeParams) {
         if ($routeParams.type) {
-        $http
-        .get(API_URL + 'words/group.json', { params: { id: $routeParams.id, type : $routeParams.type } })
-            .success(function(data){
+            $http
+                .get(API_URL + 'words/group.json', { params: { id: $routeParams.id, type: $routeParams.type } })
+                .success(function (data) {
                     $scope.words = data.words;
-            });
-            
-        } 
+                });
+
+        }
         else {
-        $http.post(API_URL + 'words.json', $cookies.dic).success(function (data) {
-            $scope.words = data;
-        });            
+            $http.post(API_URL + 'words.json', $cookies.dic).success(function (data) {
+                $scope.words = data;
+            });
         }
     })
 
-    .controller('rootCtrl', function ($scope, $http, $cookies, $translate, $location) {
+    .controller('rootCtrl', function ($scope, $http, $cookies, $translate, $location, main) {
         $scope.changeLanguage = function (key) {
             $translate.use(key);
             $cookies.lang = key;
@@ -183,6 +184,10 @@ app
             return $cookies.dic;
         }, function (newValue) {
             $scope.dic = angular.fromJson($cookies.dic);
+        });
+
+        $scope.$watch(main.getMain(), function (newValue) {
+            $scope.main = main;
         });
         $scope.$watch(function () {
             return $cookies.uid;

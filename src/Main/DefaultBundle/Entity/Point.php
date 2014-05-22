@@ -25,7 +25,7 @@ class Point
     protected $test;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Word", inversedBy="translations",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Word", inversedBy="points",cascade={"persist"})
      * @ORM\JoinColumn(name="word_id", referencedColumnName="id")
      */
     protected $word;

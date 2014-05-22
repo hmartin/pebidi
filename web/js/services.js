@@ -9,13 +9,20 @@ new app
             return dictionary;
         };
     })
+    .service('mainService', function () {
+        var main = {};
+
+        this.main = function () {
+            return main;
+        };
+    })
 
     .service('testService', function ($http, $location, $cookies, userService) {
         this.words = {};
         this.nbQuestion = 0;
         this.id = 0;
         this.did = 0;
-        this.score = 0;
+        this.testScore = 0;
 
         this.createTest = function (did, question) {
             this.nbQuestion = question;
@@ -34,11 +41,10 @@ new app
                     userService.getScore(this.did);
                 }.bind(this));
             s = 0;i = 0;
-            points.forEach(function(element) {
-                this.score = this.score + element.pt;
-                i = i+1;
-            });
-            this.score = this.score * 100 / i;
+            this.testScore = points.reduce(function(a, b) {
+                return a + b.p;
+            }, 0);
+            this.testScore = this.testScore * 100 / this.nbQuestion;
         }
         
         this.doItAgain = function () {
@@ -46,6 +52,10 @@ new app
                 .success(function (data) {
                     $location.path('/questions');
                 }.bind(this));
+        }
+        this.getTestScore = function () {
+            console.log('getTestScore ');
+            return this.testScore;
         }
     })
 

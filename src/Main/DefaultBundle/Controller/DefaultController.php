@@ -28,21 +28,38 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         //echo '<pre>';
-        if ($this->get('cookie')->has('id')) {
-            return $this->redirect($this->generateUrl('newWord', array('id' => $this->get('cookie')->get('id')) ));
+        //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
+        //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
+
+        //$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find(1);
+        //$t = $this->getDoctrine()->getRepository('MainDefaultBundle:test')->find(1);
+        //$test = $this->getDoctrine()->getRepository('MainDefaultBundle:test');
+        //$p = $this->getDoctrine()->getRepository('MainDefaultBundle:point')->find(1);
+        //$a = array('uid' => $u->getId(), 'did' => $d->getId());
+        //$test->getAvgScore($a);
+
+        //$results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(5, $d, $u);
+/*        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('w')
+            ->leftJoin('w.dictionaries','d')
+            ->leftJoin('w.groupsWords','gw')
+            ->where('d.id  = :did')
+            ->andWhere('gw.id  = :gwid')
+            ->setParameter('gwid', 1)
+            ->setParameter('did', 1)
+        ;
+
+        $results = $qb->getQuery()->getResult();*/
+        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
+            ->leftJoin('d.words', 'w')
+            ->leftJoin('d.translations', 't', 'WITH', 't.word = w.id')
+            ->where('d.id = :id')
+            ->setParameter(':id', 1);
+
+        $results = $qb->getQuery()->getResult();
+        foreach($results as $r) {
+            var_dump($r);
+            ///echo get_class($r);
         }
-        $u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
-        $d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
-
-        $w = $this->getDoctrine()->getRepository('MainDefaultBundle:word')->find(1);
-        $t = $this->getDoctrine()->getRepository('MainDefaultBundle:test')->find(1);
-        $test = $this->getDoctrine()->getRepository('MainDefaultBundle:test');
-        $p = $this->getDoctrine()->getRepository('MainDefaultBundle:point')->find(1);
-        $a = array('uid' => $u->getId(), 'did' => $d->getId());
-        $test->getAvgScore($a);
-
-        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(5, $d, $u);
-        var_dump($results);
         return array();
     }
 

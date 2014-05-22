@@ -50,8 +50,8 @@ class ApiWordController extends FOSRestController
         if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
         {
             $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
-                ->leftJoin('d.translations', 't')
-                ->leftJoin('t.word', 'w')
+                ->leftJoin('d.words', 'w')
+                ->leftJoin('d.translations', 't', 'WITH', 't.word = w.id')
                 ->select('w.id, w.word, t.translation')
                 ->where('d.id = :id')
                 ->setParameter(':id', $d->getId());
@@ -69,10 +69,10 @@ class ApiWordController extends FOSRestController
      */
     public function getAutoCompleteWordsAction(Request $request)
     {
-        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('wen')
+        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('w')
             ->select('w.word')
-            ->addSelect('LENGHT(w.word) AS l')
-            ->where('wen.word LIKE :word')
+            ->addSelect('LENGTH(w.word) AS l')
+            ->where('w.word LIKE :word')
             ->setMaxResults(8)
             ->setParameter(':word', $request->query->get('word').'%')
             ->orderBy('l', 'ASC');
