@@ -8,6 +8,6 @@ web/uploads/*
 web/bundles/*
 
 composer.lock
-.idea/
+.idea
 .codio
 .settings
