@@ -23,6 +23,7 @@ class ApiTestController extends FOSRestController
             $nb = $request->request->get('nbQuestion'))
         {
             $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest($nb, $d, $u);
+            shuffle($results);
 
             $t = new e\Test();
             $t->setDictionary($d);
@@ -30,7 +31,7 @@ class ApiTestController extends FOSRestController
             $t->setUser($u);
             $this->get('persist')->persistAndFlush($t);
 
-            return array('id' => $t->getId(), 'words' => shuffle($results));
+            return array('id' => $t->getId(), 'words' => $results);
         }
         throw new \Exception('Something went wrong!');
     }

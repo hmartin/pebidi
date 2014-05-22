@@ -141,7 +141,7 @@ app
         };
     })
 
-    .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies) {
+    .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies, $routeParams) {
         if ($routeParams.type) {
         $http
         .get(API_URL + 'words/group.json', { params: { id: $routeParams.id, type : $routeParams.type } })
