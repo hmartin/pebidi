@@ -1,4 +1,4 @@
- app
+new app
     .service('dictionaryService', function () {
         var dictionary;
 
@@ -20,7 +20,7 @@
         this.createTest = function (did, question) {
             this.nbQuestion = question;
             this.did = did;
-            $http.post(API_URL + 'creates/tests.json', {uid: $cookies.uid, id: did, nbQuestion: question})
+            $http.post(API_URL + 'creates/tests.json', {uid: $cookies.uid, id: did, nbQuestion: question, type: 'n'})
                 .success(function (data) {
                     this.words = data.words;
                     this.id = data.id;
@@ -39,6 +39,13 @@
                 i = i+1;
             });
             this.score = this.score * 100 / i;
+        }
+        
+        this.doItAgain = function () {
+            $http.post(API_URL + 'creates/tests.json', {id: id, type: 'doItAgain'})
+                .success(function (data) {
+                    $location.path('/questions');
+                }.bind(this));
         }
     })
 

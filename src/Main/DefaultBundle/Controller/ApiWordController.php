@@ -81,8 +81,11 @@ class ApiWordController extends FOSRestController
 
         return array('words' => $results);
     }
-    
-    public function getTradFromWordReference($o, $d, $word) {
+   
+    /**
+     * @Rest\View()
+     */ 
+    public function getTradFromWordReferenceAction($o, $d, $word) {
         $html = \file_get_contents('http://www.dict66.com/translate/fr-en/car');
         //var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
@@ -96,8 +99,7 @@ class ApiWordController extends FOSRestController
                 return $node->text();
             });
             return array('origin' => $o, 'dest' => $d);
-        });
-        
+        });        
     }
 
 }

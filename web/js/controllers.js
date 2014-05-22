@@ -115,6 +115,9 @@ app
     })
 
     .controller('CongratsTestCtrl', function ($scope, testService) {
+        $scope.doItAgain = function () {
+            testService.doItAgain();
+        }
     })
 
     .controller('AddGroupWordCtrl', function ($scope, $http, $location, $cookies) {
