@@ -30,6 +30,10 @@ app
 
     .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, dicService, userService){
         $scope.formData = {};
+        
+    $scope.$item = 0;
+    $scope.$model = 0;
+    $scope.$label = 0;
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             dicService.get($routeParams.id);
         }
@@ -51,7 +55,14 @@ app
                     return words;
                 });
             };
+ $scope.onSelect = function ($item, $model, $label) {
+    $scope.$item = $item;
+    $scope.$model = $model;
+    $scope.$label = $label;
 
+
+};
+        
         $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
             $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
@@ -118,6 +129,7 @@ app
         $scope.doItAgain = function () {
             testService.doItAgain();
         }
+        $scope.score = testService.score;
     })
 
     .controller('AddGroupWordCtrl', function ($scope, $http, $location, $cookies) {

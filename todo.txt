@@ -16,10 +16,10 @@ create initial dic*
 display and calculate score*
 algo v1 test*
 display answer*
+pb test +5/-5 *
 add list of word (a tester)
-pb test +5/-5 (a tester)
-
 congrats page (a tester)
+
 stat dictionary (a tester)
 view group word / add word (a tester)
 good display dic66 (ou pompage)
