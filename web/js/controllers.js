@@ -1,5 +1,5 @@
 app
-    .controller('HomeCtrl', function ($scope, $http, $location, $cookies) {
+    .controller('HomeCtrl', function ($scope, $http, $location, $cookies, main) {
         if ($cookies.dic && $cookies.uid) {
             $scope.dic = angular.fromJson($cookies.dic);
             $location.path('/addWord/' + $scope.dic.id);
@@ -8,7 +8,7 @@ app
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
                 $cookies.uid = angular.toJson(data.uid);
                 if (data.hasOwnProperty('dic')) {
-                    $cookies.dic = angular.toJson(data.dic);
+                    main.setDic(data.dic);
                     $location.path('/addWord/' + data.dic.id);
                 } else {
                     $location.path('/createDic/');
@@ -28,7 +28,7 @@ app
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, dicService, userService) {
+    .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, main) {
         $scope.formData = {};
 
         $scope.$item = 0;
@@ -59,17 +59,14 @@ app
             $scope.$item = $item;
             $scope.$model = $model;
             $scope.$label = $label;
-
-
         };
 
         $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
+            $scope.formData.word = '';
+            $scope.formData.translation = '';
             $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
-                $scope.dic = data.dic;
-                $cookies.dic = angular.toJson(data.dic);
-                $scope.formData.word = '';
-                $scope.formData.translation = '';
+                main.setCountWord(data.dic.countWord);
             });
         };
     })
@@ -94,7 +91,7 @@ app
         }
     })
 
-    .controller('TestCtrl', function ($scope, $rootScope, $http, $location, $cookies, testService) {
+    .controller('TestCtrl', function ($scope, $http, $location, testService) {
         $scope.step = 1;
         $scope.points = [];
         $scope.i = 0;
@@ -110,10 +107,7 @@ app
         $scope.saveResult = function (p) {
             $scope.i++;
             $scope.progress = ($scope.i) * 100 / testService.nbQuestion;
-            $scope.point = {};
-            $scope.point.wid = $scope.word.id;
-            $scope.point.p = p;
-            $scope.points.push($scope.point);
+            $scope.points.push({wid: $scope.word.id, p: p});
 
             if ($scope.i == testService.nbQuestion) {
                 testService.saveResults($scope.points);
@@ -122,7 +116,6 @@ app
 
             $scope.word = $scope.words[$scope.i];
             $scope.step = 1;
-
         };
     })
 
@@ -133,7 +126,7 @@ app
         $scope.testScore = testService.getTestScore();
     })
 
-    .controller('AddGroupWordCtrl', function ($scope, $http, $location, $cookies) {
+    .controller('AddGroupWordCtrl', function ($scope, $http, $location, main) {
         $http
             .get(API_URL + 'words/group.json', { params: { lang: 'en' } })
             .success(function (data) {
@@ -144,8 +137,8 @@ app
             $scope.data = {};
             $scope.data.did = $scope.dic.id;
             $scope.data.gwid = id;
-            $http.post(API_URL + 'adds/groups/words.json', $scope.data).success(function (data) {
-                // success
+            $http.post(API_URL + 'adds/groups/words.json', $scope.data).success(function (data) {            
+                main.setCountWord(data.dic.countWord);
             });
         };
 
@@ -154,7 +147,7 @@ app
         };
     })
 
-    .controller('DictionnaryCtrl', function ($scope, $http, $location, $cookies, $routeParams) {
+    .controller('DictionnaryCtrl', function ($scope, $http, $location, $routeParams) {
         if ($routeParams.type) {
             $http
                 .get(API_URL + 'words/group.json', { params: { id: $routeParams.id, type: $routeParams.type } })
@@ -180,12 +173,6 @@ app
             delete $cookies['uid'];
             $location.path('/');
         };
-        $scope.$watch(function () {
-            return $cookies.dic;
-        }, function (newValue) {
-            $scope.dic = angular.fromJson($cookies.dic);
-        });
-
         $scope.$watch(main.getMain(), function (newValue) {
             $scope.main = main;
         });
@@ -193,10 +180,5 @@ app
             return $cookies.uid;
         }, function (newValue) {
             $scope.uid = angular.fromJson($cookies.uid);
-        });
-        $scope.$watch(function () {
-            return $cookies.score;
-        }, function (newValue) {
-            $scope.score = angular.fromJson($cookies.score);
         });
     })

@@ -1,23 +1,27 @@
-new app
-    .service('dictionaryService', function () {
-        var dictionary;
-
-        this.set = function (dic) {
-            dictionary = dic;
-        };
-        this.get = function () {
-            return dictionary;
-        };
-    })
+app
     .service('mainService', function () {
         var main = {};
+        main.id =0;
+        main.dic = {};
 
+        this.setDic = function (dic) {
+            main.dic = dic;
+            $rootScope.$apply();
+        };
+        this.setDicScore = function (dicScore) {
+            main.dic.score = dicScore;
+            $rootScope.$apply();
+        };
+        this.setCountWord = function (countWord) {
+            main.dic.countWord = countWord;
+            $rootScope.$apply();
+        };
         this.main = function () {
             return main;
         };
     })
 
-    .service('testService', function ($http, $location, $cookies, userService) {
+    .service('testService', function ($http, $location, main) {
         this.words = {};
         this.nbQuestion = 0;
         this.id = 0;
@@ -37,8 +41,7 @@ new app
         this.saveResults = function (points) {
             $http.post(API_URL + 'saves/results.json', {id: this.id, points: points})
                 .success(function (data) {
-                    this.globalScore = data.globalScore;
-                    userService.getScore(this.did);
+                    main.setScore(data.globalScore);
                 }.bind(this));
             s = 0;i = 0;
             this.testScore = points.reduce(function(a, b) {
@@ -59,13 +62,14 @@ new app
         }
     })
 
-    .service('userService', function ($http, $location, $cookies) {
-        this.getScore = function (did) {
+    .service('userService', function ($http, $location) {
+        /* USELESS UPDATE SCORE AFTER AJAX CALL
+         * this.getScore = function (did) {
             $http.get(API_URL + 'score.json', {params:{did: did, uid: $cookies.uid}})
                 .success(function (data) {
                     $cookies.score = angular.toJson(data.score);
                 }.bind(this));
-        }
+        }*/
     })
 
     .service('wordRetriever', function () {
@@ -76,12 +80,12 @@ new app
         };
     })
 
-    .service('dicService', function ($http, $location, $cookies) {
+    .service('dicService', function ($http, $location, main) {
 
         this.create = function (originLang, destLang) {
             $http.post(API_URL + 'creates/dics.json', {uid: $cookies.uid, originLang: originLang, destLang: destLang}).success(function (data) {
                 if (data.dic) {
-                    $cookies.dic = angular.toJson(data.dic);
+                    main.setDic(data.dic);
                     $location.path('/addWord/' + data.dic.id);
                 }
             });

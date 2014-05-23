@@ -85,7 +85,7 @@ class ApiWordController extends FOSRestController
     /**
      * @Rest\View()
      */ 
-    public function getTradFromWordReferenceAction($o, $d, $word) {
+    public function getOriDestWordAction($o, $d, $word) {
         $html = \file_get_contents('http://www.dict66.com/translate/fr-en/car');
         //var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
