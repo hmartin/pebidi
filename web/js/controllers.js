@@ -1,14 +1,20 @@
 app
-    .controller('HomeCtrl', function ($scope, $http, $location, $cookies, main) {
+    .controller('HomeCtrl', function ($scope, $http, $location, $cookies, mainService) {
         if ($cookies.dic && $cookies.uid) {
-            $scope.dic = angular.fromJson($cookies.dic);
-            $location.path('/addWord/' + $scope.dic.id);
+            mainService.setDic(angular.toJson($cookies.dic));
+            main = mainService.getMain();
+            console.log(main);
+            $location.path('/addWord/' + main.dic.id);
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
-                $cookies.uid = angular.toJson(data.uid);
+                //$cookies.uid = angular.toJson(data.uid);
                 if (data.hasOwnProperty('dic')) {
-                    main.setDic(data.dic);
+                    console.info(data.dic)
+                    mainService.setDic(data.dic);
+                    $scope.main = mainService.getDic();
+                    console.log('HomeCtrl');
+                    console.log($scope.main);
                     $location.path('/addWord/' + data.dic.id);
                 } else {
                     $location.path('/createDic/');
@@ -17,7 +23,7 @@ app
         };
     })
 
-    .controller('CreateDicCtrl', function ($scope, $http, $location, $cookies, dicService) {
+    .controller('CreateDicCtrl', function ($scope, $http, $location, dicService) {
         $scope.lang = ['de', 'en', 'es', 'fr'];
         $scope.count = $scope.lang.lenght;
         $scope.ip = 0;
@@ -28,7 +34,7 @@ app
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $cookies, $routeParams, main) {
+    .controller('WordCtrl', function ($scope, $http, $location, $routeParams, dicService, mainService) {
         $scope.formData = {};
 
         $scope.$item = 0;
@@ -37,10 +43,9 @@ app
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             dicService.get($routeParams.id);
         }
-
-        $scope.$watch('dic', function () {
-            userService.getScore($scope.dic.id);
-        });
+        $scope.dic = mainService.getDic();
+        console.log('wordCtr');
+        console.log($scope.main);
 
         $scope.getWords = function (val) {
             return $http.get(API_URL + 'auto/complete/words.json', {
@@ -66,7 +71,7 @@ app
             $scope.formData.word = '';
             $scope.formData.translation = '';
             $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
-                main.setCountWord(data.dic.countWord);
+                mainService.setCountWord(data.dic.countWord);
             });
         };
     })
@@ -126,7 +131,7 @@ app
         $scope.testScore = testService.getTestScore();
     })
 
-    .controller('AddGroupWordCtrl', function ($scope, $http, $location, main) {
+    .controller('AddGroupWordCtrl', function ($scope, $http, $location, mainService) {
         $http
             .get(API_URL + 'words/group.json', { params: { lang: 'en' } })
             .success(function (data) {
@@ -138,7 +143,7 @@ app
             $scope.data.did = $scope.dic.id;
             $scope.data.gwid = id;
             $http.post(API_URL + 'adds/groups/words.json', $scope.data).success(function (data) {            
-                main.setCountWord(data.dic.countWord);
+                mainService.setCountWord(data.dic.countWord);
             });
         };
 
@@ -163,7 +168,7 @@ app
         }
     })
 
-    .controller('rootCtrl', function ($scope, $http, $cookies, $translate, $location, main) {
+    .controller('rootCtrl', function ($scope, $http, $cookies, $translate, $location, mainService) {
         $scope.changeLanguage = function (key) {
             $translate.use(key);
             $cookies.lang = key;
@@ -173,9 +178,14 @@ app
             delete $cookies['uid'];
             $location.path('/');
         };
-        $scope.$watch(main.getMain(), function (newValue) {
-            $scope.main = main;
+        $scope.$on('main:up', function (event, newValue) {
+            $scope.$digest();
         });
+        $scope.$watch( mainService.getDic(), function (data) {
+            console.info('main:up');
+            $scope.dic = data;
+        }, true);
+
         $scope.$watch(function () {
             return $cookies.uid;
         }, function (newValue) {

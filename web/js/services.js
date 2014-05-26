@@ -1,27 +1,25 @@
 app
     .service('mainService', function () {
         var main = {};
-        main.id =0;
-        main.dic = {};
+        var dic ={};
 
         this.setDic = function (dic) {
-            main.dic = dic;
-            $rootScope.$apply();
+            this.dic = dic;
         };
         this.setDicScore = function (dicScore) {
             main.dic.score = dicScore;
-            $rootScope.$apply();
+
         };
         this.setCountWord = function (countWord) {
             main.dic.countWord = countWord;
-            $rootScope.$apply();
+
         };
-        this.main = function () {
-            return main;
+        this.getDic = function () {
+            return this.dic;
         };
     })
 
-    .service('testService', function ($http, $location, main) {
+    .service('testService', function ($http, $location, mainService) {
         this.words = {};
         this.nbQuestion = 0;
         this.id = 0;
@@ -41,7 +39,7 @@ app
         this.saveResults = function (points) {
             $http.post(API_URL + 'saves/results.json', {id: this.id, points: points})
                 .success(function (data) {
-                    main.setScore(data.globalScore);
+                    mainService.setScore(data.globalScore);
                 }.bind(this));
             s = 0;i = 0;
             this.testScore = points.reduce(function(a, b) {
@@ -80,12 +78,12 @@ app
         };
     })
 
-    .service('dicService', function ($http, $location, main) {
+    .service('dicService', function ($http, $location, mainService) {
 
         this.create = function (originLang, destLang) {
             $http.post(API_URL + 'creates/dics.json', {uid: $cookies.uid, originLang: originLang, destLang: destLang}).success(function (data) {
                 if (data.dic) {
-                    main.setDic(data.dic);
+                    mainService.setDic(data.dic);
                     $location.path('/addWord/' + data.dic.id);
                 }
             });
@@ -93,8 +91,7 @@ app
         this.get = function (id) {
             $http.post(API_URL + 'gets/dics.json', {id: id}).success(function (data) {
                 if (data.dic) {
-                    $cookies.dic = angular.toJson(data.dic);
-                    return data.dic;
+                    mainService.setDic(angular.toJson(data.dic));
                 }
             });
         };

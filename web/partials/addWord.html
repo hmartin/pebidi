@@ -1,30 +1,36 @@
-<h1>{{ 'welcome'|translate  }}</h1>
-<p class="lead">{{ 'addWord.newWord'|translate  }}</p>
-        <div ng-if="dic">
-<p class="lead">
-<form  ng-submit="processWord()">
-    <div class="form-group has-feedback">
-        <input typeahead-on-select="onSelect($item, $model, $label)" type="text" ng-model="formData.word" placeholder="{{ 'addWord.word'|translate  }}" typeahead-min-length="3" typeahead-wait-ms="100" typeahead="word for word in getWords($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control" required>
-        <span ng-show="loadingLocations" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
-    </div>
-    <div class="form-group">
-        <input class="form-control" ng-model="formData.translation" type="text" name="word" placeholder="{{ 'addWord.translation'|translate  }}">
+<h1>{{ 'welcome'|translate }}</h1>
+<p class="lead">{{ 'addWord.newWord'|translate }}</p>
+<div ng-if="dic">
+    <p class="lead">
 
-        <a href="" tooltip-placement="top" tooltip="Some help!"><span class="glyphicon glyphicon-question-sign"></span></a>
-    </div>
-    {{ item }}
-    {{ scope }}
-    {{ label }}
-    <button type="submit"  class="btn btn-success input-lg" >{{ 'save'|translate  }}</button>
-</form>
-</p>
-
-<div class="row">
-    <div ng-include="'blocs/countWord.html'"></div>
-    <div class="col-md-6">
-        <div ng-include="'blocs/knowledge.html'"></div>
-        <a class="btn btn-primary btn-lg" ng-href="#/createTest" >{{ 'addWord.doATest'|translate  }}</a>
-    </div>
-</div>
-Your dicId is {{ dic.id}}
+    <form ng-submit="processWord()">
+        <div class="form-group has-feedback">
+            <input typeahead-on-select="onSelect($item, $model, $label)" type="text" ng-model="formData.word"
+                   placeholder="{{ 'addWord.word'|translate  }}" typeahead-min-length="3" typeahead-wait-ms="100"
+                   typeahead="word for word in getWords($viewValue) | filter:$viewValue"
+                   typeahead-loading="loadingLocations" class="form-control" required>
+            <span ng-show="loadingLocations" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
         </div>
+        <div class="form-group">
+            <input class="form-control" ng-model="formData.translation" type="text" name="word"
+                   placeholder="{{ 'addWord.translation'|translate  }}">
+
+            <a href="" tooltip-placement="top" tooltip="Some help!"><span
+                    class="glyphicon glyphicon-question-sign"></span></a>
+        </div>
+        {{ item }}
+        {{ scope }}
+        {{ label }}
+        <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
+    </form>
+    </p>
+
+    <div class="row">
+        <div ng-include="'blocs/countWord.html'"></div>
+        <div class="col-md-6">
+            <div ng-include="'blocs/knowledge.html'"></div>
+            <a class="btn btn-primary btn-lg" ng-href="#/createTest">{{ 'addWord.doATest'|translate }}</a>
+        </div>
+    </div>
+    Your dicId is {{ dic.id}}
+</div>
