@@ -25,13 +25,15 @@ view group word / add word (a tester)
 good display dic66 (ou pompage)
 check value and redirect if null
 css dictionary, css global
-full angular optimization
+full angular optimization-
 
 v1 other:
 !translate*
 help
 
 v2:
+Real test
+Mobil apps
 Create & Edit best translation
 create account
 create groupWord

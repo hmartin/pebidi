@@ -14,11 +14,11 @@
   "ignore": [
     "ac_template.html"
   ],
-  "_release": "aa62071eb6",
+  "_release": "2eb28fea0a",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "aa62071eb6a38e316e6eb1e44a69971e1034575d"
+    "commit": "2eb28fea0ad30bf3768e566919083cad9b4d562a"
   },
   "_source": "git://github.com/JustGoscha/allmighty-autocomplete.git",
   "_target": "*",

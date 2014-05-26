@@ -14,6 +14,7 @@
       "angular-bootstrap": "*",
       "angular-cookies": "*",
       "allmighty-autocomplete": "*",
-      "angular-sanitize": "*"
+      "angular-sanitize": "*",
+      "angular-local-storage": "*"
   }
 }

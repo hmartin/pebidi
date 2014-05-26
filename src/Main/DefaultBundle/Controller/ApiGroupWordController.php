@@ -36,6 +36,28 @@ class ApiGroupWordController extends FOSRestController
     /**
      * @Rest\View()
      */
+    public function getTypeWordsListAction($type, $id, Request $request)
+    {
+        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
+        {
+            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
+                ->leftJoin('d.words', 'w')
+                ->leftJoin('d.translations', 't', 'WITH', 't.word = w.id')
+                ->select('w.id, w.word, t.translation')
+                ->where('d.id = :id')
+                ->setParameter(':id', $d->getId());
+
+            $results = $qb->getQuery()->getResult();
+
+            return array('words' => $results);
+        }
+        throw new \Exception('Something went wrong!');
+    }
+
+    
+    /**
+     * @Rest\View()
+     */
     public function postAddGroupWordAction(Request $request)
     {
         if ($gwid = $request->request->get('gwid') and $did = $request->request->get('did')

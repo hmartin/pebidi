@@ -45,11 +45,13 @@ app.config(['$routeProvider',
             }).
             when('/dictionary/:id', {
                 templateUrl: 'partials/dictionary.html',
-                controller: 'DictionnaryCtrl'
+                controller: 'DictionnaryCtrl',
+                type: 'dictionary'
             }).
-            when('/viewWords/:type/:id', {
+            when('/group/:id', {
                 templateUrl: 'partials/dictionary.html',
-                controller: 'DictionnaryCtrl'
+                controller: 'DictionnaryCtrl',
+                type: 'group'
             }).
             otherwise({
                 redirectTo: '/'

@@ -1,20 +1,16 @@
 app
-    .controller('HomeCtrl', function ($scope, $http, $location, $cookies, mainService) {
-        if ($cookies.dic && $cookies.uid) {
-            mainService.setDic(angular.toJson($cookies.dic));
-            main = mainService.getMain();
-            console.log(main);
-            $location.path('/addWord/' + main.dic.id);
+    .controller('HomeCtrl', function ($scope, $http, $location, LocalStorageModule, mainService) {
+        if (LocalStorageModule.get('dic') && LocalStorageModule.get('uid') {
+            mainService.setDic(LocalStorageModule.get('dic'));
+            console.log(mainService.dic);
+            $location.path('/addWord/' + mainService.dic.id);
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
-                //$cookies.uid = angular.toJson(data.uid);
+                LocalStorageModule.set('uid', angular.toJson(data.uid));
                 if (data.hasOwnProperty('dic')) {
                     console.info(data.dic)
                     mainService.setDic(data.dic);
-                    $scope.main = mainService.getDic();
-                    console.log('HomeCtrl');
-                    console.log($scope.main);
                     $location.path('/addWord/' + data.dic.id);
                 } else {
                     $location.path('/createDic/');
@@ -152,43 +148,28 @@ app
         };
     })
 
-    .controller('DictionnaryCtrl', function ($scope, $http, $location, $routeParams) {
-        if ($routeParams.type) {
+    .controller('DictionnaryCtrl', function ($scope, $http, $route, $routeParams) {  
             $http
-                .get(API_URL + 'words/group.json', { params: { id: $routeParams.id, type: $routeParams.type } })
+                .get(API_URL + 'type/'+ $route.current.type +'/words/'+ $routeParams.id + '/list.json')
                 .success(function (data) {
                     $scope.words = data.words;
                 });
-
-        }
-        else {
-            $http.post(API_URL + 'words.json', $cookies.dic).success(function (data) {
-                $scope.words = data;
-            });
-        }
     })
 
-    .controller('rootCtrl', function ($scope, $http, $cookies, $translate, $location, mainService) {
+    .controller('rootCtrl', function ($scope, $http, LocalStorageModule, $translate, $location, mainService) {
         $scope.changeLanguage = function (key) {
             $translate.use(key);
-            $cookies.lang = key;
+            mainService.lang = key;
         };
-        $scope.clearCookies = function () {
-            delete $cookies['dic'];
-            delete $cookies['uid'];
+        
+        $scope.clearLocalStorage = function () {
+            localStorageService.clearAll();
             $location.path('/');
         };
-        $scope.$on('main:up', function (event, newValue) {
-            $scope.$digest();
-        });
+        
         $scope.$watch( mainService.getDic(), function (data) {
             console.info('main:up');
             $scope.dic = data;
         }, true);
 
-        $scope.$watch(function () {
-            return $cookies.uid;
-        }, function (newValue) {
-            $scope.uid = angular.fromJson($cookies.uid);
-        });
     })

@@ -19,7 +19,7 @@
     <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/angular-translate/angular-translate.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-local-storage.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
@@ -42,7 +42,7 @@
                             <div ng-if="dic.id != uid" class="animate-if">
                                 {{ 'dictionaryOf'|translate  }} {{ dic.bitEmail }}
                             </div>
-                            <br><a ng-click="clearCookies()">{{ 'signOut'|translate  }}</a>
+                            <br><a ng-click="clearLocalStorage()">{{ 'signOut'|translate  }}</a>
                         </div>
 
                     </div>
