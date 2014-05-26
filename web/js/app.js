@@ -5,10 +5,10 @@ var API_URL = '/api_dev.php/';
 var app = angular.module('app', [
     'ngRoute',
     'ngAnimate',
-    'ngCookies',
+    'LocalStorageModule',
     'ngSanitize',
     'ui.bootstrap',
-    'pascalprecht.translate',
+    'pascalprecht.translate'
 
 ]);
 

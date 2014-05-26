@@ -1,12 +1,12 @@
 app
-    .service('mainService', function () {
+    .service('mainService', function (localStorageService) {
         this.main = {};
         this.dic ={};
         this.lang = '';
 
         this.setDic = function (dic) {
             this.dic = dic;
-            LocalStorageModule.set('dic', dic);
+            localStorageService.set('dic', dic);
         };
         this.setDicScore = function (dicScore) {
             main.dic.score = dicScore;

@@ -1,13 +1,13 @@
 app
-    .controller('HomeCtrl', function ($scope, $http, $location, LocalStorageModule, mainService) {
-        if (LocalStorageModule.get('dic') && LocalStorageModule.get('uid') {
-            mainService.setDic(LocalStorageModule.get('dic'));
+    .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService) {
+        if (localStorageService.get('dic') && localStorageService.get('uid')) {
+            mainService.setDic(localStorageService.get('dic'));
             console.log(mainService.dic);
             $location.path('/addWord/' + mainService.dic.id);
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
-                LocalStorageModule.set('uid', angular.toJson(data.uid));
+                localStorageService.set('uid', angular.toJson(data.uid));
                 if (data.hasOwnProperty('dic')) {
                     console.info(data.dic)
                     mainService.setDic(data.dic);
@@ -72,7 +72,9 @@ app
         };
     })
 
-    .controller('CreateTestCtrl', function ($scope, testService) {
+    .controller('CreateTestCtrl', function ($scope, testService, mainService) {
+        $scope.dic = mainService.getDic();
+        console.info($scope.dic );
         if ($scope.dic.countWord > 20) {
             $scope.nbquestion = 20;
         } else {
@@ -149,14 +151,14 @@ app
     })
 
     .controller('DictionnaryCtrl', function ($scope, $http, $route, $routeParams) {  
-            $http
-                .get(API_URL + 'type/'+ $route.current.type +'/words/'+ $routeParams.id + '/list.json')
-                .success(function (data) {
-                    $scope.words = data.words;
-                });
+        $http
+            .get(API_URL + 'types/'+ $route.current.type +'/words/'+ $routeParams.id + '/list.json')
+            .success(function (data) {
+                $scope.words = data.words;
+            });
     })
 
-    .controller('rootCtrl', function ($scope, $http, LocalStorageModule, $translate, $location, mainService) {
+    .controller('rootCtrl', function ($scope, $http, localStorageService, $translate, $location, mainService) {
         $scope.changeLanguage = function (key) {
             $translate.use(key);
             mainService.lang = key;

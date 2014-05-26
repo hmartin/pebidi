@@ -38,20 +38,22 @@ class ApiGroupWordController extends FOSRestController
      */
     public function getTypeWordsListAction($type, $id, Request $request)
     {
-        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ))
-        {
-            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
-                ->leftJoin('d.words', 'w')
-                ->leftJoin('d.translations', 't', 'WITH', 't.word = w.id')
-                ->select('w.id, w.word, t.translation')
-                ->where('d.id = :id')
-                ->setParameter(':id', $d->getId());
+        if ($type == 'dictionary') {
+            $id = base_convert($id, 23, 10);
+            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d');
 
-            $results = $qb->getQuery()->getResult();
-
-            return array('words' => $results);
+        } else {
+            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->createQueryBuilder('d');
         }
-        throw new \Exception('Something went wrong!');
+
+        $qb->leftJoin('d.words', 'w')
+        ->select('w.id, w.word ')
+        ->where('d.id = :id')
+        ->setParameter(':id', $id);
+
+        $results = $qb->getQuery()->getResult();
+
+        return array('words' => $results);
     }
 
     
