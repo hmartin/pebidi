@@ -17,11 +17,11 @@ display and calculate score*
 algo v1 test*
 display answer*
 pb test +5/-5 *
-add list of word (a tester)
+add list of word*
 congrats page (a tester)
 
-stat dictionary (a tester)
-view group word / add word (a tester)
+stat dictionary
+view group word / add word
 good display dic66 (ou pompage)
 check value and redirect if null
 css dictionary, css global
@@ -33,11 +33,14 @@ help
 
 v2:
 Real test
-Mobil apps
+Test mobil apps
 Create & Edit best translation
 create account
 create groupWord
 algo v2 test
 multiple dic
 Add translate languages (de, es)
+
+v3
 Add teacher/ Friends 
+Mabil apps
