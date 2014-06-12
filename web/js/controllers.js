@@ -37,7 +37,9 @@ app
         $scope.$model = 0;
         $scope.$label = 0;
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
-            dicService.get($routeParams.id);
+            $scope.dic = dicService.get($routeParams.id);
+            console.info('if');
+            console.info($scope.dic);
         }
         $scope.dic = mainService.getDic();
         console.log('wordCtr');

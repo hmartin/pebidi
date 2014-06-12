@@ -94,6 +94,7 @@ app
             $http.post(API_URL + 'gets/dics.json', {id: id}).success(function (data) {
                 if (data.dic) {
                     mainService.setDic(angular.toJson(data.dic));
+                    return data.dic;
                 }
             });
         };
