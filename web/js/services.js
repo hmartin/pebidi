@@ -1,23 +1,48 @@
 app
     .service('mainService', function (localStorageService) {
         this.main = {};
-        this.dic ={};
+        this.dic = {};
         this.lang = '';
 
         this.setDic = function (dic) {
             this.dic = dic;
             localStorageService.set('dic', dic);
+            console.log(dic);
         };
-        this.setDicScore = function (dicScore) {
-            main.dic.score = dicScore;
+        this.setGlobalScore = function (dicScore) {
+            this.dic.score = dicScore;
 
         };
         this.setCountWord = function (countWord) {
-            main.dic.countWord = countWord;
-
+            this.dic.countWord = countWord;
         };
         this.getDic = function () {
+            if(!('id' in this.dic) && (localStorageService.get('dic'))) {
+                this.dic = localStorageService.get('dic');
+            }
             return this.dic;
+        };
+
+        this.getDid = function () {
+            return this.dic.id;
+        };
+
+        this.setUid = function (uid) {
+            this.uid = uid;
+            localStorageService.set('uid', uid);
+        };
+        this.getUid = function () {
+            if (this.uid || localStorageService.get('uid')) {
+                if (!this.uid) {
+                    this.uid = localStorageService.get('uid');
+                }
+                return this.uid;
+            } else {
+                return false;
+            }
+        };
+        this.watchUid = function () {
+            return this.uid;
         };
     })
 
@@ -31,7 +56,7 @@ app
         this.createTest = function (did, question) {
             this.nbQuestion = question;
             this.did = did;
-            $http.post(API_URL + 'creates/tests.json', {uid: $cookies.uid, id: did, nbQuestion: question, type: 'n'})
+            $http.post(API_URL + 'creates/tests.json', {uid: mainService.getUid(), id: did, nbQuestion: question, type: 'n'})
                 .success(function (data) {
                     this.words = data.words;
                     this.id = data.id;
@@ -41,15 +66,16 @@ app
         this.saveResults = function (points) {
             $http.post(API_URL + 'saves/results.json', {id: this.id, points: points})
                 .success(function (data) {
-                    mainService.setScore(data.globalScore);
+                    mainService.setGlobalScore(data.score);
                 }.bind(this));
-            s = 0;i = 0;
-            this.testScore = points.reduce(function(a, b) {
+            s = 0;
+            i = 0;
+            this.testScore = points.reduce(function (a, b) {
                 return a + b.p;
             }, 0);
             this.testScore = this.testScore * 100 / this.nbQuestion;
         }
-        
+
         this.doItAgain = function () {
             $http.post(API_URL + 'creates/tests.json', {id: id, type: 'doItAgain'})
                 .success(function (data) {
@@ -62,14 +88,24 @@ app
         }
     })
 
-    .service('userService', function ($http, $location) {
-        /* USELESS UPDATE SCORE AFTER AJAX CALL
-         * this.getScore = function (did) {
-            $http.get(API_URL + 'score.json', {params:{did: did, uid: $cookies.uid}})
-                .success(function (data) {
-                    $cookies.score = angular.toJson(data.score);
-                }.bind(this));
-        }*/
+    .service('wordService', function ($http, $rootScope, $timeout, mainService) {
+        this.post = function (formData) {
+            console.log(formData.word);
+            console.log('??');
+            $http.post(API_URL + 'news/words.json', {'word' : formData.word, 'translation': formData.translation, 'id': mainService.getDid()}).success(function (data) {
+                $timeout(function () {
+                    mainService.setDic(data.dic);
+                    $rootScope.$apply();
+                }, 0);
+            });
+        };
+
+        this.delete = function(id) {
+            $http.post(API_URL + 'deletes/words.json', { 'id': id, 'did': mainService.getDid()}).success(function (data) {
+                mainService.setDic(data.dic);
+
+            });
+        }
     })
 
     .service('wordRetriever', function () {
@@ -80,10 +116,10 @@ app
         };
     })
 
-    .service('dicService', function ($http, $location, mainService) {
+    .service('dicService', function ($http, $rootScope, $location, $timeout, mainService) {
 
         this.create = function (originLang, destLang) {
-            $http.post(API_URL + 'creates/dics.json', {uid: $cookies.uid, originLang: originLang, destLang: destLang}).success(function (data) {
+            $http.post(API_URL + 'creates/dics.json', {uid: mainService.getUid(), originLang: originLang, destLang: destLang}).success(function (data) {
                 if (data.dic) {
                     mainService.setDic(data.dic);
                     $location.path('/addWord/' + data.dic.id);
@@ -91,11 +127,18 @@ app
             });
         };
         this.get = function (id) {
-            $http.post(API_URL + 'gets/dics.json', {id: id}).success(function (data) {
+            data = {'id': id};
+            if (mainService.getUid()) {
+                data.uid = mainService.getUid();
+            }
+            $http.post(API_URL + 'gets/dics.json', data).success(function (data) {
                 if (data.dic) {
-                    mainService.setDic(angular.toJson(data.dic));
-                    return data.dic;
+                    $timeout(function () {
+                        console.log('timeout');
+                        mainService.setDic(data.dic);
+                        $rootScope.$apply();
+                    }, 0);
                 }
-            });
+            })
         };
     });

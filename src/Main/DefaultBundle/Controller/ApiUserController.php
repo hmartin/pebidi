@@ -68,10 +68,16 @@ class ApiUserController extends FOSRestController
     {
         if ($id = $request->request->get('id')) {
             if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($id)) {
+
+                if ($uid = $request->request->get('uid') and
+                    $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($uid)
+                ) {
+                    $d->setUserScore($this->getScore($u, $d));
+                }
                 return array('dic' => $d->getJsonArray());
             }
         }
-        throw new \Exception('Something went wrong!');
+        throw new \Exception('postGetDicAction went wrong!');
     }
 
     /**
@@ -80,11 +86,19 @@ class ApiUserController extends FOSRestController
     public function getScoreAction(Request $request)
     {
         if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->query->get('uid')) and
-            $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->query->get('did'), 23, 10) ))
-        {
-            $a = array('user' => $u, 'dictionary' => $d);
-            $ds = $this->getDoctrine()->getRepository('MainDefaultBundle:DictionaryScore')->findOneBy($a);
-            return array('score' => $ds->getScore());
+            $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->query->get('did'))
+        ) {
+
+            return array('score' => $this->getScore($u, $d));
+            ;
         }
+    }
+
+    private function getScore($u, $d)
+    {
+        $a = array('user' => $u, 'dictionary' => $d);
+        $ds = $this->getDoctrine()->getRepository('MainDefaultBundle:DictionaryScore')->findOneBy($a);
+        return $ds->getScore();
+
     }
 }

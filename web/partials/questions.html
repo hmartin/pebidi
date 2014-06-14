@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2 align-center">
-        ({{ i+1 }})<h2>{{ word.word }}</h2>
+        <h2>{{ i+1 }})&nbsp;{{ word.word }}</h2>
 
     <div class="row" ng-if="step == 1">
         <div class="col-md-8 col-md-offset-2 align-center">
@@ -14,14 +14,14 @@
         <br>
         {{'Definition'|translate }}<p ng-bind-html="word.definitions|brDef" ></p>
         <div class="col-md-8 col-md-offset-2 align-center">
-            <button ng-click="saveResult(0)" class="btn btn-success input-lg">{{ 'IDontRemenber'|translate }}</button>
+            <button ng-click="saveResult(0)" class="btn btn-warning input-lg">{{ 'IDontRemenber'|translate }}</button>
             <button ng-click="saveResult(1)" class="btn btn-success input-lg">{{ 'IGotIt'|translate }}</button>
         </div>
     </div>
         
     </div>
 </div>
-
+<br>
 <div class="progress progress-striped">
     <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
          aria-valuemax="100" style="width: {{ progress }}%">

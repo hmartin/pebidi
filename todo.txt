@@ -18,20 +18,22 @@ algo v1 test*
 display answer*
 pb test +5/-5 *
 add list of word*
-congrats page (a tester)
+congrats page *
+full angular optimization*
+view group word / add group*
+check value and redirect if null*
 
-stat dictionary
-view group word / add word
 good display dic66 (ou pompage)
-check value and redirect if null
+view
 css dictionary, css global
-full angular optimization-
 
 v1 other:
 !translate*
 help
 
 v2:
+stat dictionary
+do it again
 Real test
 Test mobil apps
 Create & Edit best translation

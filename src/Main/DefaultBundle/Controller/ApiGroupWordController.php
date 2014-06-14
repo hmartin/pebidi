@@ -67,30 +67,15 @@ class ApiGroupWordController extends FOSRestController
             and $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($did))
         {
 
-            $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('w')
-                ->leftJoin('w.dictionaries','d')
-                ->leftJoin('w.groupsWords','gw')
-                ->where('d.id  = :did')
-                ->andWhere('gw.id  = :gwid')
-                ->setParameter('gwid', $gwid)
-                ->setParameter('did', $did)
-            ;
-
-            $results = $qb->getQuery()->getResult();
-            foreach($results as $r) {
-                $excludeWord[] = $r->getId();
-                var_dump($r->getWord());
-            }
-            $i=0;
             foreach($gw->getWords() as $w) {
-                if (!in_array($w->getId(), $excludeWord)) {
+                if(!$d->getWords()->contains($w)) {
                     $d->addWord($w);
-                    $i++;
                 }
             }
+
             $this->get('persist')->persistAndFlush($d);
 
-            return array('nbAdd' => $i);
+            return array('dic' => $d->getJsonArray());
         }
         throw new \Exception('AddGroupWord went wrong!');
     }

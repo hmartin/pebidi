@@ -64,6 +64,8 @@ class Dictionary
      * @ORM\Column(type="integer")
      */
     protected $private = 0;
+    
+    protected $userScore = 0;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -75,7 +77,7 @@ class Dictionary
         return array( 'id' => $this->getConvertId(),
         'countWord' => count($this->getWords()),
         'bitEmail' => $this->getUser()->getBitEmail(),
-        'score' => $this->getScore()
+        'score' => $this->getUserScore()
                     );
     }
     /**
@@ -331,11 +333,23 @@ class Dictionary
     /**
      * Get score
      *
-     * @return integer 
+     * @return integer
      */
     public function getScore()
     {
         return $this->score;
+    }
+
+    public function setUserScore($userScore)
+    {
+        $this->userScore = $userScore;
+
+        return $this;
+    }
+
+    public function getUserScore()
+    {
+        return $this->userScore;
     }
 
     /**

@@ -59,10 +59,11 @@ class ApiTestController extends FOSRestController
             $a = array('user' => $t->getUser()->getId(), 'dictionary' => $t->getDictionary()->getId());
             $ds = $this->getDoctrine()->getRepository('MainDefaultBundle:DictionaryScore')->findOneBy($a);
             $a = array('uid' => $t->getUser()->getId(), 'did' => $t->getDictionary()->getId());
-            $ds->setScore($this->getDoctrine()->getRepository('MainDefaultBundle:Test')->getAvgScore($a));
+            $newScore = $this->getDoctrine()->getRepository('MainDefaultBundle:Test')->getAvgScore($a);
+            $ds->setScore($newScore);
             $this->get('persist')->persistAndFlush($ds);
 
-            return array();
+            return array('score' => $newScore);
         }
         throw new \Exception('Something went wrong!');
     }

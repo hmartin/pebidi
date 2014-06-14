@@ -7,7 +7,7 @@ app
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
-                localStorageService.set('uid', angular.toJson(data.uid));
+                mainService.setUid(data.uid);
                 if (data.hasOwnProperty('dic')) {
                     console.info(data.dic)
                     mainService.setDic(data.dic);
@@ -30,20 +30,13 @@ app
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $routeParams, dicService, mainService) {
+    .controller('WordCtrl', function ($scope, $http, $location, $routeParams, dicService, mainService, wordService) {
         $scope.formData = {};
+        $scope.def = '--';
 
-        $scope.$item = 0;
-        $scope.$model = 0;
-        $scope.$label = 0;
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
-            $scope.dic = dicService.get($routeParams.id);
-            console.info('if');
-            console.info($scope.dic);
+            dicService.get($routeParams.id);
         }
-        $scope.dic = mainService.getDic();
-        console.log('wordCtr');
-        console.log($scope.main);
 
         $scope.getWords = function (val) {
             return $http.get(API_URL + 'auto/complete/words.json', {
@@ -58,25 +51,24 @@ app
                     return words;
                 });
         };
-        $scope.onSelect = function ($item, $model, $label) {
-            $scope.$item = $item;
-            $scope.$model = $model;
-            $scope.$label = $label;
+        $scope.onSelect = function ($item) {
+            $http.get(API_URL + 'oris/en/dests/fr/words/' + $item + '.json').then(function (res) {
+                $scope.def = res.data;
+            });
         };
 
         $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
+            console.log($scope.formData);
+            wordService.post($scope.formData);
             $scope.formData.word = '';
             $scope.formData.translation = '';
-            $http.post(API_URL + 'news/words.json', $scope.formData).success(function (data) {
-                mainService.setCountWord(data.dic.countWord);
-            });
         };
-    })
+    }
+)
 
-    .controller('CreateTestCtrl', function ($scope, testService, mainService) {
-        $scope.dic = mainService.getDic();
-        console.info($scope.dic );
+    .controller('CreateTestCtrl', function ($scope, testService) {
+
         if ($scope.dic.countWord > 20) {
             $scope.nbquestion = 20;
         } else {
@@ -142,8 +134,8 @@ app
             $scope.data = {};
             $scope.data.did = $scope.dic.id;
             $scope.data.gwid = id;
-            $http.post(API_URL + 'adds/groups/words.json', $scope.data).success(function (data) {            
-                mainService.setCountWord(data.dic.countWord);
+            $http.post(API_URL + 'adds/groups/words.json', $scope.data).success(function (data) {
+                mainService.setDic(data.dic);
             });
         };
 
@@ -152,28 +144,50 @@ app
         };
     })
 
-    .controller('DictionnaryCtrl', function ($scope, $http, $route, $routeParams) {  
+    .controller('DictionnaryCtrl', function ($scope, $http, $route, $routeParams, wordService, dicService) {
+
+        if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
+            dicService.get($routeParams.id);
+        }
+
         $http
-            .get(API_URL + 'types/'+ $route.current.type +'/words/'+ $routeParams.id + '/list.json')
+            .get(API_URL + 'types/' + $route.current.type + '/words/' + $routeParams.id + '/list.json')
             .success(function (data) {
                 $scope.words = data.words;
             });
+
+        $scope.deleteWord = function (id) {
+            wordService.delete(id);
+        }
     })
 
-    .controller('rootCtrl', function ($scope, $http, localStorageService, $translate, $location, mainService) {
+    .controller('rootCtrl', function ($scope, $rootScope, $http, localStorageService, $translate, $location, mainService) {
+
+        $scope.service = mainService;
         $scope.changeLanguage = function (key) {
             $translate.use(key);
             mainService.lang = key;
         };
-        
+
+        if (mainService.getUid()) {
+            $scope.uid = mainService.getUid();
+        }
+
         $scope.clearLocalStorage = function () {
+            mainService.setDic({});
+            mainService.setUid(0);
             localStorageService.clearAll();
             $location.path('/');
         };
-        
-        $scope.$watch( mainService.getDic(), function (data) {
-            console.info('main:up');
+
+        $scope.dic = mainService.getDic();
+        $scope.$watch('service.getDic()', function (data) {
+            console.info('wathed!');
             $scope.dic = data;
+        }, true);
+
+        $scope.$watch('service.watchUid()', function (data) {
+            $scope.uid = data;
         }, true);
 
     })

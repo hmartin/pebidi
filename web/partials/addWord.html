@@ -1,6 +1,6 @@
+<div ng-if="dic">
 <h1>{{ 'welcome'|translate }}</h1>
 <p class="lead">{{ 'addWord.newWord'|translate }}</p>
-<div ng-if="dic">
     <p class="lead">
 
     <form ng-submit="processWord()">
@@ -17,10 +17,8 @@
 
             <a href="" tooltip-placement="top" tooltip="Some help!"><span
                     class="glyphicon glyphicon-question-sign"></span></a>
-        </div>
-        {{ item }}
-        {{ scope }}
-        {{ label }}
+        </div>*
+        {{ def }}*
         <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
     </form>
     </p>
@@ -33,4 +31,8 @@
         </div>
     </div>
     Your dicId is {{ dic.id}}
+</div>
+
+<div ng-if="!dic">
+    <h1>Not found</h1>
 </div>
