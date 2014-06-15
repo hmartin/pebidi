@@ -24,7 +24,6 @@ view group word / add group*
 check value and redirect if null*
 
 good display dic66 (ou pompage)
-view
 css dictionary, css global
 
 v1 other:
@@ -45,4 +44,4 @@ Add translate languages (de, es)
 
 v3
 Add teacher/ Friends 
-Mabil apps
+Mobil apps

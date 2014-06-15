@@ -32,7 +32,7 @@ app
 
     .controller('WordCtrl', function ($scope, $http, $location, $routeParams, dicService, mainService, wordService) {
         $scope.formData = {};
-        $scope.def = '--';
+        $scope.def = '';
 
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             dicService.get($routeParams.id);
