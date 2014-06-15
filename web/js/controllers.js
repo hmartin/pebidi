@@ -30,25 +30,19 @@ app
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $routeParams, dicService, mainService, wordService) {
+    .controller('WordCtrl', function ($scope, $http, $location, $routeParams, $filter, dicService, mainService, wordService) {
         $scope.formData = {};
-        $scope.def = '';
 
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             dicService.get($routeParams.id);
         }
 
         $scope.getWords = function (val) {
-            return $http.get(API_URL + 'auto/complete/words.json', {
-                params: {
-                    word: val
-                }
-            }).then(function (res) {
-                    var words = [];
-                    angular.forEach(res.data.words, function (item) {
-                        words.push(item.word);
-                    });
-                    return words;
+
+            return $http.get('../dict.json').then(function (res) {
+                    return $filter('limitTo')($filter('filter')(res.data.data, val,function (actual, expected) {
+                        return actual.toLowerCase().indexOf(expected.toLowerCase()) == 0;
+                    }),10);
                 });
         };
         $scope.onSelect = function ($item) {

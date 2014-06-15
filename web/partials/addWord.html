@@ -5,10 +5,11 @@
 
     <form ng-submit="processWord()">
         <div class="form-group has-feedback">
-            <input typeahead-on-select="onSelect($item, $model, $label)" type="text" ng-model="formData.word"
+            <input type="text" ng-model="formData.word"
                    placeholder="{{ 'addWord.word'|translate  }}" typeahead-min-length="3" typeahead-wait-ms="100"
-                   typeahead="word for word in getWords($viewValue) | filter:$viewValue"
-                   typeahead-loading="loadingLocations" class="form-control" required>
+                   typeahead="word as word.w for word in getWords($viewValue) | filter:{w:$viewValue}"
+                   typeahead-loading="loadingLocations" typeahead-template-url="listWord.html" class="form-control" required>
+
             <span ng-show="loadingLocations" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
         </div>
         <div class="form-group">
@@ -18,7 +19,6 @@
             <a href="" tooltip-placement="top" tooltip="Some help!"><span
                     class="glyphicon glyphicon-question-sign"></span></a>
         </div>
-        {{ def }}
         <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
     </form>
     </p>
@@ -36,3 +36,9 @@
 <div ng-if="!dic">
     <h1>Not found</h1>
 </div>
+<script type="text/ng-template" id="listWord.html">
+    <a>
+        <span bind-html-unsafe="match.model.w | typeaheadHighlight:query"></span>(
+        <span bind-html-unsafe="match.model.t | typeaheadHighlight:query"></span>)
+    </a>
+</script>

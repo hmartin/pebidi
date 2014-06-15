@@ -21,9 +21,11 @@ class ApiWordController extends FOSRestController
     {
 
         if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find(base_convert($request->request->get('id'), 23, 10))) {
-            if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $request->request->get('word')))) {
+            $word = $request->request->get('word');
+
+            if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word['w']))) {
                 $w = new e\Word();
-                $w->setWord($request->request->get('word'));
+                $w->setWord($word['w']);
                 $w->setLang('en');
                 $this->get('persist')->persistAndFlush($w);
             }
