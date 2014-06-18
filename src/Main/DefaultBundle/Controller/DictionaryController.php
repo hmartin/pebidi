@@ -18,8 +18,8 @@ class DictionaryController extends Controller
     public function dictionaryAction(Request $request, $id)
     {
         $params = array();
-        $d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find( base_convert($id, 23, 10) );
-        $params['words'] = $d->getWords();
+        //pass user
+        $params['words'] = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsList($id);
         return $params;
     }
 }
