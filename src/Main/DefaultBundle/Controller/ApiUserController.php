@@ -31,6 +31,7 @@ class ApiUserController extends FOSRestController
             }
             $params = array('uid' => $u->getId());
             if ($d = $u->getDefaultDictionary()) {
+                $d->setUserScore($this->getScore($u, $d));
                 $params['dic'] = $d->getJsonArray();
             }
             return $params;

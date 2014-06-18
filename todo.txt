@@ -22,13 +22,15 @@ congrats page *
 full angular optimization*
 view group word / add group*
 check value and redirect if null*
+stat dictionary*
 
-css dictionary, css global
-translate
-help
-stat dictionary
+create /edit / block / visibility groupWord
+css global
+full translate
+full help
 translate db optimization
-create groupWord
+
+
 
 v2:
 do it again

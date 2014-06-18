@@ -58,6 +58,7 @@ doctrine:
         dql:
             string_functions:
                 GROUP_CONCAT: Main\DefaultBundle\Query\GroupConcat
+                IF: Main\DefaultBundle\Query\IfFunction
 
 fos_user:
     db_driver: orm

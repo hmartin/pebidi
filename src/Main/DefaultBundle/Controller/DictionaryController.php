@@ -19,7 +19,11 @@ class DictionaryController extends Controller
     {
         $params = array();
         //pass user
-        $params['words'] = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsList($id);
+        $uid = null;
+        if($request->query->get('uid')) {
+            $uid = $request->query->get('uid');
+        }
+        $params['words'] = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsList($id, $uid);
         return $params;
     }
 }

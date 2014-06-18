@@ -108,7 +108,7 @@ app
         }
     })
 
-    .service('wordRetriever', function () {
+    .service('wordRetriever', function ($http) {
         this.getWords = function (typed) {
             $http.post(API_URL + 'get/tests.json', {'typed': typed}).success(function (data) {
                 return data.words;
@@ -141,4 +141,14 @@ app
                 }
             })
         };
+
+        this.getWords = function (type, id) {
+            var promise = $http
+                .get(API_URL + 'types/' + type + '/words/' + id + '/list.json', { params: {'uid' : mainService.getUid()}})
+                .then(function (data) {
+                    return data.data.words;
+                });
+            return promise;
+        }
+
     });

@@ -45,12 +45,12 @@ app.config(['$routeProvider',
             }).
             when('/dictionary/:id', {
                 templateUrl: 'partials/dictionary.html',
-                controller: 'DictionnaryCtrl',
+                controller: 'DictionaryCtrl',
                 type: 'dictionary'
             }).
             when('/group/:id', {
                 templateUrl: 'partials/dictionary.html',
-                controller: 'DictionnaryCtrl',
+                controller: 'DictionaryCtrl',
                 type: 'group'
             }).
             otherwise({
@@ -107,7 +107,11 @@ app.config(function ($translateProvider) {
         'questionTest': 'QCM',
         'start': 'Commencer!',
         'numberOfQuestion': 'Nombre de question',
-        'knowledge': 'Acquis'
+        'knowledge': 'Acquis',
+        'fr': 'Français',
+        'es': 'Spanish',
+        'en': 'English',
+        'de': 'German'
     });
     $translateProvider.preferredLanguage('en');
 });

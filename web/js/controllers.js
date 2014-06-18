@@ -40,7 +40,7 @@ app
         $scope.getWords = function (val) {
 
             return $http.get('../dict.json').then(function (res) {
-                    return $filter('limitTo')($filter('filter')(res.data.data, val,function (actual, expected) {
+                    return $filter('limitTo')($filter('filter')(res.data, val,function (actual, expected) {
                         return actual.toLowerCase().indexOf(expected.toLowerCase()) == 0;
                     }),10);
                 });
@@ -138,17 +138,14 @@ app
         };
     })
 
-    .controller('DictionnaryCtrl', function ($scope, $http, $route, $routeParams, wordService, dicService) {
+    .controller('DictionaryCtrl', function ($scope, $http, $route, $routeParams, wordService, dicService) {
 
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             dicService.get($routeParams.id);
         }
 
-        $http
-            .get(API_URL + 'types/' + $route.current.type + '/words/' + $routeParams.id + '/list.json')
-            .success(function (data) {
-                $scope.words = data.words;
-            });
+
+        dicService.getWords($route.current.type, $routeParams.id).then(function(data) { console.log(data);$scope.words = data; });
 
         $scope.deleteWord = function (id) {
             wordService.delete(id);

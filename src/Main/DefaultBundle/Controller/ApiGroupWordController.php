@@ -45,11 +45,35 @@ class ApiGroupWordController extends FOSRestController
         } else {
             $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->createQueryBuilder('d');
         }
+        $qb
+            ->select('w.id, w.word, t.translation')
+            ->addSelect('SUM(p.point)/COUNT(p.id) AS global')
+            ->addSelect('GROUP_CONCAT(DISTINCT def.definition) AS definitions')
+            ->innerJoin('d.words', 'w')
+            ->leftJoin('w.translations', 't')
+            ->leftJoin('w.definitions', 'def')
+            ->leftJoin('w.points','p')
+            ->where('d.id = :id')
+        ;
 
-        $qb->leftJoin('d.words', 'w')
-        ->select('w.id, w.word ')
-        ->where('d.id = :id')
-        ->setParameter(':id', $id);
+        if($uid = $request->query->get('uid')) {
+            //var_dump($uid);
+            $qb
+                ->addSelect('SUM(IF(test.id IS NOT NULL, p.point, 0))/SUM(IF(test.id IS NOT NULL, 1, 0)) AS stat_sum_realised')
+                ->leftJoin('p.test', 'test', 'WITH', 'test.user = :uid')
+                ->setParameter(':uid', $request->query->get('uid'))
+            ;
+        } else {
+            $qb
+                ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised')
+            ;
+        }
+
+        $qb
+            ->setParameter(':id', $id)
+            ->groupBy('w.word')
+        ;
+
 
         $results = $qb->getQuery()->getResult();
 

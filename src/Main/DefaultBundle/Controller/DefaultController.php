@@ -18,7 +18,7 @@ class DefaultController extends Controller
      */
     public function initAction()
     {
-        return $this->redirect($this->generateUrl('default', array( '_locale' => 'fr' )));
+        return $this->redirect($this->generateUrl('default', array('_locale' => 'fr')));
     }
 
     /**
@@ -39,24 +39,45 @@ class DefaultController extends Controller
         //$test->getAvgScore($a);
 
         //$results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(5, $d, $u);
-/*        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('w')
-            ->leftJoin('w.dictionaries','d')
-            ->leftJoin('w.groupsWords','gw')
-            ->where('d.id  = :did')
-            ->andWhere('gw.id  = :gwid')
-            ->setParameter('gwid', 1)
-            ->setParameter('did', 1)
-        ;
+        /*        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('w')
+                    ->leftJoin('w.dictionaries','d')
+                    ->leftJoin('w.groupsWords','gw')
+                    ->where('d.id  = :did')
+                    ->andWhere('gw.id  = :gwid')
+                    ->setParameter('gwid', 1)
+                    ->setParameter('did', 1)
+                ;
 
-        $results = $qb->getQuery()->getResult();*/
-        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
-            ->leftJoin('d.words', 'w')
-            ->leftJoin('d.translations', 't', 'WITH', 't.word = w.id')
-            ->where('d.id = :id')
-            ->setParameter(':id', 1);
+                $results = $qb->getQuery()->getResult();
+                $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
+                    ->leftJoin('d.words', 'w')
+                    ->leftJoin('d.translations', 't', 'WITH', 't.word = w.id')
+                    ->where('d.id = :id')
+                    ->setParameter(':id', 1);*/
+
+        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d');
+
+        $qb
+            ->select('w.id, w.word, t.translation')
+            ->addSelect('SUM(p.point)/COUNT(p.id) AS global')
+            ->addSelect('GROUP_CONCAT(DISTINCT def.definition) AS definitions')
+            ->innerJoin('d.words', 'w')
+            ->leftJoin('w.translations', 't')
+            ->leftJoin('w.definitions', 'def')
+            ->leftJoin('w.points', 'p')
+            ->where('d.id = :id');
+            $qb
+                ->addSelect('SUM(IF(test.id IS NULL, p.point, 0))/SUM(IF(test.id IS NULL, 1, 0)) AS stat_sum_realised')
+                ->leftJoin('p.test', 'test', 'WITH', 'test.user = :uid')
+                ->setParameter(':uid', 1);
+
+
+        $qb
+            ->setParameter(':id', 1)
+            ->groupBy('w.word');
 
         $results = $qb->getQuery()->getResult();
-        foreach($results as $r) {
+        foreach ($results as $r) {
             var_dump($r);
             ///echo get_class($r);
         }
@@ -73,8 +94,7 @@ class DefaultController extends Controller
         //var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
 
-        $a = $crawler->filter('.translation-results tbody > tr')->each(function ($node, $i)
-        {
+        $a = $crawler->filter('.translation-results tbody > tr')->each(function ($node, $i) {
             $o = $node->filter('.result-item-source > .wordentry')->each(function ($node, $i) {
                 return $node->text();
             });
@@ -84,9 +104,10 @@ class DefaultController extends Controller
             return array('origin' => $o, 'dest' => $d);
         });
         echo '<pre><br><br><br>';
-        var_dump($a);exit;
+        var_dump($a);
+        exit;
     }
-    
+
 
     /**
      * @Route("/{_locale}/cc", name="clearCookies" )
@@ -106,11 +127,10 @@ class DefaultController extends Controller
         $params = array();
         $this->get('cookie')->setCookie('id', $id);
 
-        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find( base_convert($id, 23, 10) )) 
-        {
+        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(base_convert($id, 23, 10))) {
             if ($d->getPrivate()) {
                 if ($u = $this->getUser()) {
-                    if ($d->getUser() != $u ) {
+                    if ($d->getUser() != $u) {
                         return $this->redirect($this->generateUrl('static', array('template' => 'private')));
                     }
                 } else {
@@ -127,17 +147,17 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $w->addDictionary($d);
                 $this->get('persist')->persistAndFlush($w);
-                foreach( $w->getTranslations() as $t ) {
-                    $t->setWord( $w );
+                foreach ($w->getTranslations() as $t) {
+                    $t->setWord($w);
                     $t->setDictionary($d);
                     $this->get('persist')->persistAndFlush($t);
                 }
-                foreach( $w->getDictionaries() as $d ) {
-                    $d->addWord( $w );
+                foreach ($w->getDictionaries() as $d) {
+                    $d->addWord($w);
                     $this->get('persist')->persistAndFlush($t);
                 }
 
-                return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId()) ));
+                return $this->redirect($this->generateUrl('newWord', array('id' => $d->getConvertId())));
             }
             $params['dictionary'] = $d;
             $params['form'] = $form->createView();
@@ -152,11 +172,12 @@ class DefaultController extends Controller
      * @Template
      */
     public function staticAction($template)
-    {    
-        return $this->render('MainDefaultBundle:Static:'.$template.'.html.twig', array());
+    {
+        return $this->render('MainDefaultBundle:Static:' . $template . '.html.twig', array());
     }
 
-    public function clean() {
+    public function clean()
+    {
         /*
          SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE `DictionariesWord`;
