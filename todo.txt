@@ -23,21 +23,19 @@ full angular optimization*
 view group word / add group*
 check value and redirect if null*
 
-good display dic66 (ou pompage)
 css dictionary, css global
-
-v1 other:
-!translate*
+translate
 help
+stat dictionary
+translate db optimization
+create groupWord
 
 v2:
-stat dictionary
 do it again
 Real test
 Test mobil apps
 Create & Edit best translation
 create account
-create groupWord
 algo v2 test
 multiple dic
 Add translate languages (de, es)
