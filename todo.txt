@@ -4,7 +4,7 @@ when user register, he become private, like all his dictionaries
 
 if cookies uid
 
-v1 main:
+v0 startup:
 set cookies*
 api add words*
 clear cookies*
@@ -24,24 +24,28 @@ view group word / add group*
 check value and redirect if null*
 stat dictionary*
 
-create /edit / block / visibility groupWord
+v1 family:
 css global
 full translate
 full help
 translate db optimization
+init lang
+asyncr create dic
 
-
-
-v2:
+v2 friend:
+create / edit / block / visibility groupWord
 do it again
 Real test
-Test mobil apps
-Create & Edit best translation
-create account
-algo v2 test
-multiple dic
-Add translate languages (de, es)
+Add translate languages (es)
 
-v3
+v3 school:
+multiple dic
+Test mobil apps
+create account
+
+v4 college:
+Add translate languages (de, it,...)
+Create & Edit best translation
 Add teacher/ Friends 
 Mobil apps
+algo v2 test

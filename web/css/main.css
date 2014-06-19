@@ -135,17 +135,6 @@ body {
     font-weight: bold;
 }
 
-
-/*
- * Footer
- */
-
-.mastfoot {
-    color: #999; /* IE8 proofing */
-    color: rgba(255,255,255,.5);
-    box-shadow: inset 0 -20px 12px rgba(0,0,0,.5);
-}
-
 /*
  * Affix and center
  */
@@ -155,10 +144,6 @@ body {
     .masthead {
         position: fixed;
         top: 0;
-    }
-    .mastfoot {
-        position: fixed;
-        bottom: 0;
     }
     /* Start the vertical centering */
     .site-wrapper-inner {
@@ -171,6 +156,12 @@ body {
         width: 100%; /* Must be percentage or pixels for horizontal alignment */
     }
 }
+@media only screen and (max-height: 600px) {    
+    .mastfoot {
+        position: fixed;
+        bottom: 0;
+    }
+}
 
 .cover-container {
     top: 0px;
@@ -179,6 +170,6 @@ body {
     .masthead,
     .mastfoot,
     .cover-container {
-        width: 700px;
+        width: 900px;
     }
 }
