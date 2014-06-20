@@ -54,9 +54,9 @@ module.exports = function(grunt) {
      */
     i18nextract: {
 
-      // Provide fr_FR language
+      /*
       default_options: {
-        prefix:   '00_',
+        prefix:   '',
         suffix:   '.json',
         src:      [ 'web/partials/*.html'],
         lang:     ['fr_FR'],
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
       },
 
       default_exists_i18n : {
-        prefix:   '01_',
+        prefix:   'exist_',
         suffix:   '.json',
         nullEmpty: true,
           src:      [ 'web/partials/*.html'],
@@ -74,30 +74,19 @@ module.exports = function(grunt) {
       },
 
       default_deleted_i18n : {
-        prefix:   '02_',
+        prefix:   'delete_',
         suffix:   '.json',
           src:      [ 'web/partials/*.html'],
         lang:     ['fr_FR'],
         dest:     'web/translate',
         source:   'test/fixtures/default_deleted_i18n.json' // Use to generate different output file
       },
-
+*/
       default_language: {
-        prefix:   '04_',
+        prefix:   '',
         suffix:   '.json',
           src:      [ 'web/partials/*.html'],
-        lang:     ['fr_FR', 'en_US'],
-        dest:     'web/translate',
-        defaultLang: 'en_US'
-      },
-
-      json_extract: {
-        prefix:   '05_',
-        suffix:   '.json',
-          src:      [ 'web/partials/*.html'],
-        jsonSrc:  [ 'test/fixtures/*.json' ],
-        jsonSrcName: ['label'],
-        lang:     ['en_US'],
+        lang:     ['fr', 'en'],
         dest:     'web/translate',
         defaultLang: 'en_US'
       }
