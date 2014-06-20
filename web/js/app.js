@@ -89,7 +89,7 @@ app.config(function ($translateProvider) {
     $translateProvider.translations('fr', {
         'dictionaryOf': 'Dictionnaire de:',
         'clickHere': 'Cliquer ici',
-        'slogan': 'Créer votre dictionnaire de langue perosnnel!',
+        'slogan': 'Créer votre propre dictionnaire de langue!',
         'homepage.explication1': 'Entrez juste votre email, et n\'oubliez plus ce que vous savez',
         'email.address': 'Email',
         'go': 'Go!',

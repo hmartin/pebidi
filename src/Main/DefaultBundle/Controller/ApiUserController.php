@@ -71,8 +71,9 @@ class ApiUserController extends FOSRestController
             if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($id)) {
 
                 if ($uid = $request->request->get('uid') and
-                    $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($uid)
-                ) {
+                    $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($uid) and
+                    $d->getUser()->getId()  == $uid)
+                {
                     $d->setUserScore($this->getScore($u, $d));
                 }
                 return array('dic' => $d->getJsonArray());
