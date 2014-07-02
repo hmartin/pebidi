@@ -30,7 +30,10 @@ full translate
 full help
 translate db optimization
 init lang
+one step create dic
 asyncr create dic
+db english french/ french english
+add extra input if no translation
 
 v2 friend:
 create / edit / block / visibility groupWord

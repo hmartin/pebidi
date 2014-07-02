@@ -3,7 +3,7 @@
 <form class="form-inline" ng-submit="processForm()">
     <div class="form-group">
         <label class="sr-only" for="email">{{ 'email.address'|translate  }}</label>
-        <input id="email" class="form-control input-lg" ng-model="formData.email" type="email" name="email" placeholder="Email Address" required>
+        <input id="email" class="form-control input-lg" ng-model="formData.email" type="email" name="email" placeholder="Email Address" required  auto-focus>
     </div>
     <button type="submit"  class="btn btn-success input-lg" >{{ 'go'|translate  }}</button>
 </form>
