@@ -5029,7 +5029,7 @@
 {"w":"botch (up)","t":"saboter"},
 {"w":"both","t":"les deux, tous (les) deux, l'un et l'autre"},
 {"w":"bother","t":"ennui, déranger, troubler, ennuyer, importuner"},
-{"w":"bottle","t":"mettre en bocaux, flacon, bouteille"},
+ {"w":"bottle","t":["mettre en bocaux", "flacon", "bouteille"]},
 {"w":"bottle (cu)","t":"mettre en conserve"},
 {"w":"bottle opener","t":"décapsuleur"},
 {"w":"bottle rack","t":"casier à bouteilles"},
