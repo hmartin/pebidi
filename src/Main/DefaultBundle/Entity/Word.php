@@ -59,6 +59,17 @@ class Word
     protected $points;
 
     /**
+     * @ORM\OneToMany(targetEntity="WordWord", mappedBy="word1",cascade={"persist"})
+     */
+    protected $wordwords1;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="WordWord", mappedBy="word1",cascade={"persist"})
+     */
+    protected $wordwords2;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
@@ -353,5 +364,71 @@ class Word
     public function getGroupsWords()
     {
         return $this->groupsWords;
+    }
+
+    /**
+     * Add wordwords1
+     *
+     * @param \Main\DefaultBundle\Entity\WordWord $wordwords1
+     * @return Word
+     */
+    public function addWordwords1(\Main\DefaultBundle\Entity\WordWord $wordwords1)
+    {
+        $this->wordwords1[] = $wordwords1;
+
+        return $this;
+    }
+
+    /**
+     * Remove wordwords1
+     *
+     * @param \Main\DefaultBundle\Entity\WordWord $wordwords1
+     */
+    public function removeWordwords1(\Main\DefaultBundle\Entity\WordWord $wordwords1)
+    {
+        $this->wordwords1->removeElement($wordwords1);
+    }
+
+    /**
+     * Get wordwords1
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWordwords1()
+    {
+        return $this->wordwords1;
+    }
+
+    /**
+     * Add wordwords2
+     *
+     * @param \Main\DefaultBundle\Entity\WordWord $wordwords2
+     * @return Word
+     */
+    public function addWordwords2(\Main\DefaultBundle\Entity\WordWord $wordwords2)
+    {
+        $this->wordwords2[] = $wordwords2;
+
+        return $this;
+    }
+
+    /**
+     * Remove wordwords2
+     *
+     * @param \Main\DefaultBundle\Entity\WordWord $wordwords2
+     */
+    public function removeWordwords2(\Main\DefaultBundle\Entity\WordWord $wordwords2)
+    {
+        $this->wordwords2->removeElement($wordwords2);
+    }
+
+    /**
+     * Get wordwords2
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWordwords2()
+    {
+        return $this->wordwords2;
     }
 }

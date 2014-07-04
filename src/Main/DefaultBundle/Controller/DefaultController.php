@@ -27,7 +27,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        //echo '<pre>';
+        echo '<pre>';
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
 
@@ -55,7 +55,7 @@ class DefaultController extends Controller
                     ->where('d.id = :id')
                     ->setParameter(':id', 1);*/
 
-        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d');
+/*        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d');
 
         $qb
             ->select('w.id, w.word, t.translation')
@@ -76,11 +76,54 @@ class DefaultController extends Controller
             ->setParameter(':id', 1)
             ->groupBy('w.word');
 
-        $results = $qb->getQuery()->getResult();
+SET FOREIGN_KEY_CHECKS=0;
+TRUNCATE Word;
+TRUNCATE WordWord;
+SET FOREIGN_KEY_CHECKS=1;
+
+*/
+
+        $f = file_get_contents('http://persodic-local.com/dict.json');
+        $a = json_decode($f);
+        \Doctrine\Common\Util\Debug::dump($a[100]->w,3);
+        $i=0;
+        foreach($a as $w) {
+            $ww = new e\Word();
+            $ww->setWord($w->w);
+            $ww->setLang('en');
+            $this->get('persist')->persist($ww);
+            foreach(explode(',', $w->t) as $t) {
+                $tt = new e\Word();
+                $tt->setWord(trim($t));
+                $tt->setLang('fr');
+                $this->get('persist')->persist($tt);
+                $wwe = new e\WordWord();
+                $wwe->setWord1($ww);
+                $wwe->setWord2($tt);
+                $this->get('persist')->persist($wwe);
+            }
+            echo $i.'<br>';
+            $i++;
+            if ($i % 1000 == 0 ) {
+                $this->get('persist')->flush();
+
+            }
+        }
+        $this->get('persist')->flush();
+
+        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('w');
+
+        $qb
+            ->select('w.id, w.word, www1.word, www2.word')
+            ->innerJoin('w.wordwords1', 'ww1')
+            ->innerJoin('w.wordwords2', 'ww2')
+            ->innerJoin('ww1.word2', 'www1')
+            ->innerJoin('ww2.word1', 'www2')
+            ->where('ww1.id != w.id AND ww2.id != w.id');
+/*        $results = $qb->getQuery()->getResult();
         foreach ($results as $r) {
             var_dump($r);
-            ///echo get_class($r);
-        }
+        }*/
         return array();
     }
 

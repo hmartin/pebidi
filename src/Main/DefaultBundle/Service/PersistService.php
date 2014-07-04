@@ -17,4 +17,12 @@ class PersistService
         $this->em->persist($obj);
         $this->em->flush();
     }
+
+    public function persist($obj) {
+        $this->em->persist($obj);
+    }
+
+    public function flush() {
+        $this->em->flush();
+    }
 }
