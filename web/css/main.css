@@ -61,6 +61,8 @@ body {
     margin-left: auto;
 }
 
+.top-buffer { margin-top:20px; }
+
 /* Padding for spacing */
 .inner {
     padding: 30px;

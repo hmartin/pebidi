@@ -36,8 +36,8 @@
     <h1>Not found</h1>
 </div>
 <script type="text/ng-template" id="listWord.html">
-    <a>
-        <span bind-html-unsafe="match.model.w | typeaheadHighlight:query"></span>(
-        <span bind-html-unsafe="match.model.t | typeaheadHighlight:query"></span>)
+    <a style="text-align: left">
+        <span style="width:120px;float: left" bind-html-unsafe="match.model.w | typeaheadHighlight:query"></span>&nbsp;<=>&nbsp;
+        <span bind-html-unsafe="match.model.t | typeaheadHighlight:query"></span>
     </a>
 </script>

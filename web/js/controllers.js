@@ -1,9 +1,13 @@
 app
     .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService) {
+        $scope.lang = ['en', 'es', 'fr'];
+        $scope.count = $scope.lang.lenght;
+        $scope.ip = 0;
+        $scope.ia = 2;
         if (localStorageService.get('dic') && localStorageService.get('uid')) {
             mainService.setDic(localStorageService.get('dic'));
             console.log(mainService.dic);
-            $location.path('/addWord/' + mainService.dic.id);
+            $location.path('/dictionary/' + mainService.dic.id);
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
@@ -18,10 +22,6 @@ app
     })
 
     .controller('CreateDicCtrl', function ($scope, $http, $location, dicService) {
-        $scope.lang = ['de', 'en', 'es', 'fr'];
-        $scope.count = $scope.lang.lenght;
-        $scope.ip = 0;
-        $scope.ia = 1;
         //type, orign Lang, dest Lang
         $scope.createDic = function () {
             dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);

@@ -27,7 +27,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        echo '<pre>';
+        //echo '<pre>';
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
 
@@ -83,7 +83,7 @@ SET FOREIGN_KEY_CHECKS=1;
 
 */
 
-        $f = file_get_contents('http://persodic-local.com/dict.json');
+        $f = file_get_contents('http://persodic-local.com/dict4.json');
         $a = json_decode($f);
         \Doctrine\Common\Util\Debug::dump($a[100]->w,3);
         $i=0;
@@ -102,7 +102,7 @@ SET FOREIGN_KEY_CHECKS=1;
                 $wwe->setWord2($tt);
                 $this->get('persist')->persist($wwe);
             }
-            echo $i.'<br>';
+            //echo $i.'<br>';
             $i++;
             if ($i % 1000 == 0 ) {
                 $this->get('persist')->flush();
