@@ -11,11 +11,9 @@ app
                 if (data.hasOwnProperty('dic')) {
                     console.info(data.dic)
                     mainService.setDic(data.dic);
-                    $location.path('/addWord/' + data.dic.id);
-                } else {
-                    $location.path('/createDic/');
                 }
             });
+            $location.path('/dictionary');
         };
     })
 
@@ -38,17 +36,11 @@ app
         }
 
         $scope.getWords = function (val) {
-
             return $http.get('../dict.json').then(function (res) {
                     return $filter('limitTo')($filter('filter')(res.data, val,function (actual, expected) {
                         return actual.toLowerCase().indexOf(expected.toLowerCase()) == 0;
                     }),10);
                 });
-        };
-        $scope.onSelect = function ($item) {
-            $http.get(API_URL + 'oris/en/dests/fr/words/' + $item + '.json').then(function (res) {
-                $scope.def = res.data;
-            });
         };
 
         $scope.processWord = function () {

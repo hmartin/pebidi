@@ -5,6 +5,16 @@
         <label class="sr-only" for="email">{{ 'email.address'|translate  }}</label>
         <input id="email" class="form-control input-lg" ng-model="formData.email" type="email" name="email" placeholder="Email Address" required  auto-focus>
     </div>
+    
+        <div class="row">
+            <div class="col-md-1"><a href="" ng-click="ip = ((ip + 3)%4)" ><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+            <div class="col-md-2">{{ lang[ip]|translate }}</div>
+            <div class="col-md-1"><a href="" ng-click="ip = ((ip + 1)%4)" ><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+       <=>
+            <div class="col-md-1"><a href="" ng-click="ia = ((ia + 3)%4)" ><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+            <div class="col-md-2">{{ lang[ia]|translate }}</div>
+            <div class="col-md-1"><a href="" ng-click="ia = ((ia + 1)%4)" ><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+        </div>
     <button type="submit"  class="btn btn-success input-lg" >{{ 'go'|translate  }}</button>
 </form>
 <p class="lead">{{ 'homepage.explication2'|translate  }}</p>
