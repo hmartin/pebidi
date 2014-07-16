@@ -15,16 +15,10 @@ app
                 if (data.hasOwnProperty('dic')) {
                     console.info(data.dic)
                     mainService.setDic(data.dic);
+            		dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
                 }
             });
             $location.path('/dictionary');
-        };
-    })
-
-    .controller('CreateDicCtrl', function ($scope, $http, $location, dicService) {
-        //type, orign Lang, dest Lang
-        $scope.createDic = function () {
-            dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
         };
     })
 
@@ -174,3 +168,13 @@ app
         }, true);
 
     })
+
+/*
+
+    .controller('CreateDicCtrl', function ($scope, $http, $location, dicService) {
+        //type, orign Lang, dest Lang
+        $scope.createDic = function () {
+            dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
+        };
+    })
+    */
