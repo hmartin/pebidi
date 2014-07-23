@@ -44,7 +44,7 @@ class GroupConcat extends FunctionNode
             $this->isDistinct = true;
         }
 
-        $this->expression = $parser->SingleValuedPathExpression();
+        $this->expression = $parser->ArithmeticExpression();
 
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }

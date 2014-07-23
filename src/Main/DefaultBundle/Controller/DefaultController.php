@@ -153,6 +153,31 @@ SET FOREIGN_KEY_CHECKS=1;
 
 
     /**
+     * @Route("/{_locale}/json", name="generateJson" )
+     */
+    public function generateJsonAction()
+    {
+
+        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('word');
+        $qb
+            ->select('word.word as w, GROUP_CONCAT( DISTINCT IF(www1.word IS NULL, www2.word, www1.word)) as t')
+            ->innerJoin('word.wordwords1', 'ww1')
+            ->innerJoin('word.wordwords2', 'ww2')
+            ->innerJoin('ww1.word2', 'www1')
+            ->innerJoin('ww2.word1', 'www2')
+            ->where('ww1.id != word.id AND ww2.id != word.id')
+            ->andWhere("word.lang = 'en' AND (www1.lang = 'fr' OR www2.lang =  'fr')")
+            ->groupBy('word.word')
+            //->setMaxResults(5)
+        ;
+        $results = $qb->getQuery()->getResult();
+        $file = fopen(__DIR__.'/../../../../web/dict/dict.json',"w");
+        echo fwrite($file,json_encode($results));
+        fclose($file);
+        //exit;
+    }
+
+    /**
      * @Route("/{_locale}/cc", name="clearCookies" )
      */
     public function clearCookiesAction()

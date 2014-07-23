@@ -30,7 +30,7 @@ app
         }
 
         $scope.getWords = function (val) {
-            return $http.get('../dict.json').then(function (res) {
+            return $http.get('../dict/dict.json').then(function (res) {
                     return $filter('limitTo')($filter('filter')(res.data, val,function (actual, expected) {
                         return actual.toLowerCase().indexOf(expected.toLowerCase()) == 0;
                     }),10);
