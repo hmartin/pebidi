@@ -1,5 +1,6 @@
 {
   "name": "allmighty-autocomplete",
+  "ignore": [],
   "homepage": "http://justgoscha.github.io/allmighty-autocomplete/",
   "authors": [
     "Goscha Graf <justgoscha@gmail.com>"
@@ -10,15 +11,15 @@
     "angularjs"
   ],
   "license": "MIT",
-  "main": "./script/autocomplete.js",
-  "ignore": [
-    "ac_template.html"
+  "main": [
+    "./script/autocomplete.js",
+    "./style/autocomplete.css"
   ],
-  "_release": "2eb28fea0a",
+  "_release": "e72c900d0f",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "2eb28fea0ad30bf3768e566919083cad9b4d562a"
+    "commit": "e72c900d0f891479f9acfe13da7a51484467d5e4"
   },
   "_source": "git://github.com/JustGoscha/allmighty-autocomplete.git",
   "_target": "*",
