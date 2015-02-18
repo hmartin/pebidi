@@ -11,6 +11,7 @@ app
         };
         this.setGlobalScore = function (dicScore) {
             this.dic.score = dicScore;
+            console.log('scor tot' + dicScore);
 
         };
         this.setCountWord = function (countWord) {

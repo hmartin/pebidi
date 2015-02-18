@@ -31,11 +31,6 @@ class Dictionary
     private $words;
 
     /**
-     * @ORM\OneToMany(targetEntity="Translation", mappedBy="dictionary")
-     */
-    protected $translations;
-
-    /**
      * @ORM\OneToMany(targetEntity="DictionaryScore", mappedBy="dictionary")
      */
     protected $dictionaryScores;

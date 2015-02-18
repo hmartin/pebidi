@@ -27,6 +27,7 @@ db english french*
 translate db optimization*
 
 v1 family:
+Create & Edit best translation
 css global
 full translate
 init lang
@@ -50,7 +51,6 @@ create account
 
 v4 college:
 Add translate languages (es, de, it,...)
-Create & Edit best translation
 Add teacher/ Friends 
 Mobil apps
 algo v2 test

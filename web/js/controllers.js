@@ -1,5 +1,5 @@
 app
-    .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService) {
+    .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService, dicService) {
         $scope.lang = ['en', 'es', 'fr'];
         $scope.count = $scope.lang.lenght;
         $scope.ip = 0;
@@ -15,7 +15,8 @@ app
                 if (data.hasOwnProperty('dic')) {
                     console.info(data.dic)
                     mainService.setDic(data.dic);
-            		dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
+                } else {
+                    dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
                 }
             });
             $location.path('/dictionary');
@@ -32,7 +33,7 @@ app
         $scope.getWords = function (val) {
             return $http.get('../dict/dict.json').then(function (res) {
                     return $filter('limitTo')($filter('filter')(res.data, val,function (actual, expected) {
-                        return actual.toLowerCase().indexOf(expected.toLowerCase()) == 0;
+                        return actual.toString().toLowerCase().indexOf(expected.toLowerCase()) == 0;
                     }),10);
                 });
         };
@@ -158,9 +159,11 @@ app
         };
 
         $scope.dic = mainService.getDic();
+
         $scope.$watch('service.getDic()', function (data) {
             console.info('wathed!');
-            $scope.dic = data;
+            console.log(data.score);
+            $scope.dic = mainService.getDic();
         }, true);
 
         $scope.$watch('service.watchUid()', function (data) {
