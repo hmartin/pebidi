@@ -26,7 +26,7 @@ class Word
     /**
      * @ORM\Column(type="string", length=5)
      */
-    protected $lang;
+    protected $local;
 
     /**
      * @ORM\Column(type="integer")

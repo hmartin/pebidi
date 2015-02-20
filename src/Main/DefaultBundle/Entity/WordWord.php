@@ -8,8 +8,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity(fields={
  */
-class Definition
+class Ww
 {
     /**
      * @ORM\Id
@@ -19,10 +20,21 @@ class Definition
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Word", inversedBy="translations",cascade={"persist"})
-     * @ORM\JoinColumn(name="word_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Word",cascade={"persist"})
+     * @ORM\JoinColumn()
      */
-    protected $word;
+    protected $word1;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Word", cascade={"persist"})
+     * @ORM\JoinColumn()
+     */
+    protected $word2;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Sense", mappedBy="wws")
+     */
+    protected $sense;
 
 
 }
