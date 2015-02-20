@@ -49,11 +49,6 @@ class Word
     protected $points;
 
     /**
-     * @ORM\OneToMany(targetEntity="Sense", mappedBy="word",cascade={"persist"})
-     */
-    protected $senses;
-
-    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
