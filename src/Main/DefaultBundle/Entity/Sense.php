@@ -19,15 +19,10 @@ class Sense
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Word", inversedBy="senses",cascade={"persist"})
+     * @ORM\Column(type="string", length=5)
      */
-    protected $word;
+    protected $local;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Word")
-     * @ORM\JoinTable(name="SenseWords")
-     **/
-    private $senseWords;
 
     /**
      * @ORM\Column(type="text")
