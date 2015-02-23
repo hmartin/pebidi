@@ -1,4 +1,5 @@
 app/bootstrap*
+app/config/parameter.yml
 
 vendor/*
 

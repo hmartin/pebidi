@@ -1,5 +1,5 @@
 app
-    .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService, dicService) {
+    .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService, pediService) {
         $scope.lang = ['en', 'es', 'fr'];
         $scope.count = $scope.lang.lenght;
         $scope.ip = 0;
@@ -16,26 +16,26 @@ app
                     console.info(data.dic)
                     mainService.setDic(data.dic);
                 } else {
-                    dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
+                    pediService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
                 }
             });
             $location.path('/dictionary');
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $routeParams, $filter, dicService, mainService, wordService) {
+    .controller('WordCtrl', function ($scope, $http, $location, $routeParams, $filter, pediService, mainService, wordService, dicService, localStorageService) {
         $scope.formData = {};
 
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
-            dicService.get($routeParams.id);
+            pediService.get($routeParams.id);
         }
+        dicService.getDic();
 
         $scope.getWords = function (val) {
-            return $http.get('../dict/dict.json').then(function (res) {
-                    return $filter('limitTo')($filter('filter')(res.data, val,function (actual, expected) {
-                        return actual.toString().toLowerCase().indexOf(expected.toLowerCase()) == 0;
-                    }),10);
-                });
+            var dic = localStorageService.get('data');
+            return $filter('limitTo')($filter('filter')(dic, val, function (actual, expected) {
+                return actual.toString().toLowerCase().indexOf(expected.toLowerCase()) == 0;
+            }), 10);
         };
 
         $scope.processWord = function () {
@@ -45,8 +45,7 @@ app
             $scope.formData.word = '';
             $scope.formData.translation = '';
         };
-    }
-)
+    })
 
     .controller('CreateTestCtrl', function ($scope, testService) {
 
@@ -106,7 +105,7 @@ app
 
     .controller('AddGroupWordCtrl', function ($scope, $http, $location, mainService) {
         $http
-            .get(API_URL + 'words/group.json', { params: { lang: 'en' } })
+            .get(API_URL + 'words/group.json', {params: {lang: 'en'}})
             .success(function (data) {
                 $scope.groupsWords = data.groups;
             });
@@ -125,14 +124,17 @@ app
         };
     })
 
-    .controller('DictionaryCtrl', function ($scope, $http, $route, $routeParams, wordService, dicService) {
+    .controller('DictionaryCtrl', function ($scope, $http, $route, $routeParams, wordService, pediService) {
 
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
-            dicService.get($routeParams.id);
+            pediService.get($routeParams.id);
         }
 
 
-        dicService.getWords($route.current.type, $routeParams.id).then(function(data) { console.log(data);$scope.words = data; });
+        pediService.getWords($route.current.type, $routeParams.id).then(function (data) {
+            console.log(data);
+            $scope.words = data;
+        });
 
         $scope.deleteWord = function (id) {
             wordService.delete(id);
@@ -171,13 +173,3 @@ app
         }, true);
 
     })
-
-/*
-
-    .controller('CreateDicCtrl', function ($scope, $http, $location, dicService) {
-        //type, orign Lang, dest Lang
-        $scope.createDic = function () {
-            dicService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
-        };
-    })
-    */

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Main\DefaultBundle\Entity as e;
 use Main\DefaultBundle\Form as f;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -81,7 +82,6 @@ TRUNCATE Word;
 TRUNCATE WordWord;
 SET FOREIGN_KEY_CHECKS=1;
 
-*/
 
         $f = file_get_contents('http://persodic-local.com/dict4.json');
         $a = json_decode($f);
@@ -120,11 +120,12 @@ SET FOREIGN_KEY_CHECKS=1;
             ->innerJoin('ww1.word2', 'www1')
             ->innerJoin('ww2.word1', 'www2')
             ->where('ww1.id != w.id AND ww2.id != w.id');
+        */
 /*        $results = $qb->getQuery()->getResult();
         foreach ($results as $r) {
             var_dump($r);
         }*/
-        return array();
+        return $this->render('MainDefaultBundle:Default:index.html.twig', array());
     }
 
     /**

@@ -18,7 +18,7 @@ app
             this.dic.countWord = countWord;
         };
         this.getDic = function () {
-            if(!('id' in this.dic) && (localStorageService.get('dic'))) {
+            if (!('id' in this.dic) && (localStorageService.get('dic'))) {
                 this.dic = localStorageService.get('dic');
             }
             return this.dic;
@@ -57,7 +57,12 @@ app
         this.createTest = function (did, question) {
             this.nbQuestion = question;
             this.did = did;
-            $http.post(API_URL + 'creates/tests.json', {uid: mainService.getUid(), id: did, nbQuestion: question, type: 'n'})
+            $http.post(API_URL + 'creates/tests.json', {
+                uid: mainService.getUid(),
+                id: did,
+                nbQuestion: question,
+                type: 'n'
+            })
                 .success(function (data) {
                     this.words = data.words;
                     this.id = data.id;
@@ -89,10 +94,19 @@ app
         }
     })
 
+
+    /*
+     * Add
+     * delete
+     */
     .service('wordService', function ($http, $rootScope, $timeout, mainService) {
         this.post = function (formData) {
             mainService.setCountWord(mainService.dic.countWord + 1);
-            $http.post(API_URL + 'news/words.json', {'word' : formData.word, 'translation': formData.translation, 'id': mainService.getDid()}).success(function (data) {
+            $http.post(API_URL + 'news/words.json', {
+                'word': formData.word,
+                'translation': formData.translation,
+                'id': mainService.getDid()
+            }).success(function (data) {
                 $timeout(function () {
                     mainService.setDic(data.dic);
                     $rootScope.$apply();
@@ -100,26 +114,43 @@ app
             });
         };
 
-        this.delete = function(id) {
-            $http.post(API_URL + 'deletes/words.json', { 'id': id, 'did': mainService.getDid()}).success(function (data) {
+        this.delete = function (id) {
+            $http.post(API_URL + 'deletes/words.json', {
+                'id': id,
+                'did': mainService.getDid()
+            }).success(function (data) {
                 mainService.setDic(data.dic);
 
             });
         }
     })
 
-    .service('wordRetriever', function ($http) {
-        this.getWords = function (typed) {
-            $http.post(API_URL + 'get/tests.json', {'typed': typed}).success(function (data) {
-                return data.words;
-            });
+
+    .service('dicService', function ($http, localStorageService) {
+
+        this.getDic = function () {
+            if (!this.dic) {
+                return $http.get('../dict/dict.json').then(function (res) {
+                    console.log('dicService.getDic');
+                    localStorageService.set('data', res.data);
+                });
+            }
+
+            return this.dic;
         };
     })
 
-    .service('dicService', function ($http, $rootScope, $location, $timeout, mainService) {
+    /*
+     * Create and get personal Dictionary
+     */
+    .service('pediService', function ($http, $rootScope, $location, $timeout, mainService) {
 
         this.create = function (originLang, destLang) {
-            $http.post(API_URL + 'creates/dics.json', {uid: mainService.getUid(), originLang: originLang, destLang: destLang}).success(function (data) {
+            $http.post(API_URL + 'creates/dics.json', {
+                uid: mainService.getUid(),
+                originLang: originLang,
+                destLang: destLang
+            }).success(function (data) {
                 if (data.dic) {
                     mainService.setDic(data.dic);
                     $location.path('/addWord/' + data.dic.id);
@@ -144,7 +175,7 @@ app
 
         this.getWords = function (type, id) {
             var promise = $http
-                .get(API_URL + 'types/' + type + '/words/' + id + '/list.json', { params: {'uid' : mainService.getUid()}})
+                .get(API_URL + 'types/' + type + '/words/' + id + '/list.json', {params: {'uid': mainService.getUid()}})
                 .then(function (data) {
                     return data.data.words;
                 });
