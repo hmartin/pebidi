@@ -48,6 +48,10 @@ app.config(['$routeProvider',
                 controller: 'DictionaryCtrl',
                 type: 'dictionary'
             }).
+            when('/improve/:word', {
+                templateUrl: 'partials/improve.html',
+                controller: 'ImproveCtrl'
+            }).
             when('/group/:id', {
                 templateUrl: 'partials/dictionary.html',
                 controller: 'DictionaryCtrl',

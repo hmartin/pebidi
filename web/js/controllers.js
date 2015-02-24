@@ -29,13 +29,18 @@ app
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             pediService.get($routeParams.id);
         }
-        dicService.getDic();
+        dicService.loadDic();
 
         $scope.getWords = function (val) {
-            var dic = localStorageService.get('data');
-            return $filter('limitTo')($filter('filter')(dic, val, function (actual, expected) {
+            sug = $filter('limitTo')($filter('filter')(dicService.getDic(), val, function (actual, expected) {
                 return actual.toString().toLowerCase().indexOf(expected.toLowerCase()) == 0;
             }), 10);
+            $scope.submitCreate = false;
+            if (sug.length == 0) {
+                $scope.submitCreate = true;
+            }
+
+            return sug;
         };
 
         $scope.processWord = function () {

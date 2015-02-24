@@ -1,0 +1,25 @@
+<div ng-if="dic">
+    <h1>{{ 'improve.newWord'|translate }}</h1>
+
+    <p class="lead">
+view example
+    <form ng-submit="processWord()">
+        <div class="form-group has-feedback">
+            <input type="text" ng-model="word" class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
+            <select ng-model="wordType" >
+            <option>{{ 'noun'|translate }}</option>
+            <option>{{ 'adjective'|translate }}</option>
+            <option>{{ 'verb'|translate }}</option>
+            </select>
+            <input type="text" ng-model="definition" class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
+            <input type="text" ng-model="translation" class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
+
+
+            <span ng-show="loadingLocations" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
+        </div>
+        <div class="form-group" >
+            <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
+        </div>
+    </form>
+    </p>
+</div>

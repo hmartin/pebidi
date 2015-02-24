@@ -127,17 +127,23 @@ app
 
 
     .service('dicService', function ($http, localStorageService) {
-
-        this.getDic = function () {
+        var dic = null;
+        this.loadDic = function () {
             if (!this.dic) {
                 return $http.get('../dict/dict.json').then(function (res) {
-                    console.log('dicService.getDic');
-                    localStorageService.set('data', res.data);
+                    console.log('dicService.loadDic');
+                    dic = res.data;
+
+                    return dic;
                 });
             }
 
-            return this.dic;
+            return dic;
         };
+
+        this.getDic = function () {
+            return dic;
+        }
     })
 
     /*
