@@ -3,17 +3,18 @@
 
     <p class="lead">{{ 'addWord.newWord'|translate }}</p>
 
-    <p class="lead">
+<div class="row">
+  <div class="col-md-12">
 
     <form ng-submit="processWord()">
         <div class="form-group has-feedback">
             <input type="text" ng-model="formData.word"
                    placeholder="{{ 'addWord.word'|translate  }}" typeahead-min-length="2" typeahead-wait-ms="100"
                    typeahead="word as word.$ for word in getWords($viewValue) | filter:{$:$viewValue}"
-                   typeahead-loading="loadingLocations" typeahead-template-url="listWord.html" class="form-control"
+                   typeahead-loading="loading" typeahead-template-url="listWord.html" class="form-control"
                    required auto-focus>
 
-            <span ng-show="loadingLocations" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
+            <span ng-show="loading" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
         </div>
         <div class="form-group" ng-show="submitCreate">
             {{ 'oops'|translate }}
@@ -23,8 +24,8 @@
             <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
         </div>
     </form>
-    </p>
-
+  </div>
+</div>
     <div class="row">
         <div ng-include="'blocs/countWord.html'"></div>
         <div class="col-md-6">
