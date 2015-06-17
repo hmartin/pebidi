@@ -19,8 +19,7 @@ class ApiWordController extends FOSRestController
      */
     public function postNewWordAction(Request $request)
     {
-
-        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find(base_convert($request->request->get('id'), 23, 10))) {
+        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->request->get('id'))) {
             $word = $request->request->get('word');
 
             if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word['w']))) {

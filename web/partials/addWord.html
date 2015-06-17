@@ -10,7 +10,7 @@
         <div class="form-group has-feedback">
             <input type="text" ng-model="formData.word"
                    placeholder="{{ 'addWord.word'|translate  }}" typeahead-min-length="2" typeahead-wait-ms="100"
-                   typeahead="word as word.$ for word in getWords($viewValue) | filter:{$:$viewValue}"
+                   typeahead="word as word.w for word in getWords($viewValue) | filter:{$:$viewValue}"
                    typeahead-loading="loading" typeahead-template-url="listWord.html" class="form-control"
                    required auto-focus>
 
@@ -18,7 +18,7 @@
         </div>
         <div class="form-group" ng-show="submitCreate">
             {{ 'oops'|translate }}
-            <a href="#/improve/{{ formData.word }}" class="btn btn-success input-lg">{{ 'improve.dictionary'|translate }}</a>
+            <a href="#/improve/{{ formData.word }}" class="btn btn-info input-lg">{{ 'improve.dictionary'|translate }}</a>
         </div>
         <div class="form-group" ng-show="!submitCreate">
             <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>

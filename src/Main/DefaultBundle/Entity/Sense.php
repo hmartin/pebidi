@@ -384,4 +384,27 @@ class Sense
     {
         return $this->word;
     }
+
+    /**
+     * Set local
+     *
+     * @param string $local
+     * @return Sense
+     */
+    public function setLocal($local)
+    {
+        $this->local = $local;
+
+        return $this;
+    }
+
+    /**
+     * Get local
+     *
+     * @return string 
+     */
+    public function getLocal()
+    {
+        return $this->local;
+    }
 }
