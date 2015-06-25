@@ -25,18 +25,18 @@ class ApiWordController extends FOSRestController
             if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word['w']))) {
                 $w = new e\Word();
                 $w->setWord($word['w']);
-                $w->setLang('en');
+                $w->setLocal('en');
                 $this->get('persist')->persistAndFlush($w);
             }
             if (!$d->getWords()->contains($w)) {
                 $d->addWord($w);
                 $this->get('persist')->persistAndFlush($d);
 
-                $t = new e\Translation();
+/*                $t = new e\Translation();
                 $t->setDictionary($d);
                 $t->setTranslation($request->request->get('translation'));
                 $t->setWord($w);
-                $this->get('persist')->persistAndFlush($t);
+                $this->get('persist')->persistAndFlush($t);*/
             }
 
             return array('dic' => $d->getJsonArray());

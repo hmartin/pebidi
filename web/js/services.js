@@ -168,6 +168,7 @@ app
             if (mainService.getUid()) {
                 data.uid = mainService.getUid();
             }
+            console.log(data);
             $http.post(API_URL + 'gets/dics.json', data).success(function (data) {
                 if (data.dic) {
                     $timeout(function () {
@@ -183,7 +184,8 @@ app
             var promise = $http
                 .get(API_URL + 'types/' + type + '/words/' + id + '/list.json', {params: {'uid': mainService.getUid()}})
                 .then(function (data) {
-                    return data.data.words;
+
+                    return data.data;
                 });
             return promise;
         }

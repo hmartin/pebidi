@@ -37,6 +37,14 @@ class Ww
      * @ORM\JoinTable(name="WwSenses")
      */
     protected $senses;
+
+    /**
+     * 0 => max
+     * @ORM\Column(type="integer")
+     */
+    protected $certified = 0;
+
+
     /**
      * Constructor
      */

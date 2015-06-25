@@ -26,9 +26,12 @@ app
     .controller('WordCtrl', function ($scope, $http, $location, $routeParams, $filter, pediService, mainService, wordService, dicService, localStorageService) {
         $scope.formData = {};
 
-        if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
+        if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             pediService.get($routeParams.id);
+        } else {
+            pediService.get($scope.dic.id);
         }
+
         dicService.loadDic();
 
         $scope.getWords = function (val) {

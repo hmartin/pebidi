@@ -72,7 +72,7 @@ class ApiUserController extends FOSRestController
 
                 if ($uid = $request->request->get('uid') and
                     $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($uid) and
-                    $d->getUser()->getId()  == $uid)
+                    $d->getUser()->getId() == $uid)
                 {
                     $d->setUserScore($this->getScore($u, $d));
                 }
