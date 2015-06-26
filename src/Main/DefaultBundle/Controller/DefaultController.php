@@ -134,6 +134,7 @@ SET FOREIGN_KEY_CHECKS=1;
      */
     public function testAction(Request $request)
     {
+      //http://www.wordreference.com/2012/sitemap.aspx?dict=enfr&page=1
         $html = \file_get_contents('http://www.dict66.com/translate/fr-en/car');
         //var_dump($html);echo '<br><br><br>';
         $crawler = new Crawler($html);
@@ -149,6 +150,44 @@ SET FOREIGN_KEY_CHECKS=1;
         });
         echo '<pre><br><br><br>';
         var_dump($a);
+        exit;
+    }
+  
+    /**
+     * @Route("/suckWordref", name="suckWordref")
+     * @Template()
+     */
+    public function suckWordrefAction(Request $request)
+    {
+      //
+        //$html = \file_get_contents('http://www.wordreference.com/2012/sitemap.aspx?dict=enfr&page=1');
+      $curl_handle= curl_init();
+\curl_setopt($curl_handle, CURLOPT_URL,'http://www.wordreference.com/2012/sitemap.aspx?dict=enfr&page=1');
+\curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+\curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+\curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+$html = \curl_exec($curl_handle);
+\curl_close($curl_handle);
+        //var_dump($html);echo '<br><br><br>';
+        $crawler = new Crawler($html);
+
+        $a = $crawler->filter('#contenttable')->links();
+        var_dump($a);
+      foreach($links as $l) {
+        
+        $subhtml = \file_get_contents($l->getUri());
+      }
+          
+          /*->each(function ($node, $i) {
+            $o = $node->filter('.result-item-source > .wordentry')->each(function ($node, $i) {
+                return $node->text();
+            });
+            $d = $node->filter('.result-item-target > .wordentry')->each(function ($node, $i) {
+                return $node->text();
+            });
+            return array('origin' => $o, 'dest' => $d);
+        });
+        echo '<pre><br><br><br>';*/
         exit;
     }
 

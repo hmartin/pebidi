@@ -130,7 +130,7 @@ app
         var dic = null;
         this.loadDic = function () {
             if (!this.dic) {
-                return $http.get('../dict/dict.json').then(function (res) {
+                return $http.get(URL + 'dict/dict.json').then(function (res) {
                     console.log('dicService.loadDic');
                     dic = res.data;
 

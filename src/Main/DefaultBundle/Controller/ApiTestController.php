@@ -13,13 +13,15 @@ use Main\DefaultBundle\Form as f;
 
 class ApiTestController extends FOSRestController
 {
+  
     /**
      * @Rest\View()
      */
     public function postCreateTestAction(Request $request)
     {
-        if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->request->get('uid')) and
-            $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find( base_convert($request->request->get('id'), 23, 10) ) and
+      var_dump($request->get('uid'));
+        if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->get('uid')) &&
+            $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->get('id')) &&
             $nb = $request->request->get('nbQuestion'))
         {
             $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest($nb, $d, $u);
