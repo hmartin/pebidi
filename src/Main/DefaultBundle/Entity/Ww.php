@@ -141,4 +141,28 @@ class Ww
     {
         return $this->senses;
     }
+
+    /**
+     * Set certified
+     *
+     * @param integer $certified
+     *
+     * @return Ww
+     */
+    public function setCertified($certified)
+    {
+        $this->certified = $certified;
+
+        return $this;
+    }
+
+    /**
+     * Get certified
+     *
+     * @return integer
+     */
+    public function getCertified()
+    {
+        return $this->certified;
+    }
 }

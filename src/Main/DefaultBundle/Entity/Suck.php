@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Point
+class Suck
 {
     /**
      * @ORM\Id
@@ -19,34 +19,26 @@ class Point
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Test", inversedBy="points")
-     * @ORM\JoinColumn(name="test_id", referencedColumnName="id")
-     */
-    protected $test;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Word", inversedBy="points",cascade={"persist"})
-     * @ORM\JoinColumn(name="word_id", referencedColumnName="id")
-     */
-    protected $word;
-
-    /**
      * @ORM\Column(type="integer")
      */
-    protected $point;
+    protected $page;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $url;
 
 
     /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created", type="datetime")
+     * @ORM\Column(type="text")
      */
-    private $created;
+    protected $hmtl;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -54,94 +46,74 @@ class Point
     }
 
     /**
-     * Set point
+     * Set page
      *
-     * @param integer $point
-     * @return Point
+     * @param integer $page
+     *
+     * @return Suck
      */
-    public function setPoint($point)
+    public function setPage($page)
     {
-        $this->point = $point;
+        $this->page = $page;
 
         return $this;
     }
 
     /**
-     * Get point
+     * Get page
      *
-     * @return integer 
+     * @return integer
      */
-    public function getPoint()
+    public function getPage()
     {
-        return $this->point;
+        return $this->page;
     }
 
     /**
-     * Set created
+     * Set url
      *
-     * @param \DateTime $created
-     * @return Point
+     * @param string $url
+     *
+     * @return Suck
      */
-    public function setCreated($created)
+    public function setUrl($url)
     {
-        $this->created = $created;
+        $this->url = $url;
 
         return $this;
     }
 
     /**
-     * Get created
+     * Get url
      *
-     * @return \DateTime 
+     * @return string
      */
-    public function getCreated()
+    public function getUrl()
     {
-        return $this->created;
+        return $this->url;
     }
 
     /**
-     * Set test
+     * Set hmtl
      *
-     * @param \Main\DefaultBundle\Entity\Test $test
-     * @return Point
+     * @param string $hmtl
+     *
+     * @return Suck
      */
-    public function setTest(\Main\DefaultBundle\Entity\Test $test = null)
+    public function setHmtl($hmtl)
     {
-        $this->test = $test;
+        $this->hmtl = $hmtl;
 
         return $this;
     }
 
     /**
-     * Get test
+     * Get hmtl
      *
-     * @return \Main\DefaultBundle\Entity\Test 
+     * @return string
      */
-    public function getTest()
+    public function getHmtl()
     {
-        return $this->test;
-    }
-
-    /**
-     * Set word
-     *
-     * @param \Main\DefaultBundle\Entity\Word $word
-     * @return Point
-     */
-    public function setWord(\Main\DefaultBundle\Entity\Word $word = null)
-    {
-        $this->word = $word;
-
-        return $this;
-    }
-
-    /**
-     * Get word
-     *
-     * @return \Main\DefaultBundle\Entity\Word 
-     */
-    public function getWord()
-    {
-        return $this->word;
+        return $this->hmtl;
     }
 }
