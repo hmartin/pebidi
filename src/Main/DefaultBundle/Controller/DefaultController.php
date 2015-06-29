@@ -159,19 +159,90 @@ class DefaultController extends Controller
      */
     public function suckWordrefAction(Request $request)
     {
-        //
+        $em = $this->getDoctrine()->getManager();
 
-$x = 1/0;
-        /*->each(function ($node, $i) {
-          $o = $node->filter('.result-item-source > .wordentry')->each(function ($node, $i) {
-              return $node->text();
-          });
-          $d = $node->filter('.result-item-target > .wordentry')->each(function ($node, $i) {
-              return $node->text();
-          });
-          return array('origin' => $o, 'dest' => $d);
-      });
-      echo '<pre><br><br><br>';*/
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("
+         SET FOREIGN_KEY_CHECKS=0;
+TRUNCATE `Word`;
+TRUNCATE `Ww`;
+TRUNCATE `Sense`;
+TRUNCATE `WwSenses`;
+         SET FOREIGN_KEY_CHECKS=1;");
+//        $statement->execute();
+
+        $ss = $this->getDoctrine()->getRepository('MainDefaultBundle:Suck')->findAll();
+        foreach ($ss as $k => $s) {
+            if ($k < 15) {
+                continue;
+            }
+            if ($k > 35) {
+                exit;
+            }
+            $newWord = false;
+            echo '<br><br>---------------         ' . $s->getUrl() . '    ------------------------------<br>';
+            $crawler = new Crawler($s->getHmtl());
+            $crawler = $crawler->filter('table.WRD > tr');
+            $class = '';
+            foreach ($crawler as $domElement) {
+                if ($domElement->getAttribute('class') == 'even' || $domElement->getAttribute('class') == 'odd') {
+                    $tr = new Crawler($domElement);
+                    if ($class != $domElement->getAttribute('class')) {
+                        $class = $domElement->getAttribute('class');
+
+                        if (!$newWord) {
+                            if (null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
+                                $w = new e\Word();
+                                $w->setLocal('en');
+                                $w->setWord(utf8_encode($newWord));
+                                $em->persist($w);
+
+                            } else {
+                                echo 'error' . $s->getUrl() . '<br>';
+                            }
+                        }
+
+                        if (null !== ($senseValue = $tr->filter('td')->eq(1)->html())) {
+                            $sense = new e\Sense();
+                            $sense->setSense(utf8_encode($senseValue));
+                            $sense->setLocal('en');
+                            $em->persist($sense);
+
+                        }
+
+                    }
+
+                    if (null !== ($trans = $tr->filter('td.ToWrd')->eq(0))) {
+                        $trans->filter('em')->each(function (Crawler $crawler) {
+                            foreach ($crawler as $node) {
+                                $node->parentNode->removeChild($node);
+                            }
+                        });
+                        $trans->filter('a')->each(function (Crawler $crawler) {
+                            foreach ($crawler as $node) {
+                                $node->parentNode->removeChild($node);
+                            }
+                        });
+                        if (count($trans)) {
+                            echo 'c:' . $class . '   t:' . $trans->html() . '<br>';
+                            $tw = new e\Word();
+                            $tw->setLocal('fr');
+                            $tw->setWord(utf8_decode($trans->html()));
+                            $em->persist($tw);
+                            $ww = new e\Ww();
+                            $ww->setWord1($w);
+                            $ww->setWord2($tw);
+                            $ww->addSense($sense);
+                            $em->persist($ww);
+                        }
+
+
+                    }
+                    $em->flush();
+                }
+            }
+        }
+        $x = 1/0;
         exit;
     }
 
