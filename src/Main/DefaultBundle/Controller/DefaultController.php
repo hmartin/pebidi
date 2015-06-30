@@ -263,9 +263,25 @@ TRUNCATE `WwSenses`;
             ->where('ww1.id != word.id AND ww2.id != word.id')
             ->andWhere("word.lang = 'en' AND (www1.lang = 'fr' OR www2.lang =  'fr')")
             ->groupBy('word.word')//->setMaxResults(5)
+          
         ;
+      
+        $query ='SELECT  w.id, w.word, ww.word2_id, SUM(p.point) AS word_point FROM Dictionary d
+                LEFT JOIN DictionariesWord dw ON d.id = dw.dictionary_id
+                LEFT JOIN Word w ON w.id = dw.word_id
+               LEFT JOIN Ww ww ON ww.word1_id = w.id OR ww.word2_id = w.id
+                LEFT JOIN Point p ON w.id = p.word_id
+               WHERE d.id = '.$id .' GROUP BY w.id';
+        ;
+        $em = $this->getDoctrine();
+        $connection = $em->getConnection();
+        $stmt = $connection->prepare($query);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+      
         $results = $qb->getQuery()->getResult();
-        $file = fopen(__DIR__ . '/../../../../web/dict/dict.json', "w");
+        $file = fopen(__DIR__ . '/../../../../web/dict/dictNew.json', "w");
         echo fwrite($file, json_encode($results));
         fclose($file);
         //exit;
