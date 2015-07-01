@@ -160,7 +160,7 @@ class DefaultController extends Controller
     public function suckWordrefAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
+var_dump(set_time_limit ( 60*60));
         $connection = $em->getConnection();
         $statement = $connection->prepare("
          SET FOREIGN_KEY_CHECKS=0;
@@ -173,10 +173,12 @@ TRUNCATE `WwSenses`;
 
         $ss = $this->getDoctrine()->getRepository('MainDefaultBundle:Suck')->findAll();
         foreach ($ss as $k => $s) {
-            if ($k < 15) {
+            if ($k < 2998) {
                 continue;
             }
-            if ($k > 35) {
+            if ($k > 55000) {
+                $em->flush();
+                $x = 1 / 0;
                 exit;
             }
             $newWord = false;
@@ -184,14 +186,21 @@ TRUNCATE `WwSenses`;
             $crawler = new Crawler($s->getHmtl());
             $crawler = $crawler->filter('table.WRD > tr');
             $class = '';
+            $k = 0;
             foreach ($crawler as $domElement) {
                 if ($domElement->getAttribute('class') == 'even' || $domElement->getAttribute('class') == 'odd') {
                     $tr = new Crawler($domElement);
                     if ($class != $domElement->getAttribute('class')) {
+                        $k = $k + 0.1;
+                        $priority = 0;
                         $class = $domElement->getAttribute('class');
 
                         if (!$newWord) {
                             if (null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
+                                if ($this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => utf8_encode($newWord), 'local' => 'en'))) {
+                                    $w = null;
+                                    continue;
+                                }
                                 $w = new e\Word();
                                 $w->setLocal('en');
                                 $w->setWord(utf8_encode($newWord));
@@ -202,17 +211,18 @@ TRUNCATE `WwSenses`;
                             }
                         }
 
-                        if (null !== ($senseValue = $tr->filter('td')->eq(1)->html())) {
+                        if ((null !== ($senseValue = $tr->filter('td')->eq(1))) && count($senseValue) > 0) {
+
                             $sense = new e\Sense();
-                            $sense->setSense(utf8_encode($senseValue));
+                            $sense->setSense(utf8_encode($senseValue->html()));
                             $sense->setLocal('en');
+
                             $em->persist($sense);
 
                         }
 
                     }
-
-                    if (null !== ($trans = $tr->filter('td.ToWrd')->eq(0))) {
+                    if (!is_null($w) && null !== ($trans = $tr->filter('td.ToWrd')->eq(0))) {
                         $trans->filter('em')->each(function (Crawler $crawler) {
                             foreach ($crawler as $node) {
                                 $node->parentNode->removeChild($node);
@@ -224,7 +234,9 @@ TRUNCATE `WwSenses`;
                             }
                         });
                         if (count($trans)) {
-                            echo 'c:' . $class . '   t:' . $trans->html() . '<br>';
+                            $priority = $priority + 1;
+                            $prior = $priority + $k;
+                            echo 'c:' . $class . '   t:' . $trans->html() . ' $prior:' . $prior . '<br>';
                             $tw = new e\Word();
                             $tw->setLocal('fr');
                             $tw->setWord(utf8_decode($trans->html()));
@@ -233,16 +245,18 @@ TRUNCATE `WwSenses`;
                             $ww->setWord1($w);
                             $ww->setWord2($tw);
                             $ww->addSense($sense);
+                            $ww->setPriority($prior);
+
                             $em->persist($ww);
                         }
 
 
                     }
-                    $em->flush();
                 }
             }
         }
-        $x = 1/0;
+        $em->flush();
+        $x = 1 / 0;
         exit;
     }
 
@@ -253,34 +267,17 @@ TRUNCATE `WwSenses`;
     public function generateJsonAction()
     {
 
-        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('word');
-        $qb
-            ->select('word.word as w, GROUP_CONCAT( DISTINCT IF(www1.word IS NULL, www2.word, www1.word)) as t')
-            ->innerJoin('word.wordwords1', 'ww1')
-            ->innerJoin('word.wordwords2', 'ww2')
-            ->innerJoin('ww1.word2', 'www1')
-            ->innerJoin('ww2.word1', 'www2')
-            ->where('ww1.id != word.id AND ww2.id != word.id')
-            ->andWhere("word.lang = 'en' AND (www1.lang = 'fr' OR www2.lang =  'fr')")
-            ->groupBy('word.word')//->setMaxResults(5)
-          
-        ;
-      
-        $query ='SELECT  w.id, w.word, ww.word2_id, SUM(p.point) AS word_point FROM Dictionary d
-                LEFT JOIN DictionariesWord dw ON d.id = dw.dictionary_id
-                LEFT JOIN Word w ON w.id = dw.word_id
-               LEFT JOIN Ww ww ON ww.word1_id = w.id OR ww.word2_id = w.id
-                LEFT JOIN Point p ON w.id = p.word_id
-               WHERE d.id = '.$id .' GROUP BY w.id';
-        ;
+
+        $query = 'SELECT  w.id, w.word as w, w2.word as t FROM Word w
+               JOIN Ww ww ON ww.word1_id = w.id
+               JOIN Word w2 ON ww.word2_id = w2.id
+               WHERE w.local = "en" GROUP BY w.id ORDER BY ww.priority ';
         $em = $this->getDoctrine();
         $connection = $em->getConnection();
         $stmt = $connection->prepare($query);
         $stmt->execute();
 
         $results = $stmt->fetchAll();
-      
-        $results = $qb->getQuery()->getResult();
         $file = fopen(__DIR__ . '/../../../../web/dict/dictNew.json', "w");
         echo fwrite($file, json_encode($results));
         fclose($file);

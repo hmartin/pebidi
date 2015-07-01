@@ -100,4 +100,28 @@ class Sense
         }
         return $this->sense;
     }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     *
+     * @return Sense
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
 }

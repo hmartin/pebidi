@@ -39,10 +39,14 @@ class Ww
     protected $senses;
 
     /**
-     * 0 => max
      * @ORM\Column(type="integer")
      */
     protected $certified = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $priority;
 
 
     /**
@@ -164,5 +168,29 @@ class Ww
     public function getCertified()
     {
         return $this->certified;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     *
+     * @return Ww
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 }
