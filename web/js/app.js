@@ -63,6 +63,10 @@ app.config(['$routeProvider',
             });
     }]);
 
+function log(i) {
+    console.log(i);
+}
+
 app.config(function ($translateProvider) {
     $translateProvider.translations('en', {
         'dictionaryOf': 'It\'s the dictionary of:',

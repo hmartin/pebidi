@@ -2,7 +2,7 @@
 
 namespace Api\Bundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Main\DefaultBundle\Entity\Test;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -15,27 +15,28 @@ class TestController extends FOSRestController implements ClassResourceInterface
      */
     public function newAction(Request $request)
     {
-        echo $request->get('uid').'<br>';
-        echo $request->get('id').'<br>';
-        $em = $this->getDoctrine();
-        if ((null !== ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->get('uid')))) &&
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->get('type') == 'new' && (null !== ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->get('uid')))) &&
             (null !== ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->get('id')))) &&
-            $nb = $request->request->get('nbQuestion'))
-        {
-            echo 'ii';
-            echo $request->get('id');
+            $nb = $request->get('nbQuestion')
+        ) {
             $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest($nb, $d, $u);
-            shuffle($results);
-
-            $t = new e\Test();
-            $t->setDictionary($d);
-            $t->setNbQuestion($nb);
-            $t->setUser($u);
-            $em->persist($t);
-            $em->flush();
-
-            return array('id' => $t->getId(), 'words' => $results);
+        } elseif ($request->get('type') == 'doItAgain' && (null !== ($t = $this->getDoctrine()->getRepository('MainDefaultBundle:Test')->find($request->get('id'))))) {
+            $d = $t->getDictionary();
+            $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForSameTest($t);
+            $nb = count($results);
+            $u = $t->getUser();
         }
-        throw new \Exception('Something went wrong!');
+        shuffle($results);
+
+        $t = new Test();
+        $t->setDictionary($d);
+        $t->setNbQuestion($nb);
+        $t->setUser($u);
+        $em->persist($t);
+        $em->flush();
+
+        return array('id' => $t->getId(), 'words' => $results);
     }
 }

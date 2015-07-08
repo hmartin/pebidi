@@ -2,6 +2,10 @@ api:
     resource: "@ApiBundle/Resources/config/routing.yml"
     prefix:   /
 
+apiDefault:
+    type:     rest
+    resource: Main\DefaultBundle\Controller\ApiUserController
+
 apiWord:
     type:     rest
     resource: Main\DefaultBundle\Controller\ApiWordController

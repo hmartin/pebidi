@@ -1,6 +1,7 @@
 app
     .filter('brDef', function () {
         return function (input) {
+            input = input || '';
             return input.replace(/,/g, '<br/>');
         };
     })

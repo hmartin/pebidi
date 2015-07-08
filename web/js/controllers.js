@@ -83,6 +83,7 @@ app
         $scope.progress = 0;
 
         $scope.words = testService.words;
+        log(testService.words);
 
         $scope.word = $scope.words[$scope.i];
 

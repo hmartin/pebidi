@@ -18,23 +18,43 @@ class WordRepository extends EntityRepository
             'did' => $d,
             'uid' => $u,
         );
-        $qb = $this->createQueryBuilder('w')
-            ->select('w.id, w.word, translation.word as t')
+        $qb = $this->createQueryBuilder('word')
+            ->select('word.id, word.word as w, translation.word as t')
             ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised')
             ->innerJoin('\Main\DefaultBundle\Entity\Ww', 'ww',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
-                'w.id =  ww.word1')
+                'word.id =  ww.word1')
             ->innerJoin('\Main\DefaultBundle\Entity\Word', 'translation',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
                 'ww.word2 =  translation.id')
-            ->innerJoin('w.dictionaries', 'd')
-            ->leftJoin('w.points','p')
+            ->innerJoin('word.dictionaries', 'd')
+            ->leftJoin('word.points','p')
             ->where('d.id = :did')
             ->andWhere('d.user = :uid')
-            ->groupBy('w.id')
+            ->groupBy('word.id')
             ->setParameters($a)
             ->setMaxResults($nb)
             ->orderBy('stat_sum_realised', 'ASC')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+    public function getWordsForSameTest($t) {
+        $a =  array(
+            'tid' => $t
+        );
+        $qb = $this->createQueryBuilder('word')
+            ->select('word.id, word.word as w, translation.word as t')
+            ->innerJoin('\Main\DefaultBundle\Entity\Ww', 'ww',
+                \Doctrine\ORM\Query\Expr\Join::WITH,
+                'word.id =  ww.word1')
+            ->innerJoin('\Main\DefaultBundle\Entity\Word', 'translation',
+                \Doctrine\ORM\Query\Expr\Join::WITH,
+                'ww.word2 =  translation.id')
+            ->innerJoin('word.points','p')
+            ->where('p.test = :tid')
+            ->groupBy('word.id')
+            ->setParameters($a)
         ;
 
         return $qb->getQuery()->getResult();

@@ -81,7 +81,6 @@ class Dictionary
     public function __construct()
     {
         $this->words = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -198,39 +197,6 @@ class Dictionary
     public function getWords()
     {
         return $this->words;
-    }
-
-    /**
-     * Add translations
-     *
-     * @param \Main\DefaultBundle\Entity\Translation $translations
-     * @return Dictionary
-     */
-    public function addTranslation(\Main\DefaultBundle\Entity\Translation $translations)
-    {
-        $this->translations[] = $translations;
-
-        return $this;
-    }
-
-    /**
-     * Remove translations
-     *
-     * @param \Main\DefaultBundle\Entity\Translation $translations
-     */
-    public function removeTranslation(\Main\DefaultBundle\Entity\Translation $translations)
-    {
-        $this->translations->removeElement($translations);
-    }
-
-    /**
-     * Get translations
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTranslations()
-    {
-        return $this->translations;
     }
 
     /**

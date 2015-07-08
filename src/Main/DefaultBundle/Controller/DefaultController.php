@@ -33,6 +33,7 @@ class DefaultController extends Controller
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
 
         $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2,1,1);
+        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForSameTest(1);
 /*
         SET FOREIGN_KEY_CHECKS=0;
         TRUNCATE Word;
