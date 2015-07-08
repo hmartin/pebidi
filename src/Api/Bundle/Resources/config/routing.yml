@@ -1,0 +1,4 @@
+test:
+    type:     rest
+    resource: Api\Bundle\Controller\TestController
+ 

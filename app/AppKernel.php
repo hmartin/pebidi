@@ -18,12 +18,13 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new FOS\RestBundle\FOSRestBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Main\DefaultBundle\MainDefaultBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+            new Api\Bundle\ApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'api'))) {

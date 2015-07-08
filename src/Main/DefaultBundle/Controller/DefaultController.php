@@ -33,55 +33,11 @@ class DefaultController extends Controller
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
 
         $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2,1,1);
-        //$t = $this->getDoctrine()->getRepository('MainDefaultBundle:test')->find(1);
-        //$test = $this->getDoctrine()->getRepository('MainDefaultBundle:test');
-        //$p = $this->getDoctrine()->getRepository('MainDefaultBundle:point')->find(1);
-        //$a = array('uid' => $u->getId(), 'did' => $d->getId());
-        //$test->getAvgScore($a);
-
-        //$results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(5, $d, $u);
-        /*        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('w')
-                    ->leftJoin('w.dictionaries','d')
-                    ->leftJoin('w.groupsWords','gw')
-                    ->where('d.id  = :did')
-                    ->andWhere('gw.id  = :gwid')
-                    ->setParameter('gwid', 1)
-                    ->setParameter('did', 1)
-                ;
-
-                $results = $qb->getQuery()->getResult();
-                $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d')
-                    ->leftJoin('d.words', 'w')
-                    ->leftJoin('d.translations', 't', 'WITH', 't.word = w.id')
-                    ->where('d.id = :id')
-                    ->setParameter(':id', 1);*/
-
-        /*        $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d');
-
-                $qb
-                    ->select('w.id, w.word, t.translation')
-                    ->addSelect('SUM(p.point)/COUNT(p.id) AS global')
-                    ->addSelect('GROUP_CONCAT(DISTINCT def.definition) AS definitions')
-                    ->innerJoin('d.words', 'w')
-                    ->leftJoin('w.translations', 't')
-                    ->leftJoin('w.definitions', 'def')
-                    ->leftJoin('w.points', 'p')
-                    ->where('d.id = :id');
-                    $qb
-                        ->addSelect('SUM(IF(test.id IS NULL, p.point, 0))/SUM(IF(test.id IS NULL, 1, 0)) AS stat_sum_realised')
-                        ->leftJoin('p.test', 'test', 'WITH', 'test.user = :uid')
-                        ->setParameter(':uid', 1);
-
-
-                $qb
-                    ->setParameter(':id', 1)
-                    ->groupBy('w.word');
-
+/*
         SET FOREIGN_KEY_CHECKS=0;
         TRUNCATE Word;
         TRUNCATE WordWord;
         SET FOREIGN_KEY_CHECKS=1;
-
 
                 $f = file_get_contents('http://persodic-local.com/dict4.json');
                 $a = json_decode($f);
@@ -120,11 +76,13 @@ class DefaultController extends Controller
                     ->innerJoin('ww1.word2', 'www1')
                     ->innerJoin('ww2.word1', 'www2')
                     ->where('ww1.id != w.id AND ww2.id != w.id');
-                */
-        /*        $results = $qb->getQuery()->getResult();
+                
+                $results = $qb->getQuery()->getResult();
                 foreach ($results as $r) {
                     var_dump($r);
-                }*/
+                }
+      
+*/
         return $this->render('MainDefaultBundle:Default:index.html.twig', array());
     }
 
