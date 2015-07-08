@@ -32,7 +32,7 @@ class DefaultController extends Controller
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
 
-        //$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find(1);
+        $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2,1,1);
         //$t = $this->getDoctrine()->getRepository('MainDefaultBundle:test')->find(1);
         //$test = $this->getDoctrine()->getRepository('MainDefaultBundle:test');
         //$p = $this->getDoctrine()->getRepository('MainDefaultBundle:point')->find(1);

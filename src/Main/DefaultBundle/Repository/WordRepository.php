@@ -15,15 +15,18 @@ class WordRepository extends EntityRepository
 
     public function getWordsForTest($nb, $d, $u) {
         $a =  array(
-            'did' => $d->getId(),
+            'did' => $d,
             'uid' => $u,
         );
         $qb = $this->createQueryBuilder('w')
-            ->select('w.id, w.word, t.translation')
+            ->select('w.id, w.word, translation.word as t')
             ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised')
-            ->addSelect('GROUP_CONCAT(DISTINCT def.definition) AS definitions')
-            ->leftJoin('w.translations', 't')
-            ->leftJoin('w.definitions', 'def')
+            ->innerJoin('\Main\DefaultBundle\Entity\Ww', 'ww',
+                \Doctrine\ORM\Query\Expr\Join::WITH,
+                'w.id =  ww.word1')
+            ->innerJoin('\Main\DefaultBundle\Entity\Word', 'translation',
+                \Doctrine\ORM\Query\Expr\Join::WITH,
+                'ww.word2 =  translation.id')
             ->innerJoin('w.dictionaries', 'd')
             ->leftJoin('w.points','p')
             ->where('d.id = :did')

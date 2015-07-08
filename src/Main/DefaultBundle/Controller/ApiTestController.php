@@ -19,11 +19,15 @@ class ApiTestController extends FOSRestController
      */
     public function postCreateTestAction(Request $request)
     {
-      var_dump($request->get('uid'));
-        if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->get('uid')) &&
-            $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->get('id')) &&
+        echo $request->get('uid').'<br>';
+        echo $request->get('id').'<br>';
+        $em = $this->getDoctrine();
+        if ((null !== ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->get('uid')))) &&
+            (null !== ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->get('id')))) &&
             $nb = $request->request->get('nbQuestion'))
         {
+            echo 'ii';
+            echo $request->get('id');
             $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest($nb, $d, $u);
             shuffle($results);
 
@@ -31,7 +35,8 @@ class ApiTestController extends FOSRestController
             $t->setDictionary($d);
             $t->setNbQuestion($nb);
             $t->setUser($u);
-            $this->get('persist')->persistAndFlush($t);
+            $em->persist($t);
+            $em->flush();
 
             return array('id' => $t->getId(), 'words' => $results);
         }
