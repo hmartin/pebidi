@@ -13,15 +13,13 @@ class TestController extends FOSRestController implements ClassResourceInterface
     /**
      * @Rest\View()
      */
-    public function getAction(Request $request, Test $test) 
+    public function getAction(Request $request, Test $t) 
     {
-        $t = $this->getDoctrine()->getRepository('MainDefaultBundle:Test')->find($id)))) {
         $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForSameTest($t);
         
         shuffle($results);
 
-        return array('id' => $t->getId(), 'words' => $results);
-      
+        return array('id' => $t->getId(), 'words' => $results);      
     }
   
     /**

@@ -2,3 +2,6 @@ test:
     type:     rest
     resource: Api\Bundle\Controller\TestController
  
+result:
+    type:     rest
+    resource: Api\Bundle\Controller\ResultController
