@@ -19,31 +19,21 @@ class Test
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="tests",cascade={"persist"})
-     * @ORM\JoinColumn(name="dictionary_id", referencedColumnName="id")
-     */
-    protected $dictionary;
+     * @ORM\ManyToMany(targetEntity="Word", inversedBy="testsWords")
+     * @ORM\JoinTable(name="TestWord")
+     **/
+    private $words;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="tests")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $user;
+    protected $creator;
 
     /**
-     * @ORM\OneToMany(targetEntity="Point", mappedBy="test")
+     * @ORM\OneToMany(targetEntity="Result", mappedBy="test")
      */
-    protected $points;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    protected $score;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $nbQuestion;
+    protected $results;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -51,13 +41,12 @@ class Test
      */
     private $created;
 
-//type, score, nbQuestion
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->points = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->words = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -94,127 +83,91 @@ class Test
     }
 
     /**
-     * Set dictionary
+     * Add words
      *
-     * @param \Main\DefaultBundle\Entity\Dictionary $dictionary
+     * @param \Main\DefaultBundle\Entity\Word $words
      * @return Test
      */
-    public function setDictionary(\Main\DefaultBundle\Entity\Dictionary $dictionary = null)
+    public function addWord(\Main\DefaultBundle\Entity\Word $words)
     {
-        $this->dictionary = $dictionary;
+        $this->words[] = $words;
 
         return $this;
     }
 
     /**
-     * Get dictionary
+     * Remove words
      *
-     * @return \Main\DefaultBundle\Entity\Dictionary 
+     * @param \Main\DefaultBundle\Entity\Word $words
      */
-    public function getDictionary()
+    public function removeWord(\Main\DefaultBundle\Entity\Word $words)
     {
-        return $this->dictionary;
+        $this->words->removeElement($words);
     }
 
     /**
-     * Add points
-     *
-     * @param \Main\DefaultBundle\Entity\Point $points
-     * @return Test
-     */
-    public function addPoint(\Main\DefaultBundle\Entity\Point $points)
-    {
-        $this->points[] = $points;
-
-        return $this;
-    }
-
-    /**
-     * Remove points
-     *
-     * @param \Main\DefaultBundle\Entity\Point $points
-     */
-    public function removePoint(\Main\DefaultBundle\Entity\Point $points)
-    {
-        $this->points->removeElement($points);
-    }
-
-    /**
-     * Get points
+     * Get words
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPoints()
+    public function getWords()
     {
-        return $this->points;
+        return $this->words;
     }
 
     /**
-     * Set user
+     * Set creator
      *
-     * @param \Main\DefaultBundle\Entity\User $user
+     * @param \Main\DefaultBundle\Entity\User $creator
      * @return Test
      */
-    public function setUser(\Main\DefaultBundle\Entity\User $user = null)
+    public function setCreator(\Main\DefaultBundle\Entity\User $creator = null)
     {
-        $this->user = $user;
+        $this->creator = $creator;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get creator
      *
      * @return \Main\DefaultBundle\Entity\User 
      */
-    public function getUser()
+    public function getCreator()
     {
-        return $this->user;
+        return $this->creator;
     }
 
     /**
-     * Set score
+     * Add results
      *
-     * @param integer $score
+     * @param \Main\DefaultBundle\Entity\Result $results
      * @return Test
      */
-    public function setScore($score)
+    public function addResult(\Main\DefaultBundle\Entity\Result $results)
     {
-        $this->score = $score;
+        $this->results[] = $results;
 
         return $this;
     }
 
     /**
-     * Get score
+     * Remove results
      *
-     * @return integer 
+     * @param \Main\DefaultBundle\Entity\Result $results
      */
-    public function getScore()
+    public function removeResult(\Main\DefaultBundle\Entity\Result $results)
     {
-        return $this->score;
+        $this->results->removeElement($results);
     }
 
     /**
-     * Set nbQuestion
+     * Get results
      *
-     * @param integer $nbQuestion
-     * @return Test
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setNbQuestion($nbQuestion)
+    public function getResults()
     {
-        $this->nbQuestion = $nbQuestion;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQuestion
-     *
-     * @return integer 
-     */
-    public function getNbQuestion()
-    {
-        return $this->nbQuestion;
+        return $this->results;
     }
 }

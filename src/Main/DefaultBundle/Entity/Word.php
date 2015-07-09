@@ -44,6 +44,11 @@ class Word
     private $groupsWords;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Test", mappedBy="words")
+     **/
+    private $testsWords;
+
+    /**
      * @ORM\OneToMany(targetEntity="Point", mappedBy="word",cascade={"persist"})
      */
     protected $points;
@@ -266,5 +271,38 @@ class Word
     public function getPoints()
     {
         return $this->points;
+    }
+
+    /**
+     * Add testsWords
+     *
+     * @param \Main\DefaultBundle\Entity\Test $testsWords
+     * @return Word
+     */
+    public function addTestsWord(\Main\DefaultBundle\Entity\Test $testsWords)
+    {
+        $this->testsWords[] = $testsWords;
+
+        return $this;
+    }
+
+    /**
+     * Remove testsWords
+     *
+     * @param \Main\DefaultBundle\Entity\Test $testsWords
+     */
+    public function removeTestsWord(\Main\DefaultBundle\Entity\Test $testsWords)
+    {
+        $this->testsWords->removeElement($testsWords);
+    }
+
+    /**
+     * Get testsWords
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTestsWords()
+    {
+        return $this->testsWords;
     }
 }

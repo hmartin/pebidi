@@ -13,7 +13,21 @@ class TestController extends FOSRestController implements ClassResourceInterface
     /**
      * @Rest\View()
      */
-    public function newAction(Request $request)
+    public function getAction(Request $request, Test $test) 
+    {
+        $t = $this->getDoctrine()->getRepository('MainDefaultBundle:Test')->find($id)))) {
+        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForSameTest($t);
+        
+        shuffle($results);
+
+        return array('id' => $t->getId(), 'words' => $results);
+      
+    }
+  
+    /**
+     * @Rest\View()
+     */
+    public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -22,18 +36,12 @@ class TestController extends FOSRestController implements ClassResourceInterface
             $nb = $request->get('nbQuestion')
         ) {
             $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest($nb, $d, $u);
-        } elseif ($request->get('type') == 'doItAgain' && (null !== ($t = $this->getDoctrine()->getRepository('MainDefaultBundle:Test')->find($request->get('id'))))) {
-            $d = $t->getDictionary();
-            $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForSameTest($t);
-            $nb = count($results);
-            $u = $t->getUser();
         }
         shuffle($results);
 
         $t = new Test();
-        $t->setDictionary($d);
-        $t->setNbQuestion($nb);
-        $t->setUser($u);
+        $t->setCreator($u);
+        
         $em->persist($t);
         $em->flush();
 

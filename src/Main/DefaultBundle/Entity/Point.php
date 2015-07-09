@@ -19,10 +19,10 @@ class Point
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Test", inversedBy="points")
-     * @ORM\JoinColumn(name="test_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Result", inversedBy="points")
+     * @ORM\JoinColumn(name="result_id", referencedColumnName="id")
      */
-    protected $test;
+    protected $result;
 
     /**
      * @ORM\ManyToOne(targetEntity="Word", inversedBy="points",cascade={"persist"})
@@ -35,13 +35,11 @@ class Point
      */
     protected $point;
 
-
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
-
 
     /**
      * Get id
@@ -100,26 +98,26 @@ class Point
     }
 
     /**
-     * Set test
+     * Set result
      *
-     * @param \Main\DefaultBundle\Entity\Test $test
+     * @param \Main\DefaultBundle\Entity\Result $result
      * @return Point
      */
-    public function setTest(\Main\DefaultBundle\Entity\Test $test = null)
+    public function setResult(\Main\DefaultBundle\Entity\Result $result = null)
     {
-        $this->test = $test;
+        $this->result = $result;
 
         return $this;
     }
 
     /**
-     * Get test
+     * Get result
      *
-     * @return \Main\DefaultBundle\Entity\Test 
+     * @return \Main\DefaultBundle\Entity\Result 
      */
-    public function getTest()
+    public function getResult()
     {
-        return $this->test;
+        return $this->result;
     }
 
     /**
