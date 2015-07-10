@@ -250,13 +250,8 @@ class DefaultController extends Controller
     {
         /*
          SET FOREIGN_KEY_CHECKS=0;
-TRUNCATE `DictionariesWord`;
-TRUNCATE `Dictionary`;
-TRUNCATE `DictionaryScore`;
-TRUNCATE `fos_user`;
-TRUNCATE `Point`;
-TRUNCATE `Test`;
-TRUNCATE `Translation`;
+        TRUNCATE `DictionariesWord`, `Dictionary`, `DictionaryScore`, `fos_user`, `Test`, `TestWord`;
+         SET FOREIGN_KEY_CHECKS=1;
         */
     }
 

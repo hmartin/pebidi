@@ -49,12 +49,12 @@ class Dictionary
      * @ORM\Column(type="float")
      */
     protected $score = 0;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     protected $private = 0;
-    
+
     protected $userScore = 0;
 
     /**
@@ -63,13 +63,15 @@ class Dictionary
      */
     private $created;
 
-    public function getJsonArray() {
-        return array( 'id' => $this->getConvertId(),
-        'countWord' => count($this->getWords()),
-        'bitEmail' => $this->getUser()->getBitEmail(),
-        'score' => $this->getUserScore()
-                    );
+    public function getJsonArray()
+    {
+        return array('id' => $this->getConvertId(),
+            'countWord' => count($this->getWords()),
+            'bitEmail' => $this->getUser()->getBitEmail(),
+            'score' => $this->getUserScore()
+        );
     }
+
     /**
      * Constructor
      */
@@ -81,14 +83,15 @@ class Dictionary
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-    
-    public function getConvertId() {
+
+    public function getConvertId()
+    {
         return base_convert($this->id, 10, 23);
     }
 
