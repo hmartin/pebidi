@@ -17,37 +17,6 @@ class ApiWordController extends FOSRestController
     /**
      * @Rest\View()
      */
-    public function postNewWordAction(Request $request)
-    {
-        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->request->get('id'))) {
-            $word = $request->request->get('word');
-
-            if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word['w']))) {
-                $w = new e\Word();
-                $w->setWord($word['w']);
-                $w->setLocal('en');
-                $this->get('persist')->persistAndFlush($w);
-            }
-            if (!$d->getWords()->contains($w)) {
-                $d->addWord($w);
-                $this->get('persist')->persistAndFlush($d);
-
-/*                $t = new e\Translation();
-                $t->setDictionary($d);
-                $t->setTranslation($request->request->get('translation'));
-                $t->setWord($w);
-                $this->get('persist')->persistAndFlush($t);*/
-            }
-
-            return array('dic' => $d->getJsonArray());
-        }
-        throw new \Exception('Something went wrong!');
-    }
-
-
-    /**
-     * @Rest\View()
-     */
     public function getAutoCompleteWordsAction(Request $request)
     {
         $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->createQueryBuilder('w')
@@ -84,18 +53,4 @@ class ApiWordController extends FOSRestController
         return $a;
     }
 
-    /**
-     * @Rest\View()
-     */
-    public function postDeleteWordAction(Request $request)
-    {
-        if ($w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find($request->request->get('id')) and
-            $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->request->get('did'))
-        ) {
-            $d->getWords()->removeElement($w);
-            $this->get('persist')->persistAndFlush($d);
-            return array('dic' => $d->getJsonArray());
-        }
-        throw new \Exception('postDeleteWordAction went wrong!');
-    }
 }

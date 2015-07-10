@@ -31,6 +31,16 @@ class Dictionary
     private $words;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $description;
+
+    /**
      * @ORM\OneToMany(targetEntity="DictionaryScore", mappedBy="dictionary")
      */
     protected $dictionaryScores;

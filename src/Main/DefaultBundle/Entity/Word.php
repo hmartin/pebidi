@@ -39,11 +39,6 @@ class Word
     private $dictionaries;
 
     /**
-     * @ORM\ManyToMany(targetEntity="GroupWord", mappedBy="words")
-     **/
-    private $groupsWords;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Test", mappedBy="words")
      **/
     private $testsWords;

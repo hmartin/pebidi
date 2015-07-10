@@ -5,3 +5,11 @@ test:
 result:
     type:     rest
     resource: Api\Bundle\Controller\ResultController
+ 
+word:
+    type:     rest
+    resource: Api\Bundle\Controller\WordController
+ 
+dictionary:
+    type:     rest
+    resource: Api\Bundle\Controller\DictionaryController
