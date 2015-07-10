@@ -19,7 +19,7 @@ class WordRepository extends EntityRepository
             'uid' => $u,
         );
         $qb = $this->createQueryBuilder('word')
-            ->select('word.id, word.word as w, translation.word as t')
+            ->select('word as object, word.id, word.word as w, translation.word as t')
             ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised')
             ->innerJoin('\Main\DefaultBundle\Entity\Ww', 'ww',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
@@ -43,20 +43,25 @@ class WordRepository extends EntityRepository
         $a =  array(
             'tid' => $t
         );
-        $qb = $this->createQueryBuilder('word')
+        $qb = $this->initQueryBuilder()
+            ->innerJoin('word.testsWords','test')
+            ->where('test.id = :tid')
+            ->groupBy('word.id')
+            ->setParameters($a)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    private function initQueryBuilder()
+    {
+        return $this->createQueryBuilder('word')
             ->select('word.id, word.word as w, translation.word as t')
             ->innerJoin('\Main\DefaultBundle\Entity\Ww', 'ww',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
                 'word.id =  ww.word1')
             ->innerJoin('\Main\DefaultBundle\Entity\Word', 'translation',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
-                'ww.word2 =  translation.id')
-            ->innerJoin('word.points','p')
-            ->where('p.test = :tid')
-            ->groupBy('word.id')
-            ->setParameters($a)
-        ;
-
-        return $qb->getQuery()->getResult();
+                'ww.word2 =  translation.id');
     }
 }

@@ -10,6 +10,7 @@ use Main\DefaultBundle\Entity as e;
 use Main\DefaultBundle\Form as f;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
+use Main\DefaultBundle\Entity\Test;
 
 class DefaultController extends Controller
 {
@@ -32,7 +33,25 @@ class DefaultController extends Controller
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
 
-        $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2, 1, 1);
+        $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2, 2,2);
+        $em = $this->getDoctrine()->getManager();
+
+        if ((null !== ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find(2))) &&
+            (null !== ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find(2))) &&
+            $nb = 2
+        ) {
+            $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest($nb, $d, $u);
+        }
+        dump($results);
+        shuffle($results);
+
+        $t = new Test();
+        $t->setCreator($u);
+        foreach($results as $w) {
+            $t->addWord($w['object']);
+        }
+        $em->persist($t);
+        $em->flush();
         $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForSameTest(1);
         /*
                 SET FOREIGN_KEY_CHECKS=0;

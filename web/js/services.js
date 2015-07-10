@@ -57,13 +57,11 @@ app
         this.createTest = function (did, question) {
             this.nbQuestion = question;
             this.did = did;
-            $http.get(API_URL + 'tests/new.json', {
-                params: {
+            $http.post(API_URL + 'tests.json',  {
                     uid: mainService.getUid(),
                     id: did,
                     nbQuestion: question,
                     type: 'new'
-                }
             })
                 .success(function (data) {
                     this.words = data.words;
@@ -85,7 +83,7 @@ app
         }
 
         this.doItAgain = function () {
-            $http.get(API_URL + 'tests/new.json', { params: {id: this.id, type: 'doItAgain'}})
+            $http.get(API_URL + 'tests/'+this.id+'.json')
                 .success(function (data) {
                     $location.path('/questions');
                 }.bind(this));

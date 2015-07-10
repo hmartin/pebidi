@@ -29,7 +29,7 @@ class TestController extends FOSRestController implements ClassResourceInterface
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ($request->get('type') == 'new' && (null !== ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->get('uid')))) &&
+        if ((null !== ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($request->get('uid')))) &&
             (null !== ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->get('id')))) &&
             $nb = $request->get('nbQuestion')
         ) {
@@ -39,7 +39,9 @@ class TestController extends FOSRestController implements ClassResourceInterface
 
         $t = new Test();
         $t->setCreator($u);
-        
+        foreach($results as $w) {
+            $t->addWord($w['object']);
+        }
         $em->persist($t);
         $em->flush();
 

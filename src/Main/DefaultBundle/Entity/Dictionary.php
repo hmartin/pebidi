@@ -36,11 +36,6 @@ class Dictionary
     protected $dictionaryScores;
 
     /**
-     * @ORM\OneToMany(targetEntity="Test", mappedBy="dictionary")
-     */
-    protected $tests;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     protected $originLang;
@@ -98,167 +93,10 @@ class Dictionary
     }
 
     /**
-     * Set lang
-     *
-     * @param string $lang
-     * @return Dictionary
-     */
-    public function setLang($lang)
-    {
-        $this->lang = $lang;
-
-        return $this;
-    }
-
-    /**
-     * Get lang
-     *
-     * @return string 
-     */
-    public function getLang()
-    {
-        return $this->lang;
-    }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return Dictionary
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Get created
-     *
-     * @return \DateTime 
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Main\DefaultBundle\Entity\User $user
-     * @return Dictionary
-     */
-    public function setUser(\Main\DefaultBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Main\DefaultBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Add words
-     *
-     * @param \Main\DefaultBundle\Entity\Word $words
-     * @return Dictionary
-     */
-    public function addWord(\Main\DefaultBundle\Entity\Word $words)
-    {
-        $this->words[] = $words;
-
-        return $this;
-    }
-
-    /**
-     * Remove words
-     *
-     * @param \Main\DefaultBundle\Entity\Word $words
-     */
-    public function removeWord(\Main\DefaultBundle\Entity\Word $words)
-    {
-        $this->words->removeElement($words);
-    }
-
-    /**
-     * Get words
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getWords()
-    {
-        return $this->words;
-    }
-
-    /**
-     * Set private
-     *
-     * @param integer $private
-     * @return Dictionary
-     */
-    public function setPrivate($private)
-    {
-        $this->private = $private;
-
-        return $this;
-    }
-
-    /**
-     * Get private
-     *
-     * @return integer 
-     */
-    public function getPrivate()
-    {
-        return $this->private;
-    }
-
-    /**
-     * Add tests
-     *
-     * @param \Main\DefaultBundle\Entity\Test $tests
-     * @return Dictionary
-     */
-    public function addTest(\Main\DefaultBundle\Entity\Test $tests)
-    {
-        $this->tests[] = $tests;
-
-        return $this;
-    }
-
-    /**
-     * Remove tests
-     *
-     * @param \Main\DefaultBundle\Entity\Test $tests
-     */
-    public function removeTest(\Main\DefaultBundle\Entity\Test $tests)
-    {
-        $this->tests->removeElement($tests);
-    }
-
-    /**
-     * Get tests
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTests()
-    {
-        return $this->tests;
-    }
-
-    /**
      * Set originLang
      *
      * @param string $originLang
+     *
      * @return Dictionary
      */
     public function setOriginLang($originLang)
@@ -271,7 +109,7 @@ class Dictionary
     /**
      * Get originLang
      *
-     * @return string 
+     * @return string
      */
     public function getOriginLang()
     {
@@ -279,9 +117,34 @@ class Dictionary
     }
 
     /**
+     * Set lang
+     *
+     * @param string $lang
+     *
+     * @return Dictionary
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Get lang
+     *
+     * @return string
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
      * Set score
      *
-     * @param integer $score
+     * @param float $score
+     *
      * @return Dictionary
      */
     public function setScore($score)
@@ -294,52 +157,147 @@ class Dictionary
     /**
      * Get score
      *
-     * @return integer
+     * @return float
      */
     public function getScore()
     {
         return $this->score;
     }
 
-    public function setUserScore($userScore)
-    {
-        $this->userScore = $userScore;
-
-        return $this;
-    }
-
-    public function getUserScore()
-    {
-        return $this->userScore;
-    }
-
     /**
-     * Add dictionaryScores
+     * Set private
      *
-     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores
+     * @param integer $private
+     *
      * @return Dictionary
      */
-    public function addDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores)
+    public function setPrivate($private)
     {
-        $this->dictionaryScores[] = $dictionaryScores;
+        $this->private = $private;
 
         return $this;
     }
 
     /**
-     * Remove dictionaryScores
+     * Get private
      *
-     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores
+     * @return integer
      */
-    public function removeDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScores)
+    public function getPrivate()
     {
-        $this->dictionaryScores->removeElement($dictionaryScores);
+        return $this->private;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Dictionary
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Main\DefaultBundle\Entity\User $user
+     *
+     * @return Dictionary
+     */
+    public function setUser(\Main\DefaultBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Main\DefaultBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add word
+     *
+     * @param \Main\DefaultBundle\Entity\Word $word
+     *
+     * @return Dictionary
+     */
+    public function addWord(\Main\DefaultBundle\Entity\Word $word)
+    {
+        $this->words[] = $word;
+
+        return $this;
+    }
+
+    /**
+     * Remove word
+     *
+     * @param \Main\DefaultBundle\Entity\Word $word
+     */
+    public function removeWord(\Main\DefaultBundle\Entity\Word $word)
+    {
+        $this->words->removeElement($word);
+    }
+
+    /**
+     * Get words
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWords()
+    {
+        return $this->words;
+    }
+
+    /**
+     * Add dictionaryScore
+     *
+     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScore
+     *
+     * @return Dictionary
+     */
+    public function addDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScore)
+    {
+        $this->dictionaryScores[] = $dictionaryScore;
+
+        return $this;
+    }
+
+    /**
+     * Remove dictionaryScore
+     *
+     * @param \Main\DefaultBundle\Entity\DictionaryScore $dictionaryScore
+     */
+    public function removeDictionaryScore(\Main\DefaultBundle\Entity\DictionaryScore $dictionaryScore)
+    {
+        $this->dictionaryScores->removeElement($dictionaryScore);
     }
 
     /**
      * Get dictionaryScores
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDictionaryScores()
     {

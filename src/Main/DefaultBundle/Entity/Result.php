@@ -31,7 +31,7 @@ class Result
     protected $test;
 
     /**
-     * @ORM\OneToMany(targetEntity="Point", mappedBy="test")
+     * @ORM\OneToMany(targetEntity="Point", mappedBy="result")
      */
     protected $points;
 

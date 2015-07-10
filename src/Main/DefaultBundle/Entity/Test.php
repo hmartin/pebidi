@@ -95,6 +95,20 @@ class Test
         return $this;
     }
 
+
+    /**
+     * Add words
+     *
+     * @param \Main\DefaultBundle\Entity\Word $words
+     * @return Test
+     */
+    public function addWords(array $words)
+    {
+        $this->words = $words;
+
+        return $this;
+    }
+
     /**
      * Remove words
      *
