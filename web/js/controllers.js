@@ -13,7 +13,7 @@ app
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
                 mainService.setUid(data.uid);
                 if (data.hasOwnProperty('dic')) {
-                    console.info(data.dic)
+                    log('user has dic:'+data.dic)
                     mainService.setDic(data.dic);
                 } else {
                     pediService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);

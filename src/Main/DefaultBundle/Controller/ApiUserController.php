@@ -100,7 +100,7 @@ class ApiUserController extends FOSRestController
     {
         $a = array('user' => $u, 'dictionary' => $d);
         $ds = $this->getDoctrine()->getRepository('MainDefaultBundle:DictionaryScore')->findOneBy($a);
+        
         return $ds->getScore();
-
     }
 }

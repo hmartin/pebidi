@@ -19,6 +19,6 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
      */
     public function getAction(Request $request, Dictionary $d)
     {
-        return $d;
+        return $d->getJsonArray();
     }
 }

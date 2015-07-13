@@ -178,6 +178,30 @@ class Dictionary
     }
 
     /**
+     * Set score
+     *
+     * @param float $score
+     *
+     * @return Dictionary
+     */
+    public function setUserScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return float
+     */
+    public function getUSerScore()
+    {
+        return $this->score;
+    }
+
+    /**
      * Set private
      *
      * @param integer $private

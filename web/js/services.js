@@ -164,12 +164,12 @@ app
             });
         };
         this.get = function (id) {
-            data = {'id': id};
+            data = {};
             if (mainService.getUid()) {
                 data.uid = mainService.getUid();
             }
             console.log(data);
-            $http.post(API_URL + 'gets/dics.json', data).success(function (data) {
+            $http.get(API_URL + 'dictionaries/'+ id +'.json', { params: data}).success(function (data) {
                 if (data.dic) {
                     $timeout(function () {
                         console.log('timeout');
