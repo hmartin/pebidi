@@ -29,6 +29,12 @@ class Sense
      */
     protected $sense;
 
+
+    public function __toString()
+    {
+        return $this->sense;
+    }
+
     /**
      * Get id
      *
@@ -84,20 +90,6 @@ class Sense
      */
     public function getSense()
     {
-        return $this->sense;
-    }
-
-    /**
-     * Get sense
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        var_dump($this->sense);
-        if (is_null($this->sense)) {
-            return '';
-        }
         return $this->sense;
     }
 

@@ -102,7 +102,7 @@ app
     .service('wordService', function ($http, $rootScope, $timeout, mainService) {
         this.post = function (formData) {
             mainService.setCountWord(mainService.dic.countWord + 1);
-            $http.post(API_URL + 'news/words.json', {
+            $http.post(API_URL + 'words.json', {
                 'word': formData.word,
                 'translation': formData.translation,
                 'id': mainService.getDid()

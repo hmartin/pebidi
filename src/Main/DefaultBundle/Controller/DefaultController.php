@@ -33,7 +33,7 @@ class DefaultController extends Controller
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
 
-        $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2, 2,2);
+        $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2, 2, 2);
         $em = $this->getDoctrine()->getManager();
 
         if ((null !== ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find(2))) &&
@@ -47,7 +47,7 @@ class DefaultController extends Controller
 
         $t = new Test();
         $t->setCreator($u);
-        foreach($results as $w) {
+        foreach ($results as $w) {
             $t->addWord($w['object']);
         }
         $em->persist($t);
@@ -105,141 +105,6 @@ class DefaultController extends Controller
         */
         return $this->render('MainDefaultBundle:Default:index.html.twig', array());
     }
-
-    /**
-     * @Route("/suckWordref", name="suckWordref")
-     * @Template()
-     */
-    public function suckWordrefAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        var_dump(set_time_limit(60 * 60));
-        $connection = $em->getConnection();
-        $statement = $connection->prepare("
-         SET FOREIGN_KEY_CHECKS=0;
-        TRUNCATE `Word`;
-        TRUNCATE `Ww`;
-        TRUNCATE `Sense`;
-        TRUNCATE `WwSenses`;
-         SET FOREIGN_KEY_CHECKS=1;");
-//        $statement->execute();
-
-        $ss = $this->getDoctrine()->getRepository('MainDefaultBundle:Suck')->findAll();
-        foreach ($ss as $k => $s) {
-            if ($k < 2998) {
-                continue;
-            }
-            if ($k > 55000) {
-                $em->flush();
-                $x = 1 / 0;
-                exit;
-            }
-            $newWord = false;
-            echo '<br><br>---------------         ' . $s->getUrl() . '    ------------------------------<br>';
-            $crawler = new Crawler($s->getHmtl());
-            $crawler = $crawler->filter('table.WRD > tr');
-            $class = '';
-            $k = 0;
-            foreach ($crawler as $domElement) {
-                if ($domElement->getAttribute('class') == 'even' || $domElement->getAttribute('class') == 'odd') {
-                    $tr = new Crawler($domElement);
-                    if ($class != $domElement->getAttribute('class')) {
-                        $k = $k + 0.1;
-                        $priority = 0;
-                        $class = $domElement->getAttribute('class');
-
-                        if (!$newWord) {
-                            if (null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
-                                if ($this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => utf8_encode($newWord), 'local' => 'en'))) {
-                                    // word already in db
-                                    $w = null;
-                                    continue;
-                                }
-                                $w = $this->getWord($newWord, 'en');
-
-                            } else {
-                                echo 'error' . $s->getUrl() . '<br>';
-                            }
-                        }
-
-                        if ((null !== ($senseValue = $tr->filter('td')->eq(1))) && count($senseValue) > 0) {
-
-                            $sense = new e\Sense();
-                            $sense->setSense(utf8_decode($senseValue->html()));
-                            $sense->setLocal('en');
-
-                            $em->persist($sense);
-
-                        }
-                    }
-                  
-                  
-                    if (null !== ($trans = $tr->filter('td.ToWrd')->eq(0))) {
-                        if($trans->filter('span[title*="translation unavailable"]')->eq(0)) {
-                          continue;
-                        }
-                        $trans->filter('em')->each(function (Crawler $crawler) {
-                            foreach ($crawler as $node) {
-                                $node->parentNode->removeChild($node);
-                            }
-                        });
-                        $trans->filter('a')->each(function (Crawler $crawler) {
-                            foreach ($crawler as $node) {
-                                $node->parentNode->removeChild($node);
-                            }
-                        });
-                        if (count($trans)) {
-                          $ws = explode(',', $trans->html());
-                          foreach($ws as $each) {
-                            $priority = $priority + 1;
-                            $prior = $priority + $k;
-                            echo 'c:' . $class . '   t:' . $each . ' $prior:' . $prior . '<br>';
-
-                            $tw = $this->getWord($each, 'fr');
-
-                            $ww = new e\Ww();
-                            $ww->setWord1($w);
-                            $ww->setWord2($tw);
-                            $ww->addSense($sense);
-                            $ww->setPriority($prior);
-
-                            $em->persist($ww);
-                            
-                          }
-                        }
-
-
-                    }
-                }
-            }
-        }
-        $em->flush();
-        $x = 1 / 0;
-        exit;
-    }
-
-    private function getWord($w, $local)
-    {
-        $em = $this->getDoctrine()->getManager();
-        
-        $w = utf8_decode($w);
-      $w str_replace('<br>', '', $w)
-        $w = trim($w);
-      // analyze: <br> / , / <span title="somebody">[sb]</span> / <span title="something">[sth]</span> / <span title="translation unavailable" style="color: red; font-style: italic">traduction non disponible</span>
-      // <span title="translation unavailable" style="color: red; font-style: italic"><span class="ph" data-ph="sTransUnavail">traduction non disponible</span></span> 
-      //  <span title="somebody or something">[sb/sth]</span>
-        if ($w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
-            return $w;
-        }
-
-        $w = new e\Word();
-        $w->setLocal($local);
-        $w->setWord($w);
-        $em->persist($w);
-
-        return $w;
-    }
-
 
     /**
      * @Route("/{_locale}/json", name="generateJson" )

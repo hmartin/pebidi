@@ -54,18 +54,9 @@ class Word
      */
     private $created;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     public function __toString() {
         return $this->word;
     }
-
 
     /**
      * Get id
@@ -200,39 +191,6 @@ class Word
     public function getDictionaries()
     {
         return $this->dictionaries;
-    }
-
-    /**
-     * Add groupsWords
-     *
-     * @param \Main\DefaultBundle\Entity\GroupWord $groupsWords
-     * @return Word
-     */
-    public function addGroupsWord(\Main\DefaultBundle\Entity\GroupWord $groupsWords)
-    {
-        $this->groupsWords[] = $groupsWords;
-
-        return $this;
-    }
-
-    /**
-     * Remove groupsWords
-     *
-     * @param \Main\DefaultBundle\Entity\GroupWord $groupsWords
-     */
-    public function removeGroupsWord(\Main\DefaultBundle\Entity\GroupWord $groupsWords)
-    {
-        $this->groupsWords->removeElement($groupsWords);
-    }
-
-    /**
-     * Get groupsWords
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGroupsWords()
-    {
-        return $this->groupsWords;
     }
 
     /**

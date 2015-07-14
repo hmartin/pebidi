@@ -1,2 +1,6 @@
 
 
+
+services:
+    api.result_controller:
+        class:     Api\Bundle\Controller\ResultController

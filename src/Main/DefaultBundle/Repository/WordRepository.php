@@ -16,6 +16,7 @@ class WordRepository extends EntityRepository
         );
         $qb = $this->initQueryBuilder()
             ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised')
+            ->addSelect('word as object')
             ->innerJoin('word.dictionaries', 'd')
             ->leftJoin('word.points','p')
             ->where('d.id = :did')
