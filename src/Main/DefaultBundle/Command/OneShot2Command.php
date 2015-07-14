@@ -27,10 +27,18 @@ class OneShot2Command extends ContainerAwareCommand
         $connection = $em->getConnection();
         $statement = $connection->prepare("
          SET FOREIGN_KEY_CHECKS=0;
-        TRUNCATE `Word`;
-        TRUNCATE `Ww`;
-        TRUNCATE `Sense`;
-        TRUNCATE `WwSenses`;
+TRUNCATE `DictionariesWord`;
+TRUNCATE `Dictionary`;
+TRUNCATE `DictionaryScore`;
+TRUNCATE `fos_user`;
+TRUNCATE `Point`;
+TRUNCATE `Result`;
+TRUNCATE `Sense`;
+TRUNCATE `Test`;
+TRUNCATE `TestWord`;
+TRUNCATE `Word`;
+TRUNCATE `Ww`;
+TRUNCATE `WwSenses`;
          SET FOREIGN_KEY_CHECKS=1;");
         $statement->execute();
         $statement->closeCursor();
