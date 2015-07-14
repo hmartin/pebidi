@@ -46,8 +46,9 @@ Real test
 v3 school:
 full help
 multiple dic
-Test mobil apps
+Mobil apps beta
 create account
+chrome apps
 
 v4 college:
 Add translate languages (es, de, it,...)

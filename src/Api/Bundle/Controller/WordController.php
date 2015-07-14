@@ -49,6 +49,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
         ) {
             $d->getWords()->removeElement($w);
             $this->get('persist')->persistAndFlush($d);
+          
             return array('dic' => $d->getJsonArray());
         }
         throw new \Exception('postDeleteWordAction went wrong!');

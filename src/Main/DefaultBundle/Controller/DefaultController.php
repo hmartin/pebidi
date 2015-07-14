@@ -151,6 +151,7 @@ class DefaultController extends Controller
                         if (!$newWord) {
                             if (null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
                                 if ($this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => utf8_encode($newWord), 'local' => 'en'))) {
+                                    // word already in db
                                     $w = null;
                                     continue;
                                 }
@@ -164,15 +165,19 @@ class DefaultController extends Controller
                         if ((null !== ($senseValue = $tr->filter('td')->eq(1))) && count($senseValue) > 0) {
 
                             $sense = new e\Sense();
-                            $sense->setSense(utf8_encode($senseValue->html()));
+                            $sense->setSense(utf8_decode($senseValue->html()));
                             $sense->setLocal('en');
 
                             $em->persist($sense);
 
                         }
-
                     }
-                    if (!is_null($w) && null !== ($trans = $tr->filter('td.ToWrd')->eq(0))) {
+                  
+                  
+                    if (null !== ($trans = $tr->filter('td.ToWrd')->eq(0))) {
+                        if($trans->filter('span[title*="translation unavailable"]')->eq(0)) {
+                          continue;
+                        }
                         $trans->filter('em')->each(function (Crawler $crawler) {
                             foreach ($crawler as $node) {
                                 $node->parentNode->removeChild($node);
@@ -184,11 +189,13 @@ class DefaultController extends Controller
                             }
                         });
                         if (count($trans)) {
+                          $ws = explode(',', $trans->html());
+                          foreach($ws as $each) {
                             $priority = $priority + 1;
                             $prior = $priority + $k;
-                            echo 'c:' . $class . '   t:' . $trans->html() . ' $prior:' . $prior . '<br>';
+                            echo 'c:' . $class . '   t:' . $each . ' $prior:' . $prior . '<br>';
 
-                            $tw = $this->getWord($trans->html(), 'fr');
+                            $tw = $this->getWord($each, 'fr');
 
                             $ww = new e\Ww();
                             $ww->setWord1($w);
@@ -197,6 +204,8 @@ class DefaultController extends Controller
                             $ww->setPriority($prior);
 
                             $em->persist($ww);
+                            
+                          }
                         }
 
 
@@ -212,13 +221,19 @@ class DefaultController extends Controller
     private function getWord($w, $local)
     {
         $em = $this->getDoctrine()->getManager();
+        
         $w = utf8_decode($w);
+      $w str_replace('<br>', '', $w)
+        $w = trim($w);
+      // analyze: <br> / , / <span title="somebody">[sb]</span> / <span title="something">[sth]</span> / <span title="translation unavailable" style="color: red; font-style: italic">traduction non disponible</span>
+      // <span title="translation unavailable" style="color: red; font-style: italic"><span class="ph" data-ph="sTransUnavail">traduction non disponible</span></span> 
+      //  <span title="somebody or something">[sb/sth]</span>
         if ($w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
             return $w;
         }
 
         $w = new e\Word();
-        $w->setLocal('en');
+        $w->setLocal($local);
         $w->setWord($w);
         $em->persist($w);
 
