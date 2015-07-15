@@ -13,54 +13,6 @@ use Main\DefaultBundle\Form as f;
 
 class ApiUserController extends FOSRestController
 {
-    /**
-     * @Rest\View()
-     */
-    public function postEmailAction(Request $request)
-    {
-        if ($email = $request->request->get('email')) {
-
-            if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
-
-            } else {
-                $u = new e\User();
-                $u->setEmail($email);
-                $u->setUsername($email);
-                $u->setPassword($email);
-                $this->get('persist')->persistAndFlush($u);
-            }
-            $params = array('uid' => $u->getId());
-            if ($d = $u->getDefaultDictionary()) {
-                $d->setUserScore($this->getScore($u, $d));
-                $params['dic'] = $d->getJsonArray();
-            }
-            return $params;
-        }
-        throw new \Exception('Something went wrong!');
-    }
-
-    /**
-     * @Rest\View()
-     */
-    public function postCreateDicAction(Request $request)
-    {
-        if ($id = $request->request->get('uid')) {
-            if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($id)) {
-                $d = new e\Dictionary();
-                $d->setUser($u);
-                $d->setLang($request->request->get('destLang'));
-                $d->setOriginLang($request->request->get('originLang'));
-                $this->get('persist')->persistAndFlush($d);
-                $ds = new e\DictionaryScore();
-                $ds->setUser($u);
-                $ds->setDictionary($d);
-                $this->get('persist')->persistAndFlush($ds);
-
-                return array('dic' => $d->getJsonArray());
-            }
-        }
-        throw new \Exception('Something went wrong!');
-    }
 
     /**
      * @Rest\View()
@@ -74,7 +26,6 @@ class ApiUserController extends FOSRestController
                     $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($uid) and
                     $d->getUser()->getId() == $uid)
                 {
-                    $d->setUserScore($this->getScore($u, $d));
                 }
                 return array('dic' => $d->getJsonArray());
             }

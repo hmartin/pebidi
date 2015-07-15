@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table()
  */
 class User extends BaseUser
 {
@@ -49,9 +49,11 @@ class User extends BaseUser
         // your own logic
     }
 
-    public function getBitEmail() {
+    public function getBitEmail() 
+    {
         $a = explode('@', $this->email);
         $b = explode('.', $a['1']);
+      
         return $a['0'].'@....'.$b['1'];
     }
 
@@ -98,10 +100,12 @@ class User extends BaseUser
         return $this->dictionaries;
     }
     
-    public function getDefaultDictionary() {
+    public function getDefaultDictionary() 
+    {
         if (isset($this->dictionaries['0'])) {
             return $this->dictionaries['0'];
         }
+      
         return false;
     }
 

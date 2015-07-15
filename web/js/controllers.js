@@ -12,12 +12,7 @@ app
         $scope.processForm = function () {
             $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
                 mainService.setUid(data.uid);
-                if (data.hasOwnProperty('dic')) {
-                    log('user has dic:'+data.dic)
-                    mainService.setDic(data.dic);
-                } else {
-                    pediService.create($scope.lang[$scope.ip], $scope.lang[$scope.ia]);
-                }
+                mainService.setDic(data.dic);
             });
             $location.path('/dictionary');
         };
@@ -139,8 +134,7 @@ app
             pediService.get($routeParams.id);
         }
 
-
-        pediService.getWords($route.current.type, $routeParams.id).then(function (data) {
+        pediService.getWords($routeParams.id).then(function (data) {
             console.log(data);
             $scope.words = data;
         });

@@ -6,6 +6,7 @@ app
 
         this.setDic = function (dic) {
             this.dic = dic;
+            $rootScope.$apply();
             localStorageService.set('dic', dic);
             console.log(dic);
         };
@@ -109,7 +110,6 @@ app
             }).success(function (data) {
                 $timeout(function () {
                     mainService.setDic(data.dic);
-                    $rootScope.$apply();
                 }, 0);
             });
         };
@@ -124,7 +124,6 @@ app
             });
         }
     })
-
 
     .service('dicService', function ($http, localStorageService) {
         var dic = null;
@@ -150,7 +149,8 @@ app
      * Create and get personal Dictionary
      */
     .service('pediService', function ($http, $rootScope, $location, $timeout, mainService) {
-
+      /* 
+       * Not Use anymore create when user create
         this.create = function (originLang, destLang) {
             $http.post(API_URL + 'creates/dics.json', {
                 uid: mainService.getUid(),
@@ -163,26 +163,27 @@ app
                 }
             });
         };
+        
         this.get = function (id) {
             data = {};
             if (mainService.getUid()) {
                 data.uid = mainService.getUid();
             }
-            console.log(data);
+          
             $http.get(API_URL + 'dictionaries/'+ id +'.json', { params: data}).success(function (data) {
                 if (data.dic) {
                     $timeout(function () {
                         console.log('timeout');
                         mainService.setDic(data.dic);
-                        $rootScope.$apply();
                     }, 0);
                 }
             })
         };
+        */
 
-        this.getWords = function (type, id) {
+        this.getWords = function (id) {
             var promise = $http
-                .get(API_URL + 'types/' + type + '/words/' + id + '/list.json', {params: {'uid': mainService.getUid()}})
+                .get(API_URL + '/words/' + id + '/list.json', {params: {'uid': mainService.getUid()}})
                 .then(function (data) {
 
                     return data.data;

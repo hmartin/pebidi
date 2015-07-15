@@ -13,3 +13,7 @@ word:
 dictionary:
     type:     rest
     resource: Api\Bundle\Controller\DictionaryController
+ 
+user:
+    type:     rest
+    resource: Api\Bundle\Controller\UserController
