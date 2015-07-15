@@ -48,9 +48,11 @@ class Result
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($t, $u)
     {
         $this->points = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setTest($t);
+        $this->setUser($u);
     }
 
     /**

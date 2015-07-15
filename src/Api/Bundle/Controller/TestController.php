@@ -43,8 +43,12 @@ class TestController extends FOSRestController implements ClassResourceInterface
             $t->addWord($w['object']);
         }
         $em->persist($t);
+
+        $r = new Result($t ,$u);
+        $em->persist($r);
+
         $em->flush();
 
-        return array('id' => $t->getId(), 'words' => $results);
+        return array('id' => $t->getId(),'rid' => $r->getId(), 'words' => $results);
     }
 }

@@ -19,9 +19,7 @@ class ResultController extends FOSRestController implements ClassResourceInterfa
     {
         $em = $this->getDoctrine()->getManager();
       
-        $r = new Result();
-        $r->setTest($t);
-        $r->setUser($u);
+        $r = new Result($t ,$u);
         $em->persist($r);
         $em->flush();
 
