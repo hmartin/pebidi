@@ -23,7 +23,7 @@ class OneShot2Command extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
-        var_dump(set_time_limit(60 * 60));
+        var_dump(set_time_limit(60 * 60*5));
         $connection = $em->getConnection();
         $statement = $connection->prepare("
          SET FOREIGN_KEY_CHECKS=0;
@@ -40,8 +40,8 @@ TRUNCATE `Word`;
 TRUNCATE `Ww`;
 TRUNCATE `WwSenses`;
          SET FOREIGN_KEY_CHECKS=1;");
-        $statement->execute();
-        $statement->closeCursor();
+        //$statement->execute();
+        //$statement->closeCursor();
 
         $ss = $em->getRepository('MainDefaultBundle:Suck')->findAll();
         foreach ($ss as $k => $s) {
@@ -67,7 +67,7 @@ TRUNCATE `WwSenses`;
                                 if ($em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => utf8_encode($newWord), 'local' => 'en'))) {
                                     // word already in db
                                     $w = null;
-                                    continue;
+                                    continue 2;
                                 }
                                 $newWord = explode(',', $newWord);
                                 $w = $this->getWord($newWord['0'], 'en');
