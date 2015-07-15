@@ -9,39 +9,59 @@ use Doctrine\ORM\EntityRepository;
  */
 class WordRepository extends EntityRepository
 {
-    public function getWordsForTest($nb, $d, $u) {
-        $a =  array(
-            'did' => $d,
-            'uid' => $u,
-        );
-        $qb = $this->initQueryBuilder()
-            ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised')
+    public function getWordsForTest($nb, $d, $u)
+    {
+        $qb = $this->getDictionaryWords($d, $u)
             ->addSelect('word as object')
-            ->innerJoin('word.dictionaries', 'd')
-            ->leftJoin('word.points','p')
-            ->where('d.id = :did')
-            ->andWhere('d.user = :uid')
-            ->groupBy('word.id')
-            ->setParameters($a)
             ->setMaxResults($nb)
-            ->orderBy('stat_sum_realised', 'ASC')
-        ;
+            ->orderBy('stat_sum_realised', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
-    public function getWordsForSameTest($t) {
-        $a =  array(
+
+    public function getWordsForSameTest($t)
+    {
+        $a = array(
             'tid' => $t
         );
         $qb = $this->initQueryBuilder()
-            ->innerJoin('word.testsWords','test')
+            ->innerJoin('word.testsWords', 'test')
             ->where('test.id = :tid')
             ->groupBy('word.id')
-            ->setParameters($a)
-        ;
+            ->setParameters($a);
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getDictionaryAllWords($d, $u = null)
+    {
+        $qb = $this->getDictionaryWords($d, $u)
+            ->orderBy('word.word', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+    public function getDictionaryWords($d, $u = null)
+    {
+
+        $qb = $this->initQueryBuilder()
+            ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised')
+            ->innerJoin('word.dictionaries', 'd')
+            ->leftJoin('word.points', 'p')
+            ->where('d.id = :did')
+            ->setParameter('did', $d)
+            ->groupBy('word.id');
+
+        if (is_object($u)) {
+            $qb
+                ->andWhere('d.user = :uid')
+                ->setParameter('uid', $u);
+        }
+
+        return $qb;
+    }
+
 
     private function initQueryBuilder()
     {

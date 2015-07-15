@@ -197,4 +197,38 @@ class User extends BaseUser
     {
         return $this->dictionaryScores;
     }
+
+    /**
+     * Add result
+     *
+     * @param \Main\DefaultBundle\Entity\Result $result
+     *
+     * @return User
+     */
+    public function addResult(\Main\DefaultBundle\Entity\Result $result)
+    {
+        $this->results[] = $result;
+
+        return $this;
+    }
+
+    /**
+     * Remove result
+     *
+     * @param \Main\DefaultBundle\Entity\Result $result
+     */
+    public function removeResult(\Main\DefaultBundle\Entity\Result $result)
+    {
+        $this->results->removeElement($result);
+    }
+
+    /**
+     * Get results
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
 }

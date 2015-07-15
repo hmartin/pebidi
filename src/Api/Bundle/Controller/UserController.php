@@ -2,6 +2,8 @@
 
 namespace Api\Bundle\Controller;
 
+use Main\DefaultBundle\Entity\DictionaryScore;
+use Main\DefaultBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -19,35 +21,33 @@ class UserController extends FOSRestController implements ClassResourceInterface
     public function postEmailAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-      
-        $r = new Result($t ,$u);
+
        if ($email = $request->request->get('email')) {
 
             if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
 
             } else {
-                $u = new e\User();
+                $u = new User();
                 $u->setEmail($email);
                 $u->setUsername($email);
                 $u->setPassword($email);
                 $em->persist($u);
               
-                $d = new e\Dictionary();
+                $d = new Dictionary();
                 $d->setUser($u);
                 $d->setLang($request->request->get('destLang'));
                 $d->setOriginLang($request->request->get('originLang'));
               
                 $em->persist($d);
               
-                $ds = new e\DictionaryScore();
+                $ds = new DictionaryScore();
                 $ds->setUser($u);
                 $ds->setDictionary($d);
                 $em->persist($ds);
               
                 $em->flush();
             }
-         
-         
+            $em->refresh($u);
             $d->setUserScore($this->getScore($u, $d));
             $params = array('uid' => $u->getId());
             if ($d = $u->getDefaultDictionary()) {

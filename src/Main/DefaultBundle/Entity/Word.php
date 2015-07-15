@@ -258,4 +258,14 @@ class Word
     {
         return $this->testsWords;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dictionaries = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->testsWords = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->points = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }

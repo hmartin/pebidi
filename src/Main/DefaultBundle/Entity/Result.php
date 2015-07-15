@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Main\DefaultBundle\Repository\ResultRepository")
  */
 class Result
 {

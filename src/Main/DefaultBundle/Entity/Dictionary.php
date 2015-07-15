@@ -31,12 +31,12 @@ class Dictionary
     private $words;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $description;
 
@@ -46,12 +46,12 @@ class Dictionary
     protected $dictionaryScores;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $originLang;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $lang;
 
@@ -65,7 +65,10 @@ class Dictionary
      */
     protected $private = 0;
 
-    protected $userScore = 0;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $groupWord = 0;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -103,6 +106,55 @@ class Dictionary
     public function getConvertId()
     {
         return base_convert($this->id, 10, 23);
+    }
+
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Dictionary
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Dictionary
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -178,30 +230,6 @@ class Dictionary
     }
 
     /**
-     * Set score
-     *
-     * @param float $score
-     *
-     * @return Dictionary
-     */
-    public function setUserScore($score)
-    {
-        $this->score = $score;
-
-        return $this;
-    }
-
-    /**
-     * Get score
-     *
-     * @return float
-     */
-    public function getUSerScore()
-    {
-        return $this->score;
-    }
-
-    /**
      * Set private
      *
      * @param integer $private
@@ -223,6 +251,30 @@ class Dictionary
     public function getPrivate()
     {
         return $this->private;
+    }
+
+    /**
+     * Set groupWord
+     *
+     * @param integer $groupWord
+     *
+     * @return Dictionary
+     */
+    public function setGroupWord($groupWord)
+    {
+        $this->groupWord = $groupWord;
+
+        return $this;
+    }
+
+    /**
+     * Get groupWord
+     *
+     * @return integer
+     */
+    public function getGroupWord()
+    {
+        return $this->groupWord;
     }
 
     /**

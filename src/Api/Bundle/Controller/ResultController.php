@@ -2,6 +2,7 @@
 
 namespace Api\Bundle\Controller;
 
+use Main\DefaultBundle\Entity\Point;
 use Main\DefaultBundle\Entity\Test;
 use Main\DefaultBundle\Entity\Result;
 use Main\DefaultBundle\Entity\User;
@@ -18,11 +19,40 @@ class ResultController extends FOSRestController implements ClassResourceInterfa
     public function postUserAction(Request $request, Test $t, User $u)
     {
         $em = $this->getDoctrine()->getManager();
-      
-        $r = new Result($t ,$u);
+
+        $r = new Result($t, $u);
         $em->persist($r);
         $em->flush();
 
         return array('id' => $r->getId());
+    }
+
+    /**
+     * @Rest\View()
+     */
+    public function postSaveAction(Request $request, Result $r)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $points = $request->request->get('points');
+        $s = $i = 0;
+        foreach ($points as $pt) {
+            $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find($pt['wid']);
+            $p = new Point();
+            $p->setPoint($pt['p']);
+            $p->setWord($w);
+            $p->setResult($r);
+            $em->persist($p);
+            $s = $s + $pt['p'];
+            $i++;
+        }
+
+        $r->setScore($s * 100 / $i);
+        $em->persist($r);
+
+        $em->flush();
+
+        $newScore = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($r->getUser());
+
+        return array('score' => $newScore);
     }
 }

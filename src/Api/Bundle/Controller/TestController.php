@@ -2,6 +2,7 @@
 
 namespace Api\Bundle\Controller;
 
+use Main\DefaultBundle\Entity\Result;
 use Main\DefaultBundle\Entity\Test;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -39,8 +40,11 @@ class TestController extends FOSRestController implements ClassResourceInterface
 
         $t = new Test();
         $t->setCreator($u);
-        foreach($results as $w) {
+        $t->setDictionary($d);
+        foreach($results as $k => $w) {
+
             $t->addWord($w['object']);
+            unset($results[$k]['object']);
         }
         $em->persist($t);
 

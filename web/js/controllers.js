@@ -10,7 +10,7 @@ app
             $location.path('/dictionary/' + mainService.dic.id);
         }
         $scope.processForm = function () {
-            $http.post(API_URL + 'emails.json', $scope.formData).success(function (data) {
+            $http.post(API_URL + 'users/emails.json', $scope.formData).success(function (data) {
                 mainService.setUid(data.uid);
                 mainService.setDic(data.dic);
             });
@@ -22,9 +22,9 @@ app
         $scope.formData = {};
 
         if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {
-            pediService.get($routeParams.id);
+            //pediService.get($routeParams.id);
         } else {
-            pediService.get($scope.dic.id);
+            //pediService.get($scope.dic.id);
         }
 
         dicService.loadDic();

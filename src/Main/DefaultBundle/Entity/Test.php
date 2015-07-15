@@ -190,4 +190,28 @@ class Test
     {
         return $this->results;
     }
+
+    /**
+     * Set dictionary
+     *
+     * @param \Main\DefaultBundle\Entity\Dictionary $dictionary
+     *
+     * @return Test
+     */
+    public function setDictionary(\Main\DefaultBundle\Entity\Dictionary $dictionary = null)
+    {
+        $this->dictionary = $dictionary;
+
+        return $this;
+    }
+
+    /**
+     * Get dictionary
+     *
+     * @return \Main\DefaultBundle\Entity\Dictionary
+     */
+    public function getDictionary()
+    {
+        return $this->dictionary;
+    }
 }

@@ -1,12 +1,12 @@
 app
-    .service('mainService', function (localStorageService) {
+    .service('mainService', function ($rootScope, localStorageService) {
         this.main = {};
         this.dic = {};
         this.lang = '';
 
         this.setDic = function (dic) {
             this.dic = dic;
-            $rootScope.$apply();
+            //$rootScope.$apply();
             localStorageService.set('dic', dic);
             console.log(dic);
         };
@@ -53,6 +53,7 @@ app
         this.nbQuestion = 0;
         this.id = 0;
         this.did = 0;
+        this.rid = 0;
         this.testScore = 0;
 
         this.createTest = function (did, question) {
@@ -67,11 +68,12 @@ app
                 .success(function (data) {
                     this.words = data.words;
                     this.id = data.id;
+                    this.rid = data.rid;
                     $location.path('/questions');
                 }.bind(this));
         }
         this.saveResults = function (points) {
-            $http.post(API_URL + 'saves/results.json', {id: this.id, points: points})
+            $http.post(API_URL + 'results/'+ this.rid +'/saves.json', {points: points})
                 .success(function (data) {
                     mainService.setGlobalScore(data.score);
                 }.bind(this));
@@ -183,7 +185,7 @@ app
 
         this.getWords = function (id) {
             var promise = $http
-                .get(API_URL + '/words/' + id + '/list.json', {params: {'uid': mainService.getUid()}})
+                .get(API_URL + 'dictionaries/' + id + '/words.json', {params: {'uid': mainService.getUid()}})
                 .then(function (data) {
 
                     return data.data;

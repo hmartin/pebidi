@@ -13,12 +13,27 @@ use Main\DefaultBundle\Entity\Dictionary;
 
 class DictionaryController extends FOSRestController implements ClassResourceInterface
 {
-  
+
     /**
      * @Rest\View()
      */
     public function getAction(Request $request, Dictionary $d)
     {
         return $d->getJsonArray();
+    }
+
+    /**
+     * @Rest\View()
+     */
+    public function getWordsAction(Request $request, Dictionary $d)
+    {
+        $u = null;
+        if ($uid = $request->query->get('uid'))
+        {
+            $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find($uid);
+        }
+        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getDictionaryAllWords($d, $u);
+
+        return $results;
     }
 }
