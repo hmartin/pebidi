@@ -12,6 +12,12 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+
 class OneShot2Command extends ContainerAwareCommand
 {
     protected function configure()
@@ -23,14 +29,14 @@ class OneShot2Command extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
-        var_dump(set_time_limit(60 * 60*5));
+        $time_start = microtime_float();
+        var_dump(set_time_limit(60 * 60*2));
         $connection = $em->getConnection();
         $statement = $connection->prepare("
          SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE `DictionariesWord`;
 TRUNCATE `Dictionary`;
 TRUNCATE `DictionaryScore`;
-TRUNCATE `fos_user`;
 TRUNCATE `Point`;
 TRUNCATE `Result`;
 TRUNCATE `Sense`;
@@ -45,8 +51,11 @@ TRUNCATE `WwSenses`;
 
         $ss = $em->getRepository('MainDefaultBundle:Suck')->findAll();
         foreach ($ss as $k => $s) {
-            if ($k % 100 == 0) {
+            $time_end = microtime_float();
+            $time = $time_end - $time_start;
+            if ($time > 3000) {
                 $em->flush();
+                exit;
             }
             $newWord = false;
             $output->writeln($k . '---------------         ' . $s->getUrl() . '    ------------------------------');
@@ -146,9 +155,6 @@ TRUNCATE `WwSenses`;
         }
         $w = trim($w);
 
-        // analyze: <br> / , / <span title="somebody">[sb]</span> / / <span title="translation unavailable" style="color: red; font-style: italic">traduction non disponible</span>
-        // <span title="translation unavailable" style="color: red; font-style: italic"><span class="ph" data-ph="sTransUnavail">traduction non disponible</span></span>
-        //  <span title="somebody or something">[sb/sth]</span>
         if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
             return $obj;
         }

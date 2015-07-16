@@ -51,8 +51,10 @@ class ResultController extends FOSRestController implements ClassResourceInterfa
 
         $em->flush();
 
-        $newScore = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($r->getUser());
+        $score = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($r->getUser());
 
-        return array('score' => $newScore);
+        $params = array('user' => array('id' => $r->getUser()->getId(), 'score' => $score));
+
+        return $params;
     }
 }

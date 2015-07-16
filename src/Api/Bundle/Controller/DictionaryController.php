@@ -36,4 +36,18 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
 
         return $results;
     }
+
+    /**
+     * @Rest\View()
+     */
+    public function getGroupsWordsAction(Request $request)
+    {
+        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->getGroupsWords();
+        $r = array();
+        foreach($results as $d) {
+            $r[] = $d->getGroupWordJsonArray();
+        }
+
+        return array('groupsWords' => $r);
+    }
 }

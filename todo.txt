@@ -29,6 +29,7 @@ asyncr create dic*
 db french english*
 one step create dic*
 do it again*
+init lang*
 
 v1 friend:
 Create & Edit best translation
@@ -36,7 +37,7 @@ add extra input if no translation
 validate email
 css global
 full translate
-init lang
+Escaping of variable content
 create / edit / visibility groupWord
 Real test
 

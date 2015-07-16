@@ -109,9 +109,9 @@ app
 
     .controller('AddGroupWordCtrl', function ($scope, $http, $location, mainService) {
         $http
-            .get(API_URL + 'words/group.json', {params: {lang: 'en'}})
+            .get(API_URL + 'dictionary/groups/words.json', {params: {lang: 'en'}})
             .success(function (data) {
-                $scope.groupsWords = data.groups;
+                $scope.groupsWords = data.groupsWords;
             });
 
         $scope.addGroupWord = function (id) {
@@ -146,8 +146,8 @@ app
 
     .controller('rootCtrl', function ($scope, $rootScope, $http, localStorageService, $translate, $location, mainService) {
 
-        $scope.service = mainService;
         $scope.changeLanguage = function (key) {
+            log(key);
             $translate.use(key);
             mainService.lang = key;
         };
@@ -167,11 +167,13 @@ app
 
         $scope.$watch('service.getDic()', function (data) {
             console.info('wathed!');
-            console.log(data.score);
+            console.log(data);
             $scope.dic = mainService.getDic();
         }, true);
 
         $scope.$watch('service.getUser()', function (data) {
+            console.info('wathed getUser!');
+            console.log(data);
             $scope.user = mainService.getUser();
         }, true);
 

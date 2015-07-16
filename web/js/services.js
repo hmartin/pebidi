@@ -81,7 +81,7 @@ app
         this.saveResults = function (points) {
             $http.post(API_URL + 'results/'+ this.rid +'/saves.json', {points: points})
                 .success(function (data) {
-                    mainService.setGlobalScore(data.score);
+                    mainService.setUser(data.user);
                 }.bind(this));
             s = 0;
             i = 0;

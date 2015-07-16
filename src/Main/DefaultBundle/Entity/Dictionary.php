@@ -78,11 +78,19 @@ class Dictionary
 
     public function getJsonArray()
     {
-        return array('id' => $this->getConvertId(),
+        return array('id' => $this->getId(),
             'countWord' => count($this->getWords()),
             'bitEmail' => $this->getUser()->getBitEmail(),
             'uid' => $this->getUser()->getId()
         );
+    }
+
+    public function getGroupWordJsonArray()
+    {
+        return array_merge($this->getJsonArray(), array(
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+        ));
     }
 
     /**
@@ -102,12 +110,6 @@ class Dictionary
     {
         return $this->id;
     }
-
-    public function getConvertId()
-    {
-        return base_convert($this->id, 10, 23);
-    }
-
 
     /**
      * Set title
