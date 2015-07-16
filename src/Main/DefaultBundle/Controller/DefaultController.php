@@ -33,6 +33,7 @@ class DefaultController extends Controller
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
         $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find(1);
+      $this->get('mailer_manager')->sendValidateEmail($u);
         $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
 dump($w);
         //$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2, 1, 1);

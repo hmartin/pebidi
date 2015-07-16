@@ -30,14 +30,13 @@ db french english*
 one step create dic*
 do it again*
 
-v1 family:
+v1 friend:
 Create & Edit best translation
 add extra input if no translation
+validate email
 css global
 full translate
 init lang
-
-v2 friend:
 create / edit / visibility groupWord
 Real test
 
