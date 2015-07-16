@@ -48,10 +48,10 @@ class UserController extends FOSRestController implements ClassResourceInterface
                 $em->flush();
             }
             $em->refresh($u);
-            $d->setUserScore($this->getScore($u, $d));
-            $params = array('uid' => $u->getId());
+            $score = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
+            $params = array('user' => array('id' => $u->getId(), 'score' => $score));
+                            
             if ($d = $u->getDefaultDictionary()) {
-                $d->setUserScore($this->getScore($u, $d));
                 $params['dic'] = $d->getJsonArray();
             }
             return $params;

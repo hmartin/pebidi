@@ -1,7 +1,8 @@
 app
     .service('mainService', function ($rootScope, localStorageService) {
-        this.main = {};
+        this.user = {};
         this.dic = {};
+  
         this.lang = '';
 
         this.setDic = function (dic) {
@@ -10,8 +11,8 @@ app
             localStorageService.set('dic', dic);
             console.log(dic);
         };
-        this.setGlobalScore = function (dicScore) {
-            this.dic.score = dicScore;
+        this.setScore = function (dicScore) {
+            this.user.score = dicScore;
             console.log('scor tot' + dicScore);
 
         };
@@ -30,21 +31,26 @@ app
         };
 
         this.setUid = function (uid) {
-            this.uid = uid;
-            localStorageService.set('uid', uid);
+            this.user.id = uid;
         };
         this.getUid = function () {
-            if (this.uid || localStorageService.get('uid')) {
-                if (!this.uid) {
-                    this.uid = localStorageService.get('uid');
+            if (this.user.id || localStorageService.get('user')) {
+                if (!this.user.id) {
+                    this.user = localStorageService.get('user');
                 }
-                return this.uid;
+                return this.user.id;
             } else {
                 return false;
             }
         };
-        this.watchUid = function () {
-            return this.uid;
+  
+        this.getUser = function () {
+            return this.user;
+        };
+        this.setUser = function (user) {
+            this.user = user;
+          log(user);
+            localStorageService.set('user', user);
         };
     })
 

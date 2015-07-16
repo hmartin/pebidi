@@ -4,14 +4,14 @@ app
         $scope.count = $scope.lang.lenght;
         $scope.ip = 0;
         $scope.ia = 2;
-        if (localStorageService.get('dic') && localStorageService.get('uid')) {
+        if (localStorageService.get('dic') && localStorageService.get('user')) {
             mainService.setDic(localStorageService.get('dic'));
-            console.log(mainService.dic);
+            mainService.setUser(localStorageService.get('user'));
             $location.path('/dictionary/' + mainService.dic.id);
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'users/emails.json', $scope.formData).success(function (data) {
-                mainService.setUid(data.uid);
+                mainService.setUser(data.user);
                 mainService.setDic(data.dic);
             });
             $location.path('/dictionary');
@@ -158,7 +158,7 @@ app
 
         $scope.clearLocalStorage = function () {
             mainService.setDic({});
-            mainService.setUid(0);
+            mainService.setUser({});
             localStorageService.clearAll();
             $location.path('/');
         };
@@ -171,8 +171,8 @@ app
             $scope.dic = mainService.getDic();
         }, true);
 
-        $scope.$watch('service.watchUid()', function (data) {
-            $scope.uid = data;
+        $scope.$watch('service.getUser()', function (data) {
+            $scope.user = mainService.getUser();
         }, true);
 
     })

@@ -25,22 +25,20 @@ check value and redirect if null*
 stat dictionary*
 db english french*
 translate db optimization*
+asyncr create dic*
+db french english*
+one step create dic*
+do it again*
 
 v1 family:
 Create & Edit best translation
-db french english
 add extra input if no translation
 css global
 full translate
 init lang
-one step create dic
-asyncr create dic
-asyncr create test
-load words and trad in local storage
 
 v2 friend:
-create / edit / block / visibility groupWord
-do it again
+create / edit / visibility groupWord
 Real test
 
 v3 school:
@@ -55,3 +53,6 @@ Add translate languages (es, de, it,...)
 Add teacher/ Friends 
 Mobil apps
 algo v2 test
+
+toStudy:
+load words and trad in local storage

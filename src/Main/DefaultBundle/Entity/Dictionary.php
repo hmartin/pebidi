@@ -81,7 +81,7 @@ class Dictionary
         return array('id' => $this->getConvertId(),
             'countWord' => count($this->getWords()),
             'bitEmail' => $this->getUser()->getBitEmail(),
-            'score' => $this->getUserScore()
+            'uid' => $this->getUser()->getId()
         );
     }
 
