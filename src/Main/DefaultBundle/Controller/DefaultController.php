@@ -29,14 +29,21 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        //echo '<pre>';
+        echo '<pre>';
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
         //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
+        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find(1);
+        var_dump($results);
+      
+       /*
         $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find(1);
-      $this->get('mailer_manager')->sendValidateEmail($u);
+        $this->get('mailer_manager')->sendValidateEmail($u);
         $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
-dump($w);
-        //$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2, 1, 1);
+        dump($w);
+        */
+        
+        /*
+         * $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForTest(2, 1, 1);
         $em = $this->getDoctrine()->getManager();
 
         if ((null !== ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find(1))) &&
@@ -56,6 +63,9 @@ dump($w);
         $em->persist($t);
         $em->flush();
         $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordsForSameTest(1);
+        */
+      
+      
         /*
                 SET FOREIGN_KEY_CHECKS=0;
                 TRUNCATE Word;

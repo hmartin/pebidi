@@ -3,10 +3,13 @@ namespace Main\DefaultBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity
  * @ORM\Table()
+ * @ExclusionPolicy("all")
  */
 class User extends BaseUser
 {

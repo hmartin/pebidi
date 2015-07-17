@@ -35,11 +35,13 @@ v1 friend:
 Create & Edit best translation
 add extra input if no translation
 validate email
+view word
 css global
 full translate
 Escaping of variable content
 create / edit / visibility groupWord
 Real test
+Fixture GW 500 words
 
 v3 school:
 full help

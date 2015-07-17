@@ -43,12 +43,15 @@ app.config(['$routeProvider',
             }).
             when('/wordList/:id', {
                 templateUrl: 'partials/dictionary.html',
-                controller: 'DictionaryCtrl',
-                type: 'dictionary'
+                controller: 'DictionaryCtrl'
             }).
             when('/improve/:word', {
                 templateUrl: 'partials/improve.html',
                 controller: 'ImproveCtrl'
+            }).
+            when('/wordView/:id', {
+                templateUrl: 'partials/wordView.html',
+                controller: 'WordViewCtrl'
             }).
             when('/group/:id', {
                 templateUrl: 'partials/dictionary.html',

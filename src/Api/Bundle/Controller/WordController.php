@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Api\Bundle\Controller;
-
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,29 +8,42 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
-use Main\DefaultBundle\Entity as e;
-use Main\DefaultBundle\Form as f;
+use Main\DefaultBundle\Entity\Word;
 
 class WordController extends FOSRestController implements ClassResourceInterface
 {
     /**
      * @Rest\View()
      */
+    public function getAction(Request $request, Word $w)
+    {
+       $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordFullTranslation($w);
+      
+       return array($results);
+    }
+  
+    /**
+     * @Rest\View()
+     */
     public function postAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->request->get('id'))) {
             $word = $request->request->get('word');
 
             if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word['w']))) {
-                $w = new e\Word();
+                $w = new Word();
                 $w->setWord($word['w']);
                 $w->setLocal('en');
-                $this->get('persist')->persistAndFlush($w);
+                $em->persist($w);
+                $em->flush();
             }
             if (!$d->getWords()->contains($w)) {
                 $d->addWord($w);
-                $this->get('persist')->persistAndFlush($d);
+                $em->persist($d);
             }
+          
+            $em->flush();
 
             return array('dic' => $d->getJsonArray());
         }
@@ -44,11 +55,13 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function removeAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         if ($w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find($request->request->get('id')) and
             $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->request->get('did'))
         ) {
             $d->getWords()->removeElement($w);
-            $this->get('persist')->persistAndFlush($d);
+            $em->persist($d);
+            $em->flush();
           
             return array('dic' => $d->getJsonArray());
         }
