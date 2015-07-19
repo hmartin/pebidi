@@ -136,6 +136,8 @@ app
     .service('dicService', function ($http, localStorageService) {
         var dic = null;
         this.loadDic = function () {
+            log('loadDic');
+            log(!this.dic);
             if (!this.dic) {
                 return $http.get(URL + 'dict/dict.json').then(function (res) {
                     console.log('dicService.loadDic');

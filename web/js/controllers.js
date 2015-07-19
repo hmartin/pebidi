@@ -18,7 +18,7 @@ app
         };
     })
 
-    .controller('WordCtrl', function ($scope, $http, $location, $routeParams, $filter, pediService, mainService, wordService, dicService, localStorageService) {
+    .controller('AddWordCtrl', function ($scope, $http, $location, $routeParams, $filter, pediService, mainService, wordService, dicService) {
         $scope.formData = {};
 
         if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {
@@ -26,10 +26,10 @@ app
         } else {
             //pediService.get($scope.dic.id);
         }
-
         dicService.loadDic();
 
         $scope.getWords = function (val) {
+            log(val);
             sug = $filter('limitTo')($filter('filter')(dicService.getDic(), val, function (actual, expected) {
                 return actual.toString().toLowerCase().indexOf(expected.toLowerCase()) == 0;
             }), 10);
@@ -172,8 +172,7 @@ app
         }, true);
 
         $scope.$watch('service.getUser()', function (data) {
-            console.info('wathed getUser!');
-            console.log(data);
+            console.info('wathed getUser');
             $scope.user = mainService.getUser();
         }, true);
 

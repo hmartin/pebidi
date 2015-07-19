@@ -4,5 +4,13 @@ app
         $scope.word = $routeParams.word;
 
     })
+    .controller('WordCtrl', function ($scope, $routeParams, $http) {
+        $http
+            .get(API_URL + 'words/'+$routeParams.id +'.json')
+            .success(function (data) {
+                $scope.wordSenses = data;
+            });
+
+    })
 
 ;

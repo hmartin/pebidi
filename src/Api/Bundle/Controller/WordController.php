@@ -19,7 +19,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
     {
        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordFullTranslation($w);
       
-       return array($results);
+       return $results;
     }
   
     /**

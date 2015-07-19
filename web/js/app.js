@@ -23,7 +23,7 @@ app.config(['$routeProvider',
             }).
             when('/dictionary/:id?', {
                 templateUrl: 'partials/addWord.html',
-                controller: 'WordCtrl'
+                controller: 'AddWordCtrl'
             }).
             when('/addGroupWord', {
                 templateUrl: 'partials/addGroupWord.html',
@@ -49,9 +49,9 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/improve.html',
                 controller: 'ImproveCtrl'
             }).
-            when('/wordView/:id', {
-                templateUrl: 'partials/wordView.html',
-                controller: 'WordViewCtrl'
+            when('/word/:id', {
+                templateUrl: 'partials/word.html',
+                controller: 'WordCtrl'
             }).
             when('/group/:id', {
                 templateUrl: 'partials/dictionary.html',
