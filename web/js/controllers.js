@@ -5,9 +5,11 @@ app
         $scope.ip = 0;
         $scope.ia = 2;
         if (localStorageService.get('dic') && localStorageService.get('user')) {
-            mainService.setDic(localStorageService.get('dic'));
-            mainService.setUser(localStorageService.get('user'));
-            $location.path('/dictionary/' + mainService.dic.id);
+            $http.get(API_URL + 'users/'+ localStorageService.get('user').id +'.json').success(function (data) {
+                mainService.setUser(data.user);
+                mainService.setDic(data.dic);
+            });
+            $location.path('/dictionary/' + mainService.getDic().id);
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'users/emails.json', $scope.formData).success(function (data) {
@@ -165,15 +167,13 @@ app
 
         $scope.dic = mainService.getDic();
 
-        $scope.$watch('service.getDic()', function (data) {
+        $scope.$watch(mainService.getDic, function (data) {
             console.info('wathed!');
-            console.log(data);
             $scope.dic = mainService.getDic();
         }, true);
 
-        $scope.$watch('service.getUser()', function (data) {
-            console.info('wathed getUser');
-
+        $scope.$watch(mainService.getUser, function (data) {
+            console.info('mainService getUser');
             $scope.user = mainService.getUser();
         }, true);
 

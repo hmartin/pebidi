@@ -15,6 +15,21 @@ use Main\DefaultBundle\Entity\Dictionary;
 
 class UserController extends FOSRestController implements ClassResourceInterface
 {
+
+    /**
+     * @Rest\View()
+     */
+    public function getAction(Request $request, User $u)
+    {
+        $score = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
+        $params = array('user' => array('id' => $u->getId(), 'score' => $score));
+        if ($d = $u->getDefaultDictionary()) {
+            $params['dic'] = $d->getJsonArray();
+        }
+
+        return $params;
+    }
+
     /**
      * @Rest\View()
      */

@@ -1,55 +1,49 @@
 app
     .service('mainService', function ($rootScope, localStorageService) {
-        this.user = {};
-        this.dic = {};
-  
-        this.lang = '';
+        var user = {};
+        var dic = {};
+        var lang = '';
 
-        this.setDic = function (dic) {
-            this.dic = dic;
-            //$rootScope.$apply();
+        this.setDic = function (d) {
+            dic = d;
             localStorageService.set('dic', dic);
             console.log(dic);
         };
         this.setScore = function (dicScore) {
-            this.user.score = dicScore;
+            user.score = dicScore;
             console.log('scor tot' + dicScore);
 
         };
         this.setCountWord = function (countWord) {
-            this.dic.countWord = countWord;
+            dic.countWord = countWord;
         };
         this.getDic = function () {
-            if (!('id' in this.dic) && (localStorageService.get('dic'))) {
-                this.dic = localStorageService.get('dic');
+            if (!('id' in dic) && (localStorageService.get('dic'))) {
+                dic = localStorageService.get('dic');
             }
-            return this.dic;
+            return dic;
         };
 
         this.getDid = function () {
-            return this.dic.id;
+            return dic.id;
         };
 
-        this.setUid = function (uid) {
-            this.user.id = uid;
-        };
         this.getUid = function () {
-            if (this.user.id || localStorageService.get('user')) {
-                if (!this.user.id) {
-                    this.user = localStorageService.get('user');
+            if (user.id || localStorageService.get('user')) {
+                if (!user.id) {
+                    user = localStorageService.get('user');
                 }
-                return this.user.id;
+                return user.id;
             } else {
                 return false;
             }
         };
   
         this.getUser = function () {
-            return this.user;
+            return user;
         };
-        this.setUser = function (user) {
-            this.user = user;
-            log(user);
+        this.setUser = function (u) {
+            user = u;
             localStorageService.set('user', user);
         };
     })
@@ -136,11 +130,8 @@ app
     .service('dicService', function ($http, localStorageService) {
         var dic = null;
         this.loadDic = function () {
-            log('loadDic');
-            log(!this.dic);
             if (!this.dic) {
                 return $http.get(URL + 'dict/dict.json').then(function (res) {
-                    console.log('dicService.loadDic');
                     dic = res.data;
 
                     return dic;

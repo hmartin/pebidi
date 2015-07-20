@@ -13,7 +13,6 @@ use Main\DefaultBundle\Form as f;
 
 class ApiUserController extends FOSRestController
 {
-
     /**
      * @Rest\View()
      */
