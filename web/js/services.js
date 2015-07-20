@@ -49,7 +49,7 @@ app
         };
         this.setUser = function (user) {
             this.user = user;
-          log(user);
+            log(user);
             localStorageService.set('user', user);
         };
     })

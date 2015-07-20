@@ -173,6 +173,7 @@ app
 
         $scope.$watch('service.getUser()', function (data) {
             console.info('wathed getUser');
+
             $scope.user = mainService.getUser();
         }, true);
 
