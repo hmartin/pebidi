@@ -75,13 +75,18 @@ fos_rest:
     routing_loader:
         default_format: json
 
+cspoo_swiftmailer_mailgun:
+    key: "key-432a57a83c7c323fd6ba8595dd00b5c0"
+    domain: "sandbox4933dbe86b6147ba9a2199165be5e3b4.mailgun.org"
+
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport: "mailgun"
+    #host:      "%mailer_host%"
+    #username:  "%mailer_user%"
+    #password:  "%mailer_password%"
+    spool:     { type: memory } 
+ 
     
 jms_serializer:
     metadata:

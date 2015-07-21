@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+            new cspoo\Swiftmailer\MailgunBundle\cspooSwiftmailerMailgunBundle(),
+          
             new Main\DefaultBundle\MainDefaultBundle(),
             new Api\Bundle\ApiBundle(),
         );
