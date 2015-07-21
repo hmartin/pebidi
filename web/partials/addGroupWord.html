@@ -4,7 +4,7 @@
     <div class="col-md-4">{{group.description}}</div>
     <div class="col-md-2 col-md-offset-1">
         <span class="pointer glyphicon glyphicon-download" tooltip="{{ 'addGroupWord'|translate }}" ng-click="addGroupWord(group.id)"></span>
-        <a  ng-href="#/group/{{ group.id }}" class="glyphicon glyphicon-eye-open" ></a>
+        <a  ng-href="#/wordList/{{ group.id }}" class="glyphicon glyphicon-eye-open" ></a>
     </div>
 </div>
 <div ng-include="'blocs/countWord.html'"></div>

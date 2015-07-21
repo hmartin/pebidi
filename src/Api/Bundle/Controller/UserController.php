@@ -21,13 +21,7 @@ class UserController extends FOSRestController implements ClassResourceInterface
      */
     public function getAction(Request $request, User $u)
     {
-        $score = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
-        $params = array('user' => array('id' => $u->getId(), 'score' => $score));
-        if ($d = $u->getDefaultDictionary()) {
-            $params['dic'] = $d->getJsonArray();
-        }
-
-        return $params;
+      return $this->getUserAndDic($u);
     }
 
     /**
@@ -63,17 +57,25 @@ class UserController extends FOSRestController implements ClassResourceInterface
                 $em->flush();
             }
             $em->refresh($u);
-            $score = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
-            $params = array('user' => array('id' => $u->getId(), 'score' => $score));
-                            
-            if ($d = $u->getDefaultDictionary()) {
-                $params['dic'] = $d->getJsonArray();
-            }
-            return $params;
+         
+            return $this->getUserAndDic($u);
         }
     }
+  
+    protected function getUserAndDic(User $u) 
+    {
+        $score = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
+        $params = array('user' => array('id' => $u->getId(), 'score' => $score));
+        if ($d = $u->getDefaultDictionary()) {
+            $params['dic'] = $d->getJsonArray();
+            $params['user']['did'] = $d->getId();
+        }
 
-    private function getScore($u, $d)
+        return $params;
+      
+    }
+
+    protected function getScore($u, $d)
     {
         $a = array('user' => $u, 'dictionary' => $d);
         $ds = $this->getDoctrine()->getRepository('MainDefaultBundle:DictionaryScore')->findOneBy($a);

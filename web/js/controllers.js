@@ -130,7 +130,7 @@ app
         };
     })
 
-    .controller('DictionaryCtrl', function ($scope, $http, $route, $routeParams, wordService, pediService) {
+    .controller('WordListCtrl', function ($scope, $http, $route, $routeParams, wordService, pediService) {
 
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             pediService.get($routeParams.id);
