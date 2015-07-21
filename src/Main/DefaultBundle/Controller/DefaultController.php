@@ -31,13 +31,14 @@ class DefaultController extends Controller
     {
         //echo '<pre>';
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:user')->find(1);
-        //$d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
-        //$results = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find(1);
-        //var_dump($results);
+        $d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
+
+        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getDictionaryAllWords($d, null);
+        dump($results);
       
        
-        $u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find(1);
-        $this->get('mailer_manager')->sendValidateEmail($u);
+        //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find(1);
+        //$this->get('mailer_manager')->sendValidateEmail($u);
       /*
         $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
         dump($w);

@@ -1,4 +1,6 @@
-<h1>{{ 'yourDictionary'|translate }}</h1>
+
+<h1 ng-if="user.did == dic.id" >{{ 'yourDictionary'|translate }}</h1>
+<h1 ng-if="user.did != dic.id" >{{ 'group'|translate }}</h1>
 <input class="form-control" type="search" ng-model="q" placeholder="filter words..."/>
         <br>
 <div class="text-left row animate-repeat" ng-repeat="word in words | filter:q">

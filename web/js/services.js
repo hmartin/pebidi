@@ -164,6 +164,7 @@ app
                 }
             });
         };
+       */
         
         this.get = function (id) {
             data = {};
@@ -180,11 +181,11 @@ app
                 }
             })
         };
-        */
 
         this.getWords = function (id) {
+            //, {params: {'uid': mainService.getUid()}}
             var promise = $http
-                .get(API_URL + 'dictionaries/' + id + '/words.json', {params: {'uid': mainService.getUid()}})
+                .get(API_URL + 'dictionaries/' + id + '/words.json')
                 .then(function (data) {
 
                     return data.data;
