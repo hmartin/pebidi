@@ -5,23 +5,23 @@
     <form ng-submit="processWord()">
         <div class="row">
             <div class="col-xs-9 col-md-3 no-gutter" >
-                <input type="text" ng-model="word"
+                <input type="text" ng-model="form.word"
                        class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
             </div>
 
             <div class="col-xs-3 col-md-1 no-gutter">
-                <select ng-model="wordType" class="form-control">
+                <select ng-model="form.wordType" class="form-control">
                     <option>{{ 'noun'|translate }}</option>
                     <option>{{ 'adjective'|translate }}</option>
                     <option>{{ 'verb'|translate }}</option>
                 </select>
             </div>
             <div class="col-xs-12 col-md-4">
-                <input type="text" ng-model="definition"
+                <input type="text" ng-model="form.definition"
                        class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
             </div>
             <div class="col-xs-12 col-md-4">
-                <input type="text" ng-model="translation"
+                <input type="text" ng-model="form.translation"
                        class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
             </div>
         </div>

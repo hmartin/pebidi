@@ -33,12 +33,12 @@ init lang*
 add extra input if no translation*
 
 v1 friend:
+create / edit / visibility groupWord
 Create & Edit best translation
 view word
 validate email
 css global
 full translate (with Escaping of variable content)
-create / edit / visibility groupWord
 Real test
 Fixture GW 500 words
 

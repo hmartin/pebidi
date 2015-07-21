@@ -124,10 +124,6 @@ app
                 mainService.setDic(data.dic);
             });
         };
-
-        $scope.viewGroupWord = function (id) {
-            $location.path('/viewWords/group/' + id);
-        };
     })
 
     .controller('WordListCtrl', function ($scope, $http, $route, $routeParams, wordService, pediService) {
@@ -164,8 +160,6 @@ app
             localStorageService.clearAll();
             $location.path('/');
         };
-
-        $scope.dic = mainService.getDic();
 
         $scope.$watch(mainService.getDic, function (data) {
             console.info('wathed!');
