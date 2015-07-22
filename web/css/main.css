@@ -185,3 +185,8 @@ input, select,textarea {
         width: 900px;
     }
 }
+
+#wordList .row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

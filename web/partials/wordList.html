@@ -1,18 +1,21 @@
-
-<h1 ng-if="user.did == dic.id" >{{ 'yourDictionary'|translate }}</h1>
-<h1 ng-if="user.did != dic.id" >{{ 'group'|translate }}</h1>
+<div ng-if="user.did == dic.id"><h1>{{ 'yourDictionary'|translate }}</h1></div>
+<div ng-if="user.did != dic.id"><h1>{{ 'group'|translate }}</h1>
+    (<a ng-href="#/wordList/{{ user.did }}">{{ 'backToYourDictionary'|translate }}</a>)
+</div>
 <input class="form-control" type="search" ng-model="q" placeholder="filter words..."/>
-        <br>
-<div class="text-left row animate-repeat" ng-repeat="word in words | filter:q">
-    <div class="row" ng-hide="delete"  ng-class-odd="'odd'">
-        <div class="col-md-3"><a href="#/word/{{ word.id }}" >{{word.w| capitalize }}</a></div>
+<br>
+<div id="wordList" class="text-left animate-repeat" ng-repeat="word in words | filter:q">
+    <div class="row" ng-hide="delete" ng-class-odd="'odd'">
+        <div class="col-md-3"><a href="#/word/{{ word.id }}">{{word.w| capitalize }}</a></div>
         <div class="col-md-5">{{word.t| capitalize }}</div>
         <div class="col-md-1" ng-if="word.stat_sum_realised">{{ (word.stat_sum_realised*100)| number:1 }}%</div>
         <div class="col-md-1" ng-if="!word.stat_sum_realised">-</div>
         <div class="col-md-1" ng-if="word.global">{{ (word.global*100)| number:1 }}%</div>
         <div class="col-md-1" ng-if="!word.global">-</div>
         <div class="col-md-1 col-md-offset-1">
-            <span class="pointer glyphicon glyphicon-remove"
+            <span class="pointer glyphicon glyphicon-plus" ng-if="user.wids.indexOf(word.id) < -1"
+                  ng-click="delete = ! delete;deleteWord(word.id)" tooltip="{{ 'addWord'|translate }}"></span>
+            <span  ng-if="user.id == dic.uid" class="pointer glyphicon glyphicon-remove"
                   ng-click="delete = ! delete;deleteWord(word.id)"></span>
         </div>
     </div>

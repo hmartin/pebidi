@@ -53,7 +53,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
     /**
      * @Rest\View()
      */
-    public function removeAction(Request $request)
+    public function postRemoveAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         if ($w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find($request->request->get('id')) and

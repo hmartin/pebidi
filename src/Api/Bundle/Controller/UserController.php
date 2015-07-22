@@ -69,6 +69,11 @@ class UserController extends FOSRestController implements ClassResourceInterface
         if ($d = $u->getDefaultDictionary()) {
             $params['dic'] = $d->getJsonArray();
             $params['user']['did'] = $d->getId();
+            $words = $d->getWords();
+            foreach($words as $w) {
+                $params['user']['wids'][] = $w->getId();
+            }
+
         }
 
         return $params;

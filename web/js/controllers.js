@@ -13,6 +13,7 @@ app
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'users/emails.json', $scope.formData).success(function (data) {
+                console.log(data.dic);
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
             });
@@ -46,7 +47,7 @@ app
         $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
             console.log($scope.formData);
-            wordService.post($scope.formData);
+            pediService.post($scope.formData);
             $scope.formData.word = '';
             $scope.formData.translation = '';
         };
@@ -138,7 +139,7 @@ app
         });
 
         $scope.deleteWord = function (id) {
-            wordService.delete(id);
+            pediService.delete(id);
         }
     })
 
@@ -155,10 +156,12 @@ app
         }
 
         $scope.clearLocalStorage = function () {
-            mainService.setDic({});
-            mainService.setUser({});
+            mainService.setDic(null);
+            mainService.setUser(null);
+            $scope.user = {};
+            $scope.dic = {};
             localStorageService.clearAll();
-            $location.path('/');
+                $location.path('/');
         };
 
         $scope.$watch(mainService.getDic, function (data) {
