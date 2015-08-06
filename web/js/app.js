@@ -68,7 +68,7 @@ function log(i) {
 }
 
 app.config(function ($translateProvider) {
-    $translateProvider.useSanitizeValueStrategy(null);
+    $translateProvider.useSanitizeValueStrategy('sanitize');
     $translateProvider.translations('en', {
         'dictionaryOf': 'It\'s the dictionary of:',
         'clickHere': 'Click here',

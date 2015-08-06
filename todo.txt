@@ -31,6 +31,7 @@ one step create dic*
 do it again*
 init lang*
 add extra input if no translation*
+with Escaping of variable content*
 
 v1 friend:
 create / edit / visibility groupWord
@@ -38,7 +39,7 @@ Create & Edit best translation
 view word
 validate email
 css global
-full translate (with Escaping of variable content)
+full translate
 Real test
 Fixture GW 500 words
 
