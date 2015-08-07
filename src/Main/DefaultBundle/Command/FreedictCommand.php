@@ -2,6 +2,9 @@
 namespace Main\DefaultBundle\Command;
 
 use Main\DefaultBundle\Entity\Suck;
+use Main\DefaultBundle\Entity\Sense;
+use Main\DefaultBundle\Entity\Word;
+use Main\DefaultBundle\Entity\Ww;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,7 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
-class FreedictCommand extends ContainerAwareCommand
+class FreedictCommand extends InsertCommand
 {
     protected function configure()
     {
@@ -20,13 +23,51 @@ class FreedictCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
-        //$p = $em->getRepository('MainDefaultBundle:Suck')->findAll();
-        $xml = simplexml_load_file($this->getContainer()->get('kernel')->getRootDir().'/../src/Main/DefaultBundle/freeDict/fra-eng.xml');
-      $entries = $xml->text->body->entry;
-      echo $entries->count();
-      foreach ($entries as $second_gen) {
-        //echo "\n".'---1---'.$second_gen->form->orth;
-      }
+
+        $xml = simplexml_load_file($this->getContainer()->get('kernel')->getRootDir() . '/../freeDictSource/eng-fra/eng-fra.tei');
+        $entries = $xml->text->body->entry;
+
+        $nbExist = $k = 0;
+        $local = 'en';
+        $next = true;
+        foreach ($entries as $second_gen) {
+
+            if ($next and $second_gen->form->orth != 'patient')
+                continue;
+            else {
+                $next = false;
+            }
+            $word = $this->getWord($second_gen->form->orth, $local);
+            $k = $k + 0.1;
+            $priority = 0;
+
+            echo '              (origin) ';
+            foreach ($second_gen->sense as $senses) {
+
+
+                $sense = new Sense();
+                $sense->setSense('');
+                $sense->setLocal('en');
+
+                $em->persist($sense);
+
+                foreach ($senses->cit as $cits) {
+                    $tw = $this->getWord($cits->quote, 'fr');
+                    //$output->writeln('c:' . $class . '   s:'.$sense.'   w:'. $w  .'   t:' . $tw . ' $prior:' . $prior );
+                    $priority = $priority + 1;
+                    $prior = $priority + $k;
+
+                    $ww = new Ww();
+                    $ww->setWord1($word);
+                    $ww->setWord2($tw);
+                    $ww->addSense($sense);
+                    $ww->setPriority($prior);
+
+                    $em->persist($ww);
+                }
+            }
+        }
+        echo $nbExist . ' / ' . $entries->count() . "\n";
         $em->flush();
 
     }
