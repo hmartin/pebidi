@@ -12,14 +12,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
-class CleanUserCommand extends ContainerAwareCommand
+abstract class CleanUserCommand extends ContainerAwareCommand
 {
-    protected function configure()
-    {
-        $this
-            ->setName('oneShot:cleanUser');
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
