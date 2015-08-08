@@ -29,7 +29,7 @@ class InsertCommand extends ContainerAwareCommand
     protected function getWord($w, $local)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
-
+ini_set('memory_limit', '-1');
         //$w = utf8_decode($w);
         $w = str_replace('<br>', '', $w);
         echo "\n" . '('.$local.') ';
@@ -52,7 +52,7 @@ class InsertCommand extends ContainerAwareCommand
         $obj->setLocal($local);
         $obj->setWord($w);
         $em->persist($obj);
-        $em->flush();
+        //$em->flush();
 
         return $obj;
     }

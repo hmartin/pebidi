@@ -13,7 +13,7 @@ app
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'users/emails.json', $scope.formData).success(function (data) {
-                console.log(data.dic);
+                console.log(data);
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
             });

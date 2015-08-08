@@ -36,7 +36,8 @@ a:hover {
 html,
 body {
     height: 100%;
-    background-color: #461B7E;
+    /*background-color: #461B7E;*/
+    background-color: #ffffff;
 }
 body {
     color: #fff;
