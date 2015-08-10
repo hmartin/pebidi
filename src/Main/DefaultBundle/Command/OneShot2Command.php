@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 
-class OneShot2Command extends ContainerAwareCommand
+class OneShot2Command extends InsertCommand
 {
     protected function configure()
     {
@@ -49,11 +49,11 @@ TRUNCATE `WwSenses`;
             $time_end = microtime_float();
             $time = $time_end - $time_start;
             if ($time > 3000) {
-                $em->flush();
-                exit;
+                //$em->flush();
+                //exit;
             }
             $newWord = false;
-            $output->writeln($k . '---------------         ' . $s->getUrl() . '    ------------------------------');
+            $output->writeln("\n".$k . '---------------         ' . $s->getUrl() . '    ------------------------------');
             $crawler = new Crawler($s->getHmtl());
             $crawler = $crawler->filter('table.WRD > tr');
             $class = '';
@@ -68,10 +68,11 @@ TRUNCATE `WwSenses`;
 
                         if (!$newWord) {
                             if (null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
-                                if ($em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => utf8_encode($newWord), 'local' => 'en'))) {
+                                if ($em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => utf8_decode(utf8_encode($newWord)), 'local' => 'en'))) {
+                                    //echo
                                     // word already in db
                                     $w = null;
-                                    continue 2;
+                                    //continue 2;
                                 }
                                 $newWord = explode(',', $newWord);
                                 $w = $this->getWord($newWord['0'], 'en');
@@ -131,36 +132,9 @@ TRUNCATE `WwSenses`;
                 }
             }
         }
-        $em->flush();
+        //$em->flush();
         $x = 1 / 0;
         exit;
-    }
-
-    private function getWord($w, $local)
-    {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-
-        $w = utf8_decode($w);
-        $w = str_replace('<br>', '', $w);
-        if($local == 'en') {
-
-            $w = str_replace('<span title="something">[sth]</span>', '[sth]', $w);
-            $w = str_replace('<span title="somebody">[sb]</span>', '[sb]', $w);
-            $w = str_replace('<span title="somebody or something">[sb/sth]</span>', '[sb/sth]', $w);
-        }
-        $w = trim($w);
-
-        if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
-            return $obj;
-        }
-
-        $obj = new Word();
-        $obj->setLocal($local);
-        $obj->setWord($w);
-        $em->persist($obj);
-        $em->flush();
-
-        return $obj;
     }
 
 }
