@@ -48,12 +48,7 @@ TRUNCATE `WwSenses`;
         $local = 'en';
         $next = true;
         foreach ($entries as $second_gen) {
-/*
-            if ($next and $second_gen->form->orth != 'patient')
-                continue;
-            else {
-                $next = false;
-            }*/
+          
             $word = $this->getWord($second_gen->form->orth, $local);
             $k = $k + 0.1;
             $priority = 0;

@@ -20,6 +20,8 @@ function microtime_float()
 
 class InsertCommand extends ContainerAwareCommand
 {
+    public $persistWords = array('en' => array(), 'fr' => array());
+  
     protected function configure()
     {
         $this
@@ -44,6 +46,10 @@ ini_set('memory_limit', '-1');
         if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
             echo 'Exist: ' . $obj->getWord();
             return $obj;
+        } else if (array_key_exists($w, $this->persistWords[$local])) {
+            echo 'PrExi: ' . $this->persistWords[$local][$w];
+            return $obj;
+          
         }
 
         echo 'NoExi: ' . $w;
@@ -52,6 +58,7 @@ ini_set('memory_limit', '-1');
         $obj->setLocal($local);
         $obj->setWord($w);
         $em->persist($obj);
+        $this->persistWords[$local][$w] = $obj;
         //$em->flush();
 
         return $obj;

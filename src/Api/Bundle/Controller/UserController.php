@@ -74,7 +74,6 @@ class UserController extends FOSRestController implements ClassResourceInterface
             foreach($words as $w) {
                 $params['user']['wids'][] = $w->getId();
             }
-
         }
 
         return $params;
