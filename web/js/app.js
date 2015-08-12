@@ -81,9 +81,11 @@ app.config(function ($translateProvider) {
         'addWord.newWord': 'Add a new word:',
         'addWord.word': 'Word',
         'addWord.translation': 'Translation, definition, examples...',
+        'addWord.doATest': 'Do a test',
+        'addWord.oops': 'Oops, we don\'t find match word',
+        'addWord.improve': 'Improve pebidi with this new word'
         'save': 'Save!',
         'yourDictionary': 'Your dictionary',
-        'addWord.doATest': 'Do a test',
         'createTest': 'Create a test',
         'simpleTest': 'Simple test',
         'simpleTimeTest': 'Simple Test with time limit',
@@ -94,7 +96,7 @@ app.config(function ($translateProvider) {
         'fr': 'French',
         'es': 'Spanish',
         'en': 'English',
-        'de': 'German'
+        'de': 'German',
     });
     $translateProvider.translations('fr', {
         'dictionaryOf': 'Dictionnaire de:',
@@ -108,9 +110,11 @@ app.config(function ($translateProvider) {
         'addWord.newWord': 'Ajouter un nouveau mot:',
         'addWord.word': 'Mot',
         'addWord.translation': 'Traduction, définition, exemples...',
+        'addWord.doATest': 'Faire un test',
+        'addWord.oops': 'Oops, we don\'t find match word',
+        'addWord.improve': 'Improve pebidi with this new word'
         'save': 'Ajouter!',
         'yourDictionary': 'Votre dictionnaire',
-        'addWord.doATest': 'Faire un test',
         'createTest': 'Création de Test',
         'simpleTest': 'Test simple',
         'simpleTimeTest': 'Test simple avec temps limité',
