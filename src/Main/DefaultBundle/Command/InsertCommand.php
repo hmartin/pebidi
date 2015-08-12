@@ -18,24 +18,18 @@ function microtime_float()
     return ((float)$usec + (float)$sec);
 }
 
-class InsertCommand extends ContainerAwareCommand
+abstract class InsertCommand extends ContainerAwareCommand
 {
     public $persistWords = array('en' => array(), 'fr' => array());
-  
-    protected function configure()
-    {
-        $this
-            ->setName('oneShot:abstract');
-    }
 
     protected function getWord($w, $local)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
-ini_set('memory_limit', '-1');
+        ini_set('memory_limit', '-1');
         //$w = utf8_decode($w);
         $w = str_replace('<br>', '', $w);
-        echo "\n" . '('.$local.') ';
-        if($local == 'en') {
+        echo "\n" . '(' . $local . ') ';
+        if ($local == 'en') {
 
             $w = str_replace('<span title="something">[sth]</span>', '[sth]', $w);
             $w = str_replace('<span title="somebody">[sb]</span>', '[sb]', $w);
@@ -49,7 +43,7 @@ ini_set('memory_limit', '-1');
         } else if (array_key_exists($w, $this->persistWords[$local])) {
             echo 'PrExi: ' . $this->persistWords[$local][$w];
             return $obj;
-          
+
         }
 
         echo 'NoExi: ' . $w;
