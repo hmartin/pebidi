@@ -44,19 +44,20 @@ TRUNCATE `WwSenses`;
         $statement->execute();
         $statement->closeCursor();
 
-        $nbExist = $k = 0;
+        $nbExist = $k = $i = 0;
         $local = 'en';
         $next = true;
         foreach ($entries as $second_gen) {
           
             $word = $this->getWord($second_gen->form->orth, $local);
-            $k = $k + 0.1;
+            $k = 0;
             $priority = 0;
 
             echo '              (origin) ';
             foreach ($second_gen->sense as $senses) {
 
-
+                $k = $k + 0.1;
+                $priority = 0;
                 $sense = new Sense();
                 $sense->setSense('');
                 $sense->setLocal('en');
@@ -65,10 +66,15 @@ TRUNCATE `WwSenses`;
 
                 foreach ($senses->cit as $cits) {
                     $tw = $this->getWord($cits->quote, 'fr');
+                    if (is_null($tw) or $i == 1000) {
+                        echo "\n".'null:'.$cits->quote;
+        $em->flush();
+                        exit;
+                    }
                     //$output->writeln('c:' . $class . '   s:'.$sense.'   w:'. $w  .'   t:' . $tw . ' $prior:' . $prior );
                     $priority = $priority + 1;
                     $prior = $priority + $k;
-
+$i++;
                     $ww = new Ww();
                     $ww->setWord1($word);
                     $ww->setWord2($tw);

@@ -17,7 +17,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function getAction(Request $request, Word $w)
     {
-       $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordFullTranslation($w);
+        $wordRepo = $this->getDoctrine()->getRepository('MainDefaultBundle:Word');
+       if ($request->query->get('improve')) {
+          $results = $wordRepo->getWordFullTranslation($w);
+       } else {
+          $results = $wordRepo->getWordTranslationConcat($w);
+       }
       
        return $results;
     }

@@ -30,11 +30,11 @@ abstract class InsertCommand extends ContainerAwareCommand
         $w = str_replace('<br>', '', $w);
         echo "\n" . '(' . $local . ') ';
         if ($local == 'en') {
-
             $w = str_replace('<span title="something">[sth]</span>', '[sth]', $w);
             $w = str_replace('<span title="somebody">[sb]</span>', '[sb]', $w);
             $w = str_replace('<span title="somebody or something">[sb/sth]</span>', '[sb/sth]', $w);
         }
+        
         $w = trim($w);
 
         if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
@@ -42,7 +42,7 @@ abstract class InsertCommand extends ContainerAwareCommand
             return $obj;
         } else if (array_key_exists($w, $this->persistWords[$local])) {
             echo 'PrExi: ' . $this->persistWords[$local][$w];
-            return $obj;
+            return $this->persistWords[$local][$w];
 
         }
 

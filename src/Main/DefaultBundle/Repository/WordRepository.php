@@ -9,17 +9,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class WordRepository extends EntityRepository
 {
-    public function getWordFullTranslation($w) 
+    public function getWordTranslationConcat($w) 
+    {
+        $qb = $this->getWordFullTranslationQuery($w) 
+            ->addSelect('senses.sense as sense, senses.id as sid, GROUP_CONCAT(translation.word) as concat')
+            ->groupBy('senses.id');
+
+        return $qb->getQuery()->getResult();      
+    }
+    
+    protected function getWordFullTranslationQuery($w) 
     {
         $qb = $this->initQueryBuilder()
-            ->addSelect('senses.sense as sense, senses.id as sid, GROUP_CONCAT(translation.word) as concat')
             ->innerJoin('ww.senses', 'senses')
             ->where('word.id = :wid')
             ->setParameter('wid', $w)
-            ->groupBy('senses.id')
             ->orderBy('ww.priority', 'ASC');
 
-        return $qb->getQuery()->getResult();      
+        return $qb;      
+    }
+    
+    public function getWordFullTranslation($w) 
+    {
+        return $this->getWordFullTranslationQuery($w)->getQuery()->getResult();      
     }
   
     public function getWordsForTest($nb, $d, $u)
