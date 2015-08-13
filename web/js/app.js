@@ -83,7 +83,7 @@ app.config(function ($translateProvider) {
         'addWord.translation': 'Translation, definition, examples...',
         'addWord.doATest': 'Do a test',
         'addWord.oops': 'Oops, we don\'t find match word',
-        'addWord.improve': 'Improve pebidi with this new word'
+        'addWord.improve': 'Improve pebidi with this new word',
         'save': 'Save!',
         'yourDictionary': 'Your dictionary',
         'createTest': 'Create a test',
@@ -96,7 +96,7 @@ app.config(function ($translateProvider) {
         'fr': 'French',
         'es': 'Spanish',
         'en': 'English',
-        'de': 'German',
+        'de': 'German'
     });
     $translateProvider.translations('fr', {
         'dictionaryOf': 'Dictionnaire de:',
@@ -112,7 +112,7 @@ app.config(function ($translateProvider) {
         'addWord.translation': 'Traduction, définition, exemples...',
         'addWord.doATest': 'Faire un test',
         'addWord.oops': 'Oops, we don\'t find match word',
-        'addWord.improve': 'Improve pebidi with this new word'
+        'addWord.improve': 'Improve pebidi with this new word',
         'save': 'Ajouter!',
         'yourDictionary': 'Votre dictionnaire',
         'createTest': 'Création de Test',

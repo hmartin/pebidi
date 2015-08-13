@@ -1,4 +1,4 @@
- <h1>{{ 'welcome'|translate }}</h1>
+<h1>{{ 'welcome'|translate }}</h1>
 
 <p class="lead">{{ 'addWord.newWord'|translate }}</p>
 
@@ -6,7 +6,11 @@
     <div class="col-md-12">
         <form ng-submit="processWord()">
             <div class="form-group has-feedback">
-                <input type="text" ng-model="formData.word" placeholder="{{ 'addWord.word'|translate  }}" typeahead-min-length="2" typeahead-wait-ms="100" typeahead="word as word.w for word in getWords($viewValue) | filter:{$:$viewValue}" typeahead-loading="loading" typeahead-template-url="listWord.html" class="form-control" required auto-focus>
+                <input type="text" ng-model="formData.word" placeholder="{{ 'addWord.word'|translate  }}"
+                       typeahead-min-length="2" typeahead-wait-ms="100"
+                       typeahead="word as word.w for word in getWords($viewValue) | filter:{$:$viewValue}"
+                       typeahead-loading="loading" typeahead-template-url="listWord.html" class="form-control" required
+                       auto-focus>
 
                 <span ng-show="loading" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
             </div>
@@ -14,7 +18,8 @@
             <div ng-if="dic">
                 <div class="form-group" ng-show="submitCreate">
                     {{ 'addWord.oops'|translate }}
-                    <a href="#/improve/{{ formData.word }}" class="btn btn-info input-lg">{{ 'addWord.improve'|translate }}</a>
+                    <a href="#/improve/{{ formData.word }}" class="btn btn-info input-lg">{{ 'addWord.improve'|translate
+                        }}</a>
                 </div>
                 <div class="form-group" ng-show="!submitCreate">
                     <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
@@ -38,7 +43,7 @@
 </div>
 
 <script type="text/ng-template" id="listWord.html">
-    < a style = "text-align: left" > < span style = "width:120px;float: left"
-    bind - html - unsafe = "match.model.w | typeaheadHighlight:query" > < /span>&nbsp;<=>&nbsp;
-        <span bind-html-unsafe="match.model.t | typeaheadHighlight:query"></span > < /a>
+    <a style="text-align: left"><span style="width:120px;float: left"
+                                      bind-html-unsafe="match.model.w | typeaheadHighlight:query"></span>&nbsp;<=>&nbsp;
+        <span bind-html-unsafe="match.model.t | typeaheadHighlight:query"></span> </a>
 </script>
