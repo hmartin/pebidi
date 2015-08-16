@@ -25,26 +25,9 @@ class OneShot2Command extends InsertCommand
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         $time_start = microtime_float();
-        var_dump(set_time_limit(60 * 60*2));
-        $connection = $em->getConnection();
-        $statement = $connection->prepare("
-         SET FOREIGN_KEY_CHECKS=0;
-TRUNCATE `DictionariesWord`;
-TRUNCATE `Dictionary`;
-TRUNCATE `DictionaryScore`;
-TRUNCATE `Point`;
-TRUNCATE `Result`;
-TRUNCATE `Sense`;
-TRUNCATE `Test`;
-TRUNCATE `TestWord`;
-TRUNCATE `Word`;
-TRUNCATE `Ww`;
-TRUNCATE `WwSenses`;
-         SET FOREIGN_KEY_CHECKS=1;");
-        //$statement->execute();
-        //$statement->closeCursor();
 
         $ss = $em->getRepository('MainDefaultBundle:Suck')->findAll();
+        /* origin */
         foreach ($ss as $k => $s) {
             $time_end = microtime_float();
             $time = $time_end - $time_start;
@@ -58,6 +41,7 @@ TRUNCATE `WwSenses`;
             $crawler = $crawler->filter('table.WRD > tr');
             $class = '';
             $k = 0;
+            /* sence */
             foreach ($crawler as $domElement) {
                 if ($domElement->getAttribute('class') == 'even' || $domElement->getAttribute('class') == 'odd') {
                     $tr = new Crawler($domElement);

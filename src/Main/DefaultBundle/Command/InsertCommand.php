@@ -58,4 +58,27 @@ abstract class InsertCommand extends ContainerAwareCommand
         return $obj;
     }
 
+    protected function clean() 
+    {
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("
+         SET FOREIGN_KEY_CHECKS=0;
+        TRUNCATE `DictionariesWord`;
+        TRUNCATE `Dictionary`;
+        TRUNCATE `DictionaryScore`;
+        TRUNCATE `Point`;
+        TRUNCATE `Result`;
+        TRUNCATE `Sense`;
+        TRUNCATE `Test`;
+        TRUNCATE `TestWord`;
+        TRUNCATE `User`;
+        TRUNCATE `Word`;
+        TRUNCATE `Ww`;
+        TRUNCATE `WwSenses`;
+         SET FOREIGN_KEY_CHECKS=1;");
+        $statement->execute();
+        $statement->closeCursor();
+    }
+    
 }

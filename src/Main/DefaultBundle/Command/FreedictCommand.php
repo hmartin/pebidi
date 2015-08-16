@@ -26,23 +26,7 @@ class FreedictCommand extends InsertCommand
 
         $xml = simplexml_load_file($this->getContainer()->get('kernel')->getRootDir() . '/../freeDictSource/eng-fra/eng-fra.tei');
         $entries = $xml->text->body->entry;
-        $connection = $em->getConnection();
-        $statement = $connection->prepare("
-         SET FOREIGN_KEY_CHECKS=0;
-TRUNCATE `DictionariesWord`;
-TRUNCATE `Dictionary`;
-TRUNCATE `DictionaryScore`;
-TRUNCATE `Point`;
-TRUNCATE `Result`;
-TRUNCATE `Sense`;
-TRUNCATE `Test`;
-TRUNCATE `TestWord`;
-TRUNCATE `Word`;
-TRUNCATE `Ww`;
-TRUNCATE `WwSenses`;
-         SET FOREIGN_KEY_CHECKS=1;");
-        $statement->execute();
-        $statement->closeCursor();
+
 
         $nbExist = $k = $i = 0;
         $local = 'en';
