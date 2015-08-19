@@ -1,26 +1,8 @@
 <div ng-if="user">
     <h1>{{ 'improve.newWord'|translate }}</h1>
     view example
-    <form ng-submit="improve()">
-        <div class="row">
-            <div class="col-xs-9 col-md-3 no-gutter">
-                <input type="text" ng-model="form.word" class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
-            </div>
-
-            <div class="col-xs-3 col-md-1 no-gutter">
-                <select ng-model="form.wordType" class="form-control">
-                    <option>{{ 'noun'|translate }}</option>
-                    <option>{{ 'adjective'|translate }}</option>
-                    <option>{{ 'verb'|translate }}</option>
-                </select>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <input type="text" ng-model="form.sense" class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <input type="text" ng-model="form.translation" class="form-control ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched">
-            </div>
-        </div>
+    <form ng-submit="improve()">++
+        <sense-form></sense-form>--
         <div class="form-group">
             <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
         </div>

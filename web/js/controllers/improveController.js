@@ -4,6 +4,11 @@ app
       
         $scope.word = $routeParams.word;
 
+        $scope.addTransaltion = function addTransaltion() {
+            var itm = document.getElementById("myList2").lastChild;
+            var cln = itm.cloneNode(true);
+            document.getElementById("myList1").appendChild(cln);
+        }
         $scope.improveWord = function () {
             
         }
