@@ -27,12 +27,11 @@ class FreedictCommand extends InsertCommand
         $xml = simplexml_load_file($this->getContainer()->get('kernel')->getRootDir() . '/../freeDictSource/eng-fra/eng-fra.tei');
         $entries = $xml->text->body->entry;
 
-
         $nbExist = $k = $i = 0;
         $local = 'en';
         $next = true;
         foreach ($entries as $second_gen) {
-          
+
             $word = $this->getWord($second_gen->form->orth, $local);
             $k = 0;
             $priority = 0;
@@ -50,15 +49,15 @@ class FreedictCommand extends InsertCommand
 
                 foreach ($senses->cit as $cits) {
                     $tw = $this->getWord($cits->quote, 'fr');
-                    if (is_null($tw) or $i == 1000) {
-                        echo "\n".'null:'.$cits->quote;
-        $em->flush();
+                    if (is_null($tw) or $i == 1000000) {
+                        echo "\n" . 'null:' . $cits->quote;
+                        $em->flush();
                         exit;
                     }
                     //$output->writeln('c:' . $class . '   s:'.$sense.'   w:'. $w  .'   t:' . $tw . ' $prior:' . $prior );
                     $priority = $priority + 1;
                     $prior = $priority + $k;
-$i++;
+                    $i++;
                     $ww = new Ww();
                     $ww->setWord1($word);
                     $ww->setWord2($tw);
