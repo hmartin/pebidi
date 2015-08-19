@@ -1,6 +1,5 @@
 <div>
     <h1>{{ word.w| capitalize }}</h1>
-    view example
     <form ng-submit="processWord()">
         <div class="text-left row animate-repeat" ng-class-odd="'odd'" ng-repeat="wordSense in wordSenses">
             <div ng-class-odd="'odd'" >
@@ -20,8 +19,13 @@
                 </div>
             </div>
         </div>
+        <div class="row" >
+            <div class="col-md-12">
         <div class="form-group">
-            <button type="submit" class="btn btn-success input-lg">{{ 'edit'|translate }}</button>
+            <br>
+            <button type="submit" class="btn btn-success btn-sm">{{ 'edit'|translate }}</button>
+        </div>
+        </div>
         </div>
     </form>
 </div>

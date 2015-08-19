@@ -18,11 +18,11 @@
             <div ng-if="dic">
                 <div class="form-group" ng-show="submitCreate">
                     {{ 'addWord.oops'|translate }}
-                    <a href="#/improve/{{ formData.word }}" class="btn btn-info input-lg">{{ 'addWord.improve'|translate
+                    <a href="#/improve/{{ formData.word }}" class="btn btn-info btn-sm">{{ 'addWord.improve'|translate
                         }}</a>
                 </div>
                 <div class="form-group" ng-show="!submitCreate">
-                    <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
+                    <button type="submit" class="btn btn-success btn-lg">{{ 'save'|translate }}</button>
                 </div>
             </div>
         </form>
