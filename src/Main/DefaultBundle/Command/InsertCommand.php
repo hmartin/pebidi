@@ -21,6 +21,7 @@ function microtime_float()
 abstract class InsertCommand extends ContainerAwareCommand
 {
     public $persistWords = array('en' => array(), 'fr' => array());
+    public $type = array();
 
     protected function getWord($w, $local)
     {

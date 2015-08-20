@@ -1,10 +1,11 @@
 <div ng-if="user">
     <h1>{{ 'improve.newWord'|translate }}</h1>
-    view example
-    <form ng-submit="improve()">++
-        <sense-form></sense-form>--
+    <img src="img/fcw.svg" />Free Cultural Works
+    <form ng-submit="improve()">
+        <sense-form></sense-form>
         <div class="form-group">
             <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
         </div>
+        {{ 'needHelp'|translate }}<a >{{ 'viewExample'|translate }}</a>
     </form>
 </div>

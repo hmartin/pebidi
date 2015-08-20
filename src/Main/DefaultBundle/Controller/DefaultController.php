@@ -126,13 +126,17 @@ class DefaultController extends Controller
      */
     public function generateJsonAction()
     {
-        $query = 'SELECT  w.id, w.word as w, w2.word as t FROM Word w
+        $query = 'SELECT  w.id, w.word as w,  w2.word as t FROM Word w
                JOIN Ww ww ON ww.word1_id = w.id
                JOIN Word w2 ON ww.word2_id = w2.id
                WHERE w.local = "en" GROUP BY w.id ORDER BY ww.priority ';
+        $queryGroup = 'SELECT  w.id, w.word as w,GROUP_CONCAT(w2.word) as t FROM Word w
+               JOIN Ww ww ON ww.word1_id = w.id
+               JOIN Word w2 ON ww.word2_id = w2.id
+               WHERE w.local = "en" GROUP BY w.id ';
         $em = $this->getDoctrine();
         $connection = $em->getConnection();
-        $stmt = $connection->prepare($query);
+        $stmt = $connection->prepare($queryGroup);
         $stmt->execute();
 
         $results = $stmt->fetchAll();

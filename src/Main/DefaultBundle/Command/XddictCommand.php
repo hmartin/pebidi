@@ -31,12 +31,35 @@ class XddictCommand extends InsertCommand
         $local = 'en';
         $next = true;
         foreach ($entries as $second_gen) {
-
-            $word = $this->getWord($second_gen->k, $local);
-            $word = $this->getWord($second_gen, 'fr');
+            $string = $second_gen->k;
+            $this->getType($string);
+            if ($string == 'can') {
+                $word = $this->getWord($string, $local);
+            $string = $second_gen;
+            $this->getType($string);
+                $word = $this->getWord($string, 'fr');
+                
+            }
         }
-        echo $nbExist . ' / ' . $entries->count() . "\n";
+        
+        var_dump($this->type);
         $em->flush();
 
+    }
+    
+    private function getType(&$string) {
+        $type = null;
+            if( preg_match( '#\((.*?)\)#', $string, $match ) ) {
+                
+                $type = $match[1];
+                $string = preg_replace('#\((.*?)\)#', '', $string);
+                
+            }
+            $string = trim($string);
+        if ($type) {
+            $this->type[$type] = count($this->type[$type]);
+        } 
+            
+        return $type;
     }
 }
