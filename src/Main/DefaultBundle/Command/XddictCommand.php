@@ -33,33 +33,48 @@ class XddictCommand extends InsertCommand
         foreach ($entries as $second_gen) {
             $string = $second_gen->k;
             $this->getType($string);
-            if ($string == 'can') {
-                $word = $this->getWord($string, $local);
-            $string = $second_gen;
-            $this->getType($string);
-                $word = $this->getWord($string, 'fr');
-                
+            if ($word = $this->getWord($string, $local)) {
+
+                $string = $second_gen;
+                $stringsTrans = explode(',', $second_gen);
+                foreach($stringsTrans as $stringTrans) {
+                    $this->getType($stringTrans);
+                    if ($word = $this->getWord($string, $local)) {
+                        $arrayTrans[] = $this->getWord($stringTrans, 'fr');
+                    }
+                }
+
             }
         }
-        
+
+        foreach ($this->type as $k => $t) {
+            if ($t < 20 ) {
+                unset($this->type[$k]);
+            }
+        }
+
         var_dump($this->type);
         $em->flush();
 
     }
-    
-    private function getType(&$string) {
+
+    private function getType(&$string)
+    {
         $type = null;
-            if( preg_match( '#\((.*?)\)#', $string, $match ) ) {
-                
-                $type = $match[1];
-                $string = preg_replace('#\((.*?)\)#', '', $string);
-                
-            }
-            $string = trim($string);
+        if (preg_match('#\((.*?)\)#', $string, $match)) {
+
+            $type = $match[1];
+            $string = preg_replace('#\((.*?)\)#', '', $string);
+
+        }
+        $string = trim($string);
         if ($type) {
-            $this->type[$type] = count($this->type[$type]);
-        } 
-            
+            if (!isset($this->type[$type])) {
+                $this->type[$type] = 0;
+            }
+            $this->type[$type] = 1 + $this->type[$type];
+        }
+
         return $type;
     }
 }
