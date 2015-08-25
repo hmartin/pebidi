@@ -27,16 +27,6 @@ abstract class InsertCommand extends ContainerAwareCommand
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         ini_set('memory_limit', '-1');
-        //$w = utf8_decode($w);
-        $w = str_replace('<br>', '', $w);
-        echo "\n" . '(' . $local . ') ';
-        if ($local == 'en') {
-            $w = str_replace('<span title="something">[sth]</span>', '[sth]', $w);
-            $w = str_replace('<span title="somebody">[sb]</span>', '[sb]', $w);
-            $w = str_replace('<span title="somebody or something">[sb/sth]</span>', '[sb/sth]', $w);
-        }
-        
-        $w = trim($w);
 
         if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
             echo 'Exist: ' . $obj->getWord();
@@ -58,7 +48,37 @@ abstract class InsertCommand extends ContainerAwareCommand
 
         return $obj;
     }
+    
+    
 
+    protected function cleanString($string)
+    {
+        if (substr_count($string, ' ') > 2 or $this->starts_with_upper($string) ) {
+            return null;
+        }
+        if (substr_count($string, '.') > 0 or substr_count($string, '[') > 0 || substr_count($string, '(') > 0 ) {
+            echo $string;
+            return null;
+        }
+        
+        $w = $string;
+        //$w = utf8_decode($w);
+        $w = str_replace('<br>', '', $w);
+        $w = str_replace('<span title="something">[sth]</span>', '[sth]', $w);
+        $w = str_replace('<span title="somebody">[sb]</span>', '[sb]', $w);
+        $w = str_replace('<span title="somebody or something">[sb/sth]</span>', '[sb/sth]', $w);
+        
+        $w = trim($w);
+
+        return $w;
+    }
+
+    private function starts_with_upper($str) 
+    {
+        $chr = mb_substr ($str, 0, 1, "UTF-8");
+        return mb_strtolower($chr, "UTF-8") != $chr;
+    }
+    
     protected function clean() 
     {
         $em = $this->getContainer()->get('doctrine')->getManager();

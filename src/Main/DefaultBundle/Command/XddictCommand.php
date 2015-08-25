@@ -28,34 +28,38 @@ class XddictCommand extends InsertCommand
         $entries = $xml->ar;
 
         $nbExist = $k = $i = 0;
-        $local = 'en';
+        
+        $global = array();
         $next = true;
+        $output->writeln('count $entries:'. count($entries));
         foreach ($entries as $second_gen) {
-            $string = $second_gen->k;
-            $this->getType($string);
-            if ($word = $this->getWord($string, $local)) {
-
-                $string = $second_gen;
-                $stringsTrans = explode(',', $second_gen);
+            
+            $fromString = $second_gen->k->__toString();
+            $type_w = $this->getType($fromString);
+            if ($fromString = $this->cleanString($fromString)) {
+                $stringsTrans = explode(',', $second_gen->__toString());
+                
+                $arrayTrans = $senses = array();
                 foreach($stringsTrans as $stringTrans) {
-                    $this->getType($stringTrans);
-                    if ($word = $this->getWord($string, $local)) {
-                        $arrayTrans[] = $this->getWord($stringTrans, 'fr');
+                    $type_t = $this->getType($stringTrans);
+                    if ($stringTrans = $this->cleanString($stringTrans)) {
+                        $arrayTrans[] = array('w' => $stringTrans, 'type' => $type_t);
                     }
                 }
-
+                if (count($arrayTrans) > 0) {
+                    
+                    $senses[] = array('s' => '', 't' => $arrayTrans );
+                    $g =  array('w' => $fromString, 'type' => $type_w, 'senses' => $senses);
+                    $global[] = $g;
+                }
             }
+            $i++;
         }
-
-        foreach ($this->type as $k => $t) {
-            if ($t < 20 ) {
-                unset($this->type[$k]);
-            }
-        }
-
-        var_dump($this->type);
-        $em->flush();
-
+       
+        $output->writeln('count array:'. count($global));
+        $file = fopen($this->getContainer()->get('kernel')->getRootDir() . '/../dictSource/xdxf/eng-fra.json', "w");
+        $output->writeln(fwrite($file, json_encode($global)));
+        fclose($file);
     }
 
     private function getType(&$string)
