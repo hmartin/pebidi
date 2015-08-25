@@ -53,24 +53,28 @@ abstract class InsertCommand extends ContainerAwareCommand
 
     protected function cleanString($string)
     {
-        if (substr_count($string, ' ') > 2 or $this->starts_with_upper($string) ) {
-            return null;
+        if (mb_detect_encoding($string) != 'UTF-8') {
+            $string = iconv('ASCII', 'UTF-8', $string);
         }
-        if (substr_count($string, '.') > 0 or substr_count($string, '[') > 0 || substr_count($string, '(') > 0 ) {
-            echo $string;
-            return null;
-        }
-        
-        $w = $string;
-        //$w = utf8_decode($w);
-        $w = str_replace('<br>', '', $w);
-        $w = str_replace('<span title="something">[sth]</span>', '[sth]', $w);
-        $w = str_replace('<span title="somebody">[sb]</span>', '[sb]', $w);
-        $w = str_replace('<span title="somebody or something">[sb/sth]</span>', '[sb/sth]', $w);
-        
-        $w = trim($w);
 
-        return $w;
+        if (substr_count($string, ' ') > 1 or $this->starts_with_upper($string) ) {
+            return null;
+        }
+        $endash = html_entity_decode('&#x2013;', ENT_COMPAT, 'UTF-8');
+        $string = str_replace('*', '', $string);
+        $string = str_replace('...', '', $string);
+        $string = str_replace('‐', '-', $string);
+        $string = str_replace('<br>', '', $string);
+        $string = str_replace('<span title="something">[sth]</span>', '[sth]', $string);
+        $string = str_replace('<span title="somebody">[sb]</span>', '[sb]', $string);
+        $string = str_replace('<span title="somebody or something">[sb/sth]</span>', '[sb/sth]', $string);
+
+        if (!preg_match('/^[-\'\p{L}\p{M}\s-]+$/u', $string)) {
+            echo "\n". 'not accepted: '. $string;
+            return null;
+        }
+
+        return addslashes(trim($string));
     }
 
     private function starts_with_upper($str) 

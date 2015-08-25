@@ -13,12 +13,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 
-class OneShot2Command extends InsertCommand
+class OldOneShot2Command extends InsertCommand
 {
     protected function configure()
     {
         $this
-            ->setName('oneShot:analyzeSuck');
+            ->setName('oneShot:oldanalyzeSuck');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -28,7 +28,6 @@ class OneShot2Command extends InsertCommand
 
         $ss = $em->getRepository('MainDefaultBundle:Suck')->findAll();
         /* origin */
-        $output->writeln('count $entries:'. count($ss));
         foreach ($ss as $k => $s) {
             $time_end = microtime_float();
             $time = $time_end - $time_start;
@@ -37,17 +36,13 @@ class OneShot2Command extends InsertCommand
                 //exit;
             }
             $newWord = false;
-            //$output->writeln("\n".$k . '---------------         ' . $s->getUrl() . '    ------------------------------');
+            $output->writeln("\n".$k . '---------------         ' . $s->getUrl() . '    ------------------------------');
             $crawler = new Crawler($s->getHmtl());
             $crawler = $crawler->filter('table.WRD > tr');
             $class = '';
             $k = 0;
-
-            $arrayTrans = $senses = array();
             /* sence */
             foreach ($crawler as $domElement) {
-                $sense = '';
-                $senses = array();
                 if ($domElement->getAttribute('class') == 'even' || $domElement->getAttribute('class') == 'odd') {
                     $tr = new Crawler($domElement);
                     if ($class != $domElement->getAttribute('class')) {
@@ -57,8 +52,14 @@ class OneShot2Command extends InsertCommand
 
                         if (!$newWord) {
                             if (null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
+                                if ($em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => utf8_decode(utf8_encode($newWord)), 'local' => 'en'))) {
+                                    //echo
+                                    // word already in db
+                                    $w = null;
+                                    //continue 2;
+                                }
                                 $newWord = explode(',', $newWord);
-                                $w = $this->cleanString(utf8_decode($newWord['0']));
+                                $w = $this->getWord($newWord['0'], 'en');
 
                             } else {
                                 echo 'error' . $s->getUrl() . '<br>';
@@ -67,18 +68,11 @@ class OneShot2Command extends InsertCommand
 
                         if ((null !== ($senseValue = $tr->filter('td')->eq(1))) && count($senseValue) > 0) {
 
-                            $senseValue->filter('span')->each(function (Crawler $crawler) {
-                                foreach ($crawler as $node) {
-                                    $node->parentNode->removeChild($node);
-                                }
-                            });
-                            $senseValue->filter('i')->each(function (Crawler $crawler) {
-                                foreach ($crawler as $node) {
-                                    $node->parentNode->removeChild($node);
-                                }
-                            });
-                            $sensesArrayValue = explode(',', $senseValue->html());
-                            $sense = $this->cleanSense(utf8_decode($sensesArrayValue['0']));
+                            $sense = new Sense();
+                            $sense->setSense(utf8_decode($senseValue->html()));
+                            $sense->setLocal('en');
+
+                            $em->persist($sense);
 
                         }
                     }
@@ -104,51 +98,27 @@ class OneShot2Command extends InsertCommand
                                 $priority = $priority + 1;
                                 $prior = $priority + $k;
 
-                                $tw = $this->cleanString(utf8_decode($each));
+                                $tw = $this->getWord($each, 'fr');
                                 //$output->writeln('c:' . $class . '   s:'.$sense.'   w:'. $w  .'   t:' . $tw . ' $prior:' . $prior );
-                                if ($tw) {
-                                    $arrayTrans[$tw] = array('type' => '');
-                                }
+
+                                $ww = new Ww();
+                                $ww->setWord1($w);
+                                $ww->setWord2($tw);
+                                $ww->addSense($sense);
+                                $ww->setPriority($prior);
+
+                                $em->persist($ww);
 
                             }
                         }
 
                     }
-
-                    if (count($arrayTrans) > 0) {
-                        $senses[] = array('s' => $sense, 't' => $arrayTrans);
-                    }
                 }
             }
-
-
-
-            if ($w && count($senses) > 0) {
-                $g = array('type' => '', 'senses' => $senses);
-                $global[$w] = $g;
-            }
         }
-
-
-        $output->writeln('count array:'. count($global));
-        $file = fopen($this->getContainer()->get('kernel')->getRootDir() . '/../dictSource/WP_eng-fra.json', "w");
-        $output->writeln(fwrite($file, json_encode($global)));
-        fclose($file);
-    }
-
-
-
-    protected function cleanSense($string)
-    {
-        $string = str_replace('(', '', $string);
-        $string = str_replace(')', '', $string);
-
-        if (!preg_match('/^[\p{L}-\s\-\']*$/u', $string)) {
-            //echo "\n". 'wrong sense' .$string;
-            return null;
-        }
-
-        return trim($string);
+        //$em->flush();
+        $x = 1 / 0;
+        exit;
     }
 
 }

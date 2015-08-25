@@ -27,10 +27,9 @@ class XddictCommand extends InsertCommand
         $xml = simplexml_load_file($this->getContainer()->get('kernel')->getRootDir() . '/../dictSource/xdxf/eng-fra.xml');
         $entries = $xml->ar;
 
-        $nbExist = $k = $i = 0;
+        $i = 0;
         
         $global = array();
-        $next = true;
         $output->writeln('count $entries:'. count($entries));
         foreach ($entries as $second_gen) {
             
@@ -43,14 +42,14 @@ class XddictCommand extends InsertCommand
                 foreach($stringsTrans as $stringTrans) {
                     $type_t = $this->getType($stringTrans);
                     if ($stringTrans = $this->cleanString($stringTrans)) {
-                        $arrayTrans[] = array('w' => $stringTrans, 'type' => $type_t);
+                        $arrayTrans[$stringTrans] = array('type' => $type_t);
                     }
                 }
                 if (count($arrayTrans) > 0) {
                     
                     $senses[] = array('s' => '', 't' => $arrayTrans );
-                    $g =  array('w' => $fromString, 'type' => $type_w, 'senses' => $senses);
-                    $global[] = $g;
+                    $g =  array('type' => $type_w, 'senses' => $senses);
+                    $global[$fromString] = $g;
                 }
             }
             $i++;

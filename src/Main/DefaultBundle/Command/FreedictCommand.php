@@ -22,54 +22,31 @@ class FreedictCommand extends InsertCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-
-        $xml = simplexml_load_file($this->getContainer()->get('kernel')->getRootDir() . '/../freeDictSource/eng-fra/eng-fra.tei');
+        $xml = simplexml_load_file($this->getContainer()->get('kernel')->getRootDir() . '/../dictSource/eng-fra/eng-fra.tei');
         $entries = $xml->text->body->entry;
-
-        $nbExist = $k = $i = 0;
-        $local = 'en';
-        $next = true;
+        $global = array();
         foreach ($entries as $second_gen) {
 
-            $word = $this->getWord($second_gen->form->orth, $local);
-            $k = 0;
-            $priority = 0;
+            if ($word = $this->cleanString($second_gen->form->orth)) {
+                $arrayTrans = array();
+                foreach ($second_gen->sense as $senses) {
+                    foreach ($senses->cit as $cits) {
+                        $tw = $this->cleanString($cits->quote);
+                        $arrayTrans[$tw] = array('type' => '');
 
-            echo '              (origin) ';
-            foreach ($second_gen->sense as $senses) {
-
-                $k = $k + 0.1;
-                $priority = 0;
-                $sense = new Sense();
-                $sense->setSense('');
-                $sense->setLocal('en');
-
-                $em->persist($sense);
-
-                foreach ($senses->cit as $cits) {
-                    $tw = $this->getWord($cits->quote, 'fr');
-                    if (is_null($tw) or $i == 1000000) {
-                        echo "\n" . 'null:' . $cits->quote;
-                        $em->flush();
-                        exit;
                     }
-                    //$output->writeln('c:' . $class . '   s:'.$sense.'   w:'. $w  .'   t:' . $tw . ' $prior:' . $prior );
-                    $priority = $priority + 1;
-                    $prior = $priority + $k;
-                    $i++;
-                    $ww = new Ww();
-                    $ww->setWord1($word);
-                    $ww->setWord2($tw);
-                    $ww->addSense($sense);
-                    $ww->setPriority($prior);
+                }
 
-                    $em->persist($ww);
+                if ($word && count($arrayTrans) > 0) {
+                    $senses = array('s' => '', 't' => $arrayTrans);
+                    $global[$word] = array('type' => '', 'senses' => $senses);
                 }
             }
         }
-        echo $nbExist . ' / ' . $entries->count() . "\n";
-        $em->flush();
 
+        $output->writeln('count array:' . count($global));
+        $file = fopen($this->getContainer()->get('kernel')->getRootDir() . '/../dictSource/eng-fra/eng-fra.json', "w");
+        $output->writeln(fwrite($file, json_encode($global)));
+        fclose($file);
     }
 }
