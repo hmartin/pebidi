@@ -24,6 +24,11 @@ class Word
     protected $word;
 
     /**
+     * @ORM\OneToOne(targetEntity="Category")
+     */
+    protected $category;
+
+    /**
      * @ORM\Column(type="string", length=5)
      */
     protected $local;
@@ -268,4 +273,28 @@ class Word
         $this->points = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+    /**
+     * Set category
+     *
+     * @param \Main\DefaultBundle\Entity\Category $category
+     *
+     * @return Word
+     */
+    public function setCategory(\Main\DefaultBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Main\DefaultBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

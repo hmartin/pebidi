@@ -32,14 +32,14 @@ class FreedictCommand extends InsertCommand
                 foreach ($second_gen->sense as $senses) {
                     foreach ($senses->cit as $cits) {
                         $tw = $this->cleanString($cits->quote);
-                        $arrayTrans[$tw] = array('type' => '');
+                        $arrayTrans[$tw] = array();
 
                     }
                 }
 
                 if ($word && count($arrayTrans) > 0) {
                     $senses = array('s' => '', 't' => $arrayTrans);
-                    $global[$word] = array('type' => '', 'senses' => $senses);
+                    $global[$word] = array('senses' => $senses);
                 }
             }
         }
