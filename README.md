@@ -13,7 +13,9 @@ table point
 micro todo:
  add type in wp json
  add table/column (not null) type $
- insert array in db
+ insert array in db $
+ insert type
+ manage additional translation
  add priority english word
  try concat three trad
  try group by type
