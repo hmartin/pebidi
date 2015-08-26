@@ -18,7 +18,7 @@ class mergeCommand extends ContainerAwareCommand
 
     public $persistWords = array('en' => array(), 'fr' => array());
     public $type = array();
-    
+
     protected function configure()
     {
         $this
@@ -35,38 +35,39 @@ class mergeCommand extends ContainerAwareCommand
 
         $result = array_merge_recursive($a1, $a2, $a3);
 
-        echo 'merge: '.count($result)."\n";
-        
-        foreach($result as $k => $w) {
+        echo 'merge: ' . count($result) . "\n";
 
-            
+        foreach ($result as $k => $w) {
+
+
             $fromWord = $this->getWord($k, 'en');
-            
-                foreach($w['senses'] as $k => $sense) {
 
-                            $sense = new Sense();
-                            $sense->setSense($sense['sense']);
-                            $sense->setLocal('en');
+            foreach ($w['senses'] as $k => $senseArray) {
+                if (isset($senseArray['s'])) {
+                    $sense = new Sense();
+                    $sense->setSense($senseArray['s']);
+                    $sense->setLocal('en');
 
-                            $em->persist($sense);
-                    
-                foreach($sense['t'] as $k => $trans) {
-                            $transWord = $this->getWord($w, 'fr');
-                                $ww = new Ww();
-                                $ww->setWord1($transWord);
-                                $ww->setWord2($transWord);
-                                $ww->addSense($sense);
-                                $ww->setPriority(0);
+                    $em->persist($sense);
 
-                                $em->persist($ww);
+                    foreach ($senseArray['t'] as $k => $trans) {
+                        $transWord = $this->getWord($k, 'fr');
+                        $ww = new Ww();
+                        $ww->setWord1($fromWord);
+                        $ww->setWord2($transWord);
+                        $ww->addSense($sense);
+                        $ww->setPriority(0);
 
-                        }
+                        $em->persist($ww);
+
+                    }
                 }
             }
-        $output->writeln('Let\s flush');
-            $em->flush();
-        
         }
+        $output->writeln('Let\s flush');
+        $em->flush();
+
+    }
 
 
     protected function getWord($w, $local)
@@ -94,19 +95,19 @@ class mergeCommand extends ContainerAwareCommand
 
         return $obj;
     }
-    
-    
+
+
     private function deocde($filepath)
     {
         $file = file_get_contents($this->getContainer()->get('kernel')->getRootDir() . $filepath);
         $a = json_decode($file, true);
-        echo $filepath.': '.count($a)."\n";
+        echo $filepath . ': ' . count($a) . "\n";
 
         return $a;
 
     }
-    
-    protected function clean() 
+
+    protected function clean()
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         $connection = $em->getConnection();
