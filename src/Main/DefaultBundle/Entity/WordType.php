@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Main\DefaultBundle\Repository\WordRepository")
+ * @ORM\Entity()
  */
 class WordType
 {
@@ -19,12 +19,12 @@ class WordType
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $value;
+    protected $expression;
 
     /**
-     * @ORM\OneToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category")
      */
     protected $category;
 
@@ -32,4 +32,110 @@ class WordType
      * @ORM\ManyToOne(targetEntity="Word", inversedBy="wordTypes")
      */
     protected $word;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set value
+     *
+     * @param string $value
+     *
+     * @return WordType
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Main\DefaultBundle\Entity\Category $category
+     *
+     * @return WordType
+     */
+    public function setCategory(\Main\DefaultBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Main\DefaultBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set word
+     *
+     * @param \Main\DefaultBundle\Entity\Word $word
+     *
+     * @return WordType
+     */
+    public function setWord(\Main\DefaultBundle\Entity\Word $word = null)
+    {
+        $this->word = $word;
+
+        return $this;
+    }
+
+    /**
+     * Get word
+     *
+     * @return \Main\DefaultBundle\Entity\Word
+     */
+    public function getWord()
+    {
+        return $this->word;
+    }
+
+    /**
+     * Set expression
+     *
+     * @param string $expression
+     *
+     * @return WordType
+     */
+    public function setExpression($expression)
+    {
+        $this->expression = $expression;
+
+        return $this;
+    }
+
+    /**
+     * Get expression
+     *
+     * @return string
+     */
+    public function getExpression()
+    {
+        return $this->expression;
+    }
 }

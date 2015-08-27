@@ -9,15 +9,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 use Main\DefaultBundle\Entity\Sense;
-use Main\DefaultBundle\Entity\Suck;
 use Main\DefaultBundle\Entity\Word;
+use Main\DefaultBundle\Entity\WordType;
 use Main\DefaultBundle\Entity\Ww;
+use Main\DefaultBundle\Entity\Category;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class MergeCommand extends ContainerAwareCommand
 {
 
     public $persistWords = array('en' => array(), 'fr' => array());
     public $persistWordsType = array('en' => array(), 'fr' => array());
+    public $persistCategorys = array();
     public $type = array();
 
     protected function configure()
@@ -34,12 +37,16 @@ class MergeCommand extends ContainerAwareCommand
         $a1 = $this->deocde('/../dictSource/xdxf/eng-fra.json');
         $a2 = $this->deocde('/../dictSource/eng-fra/eng-fra.json');
         $a3 = $this->deocde('/../dictSource/WP_eng-fra.json');
-
+        $stopwatch = new Stopwatch();
+// Start event named 'eventName'
+        $stopwatch->start('eventName');
+// ... some code goes here
         $result = array_merge_recursive($a1, $a2, $a3);
 
         echo 'merge: ' . count($result) . "\n";
-
+        $i = 0;
         foreach ($result as $k => $w) {
+
             $fromWordType = $this->getWordType($k, 'en');
 
             foreach ($w['senses'] as $k => $senseArray) {
@@ -63,10 +70,16 @@ class MergeCommand extends ContainerAwareCommand
                     }
                 }
             }
+            $i++;
+            if ($i > 100) {
+                break;
+            }
         }
-        $output->writeln('Let\s flush');
+        $output->writeln('Let\'s flush');
         $em->flush();
-
+        $event = $stopwatch->stop('eventName');
+        $m = $event->getDuration() / 1000 / 60;
+        $output->writeln('Let\'s flush' . $m);
     }
 
 
@@ -74,48 +87,50 @@ class MergeCommand extends ContainerAwareCommand
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         if (empty($type)) {
-            $type = 'null';
+            $type = 'undef';
+        }
+
+        $category = $this->getCategory($type);
+
+        if (!isset($this->persistWordsType[$local][$type])) {
+            $this->persistWordsType[$local][$type] = array();
         }
         $wordString = $w;
         $kExplode = explode(' ', $w);
         if (count($kExplode) > 1) {
             $additional = true;
-            $wordString = $kExplode['0'];    
-        }
-        
-        $word = $this->getWord($wordString, $local);
-        
-        if (array_key_exists($w, $this->persistWords[$local][$type])) {
-            return $this->persistWords[$local][$type][$w];
+            $wordString = $kExplode['0'];
         }
 
+        $word = $this->getWord($wordString, $local);
+        if (array_key_exists($w, $this->persistWordsType[$local][$type])) {
+            return $this->persistWordsType[$local][$type][$w];
+        }
         $obj = new WordType();
         $obj->setWord($word);
-        if ($wordString  != $w) {
+        $obj->setCategory($category);
+        if ($wordString != $w) {
             $obj->setExpression($w);
         }
-        
+
         $em->persist($obj);
-        if (!isset( $this->persistWordsType[$local][$type])) {
-             $this->persistWordsType[$local][$type] = array();
-        }
         $this->persistWordsType[$local][$type][$w] = $obj;
         //$em->flush();
 
         return $obj;
     }
-    
+
     protected function getWord($w, $local)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
-            
+
         if (array_key_exists($w, $this->persistWords[$local])) {
             echo 'PrExi: ' . $this->persistWords[$local][$w];
             return $this->persistWords[$local][$w];
 
         }
 
-        echo 'NoExi: ' . $w;
+        echo 'NoExi word: ' . $w;
 
         $obj = new Word();
         $obj->setLocal($local);
@@ -126,6 +141,25 @@ class MergeCommand extends ContainerAwareCommand
         return $obj;
     }
 
+    protected function getCategory($c)
+    {
+        $em = $this->getContainer()->get('doctrine')->getManager();
+
+        if (array_key_exists($c, $this->persistCategorys)) {
+
+            return $this->persistCategorys[$c];
+
+        }
+
+        echo 'NoExi cat: ' . $c;
+
+        $obj = new Category();
+        $obj->setCategory($c);
+        $em->persist($obj);
+        $this->persistCategorys[$c] = $obj;
+
+        return $obj;
+    }
 
 
     private function deocde($filepath)
@@ -144,6 +178,7 @@ class MergeCommand extends ContainerAwareCommand
         $connection = $em->getConnection();
         $statement = $connection->prepare("
          SET FOREIGN_KEY_CHECKS=0;
+        TRUNCATE `Category`;
         TRUNCATE `DictionariesWord`;
         TRUNCATE `Dictionary`;
         TRUNCATE `DictionaryScore`;
@@ -154,17 +189,18 @@ class MergeCommand extends ContainerAwareCommand
         TRUNCATE `TestWord`;
         TRUNCATE `User`;
         TRUNCATE `Word`;
+        TRUNCATE `WordType`;
         TRUNCATE `Ww`;
         TRUNCATE `WwSenses`;
          SET FOREIGN_KEY_CHECKS=1;");
         $statement->execute();
         $statement->closeCursor();
     }
-    
 
-        /*if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
-            echo 'Exist: ' . $obj->getWord();
-            return $obj;
-        } else */
-            
+
+    /*if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
+        echo 'Exist: ' . $obj->getWord();
+        return $obj;
+    } else */
+
 }

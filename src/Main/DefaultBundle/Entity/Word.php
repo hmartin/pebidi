@@ -298,4 +298,38 @@ class Word
     {
         return $this->category;
     }
+
+    /**
+     * Add wordType
+     *
+     * @param \Main\DefaultBundle\Entity\WordType $wordType
+     *
+     * @return Word
+     */
+    public function addWordType(\Main\DefaultBundle\Entity\WordType $wordType)
+    {
+        $this->wordTypes[] = $wordType;
+
+        return $this;
+    }
+
+    /**
+     * Remove wordType
+     *
+     * @param \Main\DefaultBundle\Entity\WordType $wordType
+     */
+    public function removeWordType(\Main\DefaultBundle\Entity\WordType $wordType)
+    {
+        $this->wordTypes->removeElement($wordType);
+    }
+
+    /**
+     * Get wordTypes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWordTypes()
+    {
+        return $this->wordTypes;
+    }
 }

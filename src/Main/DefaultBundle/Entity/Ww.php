@@ -67,51 +67,6 @@ class Ww
         return $this->id;
     }
 
-    /**
-     * Set word1
-     *
-     * @param \Main\DefaultBundle\Entity\Word $word1
-     * @return Ww
-     */
-    public function setWord1(\Main\DefaultBundle\Entity\Word $word1 = null)
-    {
-        $this->word1 = $word1;
-
-        return $this;
-    }
-
-    /**
-     * Get word1
-     *
-     * @return \Main\DefaultBundle\Entity\Word 
-     */
-    public function getWord1()
-    {
-        return $this->word1;
-    }
-
-    /**
-     * Set word2
-     *
-     * @param \Main\DefaultBundle\Entity\Word $word2
-     * @return Ww
-     */
-    public function setWord2(\Main\DefaultBundle\Entity\Word $word2 = null)
-    {
-        $this->word2 = $word2;
-
-        return $this;
-    }
-
-    /**
-     * Get word2
-     *
-     * @return \Main\DefaultBundle\Entity\Word 
-     */
-    public function getWord2()
-    {
-        return $this->word2;
-    }
 
     /**
      * Add senses
@@ -192,5 +147,53 @@ class Ww
     public function getPriority()
     {
         return $this->priority;
+    }
+
+    /**
+     * Set word1
+     *
+     * @param \Main\DefaultBundle\Entity\WordType $word1
+     *
+     * @return Ww
+     */
+    public function setWord1(\Main\DefaultBundle\Entity\WordType $word1 = null)
+    {
+        $this->word1 = $word1;
+
+        return $this;
+    }
+
+    /**
+     * Get word1
+     *
+     * @return \Main\DefaultBundle\Entity\WordType
+     */
+    public function getWord1()
+    {
+        return $this->word1;
+    }
+
+    /**
+     * Set word2
+     *
+     * @param \Main\DefaultBundle\Entity\WordType $word2
+     *
+     * @return Ww
+     */
+    public function setWord2(\Main\DefaultBundle\Entity\WordType $word2 = null)
+    {
+        $this->word2 = $word2;
+
+        return $this;
+    }
+
+    /**
+     * Get word2
+     *
+     * @return \Main\DefaultBundle\Entity\WordType
+     */
+    public function getWord2()
+    {
+        return $this->word2;
     }
 }
