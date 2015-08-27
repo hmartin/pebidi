@@ -24,11 +24,6 @@ class Word
     protected $word;
 
     /**
-     * @ORM\OneToOne(targetEntity="Category")
-     */
-    protected $category;
-
-    /**
      * @ORM\Column(type="string", length=5)
      */
     protected $local;
@@ -37,6 +32,12 @@ class Word
      * @ORM\Column(type="integer")
      */
     protected $certified = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WordType", mappedBy="word",cascade={"persist"})
+     */
+    protected $wordTypes;
+
 
     /**
      * @ORM\ManyToMany(targetEntity="Dictionary", mappedBy="words")

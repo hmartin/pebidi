@@ -21,13 +21,13 @@ class Ww
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Word",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="WordType",cascade={"persist"})
      * @ORM\JoinColumn()
      */
     protected $word1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Word", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="WordType", cascade={"persist"})
      * @ORM\JoinColumn()
      */
     protected $word2;
