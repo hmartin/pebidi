@@ -11,11 +11,12 @@ Training (beta)
 table point
 
 micro todo:
- add type in wp json
+ add type in wp json $
  add table/column (not null) type $
  insert array in db $
- insert type
- manage additional translation
+ insert type $
+ manage additional translation $
  add priority english word
+ uniqu type/expression
  try concat three trad
  try group by type

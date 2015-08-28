@@ -58,7 +58,7 @@ app
         this.createTest = function (did, question) {
             this.nbQuestion = question;
             this.did = did;
-            $http.post(API_URL + 'tests.json', {
+            $http.post(API_URL + 'tests', {
                 uid: mainService.getUid(),
                 id: did,
                 nbQuestion: question,
@@ -72,7 +72,7 @@ app
                 }.bind(this));
         }
         this.saveResults = function (points) {
-            $http.post(API_URL + 'results/' + this.rid + '/saves.json', {points: points})
+            $http.post(API_URL + 'results/' + this.rid + '/saves', {points: points})
                 .success(function (data) {
                     mainService.setUser(data.user);
                 }.bind(this));
@@ -85,7 +85,7 @@ app
         }
 
         this.doItAgain = function () {
-            $http.get(API_URL + 'tests/' + this.id + '.json')
+            $http.get(API_URL + 'tests/' + this.id)
                 .success(function (data) {
                     $location.path('/questions');
                 }.bind(this));
@@ -138,7 +138,7 @@ app
                 data.uid = mainService.getUid();
             }
 
-            $http.get(API_URL + 'dictionaries/' + id + '.json', {params: data}).success(function (data) {
+            $http.get(API_URL + 'dictionaries/' + id, {params: data}).success(function (data) {
                 $timeout(function () {
                     console.log('timeout');
                     mainService.setDic(data);
@@ -149,7 +149,7 @@ app
         this.getWords = function (id) {
             //, {params: {'uid': mainService.getUid()}}
             var promise = $http
-                .get(API_URL + 'dictionaries/' + id + '/words.json')
+                .get(API_URL + 'dictionaries/' + id + '/words')
                 .then(function (data) {
                     return data.data;
                 });
@@ -158,7 +158,7 @@ app
 
         this.post = function (formData) {
             mainService.setCountWord(mainService.getDic().countWord + 1);
-            $http.post(API_URL + 'words.json', {
+            $http.post(API_URL + 'words', {
                 'word': formData.word,
                 'translation': formData.translation,
                 'id': mainService.getDic().id
@@ -170,7 +170,7 @@ app
         };
 
         this.delete = function (id) {
-            $http.post(API_URL + 'words/removes.json', {
+            $http.post(API_URL + 'words/removes', {
                 'id': id,
                 'did': mainService.getDic().id
             }).success(function (data) {

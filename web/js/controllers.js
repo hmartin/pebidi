@@ -5,14 +5,14 @@ app
         $scope.ip = 0;
         $scope.ia = 2;
         if (localStorageService.get('dic') && localStorageService.get('user')) {
-            $http.get(API_URL + 'users/'+ localStorageService.get('user').id +'.json').success(function (data) {
+            $http.get(API_URL + 'users/'+ localStorageService.get('user').id).success(function (data) {
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
             });
             $location.path('/dictionary/' + mainService.getDic().id);
         }
         $scope.processForm = function () {
-            $http.post(API_URL + 'users/emails.json', $scope.formData).success(function (data) {
+            $http.post(API_URL + 'users/emails', $scope.formData).success(function (data) {
                 console.log(data);
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
@@ -80,7 +80,7 @@ app
 
     .controller('AddGroupWordCtrl', function ($scope, $http, $location, mainService) {
         $http
-            .get(API_URL + 'dictionary/groups/words.json', {params: {lang: 'en'}})
+            .get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}})
             .success(function (data) {
                 $scope.groupsWords = data.groupsWords;
             });
@@ -89,7 +89,7 @@ app
             $scope.data = {};
             $scope.data.did = $scope.dic.id;
             $scope.data.gwid = id;
-            $http.post(API_URL + 'adds/groups/words.json', $scope.data).success(function (data) {
+            $http.post(API_URL + 'adds/groups/words', $scope.data).success(function (data) {
                 mainService.setDic(data.dic);
             });
         };

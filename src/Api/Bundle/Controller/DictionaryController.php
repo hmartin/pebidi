@@ -10,11 +10,16 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Main\DefaultBundle\Entity\Dictionary;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class DictionaryController extends FOSRestController implements ClassResourceInterface
 {
 
     /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get json info dictionary with id",
+     * )
      * @Rest\View()
      */
     public function getAction(Request $request, Dictionary $d)
@@ -23,6 +28,10 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
     }
 
     /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get words with transaltion with dictionary id",
+     * )
      * @Rest\View()
      */
     public function getWordsAction(Request $request, Dictionary $d)

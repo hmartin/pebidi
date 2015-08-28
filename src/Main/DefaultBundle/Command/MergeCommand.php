@@ -38,16 +38,17 @@ class MergeCommand extends ContainerAwareCommand
         $a2 = $this->deocde('/../dictSource/eng-fra/eng-fra.json');
         $a3 = $this->deocde('/../dictSource/WP_eng-fra.json');
         $stopwatch = new Stopwatch();
-// Start event named 'eventName'
         $stopwatch->start('eventName');
-// ... some code goes here
-        $result = array_merge_recursive($a1, $a2, $a3);
+        
+        $result = array_merge_recursive($a3, $a1, $a2);
 
         echo 'merge: ' . count($result) . "\n";
         $i = 0;
         foreach ($result as $k => $w) {
 
-            $fromWordType = $this->getWordType($k, 'en');
+            $t = $this->getType($w);
+            
+            $fromWordType = $this->getWordType($k, 'en', $t);
 
             foreach ($w['senses'] as $k => $senseArray) {
                 if (isset($senseArray['s'])) {
@@ -58,7 +59,8 @@ class MergeCommand extends ContainerAwareCommand
                     $em->persist($sense);
 
                     foreach ($senseArray['t'] as $k => $trans) {
-                        $transWordType = $this->getWordType($k, 'fr');
+                        $t = $this->getType($trans);
+                        $transWordType = $this->getWordType($k, 'fr', $t);
                         $ww = new Ww();
                         $ww->setWord1($fromWordType);
                         $ww->setWord2($transWordType);
@@ -71,7 +73,7 @@ class MergeCommand extends ContainerAwareCommand
                 }
             }
             $i++;
-            if ($i > 100) {
+            if ($i > 100000000) {
                 break;
             }
         }
@@ -82,13 +84,23 @@ class MergeCommand extends ContainerAwareCommand
         $output->writeln('Let\'s flush' . $m);
     }
 
-
-    protected function getWordType($w, $local, $type = null)
+private function getType($w) {
+    
+            $t = 'undef';
+            if (isset($w['type']) && is_array($w['type'])) {
+                foreach ($w['type'] as $type) {
+                    if (!empty($type)) {
+                        $t = $type;
+                        break;
+                    }
+                }
+            }
+    
+    return $t;
+}
+    protected function getWordType($w, $local, $type)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
-        if (empty($type)) {
-            $type = 'undef';
-        }
 
         $category = $this->getCategory($type);
 
@@ -125,12 +137,12 @@ class MergeCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         if (array_key_exists($w, $this->persistWords[$local])) {
-            echo 'PrExi: ' . $this->persistWords[$local][$w];
+            //echo 'PrExi: ' . $this->persistWords[$local][$w];
             return $this->persistWords[$local][$w];
 
         }
 
-        echo 'NoExi word: ' . $w;
+        //echo 'NoExi word: ' . $w;
 
         $obj = new Word();
         $obj->setLocal($local);
@@ -151,7 +163,7 @@ class MergeCommand extends ContainerAwareCommand
 
         }
 
-        echo 'NoExi cat: ' . $c;
+        echo 'NoExi cat: ' . $c ."\n";
 
         $obj = new Category();
         $obj->setCategory($c);

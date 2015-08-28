@@ -74,6 +74,7 @@ fos_rest:
         view_response_listener: true
     routing_loader:
         default_format: json
+        include_format: false
 
 cspoo_swiftmailer_mailgun:
     key: "key-432a57a83c7c323fd6ba8595dd00b5c0"
@@ -87,7 +88,8 @@ swiftmailer:
     #password:  "%mailer_password%"
     spool:     { type: memory } 
  
-    
+nelmio_api_doc: true
+
 jms_serializer:
     metadata:
         directories:

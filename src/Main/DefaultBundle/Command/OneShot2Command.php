@@ -32,16 +32,16 @@ class OneShot2Command extends InsertCommand
         foreach ($ss as $k => $s) {
             $time_end = microtime_float();
             $time = $time_end - $time_start;
-            if ($time > 3000) {
+            if ($time > 300) {
                 //$em->flush();
-                //exit;
+                exit;
             }
             $newWord = false;
             //$output->writeln("\n".$k . '---------------         ' . $s->getUrl() . '    ------------------------------');
             $crawler = new Crawler($s->getHmtl());
             $crawler = $crawler->filter('table.WRD > tr');
             $class = '';
-            $k = 0;
+            $k = $i = 0;
 
             $arrayTrans = $senses = array();
             /* sence */
@@ -57,6 +57,17 @@ class OneShot2Command extends InsertCommand
 
                         if (!$newWord) {
                             if (null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
+                                $t = '';
+                                if (null !== ($type = $tr->filter('em')->eq(0))) {
+
+                                    $type->filter('span')->each(function (Crawler $crawler) {
+                                        foreach ($crawler as $node) {
+                                            $node->parentNode->removeChild($node);
+                                        }
+                                    });
+                                    $t = $type->html();
+
+                                }
                                 $newWord = explode(',', $newWord);
                                 $w = $this->cleanString(utf8_decode($newWord['0']));
 
@@ -88,6 +99,18 @@ class OneShot2Command extends InsertCommand
                         if (null == $trans->filter('span[title*="translation unavailable"]')->eq(0)) {
                             continue;
                         }
+                        
+                        $t_trans = '';
+                        if (null !== ($type_trans = $trans->filter('em')->eq(0))) {
+
+                            $type_trans->filter('span')->each(function (Crawler $crawler) {
+                                foreach ($crawler as $node) {
+                                    $node->parentNode->removeChild($node);
+                                }
+                            });
+                            $t_trans = $type->html();
+                        }
+                        
                         $trans->filter('em')->each(function (Crawler $crawler) {
                             foreach ($crawler as $node) {
                                 $node->parentNode->removeChild($node);
@@ -107,7 +130,7 @@ class OneShot2Command extends InsertCommand
                                 $tw = $this->cleanString(utf8_decode($each));
                                 //$output->writeln('c:' . $class . '   s:'.$sense.'   w:'. $w  .'   t:' . $tw . ' $prior:' . $prior );
                                 if ($tw) {
-                                    $arrayTrans[$tw] = array('type' => '');
+                                    $arrayTrans[$tw] = array('type' => $t_trans);
                                 }
 
                             }
@@ -121,15 +144,12 @@ class OneShot2Command extends InsertCommand
                 }
             }
 
-
-
             if ($w && count($senses) > 0) {
-                $g = array('type' => '', 'senses' => $senses);
+                $g = array('type' => $t, 'senses' => $senses);
                 $global[$w] = $g;
             }
         }
-
-
+        
         $output->writeln('count array:'. count($global));
         $file = fopen($this->getContainer()->get('kernel')->getRootDir() . '/../dictSource/WP_eng-fra.json', "w");
         $output->writeln(fwrite($file, json_encode($global)));
