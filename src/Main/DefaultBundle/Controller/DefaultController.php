@@ -34,9 +34,11 @@ class DefaultController extends Controller
         $d = $this->getDoctrine()->getRepository('MainDefaultBundle:dictionary')->find(1);
 
         $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getDictionaryAllWords($d, null);
-        dump($results);
-      
-       
+        //dump($results);
+
+
+        $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->find(9305);
+        var_dump($this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordFullTranslation($w));
         //$u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->find(1);
         //$this->get('mailer_manager')->sendValidateEmail($u);
       /*
@@ -119,39 +121,6 @@ class DefaultController extends Controller
 
         */
         return $this->render('MainDefaultBundle:Default:index.html.twig', array());
-    }
-
-    /**
-     * @Route("/{_locale}/json", name="generateJson" )
-     */
-    public function generateJsonAction()
-    {
-        $query = 'SELECT  w.id, w.word as w,  w2.word as t FROM Word w
-               JOIN Ww ww ON ww.word1_id = w.id
-               JOIN Word w2 ON ww.word2_id = w2.id
-               WHERE w.local = "en" GROUP BY w.id ORDER BY ww.priority ';
-        $queryGroup = 'SELECT  w.id, w.word as w,GROUP_CONCAT(w2.word) as t FROM Word w
-               JOIN Ww ww ON ww.word1_id = w.id
-               JOIN Word w2 ON ww.word2_id = w2.id
-               WHERE w.local = "en" GROUP BY w.id ';
-        $em = $this->getDoctrine();
-        $connection = $em->getConnection();
-        $stmt = $connection->prepare($queryGroup);
-        $stmt->execute();
-
-        $results = $stmt->fetchAll();
-        $file = fopen(__DIR__ . '/../../../../web/dict/dict.json', "w");
-        echo fwrite($file, json_encode($results));
-        fclose($file);
-    }
-
-    public function clean()
-    {
-        /*
-         SET FOREIGN_KEY_CHECKS=0;
-        TRUNCATE `DictionariesWord`, `Dictionary`, `DictionaryScore`, `fos_user`, `Test`, `TestWord`;
-         SET FOREIGN_KEY_CHECKS=1;
-        */
     }
 
 }

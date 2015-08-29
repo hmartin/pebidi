@@ -32,26 +32,37 @@ do it again*
 init lang*
 add extra input if no translation*
 with Escaping of variable content*
+add type in wp json*
+add table/column (not null) type*
+insert array in db*
+insert type*
+manage additional translation*
+try concat three trad*
 
 v1 friend:
+view word
+css global
+Real close question test
+
+v2 social network:
 create / edit / visibility groupWord
 Create & Edit best translation
-view word
-validate email
-css global
-full translate
-Real test
+uniqu type/expression
 Fixture GW 500 words
+validate email
+chrome extension
+full translate
 
 v3 school:
 full help
-multiple dic
-Mobil apps beta
 create account
-chrome apps
 
 v4 college:
+multiple dic
+Mobil apps beta
 Add translate languages (es, de, it,...)
+
+v5 worldwide
 Add teacher/ Friends 
 Mobil apps
 algo v2 test

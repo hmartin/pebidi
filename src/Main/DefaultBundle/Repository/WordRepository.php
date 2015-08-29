@@ -91,12 +91,17 @@ class WordRepository extends EntityRepository
     private function initQueryBuilder()
     {
         return $this->createQueryBuilder('word')
-            ->select('word.id, word.word as w, translation.word as t')
+            ->select('word.id, word.word as w, trans_word.word as t')
+
+            ->innerJoin('word.wordTypes', 'wt')
             ->innerJoin('\Main\DefaultBundle\Entity\Ww', 'ww',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
-                'word.id =  ww.word1')
-            ->innerJoin('\Main\DefaultBundle\Entity\Word', 'translation',
+                'wt.id =  ww.word1')
+            ->innerJoin('\Main\DefaultBundle\Entity\WordType', 'translation',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
-                'ww.word2 =  translation.id');
+                'ww.word2 =  translation.id')
+
+            ->innerJoin('translation.word', 'trans_word')
+            ;
     }
 }

@@ -159,8 +159,7 @@ app
         this.post = function (formData) {
             mainService.setCountWord(mainService.getDic().countWord + 1);
             $http.post(API_URL + 'words', {
-                'word': formData.word,
-                'translation': formData.translation,
+                'w': formData.word.w,
                 'id': mainService.getDic().id
             }).success(function (data) {
                 $timeout(function () {
