@@ -10,10 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class ResultController extends FOSRestController implements ClassResourceInterface
 {
     /**
+     * @ApiDoc(section="Result" , description="Save results")
      * @Rest\View()
      */
     public function postUserAction(Request $request, Test $t, User $u)
