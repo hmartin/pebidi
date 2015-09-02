@@ -14,9 +14,7 @@ use Main\DefaultBundle\Entity\Word;
 class WordController extends FOSRestController implements ClassResourceInterface
 {
     /**
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get json info dictionary with id",
+     * @ApiDoc(section="Word", description="Get json info dictionary with id",
      *  parameters={
      *      {"name"="improve", "dataType"="bolean", "required"=true}
      *  }
@@ -36,9 +34,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
     }
   
     /**
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Post Word to Dic",
+     * @ApiDoc(section="Word", description="Post Word to Dic",
      *  requirements={
      *      { "name"="id", "dataType"="integer", "requirement"="\d+", "description"="dic id" },
      *      { "name"="w", "dataType"="string", "requirement"="\d+", "description"="word id" }

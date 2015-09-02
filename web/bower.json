@@ -14,6 +14,7 @@
     "allmighty-autocomplete": "*",
     "angular-sanitize": "*",
     "angular-translate": "*",
-    "angular-local-storage": "~0.1.5"
+    "angular-local-storage": "~0.1.5",
+    "aangular-translate-loader-static-files": "*"
   }
 }

@@ -15,7 +15,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class ResultController extends FOSRestController implements ClassResourceInterface
 {
     /**
-     * @ApiDoc(section="Result" , description="Save results")
+     * @ApiDoc(section="Result", description="Create result with datetime")
      * @Rest\View()
      */
     public function postUserAction(Request $request, Test $t, User $u)
@@ -30,6 +30,7 @@ class ResultController extends FOSRestController implements ClassResourceInterfa
     }
 
     /**
+     * @ApiDoc(section="Result", description="Save result")
      * @Rest\View()
      */
     public function postSaveAction(Request $request, Result $r)

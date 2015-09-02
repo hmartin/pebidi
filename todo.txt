@@ -38,11 +38,11 @@ insert array in db*
 insert type*
 manage additional translation*
 try concat three trad*
+full translate*
 
 v1 friend:
 view word
 css global
-full translate
 
 v2 social network:
 Real close question test
@@ -50,7 +50,6 @@ Create & Edit best translation
 uniqu type/expression
 validate email
 chrome extension
-full translate
 
 v3 school:
 create / edit / visibility groupWord

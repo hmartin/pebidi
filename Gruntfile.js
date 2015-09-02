@@ -56,7 +56,7 @@ module.exports = function(grunt) {
       default_language: {
         prefix:   '',
         suffix:   '.json',
-        src:      [ 'web/partials/*.html', 'web/partials/**/*.html'],
+        src:      [ 'web/*.html', 'web/partials/*.html', 'web/partials/**/*.html'],
         lang:     ['fr', 'en'],
         dest:     'web/translate',
         defaultLang: 'en_EN'
