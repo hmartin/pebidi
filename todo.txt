@@ -42,18 +42,19 @@ try concat three trad*
 v1 friend:
 view word
 css global
-Real close question test
+full translate
 
 v2 social network:
-create / edit / visibility groupWord
+Real close question test
 Create & Edit best translation
 uniqu type/expression
-Fixture GW 500 words
 validate email
 chrome extension
 full translate
 
 v3 school:
+create / edit / visibility groupWord
+Fixture GW 500 words
 full help
 create account
 

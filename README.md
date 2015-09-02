@@ -11,3 +11,6 @@ Training (beta)
 table point
 
 micro todo:
+view word type
+view word additional trans
+view word back link
