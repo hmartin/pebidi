@@ -2,7 +2,6 @@ app
     .service('mainService', function ($rootScope, localStorageService) {
         var user = null;
         var dic = null;
-        var lang = '';
 
         this.setDic = function (d) {
             dic = d;
@@ -70,7 +69,7 @@ app
                     this.rid = data.rid;
                     $location.path('/questions');
                 }.bind(this));
-        }
+        };
         this.saveResults = function (points) {
             $http.post(API_URL + 'results/' + this.rid + '/saves', {points: points})
                 .success(function (data) {
@@ -82,18 +81,18 @@ app
                 return a + b.p;
             }, 0);
             this.testScore = this.testScore * 100 / this.nbQuestion;
-        }
+        };
 
         this.doItAgain = function () {
             $http.get(API_URL + 'tests/' + this.id)
                 .success(function (data) {
                     $location.path('/questions');
                 }.bind(this));
-        }
+        };
         this.getTestScore = function () {
             console.log('getTestScore ');
             return this.testScore;
-        }
+        };
     })
 
 
@@ -124,7 +123,7 @@ app
         this.getDic = function () {
             return dic;
         }
-    })
+    });
 
     /*
      * Get pedi (or gw)
@@ -179,3 +178,4 @@ app
         }
 
     });
+    
