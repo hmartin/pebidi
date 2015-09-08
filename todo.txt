@@ -43,6 +43,7 @@ full translate*
 v1 friend:
 view word
 css global
+suck oneByOne
 
 v2 social network:
 Real close question test

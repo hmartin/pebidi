@@ -1,3 +1,4 @@
+/*global app */
 app.filter('brDef', function() {
   return function(input) {
     input = input || '';

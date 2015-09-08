@@ -1,3 +1,6 @@
+/*global API_URL */
+/*global URL */
+/*global app */
 app
     .service('mainService', function ($rootScope, localStorageService) {
         var user = null;
@@ -75,8 +78,7 @@ app
                 .success(function (data) {
                     mainService.setUser(data.user);
                 }.bind(this));
-            s = 0;
-            i = 0;
+                
             this.testScore = points.reduce(function (a, b) {
                 return a + b.p;
             }, 0);
@@ -122,8 +124,8 @@ app
 
         this.getDic = function () {
             return dic;
-        }
-    });
+        };
+    })
 
     /*
      * Get pedi (or gw)
@@ -132,7 +134,7 @@ app
     .service('pediService', function ($http, $rootScope, $location, $timeout, mainService) {
 
         this.get = function (id) {
-            data = {};
+            var data = {};
             if (mainService.getUid() == id) {
                 data.uid = mainService.getUid();
             }
@@ -142,7 +144,7 @@ app
                     console.log('timeout');
                     mainService.setDic(data);
                 }, 0);
-            })
+            });
         };
 
         this.getWords = function (id) {
@@ -153,7 +155,7 @@ app
                     return data.data;
                 });
             return promise;
-        }
+        };
 
         this.post = function (formData) {
             mainService.setCountWord(mainService.getDic().countWord + 1);
@@ -175,7 +177,7 @@ app
                 mainService.setDic(data.dic);
 
             });
-        }
+        };
 
     });
     

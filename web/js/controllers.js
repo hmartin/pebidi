@@ -1,7 +1,10 @@
+/*global API_URL */
+/*global URL */
+/*global app */
 app
     .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService, pediService) {
         $scope.lang = ['en', 'es', 'fr'];
-        $scope.count = $scope.lang.lenght;
+        $scope.count = $scope.lang.length;
         $scope.ip = 0;
         $scope.ia = 2;
         if (localStorageService.get('dic') && localStorageService.get('user')) {
@@ -36,10 +39,10 @@ app
             } else if ($scope.nbquestion > $scope.dic.countWord - 1) {
                 $scope.nbquestion = $scope.dic.countWord;
             }
-        }
+        };
         $scope.startTest = function () {
             testService.createTest($scope.dic.id, $scope.nbquestion);
-        }
+        };
     })
 
     .controller('TestCtrl', function ($scope, $http, $location, testService) {
@@ -49,7 +52,6 @@ app
         $scope.progress = 0;
 
         $scope.words = testService.words;
-        log(testService.words);
 
         $scope.word = $scope.words[$scope.i];
 
@@ -74,7 +76,7 @@ app
     .controller('CongratsTestCtrl', function ($scope, testService) {
         $scope.doItAgain = function () {
             testService.doItAgain();
-        }
+        };
         $scope.testScore = testService.getTestScore();
     })
 
@@ -108,13 +110,12 @@ app
 
         $scope.deleteWord = function (id) {
             pediService.delete(id);
-        }
+        };
     })
 
     .controller('rootCtrl', function ($scope, $rootScope, $http, localStorageService, $translate, $location, mainService) {
 
         $scope.changeLanguage = function (key) {
-            log(key);
             $translate.use(key);
             mainService.lang = key;
         };
