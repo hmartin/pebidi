@@ -15,6 +15,6 @@
     "angular-sanitize": "*",
     "angular-translate": "*",
     "angular-local-storage": "~0.1.5",
-    "aangular-translate-loader-static-files": "*"
+    "angular-translate-loader-static-files": "*"
   }
 }
