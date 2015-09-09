@@ -14,7 +14,7 @@ use Main\DefaultBundle\Entity\Word;
 class WordController extends FOSRestController implements ClassResourceInterface
 {
     /**
-     * @ApiDoc(section="Word", description="Get json info dictionary with id",
+     * @ApiDoc(section="Word", description="Get word detail",
      *  parameters={
      *      {"name"="improve", "dataType"="bolean", "required"=true}
      *  }
@@ -68,6 +68,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
     }
 
     /**
+     * @ApiDoc(section="Word", description="Remove Word to Dic",
+     *  requirements={
+     *      { "name"="id", "dataType"="integer", "requirement"="\d+", "description"="dic id" },
+     *      { "name"="w", "dataType"="string", "requirement"="\d+", "description"="word id" }
+     *  },
+     * )
      * @Rest\View()
      */
     public function postRemoveAction(Request $request)

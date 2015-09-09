@@ -16,7 +16,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
 {
 
     /**
-     * @ApiDoc(section="Word", description="Get json info dictionary with id")
+     * @ApiDoc(section="Dictionary", description="Get basic dic info")
      * @Rest\View()
      */
     public function getAction(Request $request, Dictionary $d)
@@ -25,7 +25,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
     }
 
     /**
-     * @ApiDoc(section="Word", description="Get words with transaltion with dictionary id")
+     * @ApiDoc(section="Dictionary", description="Get words with transaltion for one dic")
      * @Rest\View()
      */
     public function getWordsAction(Request $request, Dictionary $d)
@@ -41,6 +41,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
     }
 
     /**
+     * @ApiDoc(section="Dictionary", description="Get gorups words list")
      * @Rest\View()
      */
     public function getGroupsWordsAction(Request $request)

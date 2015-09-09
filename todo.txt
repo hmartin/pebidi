@@ -43,7 +43,11 @@ full translate*
 v1 friend:
 view word
 css global
+remove \
+info already add
+pb accent trad fr
 suck oneByOne
+20k more + gtrans API
 
 v2 social network:
 Real close question test

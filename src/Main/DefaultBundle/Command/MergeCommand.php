@@ -84,20 +84,21 @@ class MergeCommand extends ContainerAwareCommand
         $output->writeln('Let\'s flush' . $m);
     }
 
-private function getType($w) {
-    
-            $t = 'undef';
-            if (isset($w['type']) && is_array($w['type'])) {
-                foreach ($w['type'] as $type) {
-                    if (!empty($type)) {
-                        $t = $type;
-                        break;
+    private function getType($w) {
+        
+                $t = 'undef';
+                if (isset($w['type']) && is_array($w['type'])) {
+                    foreach ($w['type'] as $type) {
+                        if (!empty($type)) {
+                            $t = $type;
+                            break;
+                        }
                     }
                 }
-            }
+        
+        return $t;
+    }
     
-    return $t;
-}
     protected function getWordType($w, $local, $type)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();

@@ -43,7 +43,7 @@ abstract class InsertCommand extends ContainerAwareCommand
             return null;
         }
 
-        return addslashes(trim($string));
+        return trim($string);
     }
 
     private function starts_with_upper($str) 

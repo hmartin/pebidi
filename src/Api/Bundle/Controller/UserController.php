@@ -26,6 +26,11 @@ class UserController extends FOSRestController implements ClassResourceInterface
     }
 
     /**
+     * @ApiDoc(section="User", description="Create user & Dictionary with email",
+     *  requirements={
+     *      { "name"="email", "dataType"="string", "requirement"="\d+", "description"="word id" }
+     *  },
+     * )
      * @Rest\View()
      */
     public function postEmailAction(Request $request)
