@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new cspoo\Swiftmailer\MailgunBundle\cspooSwiftmailerMailgunBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
           
             new Main\DefaultBundle\MainDefaultBundle(),
             new Api\Bundle\ApiBundle(),

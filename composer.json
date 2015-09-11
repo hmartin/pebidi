@@ -30,7 +30,9 @@
         "gedmo/doctrine-extensions": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "cspoo/swiftmailer-mailgun-bundle": "dev-master",
-        "mailgun/mailgun-php": "~1.7.2"
+        "mailgun/mailgun-php": "~1.7.2",
+        "stof/doctrine-extensions-bundle": "*",
+        "beberlei/DoctrineExtensions": "*"
 
     },
     "scripts": {

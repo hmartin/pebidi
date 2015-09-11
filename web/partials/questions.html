@@ -10,9 +10,8 @@
         </div>
     </div>        
     <div class="row" ng-if="step == 2">
-        {{'YourTranslate'|translate }}{{ word.t }}
         <br>
-        {{'Definition'|translate }}<p ng-bind-html="word.definitions|brDef" ></p>
+        {{'goodAnswer'|translate }}<b>{{ word.t }}</b>
         <div class="col-md-8 col-md-offset-2 align-center">
             <button ng-click="saveResult(0)" class="btn btn-warning input-lg">{{ 'IDontRemenber'|translate }}</button>
             <button ng-click="saveResult(1)" class="btn btn-success input-lg">{{ 'IGotIt'|translate }}</button>
