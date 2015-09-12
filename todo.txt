@@ -39,13 +39,12 @@ insert type*
 manage additional translation*
 try concat three trad*
 full translate*
+pb accent trad fr*
 
-v1 friend:
+v1 school:
 view word
 css global
 remove \
-info already add
-pb accent trad fr
 suck oneByOne
 20k more + gtrans API
 
@@ -56,13 +55,14 @@ uniqu type/expression
 validate email
 chrome extension
 
-v3 school:
+v3 higth school:
 create / edit / visibility groupWord
 Fixture GW 500 words
 full help
 create account
 
 v4 college:
+info already add
 multiple dic
 Mobil apps beta
 Add translate languages (es, de, it,...)

@@ -22,19 +22,30 @@ class MostUsedCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('oneShot:merge');
+            ->setName('oneShot:20k');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        ini_set('memory_limit', '-1');
         $em = $this->getContainer()->get('doctrine')->getManager();
-        $handle = fopen("inputfile.txt", "r");
-if ($handle) {
-    while (($line = fgets($handle)) !== false) {
-        // process the line read.
-    }
-
-    fclose($handle);
-    }
+        $handle = fopen($this->getContainer()->get('kernel')->getRootDir() . "/../dictSource/20k.txt", "r");
+        $i = $l = 0;
+        if ($handle) {
+            while (($line = fgets($handle)) !== false) {
+                $l++;
+                $line = trim($line);
+                if (null == ($word = $em->getRepository('MainDefaultBundle:Word')->findBy(array('word' => $line)))) {
+                    $i++;
+                    echo $line. "\n";
+                }
+                if($i > 50) {exit;}
+                
+            }
+    
+            fclose($handle);
+        }
+        //http://mymemory.translated.net/api/get?q=where&langpair=en|fr
+        echo $i . '/' . $l;
     }
 }
