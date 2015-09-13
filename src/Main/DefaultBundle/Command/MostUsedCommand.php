@@ -35,17 +35,28 @@ class MostUsedCommand extends ContainerAwareCommand
             while (($line = fgets($handle)) !== false) {
                 $l++;
                 $line = trim($line);
-                if (null == ($word = $em->getRepository('MainDefaultBundle:Word')->findBy(array('word' => $line)))) {
-                    $i++;
-                    echo $line. "\n";
+                if (strlen($line) > 1) {
+                    if ((null == ($word = $em->getRepository('MainDefaultBundle:Word')->findBy(array('word' => $line))))
+                        || (substr($line, -1) == 's'
+                            && null == ($word = $em->getRepository('MainDefaultBundle:Word')->findBy(array('word' => substr($line, 0, -1)))))
+                        || (substr($line, -3) == 'ies'
+                            && null == ($word = $em->getRepository('MainDefaultBundle:Word')->findBy(array('word' => substr($line, 0, -3) . 'y'))))
+                    ) {
+                        $i++;
+                        $output->writeln($line);
+                        $words[] = $line;
+
+                    }
                 }
-                if($i > 50) {exit;}
-                
             }
-    
+
             fclose($handle);
         }
-        //http://mymemory.translated.net/api/get?q=where&langpair=en|fr
+
+//http://mymemory.translated.net/api/get?q=where&langpair=en|fr
         echo $i . '/' . $l;
+        $file = fopen($this->getContainer()->get('kernel')->getRootDir() . '/../dictSource/20kout.json', "w");
+        $output->writeln(fwrite($file, json_encode($words)));
+        fclose($file);
     }
 }

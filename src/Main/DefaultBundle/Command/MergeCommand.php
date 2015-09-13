@@ -42,6 +42,9 @@ class MergeCommand extends ContainerAwareCommand
         
         $result = array_merge_recursive($a3, $a1, $a2);
 
+        //dump($result['get']);
+        //exit;
+
         echo 'merge: ' . count($result) . "\n";
         $i = 0;
         foreach ($result as $k => $w) {

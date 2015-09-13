@@ -45,7 +45,7 @@ v1 school:
 view word
 css global
 remove \
-suck oneByOne
+comand suck oneByOne
 20k more + gtrans API
 
 v2 social network:

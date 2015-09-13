@@ -64,6 +64,7 @@ doctrine:
                  datediff: DoctrineExtensions\Query\Mysql\DateDiff
 
              string_functions:
+                 GROUP_CONCAT_IF_NULL: Main\DefaultBundle\Query\GroupConcat
                  char_length: DoctrineExtensions\Query\Mysql\CharLength
                  concat_ws: DoctrineExtensions\Query\Mysql\ConcatWs
                  countif: DoctrineExtensions\Query\Mysql\CountIf

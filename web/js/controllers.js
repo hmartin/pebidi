@@ -115,6 +115,8 @@ app
 
     .controller('rootCtrl', function ($scope, $rootScope, $http, localStorageService, $translate, $location, mainService) {
 
+        $scope.env = ENV;
+
         $scope.changeLanguage = function (key) {
             $translate.use(key);
             mainService.lang = key;

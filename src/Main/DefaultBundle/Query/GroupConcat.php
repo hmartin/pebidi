@@ -1,16 +1,5 @@
 <?php
 
-/**
- * DoctrineExtensions Mysql Function Pack
- *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to kontakt@beberlei.de so I can send you a copy immediately.
- */
 
 namespace Main\DefaultBundle\Query;
 
@@ -21,19 +10,12 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode,
 class GroupConcat extends FunctionNode
 {
     public $isDistinct = false;
-    public $expression = null;
-
-    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
-    {
-        return 'GROUP_CONCAT(' .
-        ($this->isDistinct ? 'DISTINCT ' : '') .
-        $this->expression->dispatch($sqlWalker) .
-        ')';
-    }
+    public $pathExp = null;
+    public $separator = null;
+    public $orderBy = null;
 
     public function parse(\Doctrine\ORM\Query\Parser $parser)
     {
-
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
@@ -44,9 +26,48 @@ class GroupConcat extends FunctionNode
             $this->isDistinct = true;
         }
 
-        $this->expression = $parser->ArithmeticExpression();
+        $parser->match(Lexer::T_IDENTIFIER);
+        $parser->match(Lexer::T_OPEN_PARENTHESIS);
+        $this->expr1 = $parser->ArithmeticExpression();
+        $parser->match(Lexer::T_COMMA);
+        $this->expr2 = $parser->ArithmeticExpression();
+        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
+
+
+        if ($lexer->isNextToken(Lexer::T_ORDER)) {
+            $this->orderBy = $parser->OrderByClause();
+        }
+
+        if ($lexer->isNextToken(Lexer::T_IDENTIFIER)) {
+            if (strtolower($lexer->lookahead['value']) !== 'separator') {
+                $parser->syntaxError('separator');
+            }
+            $parser->match(Lexer::T_IDENTIFIER);
+
+            $this->separator = $parser->StringPrimary();
+        }
 
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 
+    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
+    {
+        $result = 'GROUP_CONCAT(' . ($this->isDistinct ? 'DISTINCT ' : '');
+
+        $result .= 'IFNULL('
+            .$sqlWalker->walkArithmeticPrimary($this->expr1). ', '
+            .$sqlWalker->walkArithmeticPrimary($this->expr2).')';
+
+        if ($this->orderBy) {
+            $result .= ' '.$sqlWalker->walkOrderByClause($this->orderBy);
+        }
+
+        if ($this->separator) {
+            $result .= ' SEPARATOR '.$sqlWalker->walkStringPrimary($this->separator);
+        }
+
+        $result .= ')';
+
+        return $result;
+    }
 }

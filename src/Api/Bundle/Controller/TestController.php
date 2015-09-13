@@ -13,6 +13,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class TestController extends FOSRestController implements ClassResourceInterface
 {
     /**
+     * @ApiDoc(section="Test", description="Get word from a test")
      * @Rest\View()
      */
     public function getAction(Request $request, Test $t) 
@@ -25,6 +26,13 @@ class TestController extends FOSRestController implements ClassResourceInterface
     }
   
     /**
+     * @ApiDoc(section="Test", description="Create test",
+     *  requirements={
+     *      { "name"="uid", "dataType"="integer", "requirement"="\d+", "description"="User id" },
+     *      { "name"="id", "dataType"="integer", "requirement"="\d+", "description"="Dictoinary id" },
+     *      { "name"="nbQuestion", "dataType"="integer", "requirement"="\d+", "description"="Number of words" }
+     *  },
+     * )
      * @Rest\View()
      */
     public function postAction(Request $request)

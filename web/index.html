@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" sizes="16x16" href="favicon.ico" />
+    <link rel="icon" sizes="16x16" href="favicon.ico"/>
     <title>PeBidi - Personal Bilingual Dictionary</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -37,22 +37,23 @@
         <div class="cover-container">
             <div class="masthead clearfix">
                 <div class="">
-                    <h2 class="masthead-brand"><a href="#/" >PeBiDi</a></h2>
-                    <div class="nav masthead-nav" >
-                        dic.id:{{dic.id}}/uid:{{user.id}}/user.did{{ user.did }}
+                    <div class="logo masthead-brand"><a href="#/"><img src="logo.png"><img src="pebidi.png"></a></div>
+                    <div class="nav masthead-nav">
+                        <div ng-if="env == 'DEV'">dic.id:{{dic.id}}/uid:{{user.id}}/user.did{{ user.did }}</div>
                         <div ng-if="user.id" class="animate-if">
                             <div ng-if="dic.uid == user.id" class="animate-if">
-                                It's your dictionary
+                                {{ 'itYourDictionary'|translate }}
                             </div>
                             <div ng-if="dic.uid != user.id" class="animate-if">
-                                {{ 'dictionaryOf'|translate  }} {{ dic.bitEmail }}
+                                {{ 'dictionaryOf'|translate }} {{ dic.bitEmail }}
                             </div>
-                            <br><a ng-click="clearLocalStorage()">{{ 'logout'|translate  }}</a>
+                            <br><a ng-click="clearLocalStorage()">{{ 'logout'|translate }}</a>
                         </div>
 
                     </div>
                     <div>
-                        <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href="" ng-click="changeLanguage('en')">en</a>
+                        <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href=""
+                                                                                         ng-click="changeLanguage('en')">en</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +66,8 @@
 
             <div class="mastfoot">
                 <div class="inner">
-                    <p>Develop by <a href="http://izidot.com">Izidot</a>, Follow us on <a href="https://facebook.com">Facebook</a>.</p>
+                    Contact and Follow us on <a href="https://twitter.com/pe_bi_di">Twitter</a>.
+                    </p>
                 </div>
             </div>
         </div>
