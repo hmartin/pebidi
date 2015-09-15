@@ -53,7 +53,6 @@ class MostUsedCommand extends ContainerAwareCommand
             fclose($handle);
         }
 
-//http://mymemory.translated.net/api/get?q=where&langpair=en|fr
         echo $i . '/' . $l;
         $file = fopen($this->getContainer()->get('kernel')->getRootDir() . '/../dictSource/20kout.json', "w");
         $output->writeln(fwrite($file, json_encode($words)));

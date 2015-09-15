@@ -21,14 +21,14 @@ abstract class CleanUserCommand extends ContainerAwareCommand
         $connection = $em->getConnection();
         $statement = $connection->prepare("
          SET FOREIGN_KEY_CHECKS=0;
-TRUNCATE `DictionariesWord`;
-TRUNCATE `Dictionary`;
-TRUNCATE `DictionaryScore`;
-TRUNCATE `User`;
-TRUNCATE `Point`;
-TRUNCATE `Result`;
-TRUNCATE `Test`;
-TRUNCATE `TestWord`;
+            TRUNCATE `DictionariesWord`;
+            TRUNCATE `Dictionary`;
+            TRUNCATE `DictionaryScore`;
+            TRUNCATE `User`;
+            TRUNCATE `Point`;
+            TRUNCATE `Result`;
+            TRUNCATE `Test`;
+            TRUNCATE `TestWord`;
          SET FOREIGN_KEY_CHECKS=1;");
         $statement->execute();
         $statement->closeCursor();

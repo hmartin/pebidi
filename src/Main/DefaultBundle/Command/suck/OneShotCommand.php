@@ -1,5 +1,5 @@
 <?php
-namespace Main\DefaultBundle\Command;
+namespace Main\DefaultBundle\Command\suck;
 
 use Main\DefaultBundle\Entity\Suck;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;

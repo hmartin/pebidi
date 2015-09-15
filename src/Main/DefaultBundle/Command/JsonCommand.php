@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
-class JsonCommand extends InsertCommand
+class JsonCommand extends ContainerAwareCommand
 {
     protected function configure()
     {

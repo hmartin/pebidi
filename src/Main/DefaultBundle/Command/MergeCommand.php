@@ -131,7 +131,6 @@ class MergeCommand extends ContainerAwareCommand
 
         $em->persist($obj);
         $this->persistWordsType[$local][$type][$w] = $obj;
-        //$em->flush();
 
         return $obj;
     }
@@ -212,11 +211,4 @@ class MergeCommand extends ContainerAwareCommand
         $statement->execute();
         $statement->closeCursor();
     }
-
-
-    /*if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $local))) {
-        echo 'Exist: ' . $obj->getWord();
-        return $obj;
-    } else */
-
 }
