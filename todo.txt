@@ -40,13 +40,13 @@ manage additional translation*
 try concat three trad*
 full translate*
 pb accent trad fr*
+remove \*
+comand suck oneByOne*
+view word*
 
 v1 school:
-view word
 css global
-remove \
-comand suck oneByOne
-20k more + gtrans API
+20k more
 
 v2 social network:
 Real close question test

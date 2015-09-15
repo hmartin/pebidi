@@ -7,7 +7,7 @@
 <div id="wordList" class="text-left animate-repeat" ng-repeat="word in words | filter:q">
     <div class="row" ng-hide="delete" ng-class-odd="'odd'">
         <div class="col-md-3"><a href="#/word/{{ word.id }}">{{word.w| capitalize }}</a></div>
-        <div class="col-md-5">{{word.t| capitalize }}</div>
+        <div class="col-md-5">{{word.concat| capitalize }}</div>
         <div class="col-md-1" ng-if="word.stat_sum_realised">{{ (word.stat_sum_realised*100)| number:1 }}%</div>
         <div class="col-md-1" ng-if="!word.stat_sum_realised">-</div>
         <div class="col-md-1" ng-if="word.global">{{ (word.global*100)| number:1 }}%</div>

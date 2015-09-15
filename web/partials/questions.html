@@ -11,7 +11,7 @@
     </div>        
     <div class="row" ng-if="step == 2">
         <br>
-        <h3>{{'goodAnswer'|translate }}<b>{{ word.t }}</b></h3>
+        <h3>{{'goodAnswer'|translate }}:</h3><h3><b>{{ word.t }}</b></h3>
         <div class="col-md-8 col-md-offset-2 align-center">
             <button ng-click="saveResult(0)" class="btn btn-warning input-lg">{{ 'IDontRemenber'|translate }}</button>
             <button ng-click="saveResult(1)" class="btn btn-success input-lg">{{ 'IGotIt'|translate }}</button>

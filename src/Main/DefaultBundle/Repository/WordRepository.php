@@ -9,11 +9,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class WordRepository extends EntityRepository
 {
+    const selectGroupConcat = 'GROUP_CONCAT_IF_NULL(IFNULL(translation.expression, trans_word.word) SEPARATOR \', \') as concat';
+
     public function getWordTranslationConcat($w) 
     {
         $qb = $this->getWordFullTranslationQuery($w) 
-            ->addSelect('IFNULL(wt.expression, word.word) as fullWord, senses.sense as sense, senses.id as sid, GROUP_CONCAT_IF_NULL(IFNULL(translation.expression, trans_word.word) SEPARATOR \', \') as concat')
-            ->groupBy('fullWord');
+            ->addSelect('senses.sense as sense, senses.id as sid, '. self::selectGroupConcat )
+            ->groupBy('w');
 
         return $qb->getQuery()->getResult();      
     }
@@ -71,10 +73,11 @@ class WordRepository extends EntityRepository
     {
 
         $qb = $this->initQueryBuilder()
-            ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised')
+            ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised, '. self::selectGroupConcat)
             ->innerJoin('word.dictionaries', 'd')
             ->leftJoin('word.points', 'p')
             ->where('d.id = :did')
+            ->andWhere('wt.expression IS NULL')
             ->setParameter('did', $d)
             ->groupBy('word.id');
 
@@ -91,7 +94,7 @@ class WordRepository extends EntityRepository
     private function initQueryBuilder()
     {
         return $this->createQueryBuilder('word')
-            ->select('word.id, word.word as w, trans_word.word as t')
+            ->select('word.id, IFNULL(wt.expression, word.word) as w, trans_word.word as t')
 
             ->innerJoin('word.wordTypes', 'wt')
             ->innerJoin('\Main\DefaultBundle\Entity\Ww', 'ww',
