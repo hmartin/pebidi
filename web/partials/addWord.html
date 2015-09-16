@@ -39,7 +39,12 @@
 </div>
 
 <div ng-if="!dic">
-    <p class="lead">We're loading your Pebidi...</p>
+    <div ng-if="!dic.id">
+        <p class="lead">{{ 'wantToSave'|translate }} <a href="#/" >{{ 'createYourPebidi'|translate }}</a></p>
+    </div>
+    <div ng-if="dic.id">
+        <p class="lead">We're loading your Pebidi...</p>
+    </div>
 </div>
 
 <script type="text/ng-template" id="listWord.html">

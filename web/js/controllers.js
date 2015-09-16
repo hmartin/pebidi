@@ -59,14 +59,16 @@ app
             $scope.step = 2;
         };
         $scope.saveResult = function (p) {
-            $scope.i++;
-            $scope.progress = ($scope.i) * 100 / testService.nbQuestion;
+            var j = $scope.i + 1;
             $scope.points.push({wid: $scope.word.id, p: p});
 
-            if ($scope.i == testService.nbQuestion) {
+            if (j == testService.nbQuestion) {
                 testService.saveResults($scope.points);
                 $location.path('/congrats');
             }
+
+            $scope.i = j;
+            $scope.progress = ($scope.i) * 100 / testService.nbQuestion;
 
             $scope.word = $scope.words[$scope.i];
             $scope.step = 1;
@@ -104,7 +106,6 @@ app
         }
 
         pediService.getWords($routeParams.id).then(function (data) {
-            console.log(data);
             $scope.words = data;
         });
 

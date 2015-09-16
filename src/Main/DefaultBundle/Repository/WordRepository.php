@@ -9,12 +9,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class WordRepository extends EntityRepository
 {
-    const selectGroupConcat = 'GROUP_CONCAT_IF_NULL(IFNULL(translation.expression, trans_word.word) SEPARATOR \', \') as concat';
+    const selectGroupConcat = 'GROUP_CONCAT_IF_NULL(DISTINCT IFNULL(translation.expression, trans_word.word) SEPARATOR \', \') as concat';
 
     public function getWordTranslationConcat($w) 
     {
         $qb = $this->getWordFullTranslationQuery($w) 
-            ->addSelect('senses.sense as sense, senses.id as sid, '. self::selectGroupConcat )
+            ->addSelect(' '. self::selectGroupConcat )
             ->groupBy('w');
 
         return $qb->getQuery()->getResult();      
@@ -23,17 +23,18 @@ class WordRepository extends EntityRepository
     protected function getWordFullTranslationQuery($w) 
     {
         $qb = $this->initQueryBuilder()
+            ->addSelect('senses.sense as sense, senses.id as sid')
             ->innerJoin('ww.senses', 'senses')
             ->where('word.id = :wid')
             ->setParameter('wid', $w)
-            ->orderBy('ww.priority', 'ASC');
+            ->orderBy('word.word', 'ASC');
 
         return $qb;      
     }
     
     public function getWordFullTranslation($w) 
     {
-        return $this->getWordFullTranslationQuery($w)->getQuery()->getResult();      
+        return $this->getWordFullTranslationQuery($w)->addSelect('wt.additional')->getQuery()->getResult();
     }
   
     public function getWordsForTest($nb, $d, $u)

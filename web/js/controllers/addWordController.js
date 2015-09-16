@@ -28,7 +28,6 @@ app
 
         $scope.processWord = function () {
             $scope.formData.id = $scope.dic.id;
-            console.log($scope.formData);
             pediService.post($scope.formData);
             $scope.formData.word = '';
             $scope.formData.translation = '';

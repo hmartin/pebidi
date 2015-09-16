@@ -1,4 +1,5 @@
 <div ng-if="user.did == dic.id"><h1>{{ 'yourDictionary'|translate }}</h1></div>
+<go-home></go-home>
 <div ng-if="user.did != dic.id"><h1>{{ 'group'|translate }}</h1>
     (<a ng-href="#/wordList/{{ user.did }}">{{ 'backToYourDictionary'|translate }}</a>)
 </div>
@@ -21,4 +22,5 @@
     </div>
 </div>
 <br>
+<go-home></go-home>&nbsp;&nbsp;-&nbsp;&nbsp;
 <a ng-href="#/addGroupWord"><span class="glyphicon glyphicon-flash"></span>{{ 'addGroupWord'|translate }}</a>
