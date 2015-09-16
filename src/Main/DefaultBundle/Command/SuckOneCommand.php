@@ -33,9 +33,9 @@ class SuckOneCommand extends ContainerAwareCommand
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         
-        $origin             = $input->getArgument('origin');
-        $to             = $input->getArgument('to');
-        $w             = $input->getOption('word');
+        $origin = $input->getArgument('origin');
+        $to = $input->getArgument('to');
+        $w = $input->getOption('word');
         
         if ($obj = $em->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $w, 'local' => $origin))) {
             echo 'Exist: ' . $obj->getWord();

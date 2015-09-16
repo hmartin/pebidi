@@ -1,5 +1,5 @@
 <?php
-namespace Main\DefaultBundle\Command;
+namespace Main\DefaultBundle\Command\once;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;

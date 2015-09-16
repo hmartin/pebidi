@@ -1,5 +1,5 @@
 <?php
-namespace Main\DefaultBundle\Command;
+namespace Main\DefaultBundle\Command\once;
 
 use Main\DefaultBundle\Entity\Sense;
 use Main\DefaultBundle\Entity\Suck;

@@ -46,22 +46,23 @@ view word*
 
 v1 school:
 css global
-20k more
 
 v2 social network:
-Real close question test
-Create & Edit best translation
-uniqu type/expression
-validate email
 chrome extension
+uniqu type/expression
+Associates words (conjugates and plurals) in expression
+20k more command one by one
+Create & Edit best translation
+Real close question test
 
 v3 higth school:
 create / edit / visibility groupWord
-Fixture GW 500 words
+Fixture GW 500/20/90 words
 full help
-create account
 
 v4 college:
+validate email
+create account
 info already add
 multiple dic
 Mobil apps beta
