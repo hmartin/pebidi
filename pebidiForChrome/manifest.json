@@ -1,0 +1,19 @@
+{
+  "name": "Pebidi from Chrome",
+  "description": "Translate evryword",
+  "version": "0.7",
+  "permissions": ["contextMenus",
+        "tabs",
+        "notifications",
+        "http://*/",
+        "https://*/"],
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["content_script.js"]
+  }],
+  "background": {
+    "persistent": false,
+    "scripts": ["angular.min.js", "sample.js"]
+  },
+  "manifest_version": 2
+}

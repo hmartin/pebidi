@@ -43,12 +43,14 @@ pb accent trad fr*
 remove \*
 comand suck oneByOne*
 view word*
+chrome extension*
 
 v1 school:
 css global
 
 v2 social network:
-chrome extension
+chrome extension in the cloud
+Did in Session for chrome extension
 Create & Edit best translation
 Real close question test
 Inverse definition test
