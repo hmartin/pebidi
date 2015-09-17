@@ -1,0 +1,21 @@
+<h1>{{ 'createGroup'|translate }}</h1>
+
+<div class="row top-buffer">
+    <div class="col-lg-6 col-lg-offset-3">
+  <div class="form-group">
+            <input class="form-control input-lg" ng-model="formData.title" name="title" placeholder="{{ 'groupTitle'|translate }}" type="text" >
+  </div>
+  <div class="form-group">
+            <textarea  class="form-control" rows="3" placeholder="{{ 'groupDescription'|translate }}" ng-model="formData.description" ></textarea>
+  </div>
+  <div class="form-group">
+            <input class="form-control input-lg" ng-model="formData.private" name="private"  type="checkbox" >{{ 'privateGroup'|translate }}
+   </div>
+</div>
+  </div>
+    
+<p class="lead bg-warning" >{{ 'remarkCreateGroup'|translate }}</p>
+<span class="input-group-btn">
+    <button class="btn btn-success input-lg" ng-click="processForm()" >Go!</button>
+</span>
+<go-home></go-home>

@@ -1,0 +1,14 @@
+<h1>{{ 'addGroupWord'|translate }}</h1>
+<p class="lead" >{{ 'addGroupWordBeta'|translate }}</p>
+<div class="text-left row animate-repeat" ng-repeat="group in groupsWords">
+    <div class="col-md-3 col-md-offset-2">{{group.title}}</div>
+    <div class="col-md-4">{{group.description}}</div>
+    <div class="col-md-2 col-md-offset-1">
+        <span class="pointer glyphicon glyphicon-download" tooltip="{{ 'addGroupWord'|translate }}" ng-click="addGroupWord(group.id)"></span>
+        <a  ng-href="#/wordList/{{ group.id }}" class="glyphicon glyphicon-eye-open" ></a>
+    </div>
+</div>
+
+<go-home></go-home>
+&nbsp;&nbsp;-&nbsp;&nbsp;
+<a ng-href="#/group/create"><span class="glyphicon glyphicon-folder-plus"></span>{{ 'createGroup'|translate }}</a>

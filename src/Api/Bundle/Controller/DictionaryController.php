@@ -41,7 +41,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
     }
 
     /**
-     * @ApiDoc(section="Dictionary", description="Get gorups words list")
+     * @ApiDoc(section="Dictionary", description="Get groups words list")
      * @Rest\View()
      */
     public function getGroupsWordsAction(Request $request)

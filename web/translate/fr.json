@@ -2,8 +2,6 @@
     "itYourDictionary": "C'est votre dictionnaire",
     "dictionaryOf": "Dictionnaire de:",
     "logout": "Déconnexion",
-    "addGroupWord": "Ajouter un groupe de mots",
-    "addGroupWordBeta": "Cette fonctionalité est en dévelopement par l'équie de Pebidi, revenez dans quelques jours",
     "welcome": "Bienvenue",
     "addWord.newWord": "Ajouter un nouveau mot:",
     "addWord.word": "Mot",
@@ -18,10 +16,12 @@
     "doItAgain": "Recommencer",
     "doAnotherTest": "Faire un autre test",
     "goHome": "Retour accueil",
+    "addGroupWord": "Ajouter un groupe de mots",
     "globalResult": "Résultat global",
     "createTest": "Créer un test",
     "start": "Commencer!",
     "slogan": "Créer votre propre dictionnaire de langue!",
+    "emailAddress": "",
     "homepage.explication1": "Entrez juste votre email, et n'oubliez plus ce que vous savez",
     "homepage.explication2": "PeBiDi vous permet d'enregistrer les mots que vous avez appris",
     "improve.newWord": "Ajouter",
@@ -42,5 +42,7 @@
     "addWord": "Ajouter un mot",
     "noun": "nom",
     "adjective": "adjectif",
-    "verb": "verbe"
+    "verb": "verbe",
+    "createGroup": "",
+    "addGroupWordBeta": "Cette fonctionalité est en dévelopement par l'équie de Pebidi, revenez dans quelques jours"
 }
