@@ -11,14 +11,10 @@ Training (beta)
 table point
 
 micro todo:
-name input 
-description
-private checkbox
-make my dictionary as group and create a new one
-Not implemented: make my dictionary as group (only if public)
-Not implemented: make my dictionary as group auto update (only if public)
-
 Remove personal gw
 Edit personal gw
-
+Congrats page
+Limit words (mini 15 words)
+List only public and mine
+Default dictionary
 

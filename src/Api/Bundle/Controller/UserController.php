@@ -55,11 +55,6 @@ class UserController extends FOSRestController implements ClassResourceInterface
               
                 $em->persist($d);
               
-                $ds = new DictionaryScore();
-                $ds->setUser($u);
-                $ds->setDictionary($d);
-                $em->persist($ds);
-              
                 $em->flush();
             }
             $em->refresh($u);

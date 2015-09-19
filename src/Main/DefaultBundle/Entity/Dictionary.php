@@ -71,6 +71,11 @@ class Dictionary
     /**
      * @ORM\Column(type="integer")
      */
+    protected $main = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     protected $groupWord = 0;
 
     /**
@@ -102,6 +107,7 @@ class Dictionary
     public function __construct()
     {
         $this->words = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->main = 1;
     }
 
     /**
@@ -396,5 +402,29 @@ class Dictionary
     public function getDictionaryScores()
     {
         return $this->dictionaryScores;
+    }
+
+    /**
+     * Set main
+     *
+     * @param integer $main
+     *
+     * @return Dictionary
+     */
+    public function setMain($main)
+    {
+        $this->main = $main;
+
+        return $this;
+    }
+
+    /**
+     * Get main
+     *
+     * @return integer
+     */
+    public function getMain()
+    {
+        return $this->main;
     }
 }

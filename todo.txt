@@ -1,3 +1,39 @@
+v1 school:
+css global
+
+v2 social network:
+chrome extension in the cloud (0.5)
+Did in Session for chrome extension (1d)
+Create & Edit best translation (2d)
+create / edit / visibility groupWord (1d)
+Real close question test (1d)
+Inverse definition test (0.5d)
+Tot: 6j
+
+v3 higth school:
+Fixture GW 500/20/90 words
+full help
+
+v4 college:
+uniqu type/expression
+Associates words (conjugates and plurals) in expression
+20k more command one by one
+validate email
+create account
+info already add
+multiple dic
+Mobil apps beta
+Add translate languages (es, de, it,...)
+
+v5 worldwide
+Add teacher/ Friends 
+Mobil apps
+algo v2 test
+
+toStudy:
+load words and trad in local storage
+
+
 New user is open (private=0)
 Evry open user create open dictionary
 when user register, he become private, like all his dictionaries
@@ -44,38 +80,7 @@ remove \*
 comand suck oneByOne*
 view word*
 chrome extension*
-
-v1 school:
-css global
-
-v2 social network:
-chrome extension in the cloud (0.5)
-Did in Session for chrome extension (1d)
-Create & Edit best translation (2d)
-create / edit / visibility groupWord (1d)
-Real close question test (1d)
-Inverse definition test (0.5d)
-Tot: 6j
-
-v3 higth school:
-Fixture GW 500/20/90 words
-full help
-
-v4 college:
-uniqu type/expression
-Associates words (conjugates and plurals) in expression
-20k more command one by one
-validate email
-create account
-info already add
-multiple dic
-Mobil apps beta
-Add translate languages (es, de, it,...)
-
-v5 worldwide
-Add teacher/ Friends 
-Mobil apps
-algo v2 test
-
-toStudy:
-load words and trad in local storage
+name input *
+description*
+private checkbox*
+make my dictionary as group and create a new one*

@@ -22,7 +22,8 @@ app
         $scope.formData = {};
 
         $scope.processForm = function () {
-            $http.post(API_URL + 'adds/groups/words', $scope.formData).success(function (data) {
+            $scope.formData.did = $scope.dic.id;
+            $http.post(API_URL + 'dictionaries/creates/groups', $scope.formData).success(function (data) {
                 mainService.setDic(data.dic);
             });
         };

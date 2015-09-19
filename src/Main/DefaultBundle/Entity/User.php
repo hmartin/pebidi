@@ -106,7 +106,9 @@ class User extends BaseUser
     public function getDefaultDictionary() 
     {
         foreach($this->dictionaries as $d) {
-            return $d;
+            if ($d->getMain()) {
+                return $d;
+            }
         }
       
         return false;
