@@ -13,6 +13,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Main\DefaultBundle\Entity\Dictionary;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class UserController extends FOSRestController implements ClassResourceInterface
 {
@@ -22,7 +24,9 @@ class UserController extends FOSRestController implements ClassResourceInterface
      */
     public function getAction(Request $request, User $u)
     {
-      return $this->getUserAndDic($u);
+        $request->getSession()->set('petok', $u->getId());
+
+        return $this->getUserAndDic($u);
     }
 
     /**
@@ -37,7 +41,7 @@ class UserController extends FOSRestController implements ClassResourceInterface
     {
         $em = $this->getDoctrine()->getManager();
 
-       if ($email = $request->request->get('email')) {
+        if ($email = $request->request->get('email')) {
 
             if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
 
@@ -46,46 +50,54 @@ class UserController extends FOSRestController implements ClassResourceInterface
                 $u->setEmail($email);
                 $u->setUsername($email);
                 $u->setPassword($email);
+                $u->setRoles(array('ROLE_USER'));
                 $em->persist($u);
-              
+                $token = new UsernamePasswordToken($u, $u->getPassword(), "public", $u->getRoles());
+                $this->get("security.token_storage")->setToken($token);
+
+                $event = new InteractiveLoginEvent($request, $token);
+                $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
+
                 $d = new Dictionary();
                 $d->setUser($u);
                 $d->setLang($request->request->get('destLang'));
                 $d->setOriginLang($request->request->get('originLang'));
-              
+
                 $em->persist($d);
-              
+
                 $em->flush();
             }
             $em->refresh($u);
-         
+
             return $this->getUserAndDic($u);
         }
     }
-  
-    protected function getUserAndDic(User $u) 
+
+    protected function getUserAndDic(User $u)
     {
         $score = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
         $params = array('user' => array('id' => $u->getId(), 'score' => $score));
-      
+
         if ($d = $u->getDefaultDictionary()) {
             $params['dic'] = $d->getJsonArray();
             $params['user']['did'] = $d->getId();
             $words = $d->getWords();
-            foreach($words as $w) {
+            foreach ($words as $w) {
                 $params['user']['wids'][] = $w->getId();
             }
         }
 
+
         return $params;
-      
+
     }
 
     protected function getScore($u, $d)
     {
         $a = array('user' => $u, 'dictionary' => $d);
         $ds = $this->getDoctrine()->getRepository('MainDefaultBundle:DictionaryScore')->findOneBy($a);
-        
+
         return $ds->getScore();
     }
 }

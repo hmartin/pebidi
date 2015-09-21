@@ -18,7 +18,7 @@ class ApiGroupWordController extends FOSRestController
     /**
      * @Rest\View()
      */
-    public function groupWordAction(Request $request)
+/*    public function groupWordAction(Request $request)
     {
         if ($l = $request->query->get('lang'))
         {
@@ -32,12 +32,12 @@ class ApiGroupWordController extends FOSRestController
             return array('groups' => $results);
         }
         throw new \Exception('groupWord went wrong!');
-    }
+    }*/
     
     /**
      * @Rest\View()
      */
-    public function getTypeWordsListAction($type, $id, Request $request)
+/*    public function getTypeWordsListAction($type, $id, Request $request)
     {
         if ($type == 'dictionary') {
             $qb = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->createQueryBuilder('d');
@@ -78,29 +78,5 @@ class ApiGroupWordController extends FOSRestController
         $results = $qb->getQuery()->getResult();
 
         return array('words' => $results);
-    }
-
-    
-    /**
-     * @Rest\View()
-     */
-    public function postAddGroupWordAction(Request $request)
-    {
-        if ($gwid = $request->request->get('gwid') and $did = $request->request->get('did')
-            and $gw = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->find($gwid)
-            and $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($did))
-        {
-
-            foreach($gw->getWords() as $w) {
-                if(!$d->getWords()->contains($w)) {
-                    $d->addWord($w);
-                }
-            }
-
-            $this->get('persist')->persistAndFlush($d);
-
-            return array('dic' => $d->getJsonArray());
-        }
-        throw new \Exception('AddGroupWord went wrong!');
-    }
+    }*/
 }

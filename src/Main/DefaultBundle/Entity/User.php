@@ -19,7 +19,7 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
@@ -59,6 +59,7 @@ class User extends BaseUser
       
         return $a['0'].'@....'.$b['1'];
     }
+
 
     /**
      * Get id
@@ -235,5 +236,29 @@ class User extends BaseUser
     public function getResults()
     {
         return $this->results;
+    }
+
+    /**
+     * Set petok
+     *
+     * @param string $petok
+     *
+     * @return User
+     */
+    public function setPetok($petok)
+    {
+        $this->petok = $petok;
+
+        return $this;
+    }
+
+    /**
+     * Get petok
+     *
+     * @return string
+     */
+    public function getPetok()
+    {
+        return $this->petok;
     }
 }

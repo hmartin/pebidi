@@ -80,7 +80,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
             $em->persist($dGroup);
               
             $d = new Dictionary();
-            $d->setUser($u);
+            $d->setUser($this->getUser());
             $d->setLang($dGroup->getLang());
             $d->setOriginLang($dGroup->getOriginLang());
               
@@ -91,5 +91,28 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
             return array('dic' => $d->getJsonArray());
         }
         throw new \Exception('Something went wrong!');
+    }
+
+    /**
+     * @Rest\View()
+     */
+    public function postAddGroupWordAction(Request $request)
+    {
+        if ($gwid = $request->request->get('gwid') and $did = $request->request->get('did')
+            and $gw = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->find($gwid)
+            and $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($did))
+        {
+
+            foreach($gw->getWords() as $w) {
+                if(!$d->getWords()->contains($w)) {
+                    $d->addWord($w);
+                }
+            }
+
+            $this->get('persist')->persistAndFlush($d);
+
+            return array('dic' => $d->getJsonArray());
+        }
+        throw new \Exception('AddGroupWord went wrong!');
     }
 }
