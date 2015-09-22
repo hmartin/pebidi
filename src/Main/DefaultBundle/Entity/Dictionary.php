@@ -86,19 +86,18 @@ class Dictionary
 
     public function getJsonArray()
     {
-        return array('id' => $this->getId(),
+        $a = array('id' => $this->getId(),
             'countWord' => count($this->getWords()),
             'bitEmail' => $this->getUser()->getBitEmail(),
             'uid' => $this->getUser()->getId()
         );
-    }
 
-    public function getGroupWordJsonArray()
-    {
-        return array_merge($this->getJsonArray(), array(
-            'title' => $this->getTitle(),
-            'description' => $this->getDescription(),
-        ));
+        if ($this->getGroupWord()) {
+            $a['title'] = $this->getTitle();
+            $a['description'] = $this->getDescription();
+        }
+
+        return $a;
     }
 
     /**

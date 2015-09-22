@@ -46,10 +46,14 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
      */
     public function getGroupsWordsAction(Request $request)
     {
-        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->getGroupsWords();
+        if (null == ($user = $this->getUser())) {
+            $user = null;
+        }
+
+        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->getGroupsWords($user);
         $r = array();
         foreach($results as $d) {
-            $r[] = $d->getGroupWordJsonArray();
+            $r[] = $d->getJsonArray();
         }
 
         return array('groupsWords' => $r);
@@ -80,7 +84,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
             $em->persist($dGroup);
               
             $d = new Dictionary();
-            $d->setUser($this->getUser());
+            $d->setUser($dGroup->getUser());
             $d->setLang($dGroup->getLang());
             $d->setOriginLang($dGroup->getOriginLang());
               
@@ -94,24 +98,31 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
     }
 
     /**
+     * @ApiDoc(section="Dictionary", description="Add group to a dic",
+     *  requirements={
+     *      { "name"="did", "dataType"="integer", "requirement"="\d+", "description"="dic id" },
+     *      { "name"="gid", "dataType"="integer", "requirement"="\d+", "description"="Group (dic) id" }
+     *  },
+     * )
      * @Rest\View()
      */
     public function postAddGroupWordAction(Request $request)
     {
-        if ($gwid = $request->request->get('gwid') and $did = $request->request->get('did')
-            and $gw = $this->getDoctrine()->getRepository('MainDefaultBundle:GroupWord')->find($gwid)
+        if ($gid = $request->request->get('gid') and $did = $request->request->get('did')
+            and $gw = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($gid)
             and $d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($did))
         {
-
+            $i = 0;
             foreach($gw->getWords() as $w) {
                 if(!$d->getWords()->contains($w)) {
+                    $i++;
                     $d->addWord($w);
                 }
             }
 
             $this->get('persist')->persistAndFlush($d);
 
-            return array('dic' => $d->getJsonArray());
+            return array('dic' => $d->getJsonArray(), 'nbAdd' => $i);
         }
         throw new \Exception('AddGroupWord went wrong!');
     }

@@ -11,10 +11,16 @@ Training (beta)
 table point
 
 micro todo:
+Default dictionary*
+remove word from group*
+add all words*
+Congrats page*
+Congrats add all words
 Remove personal gw
-Edit personal gw
-Congrats page
+add word to a group
+add word from a group
+back to home dic.id is group
+user.main.dic
 Limit words (mini 15 words)
 List only public and mine
-Default dictionary
 

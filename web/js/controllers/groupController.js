@@ -12,16 +12,19 @@ app
         $scope.addGroupWord = function (id) {
             $scope.data = {};
             $scope.data.did = $scope.dic.id;
-            $scope.data.gwid = id;
-            $http.post(API_URL + 'adds/groups/words', $scope.data).success(function (data) {
+            $scope.data.gid = id;
+            $http.post(API_URL + 'dictionaries/adds/groups/words', $scope.data).success(function (data) {
                 mainService.setDic(data.dic);
+                console.log('nb add' + data.nbAdd);
             });
         };
     })
     .controller('GroupCreateCtrl', function ($scope, $http, $location, mainService) {
         $scope.formData = {};
+        $scope.congrats = false;
 
         $scope.processForm = function () {
+            $scope.congrats = true;
             $scope.formData.did = $scope.dic.id;
             $http.post(API_URL + 'dictionaries/creates/groups', $scope.formData).success(function (data) {
                 mainService.setDic(data.dic);

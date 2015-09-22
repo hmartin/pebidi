@@ -1,26 +1,34 @@
 <h1>{{ 'createGroup'|translate }}</h1>
-
 <div class="row top-buffer">
     <div class="col-lg-6 col-lg-offset-3">
-        <div class="form-group">
-            <input class="form-control input-lg" ng-model="formData.title" name="title"
-                   placeholder="{{ 'groupTitle'|translate }}" type="text">
+        <div ng-if="congrats">
+            <p class="lead">{{ 'createGroupCongrats'|translate }}</p>
         </div>
-        <div class="form-group">
+        <div ng-if="!congrats">
+            <div class="form-group">
+                <input class="form-control input-lg" ng-model="formData.title" name="title"
+                       placeholder="{{ 'groupTitle'|translate }}" type="text">
+            </div>
+            <div class="form-group">
             <textarea class="form-control" rows="3" placeholder="{{ 'groupDescription'|translate }}"
                       ng-model="formData.description"></textarea>
-        </div>
-        <div class="text-left form-group">
-            <label >
-                <input class="" ng-model="formData.private" name="private" value="private" type="checkbox"> {{
-                'privateGroup'|translate }}
-            </label>
-        </div>
+            </div>
+            <div class="text-left form-group">
+                <label>
+                    <input class="" ng-model="formData.private" name="private" value="private" type="checkbox"> {{
+                    'privateGroup'|translate }}
+                </label>
+            </div>
+            <p>&nbsp;</p>
 
-        <p class="alert alert-info" role="alert">{{ 'remarkCreateGroup'|translate }}</p>
-        <span class="input-group-btn">
-            <button class="btn btn-success input-lg" ng-click="processForm()">{{ 'submitCreateGroup'|translate }}</button>
-        </span>
+            <p class="alert alert-info" role="alert">{{ 'remarkCreateGroup'|translate }}</p>
+
+            <p>&nbsp;</p>
+            <span class="input-group-btn">
+                <button class="btn btn-success input-lg" ng-click="processForm()">{{ 'submitCreateGroup'|translate }}
+                </button>
+            </span>
+        </div>
         <go-home></go-home>
     </div>
 </div>

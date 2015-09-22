@@ -6,9 +6,14 @@ use Doctrine\ORM\EntityRepository;
 
 class DictionaryRepository extends EntityRepository
 {
-    public function getGroupsWords()
+    public function getGroupsWords($user)
     {
-        return $this->findBy(array('groupWord' => 1));
+        $qb = $this->createQueryBuilder('dic')
+            ->where('dic.groupWord = 1')
+            ->andWhere('dic.private = 0 OR dic.user = :user')
+            ->setParameter('user', $user);
+
+        return $qb->getQuery()->getResult();
     }
 
 }
