@@ -15,6 +15,7 @@
     "angular-sanitize": "*",
     "angular-translate": "*",
     "angular-local-storage": "~0.1.5",
-    "angular-translate-loader-static-files": "*"
+    "angular-translate-loader-static-files": "*",
+    "angular-flash-alert": "*"
   }
 }
