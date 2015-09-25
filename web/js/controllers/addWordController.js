@@ -1,5 +1,5 @@
 app
-    .controller('AddWordCtrl', function ($scope, $http, $location, $routeParams, $filter, pediService, mainService, wordService, dicService) {
+    .controller('AddWordCtrl', function ($scope, $http, $location, $routeParams, $filter, Flash, pediService, mainService, wordService, dicService) {
         $scope.formData = {};
 
         if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {
@@ -10,7 +10,6 @@ app
         dicService.loadDic();
 
         $scope.getWords = function (val) {
-            
             var sug = $filter('limitTo')($filter('filter')(dicService.getDic(), val, function (actual, expected) {
                 return actual.toString().toLowerCase().indexOf(expected.toLowerCase()) == 0;
             }), 10);

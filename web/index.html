@@ -21,6 +21,7 @@
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-flash-alert/dist/angular-flash.min.js"></script>
     <script src="js/env.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
@@ -58,7 +59,7 @@
                     </div>
                 </div>
             </div>
-
+            <div flash-message="2000"></div>
             <div class="inner cover">
                 <div class="view-animate-container">
                     <div ng-view class="view-animate"></div>

@@ -1,4 +1,6 @@
 {
+    "goHome": "Back to home",
+    "wellDone": "",
     "itYourDictionary": "It's your dictionary",
     "dictionaryOf": "It's the dictionary of",
     "logout": "Log out",
@@ -15,7 +17,6 @@
     "testResult": "Test result",
     "doItAgain": "Do it again",
     "doAnotherTest": "Do another test",
-    "goHome": "Back to home",
     "addGroupWord": "Add group of words",
     "globalResult": "Global result",
     "createTest": "Create test",
@@ -44,5 +45,11 @@
     "adjective": "adjective",
     "verb": "verb",
     "createGroup": "Create group of words",
-    "addGroupWordBeta": "Pebidi's team are working on it, gome back in few days!"
+    "createGroupCongrats": "",
+    "groupTitle": "",
+    "groupDescription": "",
+    "privateGroup": "",
+    "remarkCreateGroup": "",
+    "submitCreateGroup": "",
+    "addGroupWordExplication": ""
 }

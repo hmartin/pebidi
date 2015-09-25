@@ -6,7 +6,8 @@ var app = angular.module('app', [
     'LocalStorageModule',
     'ngSanitize',
     'ui.bootstrap',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'flash'
 
 ]);
 

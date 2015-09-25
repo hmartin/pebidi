@@ -2,7 +2,7 @@
 /*global API_URL */
 /*global app */
 app
-    .controller('GroupListCtrl', function ($scope, $http, $location, mainService) {
+    .controller('GroupListCtrl', function ($scope, $http, $location, $translate, Flash, mainService) {
         $http
             .get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}})
             .success(function (data) {
@@ -15,6 +15,8 @@ app
             $scope.data.gid = id;
             $http.post(API_URL + 'dictionaries/adds/groups/words', $scope.data).success(function (data) {
                 mainService.setDic(data.dic);
+                var message = '<strong>'+$translate('wellDone')+'!</strong> '+data.nbAdd+' '+$translate('wordsAdded')+'.';
+                Flash.create('success', message, 'custom-class');
                 console.log('nb add' + data.nbAdd);
             });
         };

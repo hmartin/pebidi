@@ -1,4 +1,6 @@
 {
+    "goHome": "Retour accueil",
+    "wellDone": "Well Done",
     "itYourDictionary": "C'est votre dictionnaire",
     "dictionaryOf": "Dictionnaire de:",
     "logout": "Déconnexion",
@@ -15,7 +17,6 @@
     "testResult": "Résultat du test",
     "doItAgain": "Recommencer",
     "doAnotherTest": "Faire un autre test",
-    "goHome": "Retour accueil",
     "addGroupWord": "Ajouter un groupe de mots",
     "globalResult": "Résultat global",
     "createTest": "Créer un test",
@@ -44,5 +45,11 @@
     "adjective": "adjectif",
     "verb": "verbe",
     "createGroup": "",
-    "addGroupWordBeta": "Cette fonctionalité est en dévelopement par l'équie de Pebidi, revenez dans quelques jours"
+    "createGroupCongrats": "",
+    "groupTitle": "",
+    "groupDescription": "",
+    "privateGroup": "",
+    "remarkCreateGroup": "",
+    "submitCreateGroup": "",
+    "addGroupWordExplication": ""
 }
