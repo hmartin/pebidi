@@ -76,12 +76,9 @@ class UserController extends FOSRestController implements ClassResourceInterface
 
     protected function getUserAndDic(User $u)
     {
-        $score = $this->getDoctrine()->getRepository('MainDefaultBundle:Result')->getAvgScore($u);
-        $params = array('user' => array('id' => $u->getId(), 'score' => $score));
-
         if ($d = $u->getDefaultDictionary()) {
+            $params['user'] = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->getArray($u);
             $params['dic'] = $d->getJsonArray();
-            $params['user']['did'] = $d->getId();
             $words = $d->getWords();
             foreach ($words as $w) {
                 $params['user']['wids'][] = $w->getId();

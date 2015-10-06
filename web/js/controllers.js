@@ -9,7 +9,7 @@ app
         $scope.ip = 0;
         $scope.ia = 2;
         if (localStorageService.get('dic') && localStorageService.get('user')) {
-            $http.get(API_URL + 'users/'+ localStorageService.get('user').id).success(function (data) {
+            $http.get(API_URL + 'users/' + localStorageService.get('user').id).success(function (data) {
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
             });
@@ -25,9 +25,13 @@ app
         };
     })
 
-    .controller('CreateTestCtrl', function ($scope, testService) {
+    .controller('CreateTestCtrl', function ($scope, mainService, testService) {
+        // TODO do test for group
+        if (true) {
+            mainService.setDic(mainService.getUser().dic);
+        }
 
-        if ($scope.dic.countWord > 20) {
+        if ($scope.user.dic.countWord > 20) {
             $scope.nbquestion = 20;
         } else {
             $scope.nbquestion = $scope.dic.countWord;
@@ -117,7 +121,7 @@ app
             $scope.user = {};
             $scope.dic = {};
             localStorageService.clearAll();
-                $location.path('/');
+            $location.path('/');
         };
 
         $scope.$watch(mainService.getDic, function (data) {

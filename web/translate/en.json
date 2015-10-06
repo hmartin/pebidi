@@ -1,6 +1,6 @@
 {
     "goHome": "Back to home",
-    "wellDone": "",
+    "wellDone": "Well done",
     "itYourDictionary": "It's your dictionary",
     "dictionaryOf": "It's the dictionary of",
     "logout": "Log out",
@@ -39,7 +39,7 @@
     "edit": "Edit",
     "yourDictionary": "Your dictionary",
     "group": "Group",
-    "backToYourDictionary": "Bact to your dictionary",
+    "backToYourDictionary": "Back to your dictionary",
     "addWord": "Add word",
     "noun": "noun",
     "adjective": "adjective",

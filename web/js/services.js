@@ -15,7 +15,7 @@ app
 
         };
         this.setCountWord = function (countWord) {
-            dic.countWord = countWord;
+            user.dic.countWord = countWord;
         };
         this.getDic = function () {
             if (!dic && localStorageService.get('dic')) {
@@ -159,7 +159,8 @@ app
         };
 
         this.post = function (formData) {
-            mainService.setCountWord(mainService.getDic().countWord + 1);
+
+            mainService.setCountWord(mainService.getUser().dic.countWord + 1);
             $http.post(API_URL + 'words', {
                 'w': formData.word.w,
                 'id': mainService.getDic().id
@@ -173,7 +174,7 @@ app
         this.delete = function (id) {
             $http.post(API_URL + 'words/removes', {
                 'id': id,
-                'did': mainService.getDic().id
+                'did': mainService.getUser().dic.id
             }).success(function (data) {
                 mainService.setDic(data.dic);
 
