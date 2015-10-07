@@ -142,14 +142,12 @@ app
 
             $http.get(API_URL + 'dictionaries/' + id, {params: data}).success(function (data) {
                 $timeout(function () {
-                    console.log('timeout');
                     mainService.setDic(data);
                 }, 0);
             });
         };
 
         this.getWords = function (id) {
-            //, {params: {'uid': mainService.getUid()}}
             var promise = $http
                 .get(API_URL + 'dictionaries/' + id + '/words')
                 .then(function (data) {
@@ -160,24 +158,62 @@ app
 
         this.post = function (formData) {
 
-            mainService.setCountWord(mainService.getUser().dic.countWord + 1);
+            mainService.setCountWord(mainService.dic.countWord + 1);
             $http.post(API_URL + 'words', {
                 'w': formData.word.w,
-                'id': mainService.getDic().id
+                'id': mainService.dic.id
             }).success(function (data) {
-                mainService.getUser().dic = data.dic;
+                mainService.setDic(data.dic);
+                if (mainService.getUser().dic.id == data.dic.id) {
+                    mainService.getUser().dic = data.dic;
+                }
             });
         };
 
         this.delete = function (id) {
             $http.post(API_URL + 'words/removes', {
                 'id': id,
-                'did': mainService.getUser().dic.id
+                'did': mainService.getDic().id
             }).success(function (data) {
                 mainService.getUser().dic = data.dic;
 
             });
         };
 
+    })
+    
+    /*
+     * Manage group (create and delete)
+     */
+    .service('groupService', function ($http, $rootScope, $location, $timeout, mainService) {
+        
+        this.get = function() {
+            var promise = $http.get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}})
+                .success(function (data) {
+                    return data.groupsWords;
+                });
+            
+            return promise;
+        }
+        
+        this.create = function(data) {
+            var promise = $http.post(API_URL + 'dictionaries/adds/groups/words', data).then(function (data) {
+                mainService.getUser().dic = data.dic;
+                return data;
+            });
+                
+            return promise;
+        }
+        
+        this.delete = function (id) {
+            var promise = $http.post(API_URL + 'groups/removes', {
+                    'id': id,
+                    'did': mainService.getUser().dic.id
+                }).then(function (data) {
+                    return data.groupsWords;
+                });
+                
+            return promise;
+        };
     });
     

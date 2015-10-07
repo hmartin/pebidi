@@ -91,6 +91,8 @@ app
 
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             pediService.get($routeParams.id);
+        } else {
+            $scope.dic = $scope.user.dic
         }
 
         pediService.getWords($routeParams.id).then(function (data) {
@@ -98,8 +100,6 @@ app
         });
 
         $scope.deleteWord = function (word) {
-            console.log($scope.words.indexOf(word));
-            console.log($scope.words);
             $scope.words.splice($scope.words.indexOf(word), 1);
             pediService.delete(word.id);
         };

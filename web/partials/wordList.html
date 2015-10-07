@@ -13,13 +13,19 @@
         <div class="col-md-1" ng-if="word.global">{{ (word.global*100)| number:1 }}%</div>
         <div class="col-md-1" ng-if="!word.global">-</div>
         <div class="col-md-1 col-md-offset-1">
-            <span class="pointer glyphicon glyphicon-plus" ng-if="user.wids.indexOf(word.id) < -1"
+            <span class="pointer glyphicon glyphicon-plus" ng-if="user.dic.id != dic.id"
                   ng-click="addWord(word)" tooltip="{{ 'addWord'|translate }}"></span>
-            <span  ng-if="user.id == dic.uid" class="pointer glyphicon glyphicon-remove"
+                  
+            <!-- delete from dictionary -->      
+            <span  ng-if="user.dic.id == dic.id" class="pointer glyphicon glyphicon-remove"
+                  ng-click="deleteWord(word)"></span>
+            <!-- delete from group -->      
+            <span  ng-if="user.dic.id != dic.id and user.id == dic.uid" class="pointer glyphicon glyphicon-remove"
                   ng-click="deleteWord(word)"></span>
         </div>
     </div>
 </div>
+<br>
 <br>
 <go-home></go-home>&nbsp;&nbsp;-&nbsp;&nbsp;
 <a ng-href="#/group/list"><span class="glyphicon glyphicon-flash"></span>{{ 'addGroupWord'|translate }}</a>

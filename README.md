@@ -18,11 +18,11 @@ Congrats page*
 Congrats add all words*
 back to home dic.id is group*
 user.main.dic*
+List only public and mine*
 
 
 Remove personal gw
 add word to a group
 add word from a group
 Limit words (mini 15 words)
-List only public and mine
 
