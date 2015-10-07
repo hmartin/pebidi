@@ -165,9 +165,7 @@ app
                 'w': formData.word.w,
                 'id': mainService.getDic().id
             }).success(function (data) {
-                $timeout(function () {
-                    mainService.setDic(data.dic);
-                }, 0);
+                mainService.getUser().dic = data.dic;
             });
         };
 
@@ -176,7 +174,7 @@ app
                 'id': id,
                 'did': mainService.getUser().dic.id
             }).success(function (data) {
-                mainService.setDic(data.dic);
+                mainService.getUser().dic = data.dic;
 
             });
         };

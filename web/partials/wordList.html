@@ -14,9 +14,9 @@
         <div class="col-md-1" ng-if="!word.global">-</div>
         <div class="col-md-1 col-md-offset-1">
             <span class="pointer glyphicon glyphicon-plus" ng-if="user.wids.indexOf(word.id) < -1"
-                  ng-click="delete = ! delete;deleteWord(word.id)" tooltip="{{ 'addWord'|translate }}"></span>
+                  ng-click="addWord(word)" tooltip="{{ 'addWord'|translate }}"></span>
             <span  ng-if="user.id == dic.uid" class="pointer glyphicon glyphicon-remove"
-                  ng-click="delete = ! delete;deleteWord(word.id)"></span>
+                  ng-click="deleteWord(word)"></span>
         </div>
     </div>
 </div>

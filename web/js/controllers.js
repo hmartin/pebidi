@@ -98,6 +98,8 @@ app
         });
 
         $scope.deleteWord = function (word) {
+            console.log($scope.words.indexOf(word));
+            console.log($scope.words);
             $scope.words.splice($scope.words.indexOf(word), 1);
             pediService.delete(word.id);
         };
