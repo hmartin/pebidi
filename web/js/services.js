@@ -138,15 +138,14 @@ app
             return promise;
         };
 
-        this.post = function (word) {
+        this.post = function (word, dic) {
 
-            console.log(mainService.getUser().dic.id);
-            mainService.setCountWord(mainService.getDic().countWord + 1);
+            mainService.setCountWord(dic.countWord + 1);
+
             $http.post(API_URL + 'words', {
                 'w': word,
-                'id': mainService.getDic().id
+                'id': dic.id
             }).success(function (data) {
-                console.log(mainService.getUser().dic.id);
                 mainService.setDic(data.dic);
                 console.log(mainService.getUser().dic.id);
                 if (mainService.getUser().dic.id == data.dic.id) {

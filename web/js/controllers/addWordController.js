@@ -28,7 +28,7 @@ app
         };
 
         $scope.processWord = function () {
-            pediService.post($scope.formData.word.w);
+            pediService.post($scope.formData.word.w, mainService.getDic());
             $scope.formData.word = '';
             $scope.formData.translation = '';
         };

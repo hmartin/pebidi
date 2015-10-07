@@ -87,7 +87,7 @@ app
         $scope.testScore = testService.getTestScore();
     })
 
-    .controller('WordListCtrl', function ($scope, $http, $route, $routeParams, wordService, pediService) {
+    .controller('WordListCtrl', function ($scope, $http, $route, $routeParams, mainService, wordService, pediService) {
 
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             pediService.get($routeParams.id);
@@ -100,7 +100,7 @@ app
         });
 
         $scope.addWord = function (word) {
-            pediService.post(word);
+            pediService.post(word, mainService.getUser().dic);
         };
 
         $scope.deleteWord = function (word) {
