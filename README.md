@@ -15,12 +15,14 @@ Default dictionary*
 remove word from group*
 add all words*
 Congrats page*
-Congrats add all words
+Congrats add all words*
+back to home dic.id is group*
+user.main.dic*
+
+
 Remove personal gw
 add word to a group
 add word from a group
-back to home dic.id is group
-user.main.dic
 Limit words (mini 15 words)
 List only public and mine
 

@@ -97,8 +97,9 @@ app
             $scope.words = data;
         });
 
-        $scope.deleteWord = function (id) {
-            pediService.delete(id);
+        $scope.deleteWord = function (word) {
+            $scope.words.splice($scope.words.indexOf(word), 1);
+            pediService.delete(word.id);
         };
     })
 
