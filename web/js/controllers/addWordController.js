@@ -1,12 +1,14 @@
 app
     .controller('AddWordCtrl', function ($scope, $http, $location, $routeParams, $filter, Flash, pediService, mainService, wordService, dicService) {
         $scope.formData = {};
-        
-        if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {
+
+        if(!$routeParams.id && mainService.getUser()) {
+            mainService.setDic(mainService.getUser().dic);
+        } else if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             //pediService.get($routeParams.id);
         } else {
-            $scope.dic = $scope.user.dic;
         }
+
         dicService.loadDic();
 
         $scope.getWords = function (val) {
@@ -26,8 +28,7 @@ app
         };
 
         $scope.processWord = function () {
-            $scope.formData.id = $scope.user.dic.id;
-            pediService.post($scope.formData);
+            pediService.post($scope.formData.word.w);
             $scope.formData.word = '';
             $scope.formData.translation = '';
         };

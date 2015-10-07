@@ -8,7 +8,6 @@ app
 
         this.setDic = function (d) {
             dic = d;
-            localStorageService.set('dic', dic);
         };
         this.setScore = function (dicScore) {
             user.score = dicScore;
@@ -17,24 +16,9 @@ app
         this.setCountWord = function (countWord) {
             user.dic.countWord = countWord;
         };
+
         this.getDic = function () {
-            if (!dic && localStorageService.get('dic')) {
-                dic = localStorageService.get('dic');
-            }
             return dic;
-        };
-
-        this.getUid = function () {
-            if (user && user.id) {
-
-                return user.id;
-            } else if (localStorageService.get('user')) {
-                user = localStorageService.get('user');
-                return user.id;
-
-            } else {
-                return false;
-            }
         };
 
         this.getUser = function () {
@@ -136,9 +120,7 @@ app
 
         this.get = function (id) {
             var data = {};
-            if (mainService.getUid() == id) {
-                data.uid = mainService.getUid();
-            }
+            data.uid = mainService.getUser().id;
 
             $http.get(API_URL + 'dictionaries/' + id, {params: data}).success(function (data) {
                 $timeout(function () {
@@ -156,14 +138,17 @@ app
             return promise;
         };
 
-        this.post = function (formData) {
+        this.post = function (word) {
 
-            mainService.setCountWord(mainService.dic.countWord + 1);
+            console.log(mainService.getUser().dic.id);
+            mainService.setCountWord(mainService.getDic().countWord + 1);
             $http.post(API_URL + 'words', {
-                'w': formData.word.w,
-                'id': mainService.dic.id
+                'w': word,
+                'id': mainService.getDic().id
             }).success(function (data) {
+                console.log(mainService.getUser().dic.id);
                 mainService.setDic(data.dic);
+                console.log(mainService.getUser().dic.id);
                 if (mainService.getUser().dic.id == data.dic.id) {
                     mainService.getUser().dic = data.dic;
                 }
@@ -188,21 +173,11 @@ app
     .service('groupService', function ($http, $rootScope, $location, $timeout, mainService) {
         
         this.get = function() {
-            var promise = $http.get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}})
-                .success(function (data) {
-                    return data.groupsWords;
-                });
-            
-            return promise;
+            return $http.get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}});
         }
         
         this.create = function(data) {
-            var promise = $http.post(API_URL + 'dictionaries/adds/groups/words', data).then(function (data) {
-                mainService.getUser().dic = data.dic;
-                return data;
-            });
-                
-            return promise;
+            return $http.post(API_URL + 'dictionaries/adds/groups/words', data);
         }
         
         this.delete = function (id) {

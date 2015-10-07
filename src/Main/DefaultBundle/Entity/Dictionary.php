@@ -95,6 +95,7 @@ class Dictionary
         if ($this->getGroupWord()) {
             $a['title'] = $this->getTitle();
             $a['description'] = $this->getDescription();
+            $a['author'] = $this->getUser()->getUsername();
         }
 
         return $a;

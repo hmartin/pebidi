@@ -3,14 +3,17 @@
 /*global app */
 app
     .controller('GroupListCtrl', function ($scope, $http, $location, $translate, Flash, mainService, groupService) {
-        
-        $scope.groupsWords = groupService.get();
+
+        groupService.get().success(function(data) {
+            $scope.groupsWords = data.groupsWords;
+        });
 
         $scope.addGroupWord = function (id) {
             $scope.data = {};
             $scope.data.did = $scope.user.dic.id;
             $scope.data.gid = id;
             groupService.create($scope.data).then(function(data) {
+                mainService.getUser().dic = data.dic;
                 var message = '<strong>'+$translate.instant('wellDone')+'!</strong> '+data.nbAdd+' '+$translate.instant('wordsAdded')+'.';
                 Flash.create('success', message, 'custom-class');
             });

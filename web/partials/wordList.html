@@ -14,13 +14,10 @@
         <div class="col-md-1" ng-if="!word.global">-</div>
         <div class="col-md-1 col-md-offset-1">
             <span class="pointer glyphicon glyphicon-plus" ng-if="user.dic.id != dic.id"
-                  ng-click="addWord(word)" tooltip="{{ 'addWord'|translate }}"></span>
+                  ng-click="addWord(word.w)" tooltip="{{ 'addWord'|translate }}"></span>
                   
-            <!-- delete from dictionary -->      
-            <span  ng-if="user.dic.id == dic.id" class="pointer glyphicon glyphicon-remove"
-                  ng-click="deleteWord(word)"></span>
-            <!-- delete from group -->      
-            <span  ng-if="user.dic.id != dic.id and user.id == dic.uid" class="pointer glyphicon glyphicon-remove"
+            <!-- delete from dic.id (dictionary or group) -->
+            <span  ng-if="user.dic.id == dic.id || (user.dic.id != dic.id && user.id == dic.uid)" class="pointer glyphicon glyphicon-remove"
                   ng-click="deleteWord(word)"></span>
         </div>
     </div>

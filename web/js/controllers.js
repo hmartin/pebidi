@@ -8,7 +8,7 @@ app
         $scope.count = $scope.lang.length;
         $scope.ip = 0;
         $scope.ia = 2;
-        if (localStorageService.get('dic') && localStorageService.get('user')) {
+        if (localStorageService.get('user')) {
             $http.get(API_URL + 'users/' + localStorageService.get('user').id).success(function (data) {
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
@@ -99,6 +99,10 @@ app
             $scope.words = data;
         });
 
+        $scope.addWord = function (word) {
+            pediService.post(word);
+        };
+
         $scope.deleteWord = function (word) {
             $scope.words.splice($scope.words.indexOf(word), 1);
             pediService.delete(word.id);
@@ -113,10 +117,6 @@ app
             $translate.use(key);
             mainService.lang = key;
         };
-
-        if (mainService.getUid()) {
-            $scope.uid = mainService.getUid();
-        }
 
         $scope.clearLocalStorage = function () {
             mainService.setDic(null);

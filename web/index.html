@@ -41,7 +41,7 @@
                 <div class="">
                     <div class="logo masthead-brand"><a href="#/dictionary"><img src="logo.png"><img src="pebidi.png"></a></div>
                     <div class="nav masthead-nav">
-                        <div ng-if="env == 'DEV'">dic.id:{{dic.id}}/uid:{{user.id}}/user.did{{ user.dic.id }}</div>
+                        <div ng-if="env == 'DEV'">dic.id:{{dic.id}}/uid:{{user.id}}/user.dic.id:{{ user.dic.id }}</div>
                         <div ng-if="user.id" class="animate-if">
                             <div ng-if="dic.uid == user.id" class="animate-if">
                                 {{ 'itYourDictionary'|translate }}
