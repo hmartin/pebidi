@@ -22,7 +22,6 @@ class JsonCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $query = 'SELECT  w.id, w.word as w,  w2.word as t FROM Word w';
         $queryGroup = 'SELECT  w.id, w.word as w, substring_index(group_concat(w2.word SEPARATOR ", "), ", ", 4) as t FROM Word w
                JOIN WordType wt ON wt.word_id = w.id AND wt.expression IS NULL
                JOIN Ww ww ON  ww.word1_id = wt.id

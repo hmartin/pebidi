@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class WordRepository extends EntityRepository
 {
+    //const selectGroupConcat = 'GROUP_CONCAT_IF_NULL(DISTINCT IFNULL(translation.expression, trans_word.word) SEPARATOR \', \') as concat';
     const selectGroupConcat = 'GROUP_CONCAT_IF_NULL(DISTINCT IFNULL(translation.expression, trans_word.word) SEPARATOR \', \') as concat';
 
     public function getWordTranslationConcat($w) 
@@ -64,7 +65,9 @@ class WordRepository extends EntityRepository
     public function getDictionaryAllWords($d, $u = null)
     {
         $qb = $this->getDictionaryWords($d, $u)
-            ->orderBy('word.word', 'ASC');
+            ->orderBy('word.word', 'ASC')
+            ->orderBy('trans_word.id', 'ASC')
+        ;
 
         return $qb->getQuery()->getResult();
     }
