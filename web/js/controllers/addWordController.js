@@ -1,3 +1,6 @@
+/*global URL */
+/*global API_URL */
+/*global app */
 app
     .controller('AddWordCtrl', function ($scope, $http, $location, $routeParams, $filter, Flash, pediService, mainService, wordService, dicService) {
         $scope.formData = {};

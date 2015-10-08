@@ -85,8 +85,22 @@ app
     /*
      * Add or delete pebidi's word
      */
-    .service('wordService', function ($http, $rootScope, $timeout, mainService) {
-
+    .service('wordService', function ($http, $rootScope, $timeout, $q, mainService) {
+        var word = null;
+        
+        this.get = function (idOrWord) {
+            var deferred = $q.defer();
+            if (this.word.id  == idOrWord || this.word.w == idOrWord) {
+                deferred.resolve(this.word);
+            }
+            
+            $http.get(API_URL + 'words/' + idOrWord).then(function (data) {
+                    this.word = data;
+                    deferred.resolve(data);
+            });
+            
+            return deferred.promise;
+        };
     })
 
     /*

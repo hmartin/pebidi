@@ -1,3 +1,6 @@
+/*global URL */
+/*global API_URL */
+/*global app */
 app
     .controller('ImproveCtrl', function ($scope, $routeParams, $location) {
         console.log($routeParams.word);
@@ -9,6 +12,7 @@ app
             var cln = itm.cloneNode(true);
             document.getElementById("myList1").appendChild(cln);
         }
+        
         $scope.improveWord = function () {
             
         }
