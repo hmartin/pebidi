@@ -76,6 +76,7 @@ class UserController extends FOSRestController implements ClassResourceInterface
 
     protected function getUserAndDic(User $u)
     {
+        $params = array();
         if ($d = $u->getDefaultDictionary()) {
             $params['user'] = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->getArray($u);
             $params['dic'] = $d->getJsonArray();
@@ -85,9 +86,7 @@ class UserController extends FOSRestController implements ClassResourceInterface
             }
         }
 
-
         return $params;
-
     }
 
     protected function getScore($u, $d)

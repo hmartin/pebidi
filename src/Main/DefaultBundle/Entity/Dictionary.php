@@ -88,6 +88,7 @@ class Dictionary
     {
         $a = array('id' => $this->getId(),
             'countWord' => count($this->getWords()),
+            'wids' => $this->getWids(),
             'bitEmail' => $this->getUser()->getBitEmail(),
             'uid' => $this->getUser()->getId()
         );
@@ -368,6 +369,16 @@ class Dictionary
     public function getWords()
     {
         return $this->words;
+    }
+    
+    public function getWids()
+    {
+        $a = array();
+        foreach($this->words as $w) {
+            $a[] = $w->getId();
+        }
+        
+        return $a;
     }
 
     /**
