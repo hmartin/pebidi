@@ -163,7 +163,6 @@ class MergeCommand extends ContainerAwareCommand
         if (array_key_exists($c, $this->persistCategorys)) {
 
             return $this->persistCategorys[$c];
-
         }
 
         echo 'NoExi cat: ' . $c ."\n";

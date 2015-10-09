@@ -60,7 +60,8 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
         if (intRegex.test(info.selectionText)) {
             $http.post('http://pebidi.com/api.php/words', {
                 'w': sText,
-                'id': 1
+                'id': 1,
+                'chrome': 1
             }).success(function (data) {
                 // ok!
             });

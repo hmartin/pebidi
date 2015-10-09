@@ -2,7 +2,7 @@
 /*global API_URL */
 /*global app */
 app
-    .controller('ImproveCtrl', function ($scope, $routeParams, wordService) {
+    .controller('ImproveCtrl', function ($scope, $routeParams, $compile, wordService) {
 
         $scope.word = $routeParams.word;
         wordService.get($routeParams.word).then(function (data) {
@@ -10,13 +10,12 @@ app
         });
 
         $scope.addTransaltion = function() {
-            var itm = document.getElementById("myList2").lastChild;
-            var cln = itm.cloneNode(true);
-            document.getElementById("myList1").appendChild(cln);
-        }
+            $scope.wordSenses.push({'w' : $scope.word});
+        };
 
-        $scope.improveWord = function () {
-
-        }
+        $scope.improve = function () {
+            console.log($scope.wordSenses);
+            wordService.improve($scope.wordSenses);
+        };
     })
 ;

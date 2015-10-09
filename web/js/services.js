@@ -102,6 +102,13 @@ app
 
             return deferred.promise;
         };
+        
+
+        this.improve = function (data) {
+            $http.post(API_URL + 'words/improves', {'data' : data}).success(function (data) {
+                console.log(data);
+            });
+        };
     })
 
     /*

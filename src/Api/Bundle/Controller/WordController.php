@@ -50,16 +50,10 @@ class WordController extends FOSRestController implements ClassResourceInterface
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->request->get('id'))) {
-            $word = $request->request->get('w');
-
-            if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word))) {
-                $w = new Word();
-                $w->setWord($word);
-                $w->setLocal('en');
-                $em->persist($w);
-                $em->flush();
-            }
+        if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->get('id'))) {
+            
+            $w = $this->getWords($request->get('w'));
+            
             if (!$d->getWords()->contains($w)) {
                 $d->addWord($w);
             }
@@ -93,5 +87,45 @@ class WordController extends FOSRestController implements ClassResourceInterface
             return array('dic' => $d->getJsonArray());
         }
         throw new \Exception('postDeleteWordAction went wrong!');
+    }
+    
+    
+  
+    /**
+     * @ApiDoc(section="Word", description="Improve Word",
+     *  requirements={
+     *      { "name"="data", "dataType"="string", "requirement"="\d+", "description"="word id" }
+     *  },
+     * )
+     * @Rest\View()
+     */
+    public function postImproveAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $request->get('data');
+        foreach($data as $sense) {
+            
+            $w = $this->getWords($sense['word']);
+            
+            $sense = $sense['sense'];
+            $trads = explode(',', str_replace(array(', ', ' ,'), ',', $sense['concat']));
+            
+            
+        }
+        
+        return $s;
+    }
+    
+    private function getWord($word) 
+    {
+        if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word))) {
+            $w = new Word();
+            $w->setWord($word);
+            $w->setLocal('en');
+            $em->persist($w);
+            $em->flush();
+        }
+        
+        return $w;
     }
 }
