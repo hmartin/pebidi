@@ -46,7 +46,7 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/improve.html',
                 controller: 'ImproveCtrl'
             }).
-            when('/word/:id', {
+            when('/word/:word', {
                 templateUrl: 'partials/word.html',
                 controller: 'WordCtrl'
             }).

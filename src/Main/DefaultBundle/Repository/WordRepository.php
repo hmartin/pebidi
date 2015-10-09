@@ -35,7 +35,7 @@ class WordRepository extends EntityRepository
     
     public function getWordFullTranslation($w) 
     {
-        return $this->getWordFullTranslationQuery($w)->addSelect('wt.additional')->getQuery()->getResult();
+        return $this->getWordFullTranslationQuery($w)->addSelect('wt.expression')->getQuery()->getResult();
     }
   
     public function getWordsForTest($nb, $d, $u)

@@ -2,7 +2,7 @@
     <h1>{{ 'improve.newWord'|translate }}</h1>
     <img src="img/fcw.svg" width="60px"/>Free Cultural Works
     <form ng-submit="improve()">
-        <sense-form></sense-form>
+        <sense-form  ng-repeat="wordSense in wordSenses" ></sense-form>
         <div class="form-group">
             <button type="submit" class="btn btn-success input-lg">{{ 'save'|translate }}</button>
         </div>

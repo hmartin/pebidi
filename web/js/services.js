@@ -62,7 +62,7 @@ app
                 .success(function (data) {
                     mainService.setUser(data.user);
                 }.bind(this));
-                
+
             this.testScore = points.reduce(function (a, b) {
                 return a + b.p;
             }, 0);
@@ -85,20 +85,21 @@ app
     /*
      * Add or delete pebidi's word
      */
-    .service('wordService', function ($http, $rootScope, $timeout, $q, mainService) {
+    .service('wordService', function ($http, $rootScope, $timeout, $q) {
         var word = null;
-        
+
         this.get = function (idOrWord) {
             var deferred = $q.defer();
-            if (this.word.id  == idOrWord || this.word.w == idOrWord) {
-                deferred.resolve(this.word);
+
+            if (word && (word[0].id  == idOrWord || word[0].w == idOrWord)) {
+                deferred.resolve(word);
+            } else {
+                $http.get(API_URL + 'words/' + idOrWord).then(function (data) {
+                    word = data.data;
+                    deferred.resolve(word);
+                });
             }
-            
-            $http.get(API_URL + 'words/' + idOrWord).then(function (data) {
-                    this.word = data;
-                    deferred.resolve(data);
-            });
-            
+
             return deferred.promise;
         };
     })
@@ -179,20 +180,20 @@ app
         };
 
     })
-    
+
     /*
      * Manage group (create and delete)
      */
     .service('groupService', function ($http, $rootScope, $location, $timeout, mainService) {
-        
+
         this.get = function() {
             return $http.get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}});
         }
-        
+
         this.create = function(data) {
             return $http.post(API_URL + 'dictionaries/adds/groups/words', data);
         }
-        
+
         this.delete = function (id) {
             var promise = $http.post(API_URL + 'groups/removes', {
                     'id': id,
@@ -200,7 +201,7 @@ app
                 }).then(function (data) {
                     return data.groupsWords;
                 });
-                
+
             return promise;
         };
     });

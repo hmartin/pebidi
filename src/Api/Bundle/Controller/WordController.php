@@ -21,8 +21,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
      * )
      * @Rest\View()
      */
-    public function getAction(Request $request, Word $w)
+    public function getAction(Request $request, $w)
     {
+        if (!is_int($w)) {
+            $w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneByWord($w);
+        }
+
         $wordRepo = $this->getDoctrine()->getRepository('MainDefaultBundle:Word');
        if ($request->query->get('improve')) {
           $results = $wordRepo->getWordFullTranslation($w);

@@ -13,7 +13,7 @@ app
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
             });
-            $location.path('/dictionary/' + mainService.getDic().id);
+            $location.path('/dictionary/');
         }
         $scope.processForm = function () {
             $http.post(API_URL + 'users/emails', $scope.formData).success(function (data) {
@@ -128,12 +128,10 @@ app
         };
 
         $scope.$watch(mainService.getDic, function (data) {
-            console.info('wathed!');
             $scope.dic = mainService.getDic();
         }, true);
 
         $scope.$watch(mainService.getUser, function (data) {
-            console.info('mainService getUser');
             $scope.user = mainService.getUser();
         }, true);
 
