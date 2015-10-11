@@ -25,3 +25,8 @@ Remove personal gw
 add word to a group
 Limit words (mini 15 words)
 
+SELECT * FROM Word w LEFT JOIN WordType wt ON w.id = wt.word_id WHERE w.local = 'fr';
+
+
+SELECT * FROM WordType wt JOIN Word w ON w.id = wt.word_id LEFT JOIN Ww ww ON wt.id = ww.word2_id WHERE w.local = 'en' AND ww.id IS NOT NULL;
+SELECT * FROM WordType wt JOIN Word w ON w.id = wt.word_id LEFT JOIN Ww ww ON wt.id = ww.word2_id WHERE wt.id = 44541;

@@ -28,15 +28,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
         }
 
         $wordRepo = $this->getDoctrine()->getRepository('MainDefaultBundle:Word');
-       if ($request->query->get('improve')) {
-          $results = $wordRepo->getWordFullTranslation($w);
-       } else {
-          $results = $wordRepo->getWordTranslationConcat($w);
-       }
-      
-       return $results;
+        $results = $wordRepo->getWordTranslationConcat($w);
+
+
+        return $results;
     }
-  
+
     /**
      * @ApiDoc(section="Word", description="Post Word to Dic",
      *  requirements={
@@ -51,13 +48,13 @@ class WordController extends FOSRestController implements ClassResourceInterface
         $em = $this->getDoctrine()->getManager();
 
         if ($d = $this->getDoctrine()->getRepository('MainDefaultBundle:Dictionary')->find($request->get('id'))) {
-            
-            $w = $this->getWords($request->get('w'));
-            
+
+            $w = $this->getWord($request->get('w'), 'en');
+
             if (!$d->getWords()->contains($w)) {
                 $d->addWord($w);
             }
-          
+
             $em->flush();
 
             return array('dic' => $d->getJsonArray());
@@ -83,14 +80,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
             $d->getWords()->removeElement($w);
             $em->persist($d);
             $em->flush();
-          
+
             return array('dic' => $d->getJsonArray());
         }
         throw new \Exception('postDeleteWordAction went wrong!');
     }
-    
-    
-  
+
     /**
      * @ApiDoc(section="Word", description="Improve Word",
      *  requirements={
@@ -103,29 +98,65 @@ class WordController extends FOSRestController implements ClassResourceInterface
     {
         $em = $this->getDoctrine()->getManager();
         $data = $request->get('data');
-        foreach($data as $sense) {
-            
-            $w = $this->getWords($sense['word']);
-            
-            $sense = $sense['sense'];
+        foreach ($data as $sense) {
+
+            $w = $sense['w'];
+
+            $wordString = $w;
+            $expression = null;
+            $kExplode = explode(' ', $w);
+            if (count($kExplode) > 1) {
+                $expression = $w;
+                $wordString = $kExplode['0'];
+            }
+            $word = $this->getWord($wordString, 'en');
+            $category = '';
+            if (array_key_exists('type', $sense)) {
+                $category = $sense['type'];
+            }
+
+            $wordType = $this->getDoctrine()->getRepository('MainDefaultBundle:WordType')->findOneBy(
+                array('word' => $word, 'category' => $category, 'expression' => $expression));
+            $senseStr = $sense['sense'];
+
             $trads = explode(',', str_replace(array(', ', ' ,'), ',', $sense['concat']));
-            
-            
+            foreach($trads as $t) {
+                $wordString = trim($t);
+                $expression = null;
+                $kExplode = explode(' ', $w);
+                if (count($kExplode) > 1) {
+                    $expression = $w;
+                    $wordString = $kExplode['0'];
+                }
+                $tradWord = $this->getWord($wordString, 'fr');
+                $tradWordType = $this->getDoctrine()->getRepository('MainDefaultBundle:WordType')->findOneBy(
+                    array('word' => $tradWord, 'expression' => $expression));
+
+                $ww = $this->getDoctrine()->getRepository('MainDefaultBundle:Ww')->findOneBy(array('word1' => $wordType, 'word2' => $tradWordType));
+                if ($ww) {
+
+                }
+
+            }
+
         }
-        
-        return $s;
+
+        $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordTranslationConcat($word);
+
+        return $results;
     }
-    
-    private function getWord($word) 
+
+    private function getWord($word, $local)
     {
-        if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word))) {
+        $em = $this->getDoctrine()->getManager();
+        if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word, 'local' => $local))) {
             $w = new Word();
             $w->setWord($word);
-            $w->setLocal('en');
+            $w->setLocal($local);
             $em->persist($w);
             $em->flush();
         }
-        
+
         return $w;
     }
 }

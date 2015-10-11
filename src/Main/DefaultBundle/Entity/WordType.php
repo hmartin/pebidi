@@ -24,10 +24,9 @@ class WordType
     protected $expression;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $category;
-
     /**
      * @ORM\ManyToOne(targetEntity="Word", inversedBy="wordTypes")
      */
