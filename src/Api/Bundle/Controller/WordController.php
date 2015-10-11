@@ -2,6 +2,8 @@
 
 namespace Api\Bundle\Controller;
 
+use Main\DefaultBundle\Entity\Sense;
+use Main\DefaultBundle\Entity\Ww;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -62,6 +64,20 @@ class WordController extends FOSRestController implements ClassResourceInterface
         throw new \Exception('Something went wrong!');
     }
 
+    private function getWord($word, $local)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word, 'local' => $local))) {
+            $w = new Word();
+            $w->setWord($word);
+            $w->setLocal($local);
+            $em->persist($w);
+            $em->flush();
+        }
+
+        return $w;
+    }
+
     /**
      * @ApiDoc(section="Word", description="Remove Word to Dic",
      *  requirements={
@@ -117,10 +133,20 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
             $wordType = $this->getDoctrine()->getRepository('MainDefaultBundle:WordType')->findOneBy(
                 array('word' => $word, 'category' => $category, 'expression' => $expression));
+
+            $oldWw = $this->getDoctrine()->getRepository('MainDefaultBundle:Ww')->findBy(
+                array('word1' => $wordType));
+//dump($oldWw);
+            foreach ($oldWw as $ww) {
+                $em->remove($ww);
+            }
+
+
             $senseStr = $sense['sense'];
 
             $trads = explode(',', str_replace(array(', ', ' ,'), ',', $sense['concat']));
-            foreach($trads as $t) {
+            $i = 0;
+            foreach ($trads as $t) {
                 $wordString = trim($t);
                 $expression = null;
                 $kExplode = explode(' ', $w);
@@ -134,6 +160,19 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
                 $ww = $this->getDoctrine()->getRepository('MainDefaultBundle:Ww')->findOneBy(array('word1' => $wordType, 'word2' => $tradWordType));
                 if ($ww) {
+                    $sense = new Sense();
+                    $sense->setSense($senseStr);
+                    $sense->setLocal('en');
+
+                    $em->persist($sense);
+
+                    $ww = new Ww();
+                    $ww->setWord1($wordType);
+                    $ww->setWord2($tradWordType);
+                    $ww->addSense($sense);
+                    $ww->setPriority($i++);
+
+                    $em->persist($ww);
 
                 }
 
@@ -141,22 +180,9 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
         }
 
+        $em->flush();
         $results = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->getWordTranslationConcat($word);
 
         return $results;
-    }
-
-    private function getWord($word, $local)
-    {
-        $em = $this->getDoctrine()->getManager();
-        if (!$w = $this->getDoctrine()->getRepository('MainDefaultBundle:Word')->findOneBy(array('word' => $word, 'local' => $local))) {
-            $w = new Word();
-            $w->setWord($word);
-            $w->setLocal($local);
-            $em->persist($w);
-            $em->flush();
-        }
-
-        return $w;
     }
 }

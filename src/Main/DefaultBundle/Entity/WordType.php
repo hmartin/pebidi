@@ -67,30 +67,6 @@ class WordType
     }
 
     /**
-     * Set category
-     *
-     * @param \Main\DefaultBundle\Entity\Category $category
-     *
-     * @return WordType
-     */
-    public function setCategory(\Main\DefaultBundle\Entity\Category $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \Main\DefaultBundle\Entity\Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
      * Set word
      *
      * @param \Main\DefaultBundle\Entity\Word $word
@@ -136,5 +112,29 @@ class WordType
     public function getExpression()
     {
         return $this->expression;
+    }
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     *
+     * @return WordType
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
