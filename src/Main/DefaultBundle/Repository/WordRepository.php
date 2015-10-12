@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 class WordRepository extends EntityRepository
 {
     //const selectGroupConcat = 'GROUP_CONCAT_IF_NULL(DISTINCT IFNULL(translation.expression, trans_word.word) SEPARATOR \', \') as concat';
-    const selectGroupConcat = 'GROUP_CONCAT_IF_NULL(DISTINCT IFNULL(translation.expression, trans_word.word) SEPARATOR \', \') as concat';
+    const selectGroupConcat = 'GROUP_CONCAT_IF_NULL(DISTINCT IFNULL(translation.expression, trans_word.word) ORDER BY ww.priority, ww.id SEPARATOR \', \') as concat';
 
     public function getWordTranslationConcat($w) 
     {
