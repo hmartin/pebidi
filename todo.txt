@@ -8,7 +8,6 @@ Create & Edit best translation (2d)
 create / edit / visibility groupWord (1d)
 Real close question test (1d)
 Inverse definition test (0.5d)
-PB gab trad unalike (0.5d)
 Tot: 6j
 
 v3 higth school:
@@ -43,6 +42,7 @@ when user register, he become private, like all his dictionaries
 if cookies uid
 
 v0 startup:
+PB gab trad unalike (0.5d)*
 set cookies*
 api add words*
 clear cookies*
