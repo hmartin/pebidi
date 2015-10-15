@@ -44,12 +44,11 @@
     "noun": "nom",
     "adjective": "adjectif",
     "verb": "verbe",
-    "createGroup": "",
-    "createGroupCongrats": "",
-    "groupTitle": "",
-    "groupDescription": "",
-    "privateGroup": "",
-    "remarkCreateGroup": "",
-    "submitCreateGroup": "",
-    "addGroupWordExplication": ""
+    "createGroup": "Créer un groupe",
+    "createGroupCongrats": "Votre groupe a bien été créé, félicitations!",
+    "groupTitle": "Titre",
+    "groupDescription": "Description de ce groupe",
+    "privateGroup": "Groupe privé",
+    "remarkCreateGroup": "Attention la création d'un groupe entraine d'avoir un nouveau dictionnaire vide. Si vous souhaitez garder vos mots actuels il faudra rajouter ce groupe à votre nouveau dictionnaire.",
+    "submitCreateGroup": "Créer le groupe"
 }

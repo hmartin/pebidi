@@ -45,11 +45,10 @@
     "adjective": "adjective",
     "verb": "verb",
     "createGroup": "Create group of words",
-    "createGroupCongrats": "",
-    "groupTitle": "",
-    "groupDescription": "",
-    "privateGroup": "",
-    "remarkCreateGroup": "",
-    "submitCreateGroup": "",
-    "addGroupWordExplication": ""
+    "createGroupCongrats": "Your group is created, congratulation!",
+    "groupTitle": "Title",
+    "groupDescription": "Group description",
+    "privateGroup": "Private group",
+    "remarkCreateGroup": "Warning, creating a group imply a new empty dictionary. If you want to keep your current words you have to add this group to your new dictionary.",
+    "submitCreateGroup": "Transform your pebidi to a group"
 }

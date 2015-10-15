@@ -2,12 +2,10 @@
 /*global API_URL */
 /*global app */
 app
-    .controller('ImproveCtrl', function ($scope, $routeParams, $compile, wordService) {
-
+    .controller('ImproveCtrl', function ($scope, $routeParams, $compile, wordService) 
+    {
         $scope.word = $routeParams.word;
-        wordService.get($routeParams.word).then(function (data) {
-            $scope.wordSenses = data;
-        });
+        $scope.wordSenses = wordService.get($routeParams.word);
 
         $scope.addTransaltion = function() {
             $scope.wordSenses.push({'w' : $scope.word});

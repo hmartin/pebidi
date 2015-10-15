@@ -11,8 +11,8 @@
               ng-click="addGroupWord(group.id)"></span>
         <a ng-href="#/wordList/{{ group.id }}" class="glyphicon glyphicon-eye-open"></a>
         
-        <span  ng-if="user.id == group.uid" class="pointer glyphicon glyphicon-remove"
-              ng-click="delete = ! delete;deleteWord(word.id)"></span>
+        <span ng-if="user.id == group.uid" class="pointer glyphicon glyphicon-bin"
+              ng-click="delete(group.id)"></span>
     </div>
 </div>
 
