@@ -4,6 +4,8 @@
 app.controller('WordCtrl', function($scope, $routeParams, $http, wordService) {
 
     $scope.word = $routeParams.word;
-    $scope.wordSenses = wordService.get($routeParams.word);
+    wordService.get($routeParams.word).then(function(data) {
+        $scope.wordSenses = data;
+    });
     
 });

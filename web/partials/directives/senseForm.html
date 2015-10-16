@@ -5,7 +5,8 @@
     </div>
 
     <div class="col-xs-3 col-md-1 no-gutter">
-        <select ng-model="wordSense.type" class="form-control">
+        <select ng-model="wordSense.category" class="form-control">
+            <option selected>{{ wordSense.category|translate }}</option>
             <option>{{ 'noun'|translate }}</option>
             <option>{{ 'adjective'|translate }}</option>
             <option>{{ 'verb'|translate }}</option>

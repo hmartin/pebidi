@@ -5,7 +5,9 @@ app
     .controller('ImproveCtrl', function ($scope, $routeParams, $compile, wordService) 
     {
         $scope.word = $routeParams.word;
-        $scope.wordSenses = wordService.get($routeParams.word);
+        wordService.get($routeParams.word).then(function (data) {
+            $scope.wordSenses = data;
+        });
 
         $scope.addTransaltion = function() {
             $scope.wordSenses.push({'w' : $scope.word});
