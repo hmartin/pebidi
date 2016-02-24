@@ -32,15 +32,16 @@ class OneShot2Command extends InsertCommand
         foreach ($ss as $k => $s) {
             $time_end = microtime_float();
             $time = $time_end - $time_start;
-            if ($time > 300) {
+            if ($time > 3000) {
                 //$em->flush();
-                exit;
+                //exit;
             }
-            $newWord = false;
-            //$output->writeln("\n".$k . '---------------         ' . $s->getUrl() . '    ------------------------------');
+            $newWord = true;
+            $output->writeln("\n".$k . '---------------         ' . $s->getUrl() . '    ------------------------------');
             $crawler = new Crawler($s->getHmtl());
             $crawler = $crawler->filter('table.WRD > tr');
             $class = '';
+            
             $k = $i = 0;
 
             $arrayTrans = $senses = array();
@@ -54,9 +55,8 @@ class OneShot2Command extends InsertCommand
                         $k = $k + 0.1;
                         $priority = 0;
                         $class = $domElement->getAttribute('class');
-
-                        if (!$newWord) {
-                            if (null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
+                        if ($newWord) {
+                            if ($newWord = $tr->filter('strong')->count() && null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
                                 $t = '';
                                 if (null !== ($type = $tr->filter('em')->eq(0))) {
 
@@ -92,8 +92,6 @@ class OneShot2Command extends InsertCommand
                             $sense = $this->cleanSense(utf8_decode($sensesArrayValue['0']));
 
                         }
-                    }
-
 
                     if (null !== ($trans = $tr->filter('td.ToWrd')->eq(0))) {
                         if (null == $trans->filter('span[title*="translation unavailable"]')->eq(0)) {
@@ -102,7 +100,6 @@ class OneShot2Command extends InsertCommand
                         
                         $t_trans = '';
                         if (null !== ($type_trans = $trans->filter('em')->eq(0))) {
-
                             $type_trans->filter('span')->each(function (Crawler $crawler) {
                                 foreach ($crawler as $node) {
                                     $node->parentNode->removeChild($node);
@@ -125,7 +122,7 @@ class OneShot2Command extends InsertCommand
                             $ws = explode(',', $trans->html());
                             foreach ($ws as $each) {
                                 $priority = $priority + 1;
-                                $prior = $priority + $k;
+                                $prior = $priority;
 
                                 $tw = $this->cleanString(utf8_decode($each));
                                 //$output->writeln('c:' . $class . '   s:'.$sense.'   w:'. $w  .'   t:' . $tw . ' $prior:' . $prior );
@@ -138,16 +135,17 @@ class OneShot2Command extends InsertCommand
 
                     }
 
+                    }
                     if (count($arrayTrans) > 0) {
                         $senses[] = array('s' => $sense, 't' => $arrayTrans);
+                    }
+                    if ($w && count($senses) > 0) {
+                        $g = array('expression' => $w, 'type' => $t, 'senses' => $senses);
+                        $global[] = $g;
                     }
                 }
             }
 
-            if ($w && count($senses) > 0) {
-                $g = array('type' => $t, 'senses' => $senses);
-                $global[$w] = $g;
-            }
         }
         
         $output->writeln('count array:'. count($global));

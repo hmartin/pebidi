@@ -73,8 +73,7 @@ function log(i) {
 }
 
 app.config(function ($translateProvider) {
-    // TODO: security fails (pb with accent)
-    //$translateProvider.useSanitizeValueStrategy('sanitize');
+    $translateProvider.useSanitizeValueStrategy('sanitize');
 
     $translateProvider.useStaticFilesLoader({
         prefix: 'translate/',

@@ -21,10 +21,6 @@ user.main.dic*
 List only public and mine*
 add word from a group*
 
-Remove personal gw
-add word to a group
-Limit words (mini 15 words)
-
 SELECT * FROM Word w LEFT JOIN WordType wt ON w.id = wt.word_id WHERE w.local = 'fr';
 
 

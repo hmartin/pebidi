@@ -34,20 +34,22 @@ class MergeCommand extends ContainerAwareCommand
         ini_set('memory_limit', '-1');
         $em = $this->getContainer()->get('doctrine')->getManager();
         $this->clean();
-        $a1 = $this->deocde('/../dictSource/xdxf/eng-fra.json');
-        $a2 = $this->deocde('/../dictSource/eng-fra/eng-fra.json');
-        $a3 = $this->deocde('/../dictSource/WP_eng-fra.json');
+        //$a1 = $this->deocde('/../doc/dictSource/xdxf/eng-fra.json');
+        //$a2 = $this->deocde('/../doc/dictSource/eng-fra/eng-fra.json');
+        $a3 = $this->deocde('/../doc/dictSource/WP_eng-fra.json');
         $stopwatch = new Stopwatch();
         $stopwatch->start('eventName');
         
         $result = array_merge_recursive($a3, $a1, $a2);
-
-        //dump($result['get']);
-        //exit;
-
+        
         echo 'merge: ' . count($result) . "\n";
         $i = 0;
         foreach ($result as $k => $w) {
+if (strstr($w['expression'], 'country')) {
+        dump($w);
+        exit;
+}
+continue;
 
             $t = $this->getType($w);
             

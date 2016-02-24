@@ -1,16 +1,18 @@
 v1 family:
 Create & Edit best translation (2d)
-create / edit / visibility groupWord (1d)
-Real close question test (1d)
-Inverse definition test (0.5d)
-Tot: 6j
 
 v2 social network:
+Edit group
+Real close question test (1d)
+Inverse definition test (0.5d)
 chrome extension in the cloud (0.5)
 Did in Session for chrome extension (1d)
 remove typehead mobile
 Fixture GW 500/20/90 words
 full help
+Remove personal gw
+add word to a group
+Limit words (mini 15 words)
 
 v4 college:
 uniqu type/expression
@@ -24,7 +26,7 @@ Mobil apps beta
 Add translate languages (es, de, it,...)
 
 v5 worldwide
-Add teacher/ Friends 
+Create group teacher/students Friends 
 Mobil apps
 algo v2 test
 
@@ -39,6 +41,7 @@ when user register, he become private, like all his dictionaries
 if cookies uid
 
 v0 startup:
+create / add groupWord (1d)
 PB gab trad unalike (0.5d)*
 set cookies*
 api add words*
