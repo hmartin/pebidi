@@ -4,6 +4,7 @@ namespace Api\Bundle\Controller;
 
 use Main\DefaultBundle\Entity\Sense;
 use Main\DefaultBundle\Entity\Ww;
+use Main\DefaultBundle\Entity\WordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -78,6 +79,23 @@ class WordController extends FOSRestController implements ClassResourceInterface
         return $w;
     }
 
+    private function getWordType($word, $category, $expression)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if (!$wt = $this->getDoctrine()->getRepository('MainDefaultBundle:WordType')->findOneBy(
+            array('word' => $word, 'category' => $category, 'expression' => $expression))
+        ) {
+            $wt = new WordType();
+            $wt->setWord($word);
+            $wt->setCategory($category);
+            $wt->setExpression($expression);
+            $em->persist($wt);
+            $em->flush();
+        }
+
+        return $wt;
+    }
+
     /**
      * @ApiDoc(section="Word", description="Remove Word to Dic",
      *  requirements={
@@ -114,6 +132,8 @@ class WordController extends FOSRestController implements ClassResourceInterface
     {
         $em = $this->getDoctrine()->getManager();
         $data = $request->get('data');
+        //echo '<pre>';
+        /* foreach post line */
         foreach ($data as $sense) {
 
             $w = $sense['w'];
@@ -121,6 +141,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
             $wordString = $w;
             $expression = null;
             $kExplode = explode(' ', $w);
+            // Check if composed word
             if (count($kExplode) > 1) {
                 $expression = $w;
                 $wordString = $kExplode['0'];
@@ -132,15 +153,11 @@ class WordController extends FOSRestController implements ClassResourceInterface
                 $category = $sense['category'];
             }
 
-            $wordType = $this->getDoctrine()->getRepository('MainDefaultBundle:WordType')->findOneBy(
-                array('word' => $word, 'category' => $category, 'expression' => $expression));
+            $wordType = $this->getWordType($word, $category, $expression);
 
-            dump($category);
-            dump($expression);
-            dump($wordType);
             $oldWw = $this->getDoctrine()->getRepository('MainDefaultBundle:Ww')->findBy(
                 array('word1' => $wordType));
-//dump($oldWw);
+
             foreach ($oldWw as $ww) {
                 $em->remove($ww);
             }
@@ -151,9 +168,11 @@ class WordController extends FOSRestController implements ClassResourceInterface
                 $senseStr = $sense['sense'];
             }
 
-            $trads = explode(',', str_replace(array(', ', ' ,'), ',', $sense['concat']));
+            $translations = explode(',', str_replace(array(', ', ' ,'), ',', $sense['concat']));
+
+            dump($translations);
             $i = 0;
-            foreach ($trads as $t) {
+            foreach ($translations as $t) {
                 $wordString = trim($t);
                 $expression = null;
                 $kExplode = explode(' ', $w);
@@ -162,12 +181,14 @@ class WordController extends FOSRestController implements ClassResourceInterface
                     $wordString = $kExplode['0'];
                 }
                 $tradWord = $this->getWord($wordString, 'fr');
-                dump($tradWord);
+                dump($tradWord->getWord());
                 $tradWordType = $this->getDoctrine()->getRepository('MainDefaultBundle:WordType')->findOneBy(
                     array('word' => $tradWord, 'expression' => $expression));
-dump($tradWordType);
+
+                //dump($tradWordType);
                 $ww = $this->getDoctrine()->getRepository('MainDefaultBundle:Ww')->findOneBy(array('word1' => $wordType, 'word2' => $tradWordType));
-                dump($ww);
+                dump($wordType->getId());
+                dump($tradWordType->getId());
                 if (is_null($ww)) {
                     $sense = new Sense();
                     $sense->setSense($senseStr);
@@ -180,7 +201,7 @@ dump($tradWordType);
                     $ww->setWord2($tradWordType);
                     $ww->addSense($sense);
                     $ww->setPriority($i++);
-dump($ww);
+//dump($ww);
                     $em->persist($ww);
 
                 }

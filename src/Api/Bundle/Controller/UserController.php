@@ -43,7 +43,7 @@ class UserController extends FOSRestController implements ClassResourceInterface
 
         if ($request->request->get('email') && filter_var($request->request->get('email'), FILTER_VALIDATE_EMAIL)) {
             $email = $request->request->get('email');
-dump($email);
+
             if ($u = $this->getDoctrine()->getRepository('MainDefaultBundle:User')->findOneByEmail($email)) {
 
             } else {
