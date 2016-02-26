@@ -14,10 +14,14 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+    
+liip_functional_test: ~ 
 
-parameters:
-    database_driver: pdo_mysql
-    database_host: 127.0.0.1
-    database_port: null
-    database_name: pebidi_test
-    database_user: admin
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_sqlite
+                path:     %kernel.cache_dir%/test.db
+    

@@ -16,7 +16,7 @@ class WordRepository extends EntityRepository
     {
         $qb = $this->getWordFullTranslationQuery($w) 
             ->addSelect(' wt.category, '. self::selectGroupConcat )
-            ->groupBy('w');
+            ->groupBy('senses');
 
         return $qb->getQuery()->getResult();      
     }

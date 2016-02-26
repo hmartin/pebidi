@@ -38,8 +38,6 @@ assetic:
             node_paths: [/usr/local/lib/node_modules]
             apply_to: "\.less$"
         cssrewrite: ~
-braincrafted_bootstrap:
-    less_filter: less
 
 # Doctrine Configuration
 doctrine:
@@ -123,3 +121,6 @@ jms_serializer:
                 path: "%kernel.root_dir%/Resources/serializer" 
                 namespace_prefix: "FOS\\UserBundle"
     
+services:
+    fos_user.doctrine_registry:
+        alias: doctrine
