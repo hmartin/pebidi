@@ -131,7 +131,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function postImproveAction(Request $request)
     {
-        $this->postImprove($request->get('data'));
+        return $this->postImprove($request->get('data'));
     }
         
     public function postImprove($data)

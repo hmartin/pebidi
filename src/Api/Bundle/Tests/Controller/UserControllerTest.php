@@ -18,9 +18,10 @@ class UserControllerTest extends TestAbstract
         $decoded = $this->getArray();
         $this->assertTrue(isset($decoded['user']['id']));
         $this->assertTrue(isset($decoded['dic']['id']));
-       /* $uid = $decoded['user']['id'];
+        $uid = $decoded['user']['id'];
         $did = $decoded['dic']['id'];
-        
+        var_dump($uid);
+
         foreach($this->words as $w) {
             $this->client->request('POST', '/words', array('id' => $did, 'w' => $w));
         }
@@ -29,6 +30,7 @@ class UserControllerTest extends TestAbstract
         $this->assertTrue($decoded['dic']['countWord'] == 3);
 
         $this->client->request('GET', '/dictionaries/'.$did.'/words');
-        $decoded = $this->getArray();*/
+        $decoded = $this->getArray();
+
     }
 }
