@@ -87,7 +87,7 @@ doctrine:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Main\DefaultBundle\Entity\User
+    user_class: AppBundle\Entity\User
 
 sensio_framework_extra:
     view:

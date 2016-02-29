@@ -1,0 +1,19 @@
+test:
+    type:     rest
+    resource: AppBundle\Controller\TestController
+ 
+result:
+    type:     rest
+    resource: AppBundle\Controller\ResultController
+ 
+word:
+    type:     rest
+    resource: AppBundle\Controller\WordController
+ 
+dictionary:
+    type:     rest
+    resource: AppBundle\Controller\DictionaryController
+ 
+user:
+    type:     rest
+    resource: AppBundle\Controller\UserController

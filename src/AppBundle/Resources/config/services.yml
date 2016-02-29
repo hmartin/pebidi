@@ -1,0 +1,9 @@
+
+
+
+services:
+    api.result_controller:
+        class:     AppBundle\Controller\ResultController
+    mailer_manager:
+        class:     AppBundle\Mailer\Manager
+        arguments: ["@mailer", "@templating"]

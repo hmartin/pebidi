@@ -11,15 +11,11 @@ Training (beta)
 table point
 
 micro todo:
-Default dictionary*
-remove word from group*
-add all words*
-Congrats page*
-Congrats add all words*
-back to home dic.id is group*
-user.main.dic*
-List only public and mine*
-add word from a group*
+test api suck word ref
+auto suck if word not exist
+cron 12h generate json dictionary
+
+
 
 SELECT * FROM Word w LEFT JOIN WordType wt ON w.id = wt.word_id WHERE w.local = 'fr';
 
