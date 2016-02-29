@@ -80,23 +80,6 @@ class WordController extends FOSRestController implements ClassResourceInterface
         return $w;
     }
 
-    private function getWordType($word, $category, $expression)
-    {
-        $em = $this->getDoctrine()->getManager();
-        if (!$wt = $this->getDoctrine()->getRepository('AppBundle:SubWord')->findOneBy(
-            array('word' => $word, 'category' => $category, 'expression' => $expression))
-        ) {
-            $wt = new SubWord();
-            $wt->setWord($word);
-            $wt->setCategory($category);
-            $wt->setExpression($expression);
-            $em->persist($wt);
-            $em->flush();
-        }
-
-        return $wt;
-    }
-
     /**
      * @ApiDoc(section="Word", description="Remove Word to Dic",
      *  requirements={
@@ -133,7 +116,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
     {
         return $this->postImprove($request->get('data'));
     }
-        
+
     public function postImprove($data)
     {
         $em = $this->getDoctrine()->getManager();
@@ -152,25 +135,29 @@ class WordController extends FOSRestController implements ClassResourceInterface
                 $wordString = $kExplode['0'];
             }
             $word = $this->getWord($wordString, 'en');
+            foreach($word->getSubWords() as $sw)
+            {
+                $oldWw = $this->getDoctrine()->getRepository('AppBundle:Ww')->findBy(
+                    array('word1' => $sw));
+
+                foreach ($oldWw as $ww) {
+                    $em->remove($ww);
+                }
+                $em->remove($sw);
+                $em->flush();
+            }
+
             $category = '';
             if (array_key_exists('category', $sense)) {
                 $category = $sense['category'];
             }
 
-            $wordType = $this->getWordType($word, $category, $expression);
-
-            $oldWw = $this->getDoctrine()->getRepository('AppBundle:Ww')->findBy(
-                array('word1' => $wordType));
-
-            foreach ($oldWw as $ww) {
-                $em->remove($ww);
-            }
-            $em->flush();
-
-            $senseStr = null;
+            $senseStr = '';
             if (array_key_exists('sense', $sense)) {
                 $senseStr = $sense['sense'];
             }
+
+            $subWord = $this->getSubWord($word, $category, $expression, $senseStr);
 
             $translations = explode(',', str_replace(array(', ', ' ,'), ',', $sense['concat']));
 
@@ -184,12 +171,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
                     $wordString = $kExplode['0'];
                 }
                 $tradWord = $this->getWord($wordString, 'fr');
-                $tradWordType = $this->getWordType($tradWord, '', $expression);
-                $ww = $this->getDoctrine()->getRepository('AppBundle:Ww')->findOneBy(array('word1' => $wordType, 'word2' => $tradWordType));
+                $tradSubWord = $this->getSubWord($tradWord, '', $expression, '');
+                $ww = $this->getDoctrine()->getRepository('AppBundle:Ww')->findOneBy(array('word1' => $subWord, 'word2' => $tradSubWord));
                 if (is_null($ww)) {
                     $ww = new Ww();
-                    $ww->setWord1($wordType);
-                    $ww->setWord2($tradWordType);
+                    $ww->setWord1($subWord);
+                    $ww->setWord2($tradSubWord);
                     $ww->setPriority($i++);
                     $em->persist($ww);
                 }
@@ -201,8 +188,25 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
         return $results;
     }
-    
- 
+
+    private function getSubWord($word, $category, $expression, $sense)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if (!$wt = $this->getDoctrine()->getRepository('AppBundle:SubWord')->findOneBy(
+            array('word' => $word, 'category' => $category, 'expression' => $expression, 'sense' => $sense))
+        ) {
+            $wt = new SubWord();
+            $wt->setWord($word);
+            $wt->setCategory($category);
+            $wt->setExpression($expression);
+            $wt->setSense($sense);
+            $em->persist($wt);
+            $em->flush();
+        }
+
+        return $wt;
+    }
+
     /**
      * @ApiDoc(section="Word", description="Suck Word",
      *  requirements={
@@ -210,11 +214,11 @@ class WordController extends FOSRestController implements ClassResourceInterface
      *  },
      * )
      * @Rest\View()
-     */   
+     */
     public function suckOneFromWebAction($word)
     {
-        $url = 'http://www.wordreference.com/enfr/'.$word;
-        
+        $url = 'http://www.wordreference.com/enfr/' . $word;
+
         $curl_handle = curl_init();
         \curl_setopt($curl_handle, CURLOPT_URL, $url);
         \curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
@@ -224,65 +228,68 @@ class WordController extends FOSRestController implements ClassResourceInterface
         \curl_close($curl_handle);
         $crawler = new Crawler($subhtml);
         //$output->writeln($l->getUri());
-            $crawler = $crawler->filter('table.WRD > tr');
-            
-            $class = '';
-            $newWord = true;
-            
-            $k = $i = 0;
+        $crawler = $crawler->filter('table.WRD > tr');
 
-            $arrayTrans = $senses = $global = array();
-            foreach ($crawler as $domElement) {
-                $sense = '';
-                if ($domElement->getAttribute('class') == 'even' || $domElement->getAttribute('class') == 'odd') {
-                    $tr = new Crawler($domElement);
-                    if ($class != $domElement->getAttribute('class')) {
-                        $k = $k + 0.1;
-                        $priority = 0;
-                        $class = $domElement->getAttribute('class');
-                        if ($newWord) {
-                            if ($newWord = $tr->filter('strong')->count() && null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
-                                $t = '';
-                                if (null !== ($type = $tr->filter('em')->eq(0))) {
+        $class = '';
+        $newWord = true;
 
-                                    $type->filter('span')->each(function (Crawler $crawler) {
-                                        foreach ($crawler as $node) {
-                                            $node->parentNode->removeChild($node);
-                                        }
-                                    });
-                                    $t = $type->html();
+        $k = $i = 0;
 
-                                }
-                                $newWord = explode(',', $newWord);
-                                $w = $this->cleanString(utf8_decode($newWord['0']));
+        $arrayTrans = $senses = $global = array();
+        foreach ($crawler as $domElement) {
+            $sense = '';
+            if ($domElement->getAttribute('class') == 'even' || $domElement->getAttribute('class') == 'odd') {
+                $tr = new Crawler($domElement);
+                if ($class != $domElement->getAttribute('class')) {
+                    $k = $k + 0.1;
+                    $priority = 0;
+                    $class = $domElement->getAttribute('class');
+                    if ($newWord) {
+                        if ($newWord = $tr->filter('strong')->count() && null !== ($newWord = $tr->filter('strong')->eq(0)->html())) {
+                            $t = '';
+                            if (null !== ($type = $tr->filter('em')->eq(0))) {
 
-                            } else {
-                                //echo 'error' . $s->getUrl() . '<br>';
+                                $type->filter('span')->each(function (Crawler $crawler) {
+                                    foreach ($crawler as $node) {
+                                        $node->parentNode->removeChild($node);
+                                    }
+                                });
+                                $t = $type->html();
+
                             }
+                            $newWord = explode(',', $newWord);
+                            $w = $this->cleanString(utf8_decode($newWord['0']));
+
+                        } else {
+                            //echo 'error' . $s->getUrl() . '<br>';
                         }
+                    }
 
-                        if ((null !== ($senseValue = $tr->filter('td')->eq(1))) && count($senseValue) > 0) {
+                    if ((null !== ($senseValue = $tr->filter('td')->eq(1))) && count($senseValue) > 0) {
 
-                            $senseValue->filter('span')->each(function (Crawler $crawler) {
-                                foreach ($crawler as $node) {
-                                    $node->parentNode->removeChild($node);
-                                }
-                            });
-                            $senseValue->filter('i')->each(function (Crawler $crawler) {
-                                foreach ($crawler as $node) {
-                                    $node->parentNode->removeChild($node);
-                                }
-                            });
-                            $sensesArrayValue = explode(',', $senseValue->html());
-                            $sense = $this->cleanSense(utf8_decode($sensesArrayValue['0']));
+                        $senseValue->filter('span')->each(function (Crawler $crawler) {
+                            foreach ($crawler as $node) {
+                                $node->parentNode->removeChild($node);
+                            }
+                        });
+                        $senseValue->filter('i')->each(function (Crawler $crawler) {
+                            foreach ($crawler as $node) {
+                                $node->parentNode->removeChild($node);
+                            }
+                        });
+                        $sensesArrayValue = explode(',', $senseValue->html());
+                        $converted = strtr($sensesArrayValue['0'], array_flip(get_html_translation_table(HTML_ENTITIES, ENT_QUOTES)));
+                        $converted = trim($converted, chr(0xC2).chr(0xA0));
 
-                        }
+                        $sense = $this->cleanSense(utf8_encode($converted));
+
+                    }
 
                     if (null !== ($trans = $tr->filter('td.ToWrd')->eq(0))) {
                         if (null == $trans->filter('span[title*="translation unavailable"]')->eq(0)) {
                             continue;
                         }
-                        
+
                         $t_trans = '';
                         if (null !== ($type_trans = $trans->filter('em')->eq(0))) {
                             $type_trans->filter('span')->each(function (Crawler $crawler) {
@@ -292,7 +299,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
                             });
                             $t_trans = $type->html();
                         }
-                        
+
                         $trans->filter('em')->each(function (Crawler $crawler) {
                             foreach ($crawler as $node) {
                                 $node->parentNode->removeChild($node);
@@ -304,7 +311,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
                             }
                         });
                         if (count($trans)) {
-                            
+
                             $wsClean = [];
                             $ws = explode(',', $trans->html());
                             foreach ($ws as $each) {
@@ -320,41 +327,29 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
                             }
                             if (count($wsClean)) {
-                            $senses[] = array('w' => $word, 'category' => $t, 'sense' => $sense, 'concat' => implode(',', $wsClean));
-                                
+                                $senses[] = array('w' => $word, 'category' => $t, 'sense' => $sense, 'concat' => implode(',', $wsClean));
+
                             }
                         }
 
                     }
 
-                    }
                 }
             }
-            
-        //dump(senses);    
+        }
+
+        //dump($senses);
         //return $senses;
         return $this->postImprove($senses);
     }
-    
-    protected function cleanSense($string)
-    {
-        $string = str_replace('(', '', $string);
-        $string = str_replace(')', '', $string);
 
-        if (!preg_match('/^[\p{L}-\s\-\']*$/u', $string)) {
-            //echo "\n". 'wrong sense' .$string;
-            return null;
-        }
-
-        return trim($string);
-    }
     protected function cleanString($string)
     {
         if (mb_detect_encoding($string) != 'UTF-8') {
             $string = iconv('ASCII', 'UTF-8', $string);
         }
 
-        if (substr_count($string, ' ') > 1 or $this->starts_with_upper($string) ) {
+        if (substr_count($string, ' ') > 1 or $this->starts_with_upper($string)) {
             return null;
         }
         $endash = html_entity_decode('&#x2013;', ENT_COMPAT, 'UTF-8');
@@ -374,9 +369,23 @@ class WordController extends FOSRestController implements ClassResourceInterface
         return trim($string);
     }
 
-    private function starts_with_upper($str) 
+    private function starts_with_upper($str)
     {
-        $chr = mb_substr ($str, 0, 1, "UTF-8");
+        $chr = mb_substr($str, 0, 1, "UTF-8");
         return mb_strtolower($chr, "UTF-8") != $chr;
+    }
+
+    protected function cleanSense($string)
+    {
+        $string = str_replace('(', ' ', $string);
+        $string = str_replace(')', ' ', $string);
+        $string = str_replace('&nbsp;', ' ', $string);
+
+        if (!preg_match('/^[\p{L}-\s\-\']*$/u', $string)) {
+            //echo "\n". 'wrong sense' .$string;
+            return null;
+        }
+
+        return trim($string);
     }
 }
