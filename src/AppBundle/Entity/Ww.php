@@ -21,13 +21,13 @@ class Ww
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WordType",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="SubWord",cascade={"persist"})
      * @ORM\JoinColumn()
      */
     protected $word1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WordType", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="SubWord", cascade={"persist"})
      * @ORM\JoinColumn()
      */
     protected $word2;
@@ -44,55 +44,13 @@ class Ww
 
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->senses = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-
-    /**
-     * Add senses
-     *
-     * @param \AppBundle\Entity\Sense $senses
-     * @return Ww
-     */
-    public function addSense(\AppBundle\Entity\Sense $senses)
-    {
-        $this->senses[] = $senses;
-
-        return $this;
-    }
-
-    /**
-     * Remove senses
-     *
-     * @param \AppBundle\Entity\Sense $senses
-     */
-    public function removeSense(\AppBundle\Entity\Sense $senses)
-    {
-        $this->senses->removeElement($senses);
-    }
-
-    /**
-     * Get senses
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSenses()
-    {
-        return $this->senses;
     }
 
     /**
@@ -122,7 +80,7 @@ class Ww
     /**
      * Set priority
      *
-     * @param integer $priority
+     * @param float $priority
      *
      * @return Ww
      */
@@ -136,7 +94,7 @@ class Ww
     /**
      * Get priority
      *
-     * @return integer
+     * @return float
      */
     public function getPriority()
     {
@@ -146,11 +104,11 @@ class Ww
     /**
      * Set word1
      *
-     * @param \AppBundle\Entity\WordType $word1
+     * @param \AppBundle\Entity\SubWord $word1
      *
      * @return Ww
      */
-    public function setWord1(\AppBundle\Entity\WordType $word1 = null)
+    public function setWord1(\AppBundle\Entity\SubWord $word1 = null)
     {
         $this->word1 = $word1;
 
@@ -160,7 +118,7 @@ class Ww
     /**
      * Get word1
      *
-     * @return \AppBundle\Entity\WordType
+     * @return \AppBundle\Entity\SubWord
      */
     public function getWord1()
     {
@@ -170,11 +128,11 @@ class Ww
     /**
      * Set word2
      *
-     * @param \AppBundle\Entity\WordType $word2
+     * @param \AppBundle\Entity\SubWord $word2
      *
      * @return Ww
      */
-    public function setWord2(\AppBundle\Entity\WordType $word2 = null)
+    public function setWord2(\AppBundle\Entity\SubWord $word2 = null)
     {
         $this->word2 = $word2;
 
@@ -184,7 +142,7 @@ class Ww
     /**
      * Get word2
      *
-     * @return \AppBundle\Entity\WordType
+     * @return \AppBundle\Entity\SubWord
      */
     public function getWord2()
     {

@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table()
  * @ORM\Entity()
  */
-class WordType
+class SubWord
 {
     /**
      * @ORM\Id
@@ -34,7 +34,7 @@ class WordType
     protected $sense;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Word", inversedBy="subords")
+     * @ORM\ManyToOne(targetEntity="Word", inversedBy="subWords")
      */
     protected $word;
 
@@ -49,59 +49,11 @@ class WordType
     }
 
     /**
-     * Set value
-     *
-     * @param string $value
-     *
-     * @return WordType
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Set word
-     *
-     * @param \AppBundle\Entity\Word $word
-     *
-     * @return WordType
-     */
-    public function setWord(\AppBundle\Entity\Word $word = null)
-    {
-        $this->word = $word;
-
-        return $this;
-    }
-
-    /**
-     * Get word
-     *
-     * @return \AppBundle\Entity\Word
-     */
-    public function getWord()
-    {
-        return $this->word;
-    }
-
-    /**
      * Set expression
      *
      * @param string $expression
      *
-     * @return WordType
+     * @return SubWord
      */
     public function setExpression($expression)
     {
@@ -125,7 +77,7 @@ class WordType
      *
      * @param string $category
      *
-     * @return WordType
+     * @return SubWord
      */
     public function setCategory($category)
     {
@@ -142,5 +94,53 @@ class WordType
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set sense
+     *
+     * @param string $sense
+     *
+     * @return SubWord
+     */
+    public function setSense($sense)
+    {
+        $this->sense = $sense;
+
+        return $this;
+    }
+
+    /**
+     * Get sense
+     *
+     * @return string
+     */
+    public function getSense()
+    {
+        return $this->sense;
+    }
+
+    /**
+     * Set word
+     *
+     * @param \AppBundle\Entity\Word $word
+     *
+     * @return SubWord
+     */
+    public function setWord(\AppBundle\Entity\Word $word = null)
+    {
+        $this->word = $word;
+
+        return $this;
+    }
+
+    /**
+     * Get word
+     *
+     * @return \AppBundle\Entity\Word
+     */
+    public function getWord()
+    {
+        return $this->word;
     }
 }

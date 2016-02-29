@@ -16,7 +16,7 @@ class WordRepository extends EntityRepository
     {
         $qb = $this->getWordFullTranslationQuery($w) 
             ->addSelect(' wt.category, '. self::selectGroupConcat )
-            ->groupBy('senses');
+            ->groupBy('wt.id');
 
         return $qb->getQuery()->getResult();      
     }
@@ -24,8 +24,6 @@ class WordRepository extends EntityRepository
     protected function getWordFullTranslationQuery($w) 
     {
         $qb = $this->initQueryBuilder()
-            ->addSelect('senses.sense as sense, senses.id as sid')
-            ->innerJoin('ww.senses', 'senses')
             ->where('word.id = :wid')
             ->setParameter('wid', $w)
             ->orderBy('word.word', 'ASC');
@@ -100,11 +98,11 @@ class WordRepository extends EntityRepository
         return $this->createQueryBuilder('word')
             ->select('word.id, IFNULL(wt.expression, word.word) as w, trans_word.word as t')
 
-            ->innerJoin('word.wordTypes', 'wt')
-            ->innerJoin('\AppBundle\\Entity\Ww', 'ww',
+            ->innerJoin('word.subWords', 'wt')
+            ->innerJoin('\AppBundle\Entity\Ww', 'ww',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
                 'wt.id =  ww.word1')
-            ->innerJoin('\AppBundle\\Entity\WordType', 'translation',
+            ->innerJoin('\AppBundle\Entity\SubWord', 'translation',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
                 'ww.word2 =  translation.id')
 

@@ -2,9 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Sense;
-use AppBundle\Entity\Ww;
-use AppBundle\Entity\WordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -12,6 +9,9 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\DomCrawler\Crawler;
+
+use AppBundle\Entity\Ww;
+use AppBundle\Entity\SubWord;
 
 use AppBundle\Entity\Word;
 
@@ -83,10 +83,10 @@ class WordController extends FOSRestController implements ClassResourceInterface
     private function getWordType($word, $category, $expression)
     {
         $em = $this->getDoctrine()->getManager();
-        if (!$wt = $this->getDoctrine()->getRepository('AppBundle:WordType')->findOneBy(
+        if (!$wt = $this->getDoctrine()->getRepository('AppBundle:SubWord')->findOneBy(
             array('word' => $word, 'category' => $category, 'expression' => $expression))
         ) {
-            $wt = new WordType();
+            $wt = new SubWord();
             $wt->setWord($word);
             $wt->setCategory($category);
             $wt->setExpression($expression);
@@ -171,10 +171,6 @@ class WordController extends FOSRestController implements ClassResourceInterface
             if (array_key_exists('sense', $sense)) {
                 $senseStr = $sense['sense'];
             }
-            $senseEntity = new Sense();
-            $senseEntity->setSense($senseStr);
-            $senseEntity->setLocal('en');
-            $em->persist($senseEntity);
 
             $translations = explode(',', str_replace(array(', ', ' ,'), ',', $sense['concat']));
 
@@ -194,7 +190,6 @@ class WordController extends FOSRestController implements ClassResourceInterface
                     $ww = new Ww();
                     $ww->setWord1($wordType);
                     $ww->setWord2($tradWordType);
-                    $ww->addSense($senseEntity);
                     $ww->setPriority($i++);
                     $em->persist($ww);
                 }

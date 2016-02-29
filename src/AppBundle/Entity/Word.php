@@ -65,9 +65,20 @@ class Word
     }
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->subWords = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dictionaries = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->testsWords = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->points = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,6 +89,7 @@ class Word
      * Set word
      *
      * @param string $word
+     *
      * @return Word
      */
     public function setWord($word)
@@ -90,7 +102,7 @@ class Word
     /**
      * Get word
      *
-     * @return string 
+     * @return string
      */
     public function getWord()
     {
@@ -101,6 +113,7 @@ class Word
      * Set local
      *
      * @param string $local
+     *
      * @return Word
      */
     public function setLocal($local)
@@ -113,7 +126,7 @@ class Word
     /**
      * Get local
      *
-     * @return string 
+     * @return string
      */
     public function getLocal()
     {
@@ -124,6 +137,7 @@ class Word
      * Set certified
      *
      * @param integer $certified
+     *
      * @return Word
      */
     public function setCertified($certified)
@@ -136,7 +150,7 @@ class Word
     /**
      * Get certified
      *
-     * @return integer 
+     * @return integer
      */
     public function getCertified()
     {
@@ -147,6 +161,7 @@ class Word
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Word
      */
     public function setCreated($created)
@@ -159,7 +174,7 @@ class Word
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -167,32 +182,67 @@ class Word
     }
 
     /**
-     * Add dictionaries
+     * Add subWord
      *
-     * @param \AppBundle\Entity\Dictionary $dictionaries
+     * @param \AppBundle\Entity\SubWord $subWord
+     *
      * @return Word
      */
-    public function addDictionary(\AppBundle\Entity\Dictionary $dictionaries)
+    public function addSubWord(\AppBundle\Entity\SubWord $subWord)
     {
-        $this->dictionaries[] = $dictionaries;
+        $this->subWords[] = $subWord;
 
         return $this;
     }
 
     /**
-     * Remove dictionaries
+     * Remove subWord
      *
-     * @param \AppBundle\Entity\Dictionary $dictionaries
+     * @param \AppBundle\Entity\SubWord $subWord
      */
-    public function removeDictionary(\AppBundle\Entity\Dictionary $dictionaries)
+    public function removeSubWord(\AppBundle\Entity\SubWord $subWord)
     {
-        $this->dictionaries->removeElement($dictionaries);
+        $this->subWords->removeElement($subWord);
+    }
+
+    /**
+     * Get subWords
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubWords()
+    {
+        return $this->subWords;
+    }
+
+    /**
+     * Add dictionary
+     *
+     * @param \AppBundle\Entity\Dictionary $dictionary
+     *
+     * @return Word
+     */
+    public function addDictionary(\AppBundle\Entity\Dictionary $dictionary)
+    {
+        $this->dictionaries[] = $dictionary;
+
+        return $this;
+    }
+
+    /**
+     * Remove dictionary
+     *
+     * @param \AppBundle\Entity\Dictionary $dictionary
+     */
+    public function removeDictionary(\AppBundle\Entity\Dictionary $dictionary)
+    {
+        $this->dictionaries->removeElement($dictionary);
     }
 
     /**
      * Get dictionaries
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDictionaries()
     {
@@ -200,136 +250,70 @@ class Word
     }
 
     /**
-     * Add points
+     * Add testsWord
      *
-     * @param \AppBundle\Entity\Point $points
+     * @param \AppBundle\Entity\Test $testsWord
+     *
      * @return Word
      */
-    public function addPoint(\AppBundle\Entity\Point $points)
+    public function addTestsWord(\AppBundle\Entity\Test $testsWord)
     {
-        $this->points[] = $points;
+        $this->testsWords[] = $testsWord;
 
         return $this;
     }
 
     /**
-     * Remove points
+     * Remove testsWord
      *
-     * @param \AppBundle\Entity\Point $points
+     * @param \AppBundle\Entity\Test $testsWord
      */
-    public function removePoint(\AppBundle\Entity\Point $points)
+    public function removeTestsWord(\AppBundle\Entity\Test $testsWord)
     {
-        $this->points->removeElement($points);
-    }
-
-    /**
-     * Get points
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPoints()
-    {
-        return $this->points;
-    }
-
-    /**
-     * Add testsWords
-     *
-     * @param \AppBundle\Entity\Test $testsWords
-     * @return Word
-     */
-    public function addTestsWord(\AppBundle\Entity\Test $testsWords)
-    {
-        $this->testsWords[] = $testsWords;
-
-        return $this;
-    }
-
-    /**
-     * Remove testsWords
-     *
-     * @param \AppBundle\Entity\Test $testsWords
-     */
-    public function removeTestsWord(\AppBundle\Entity\Test $testsWords)
-    {
-        $this->testsWords->removeElement($testsWords);
+        $this->testsWords->removeElement($testsWord);
     }
 
     /**
      * Get testsWords
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTestsWords()
     {
         return $this->testsWords;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->dictionaries = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->testsWords = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->points = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
 
     /**
-     * Set category
+     * Add point
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param \AppBundle\Entity\Point $point
      *
      * @return Word
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function addPoint(\AppBundle\Entity\Point $point)
     {
-        $this->category = $category;
+        $this->points[] = $point;
 
         return $this;
     }
 
     /**
-     * Get category
+     * Remove point
      *
-     * @return \AppBundle\Entity\Category
+     * @param \AppBundle\Entity\Point $point
      */
-    public function getCategory()
+    public function removePoint(\AppBundle\Entity\Point $point)
     {
-        return $this->category;
+        $this->points->removeElement($point);
     }
 
     /**
-     * Add wordType
-     *
-     * @param \AppBundle\Entity\WordType $wordType
-     *
-     * @return Word
-     */
-    public function addWordType(\AppBundle\Entity\WordType $wordType)
-    {
-        $this->wordTypes[] = $wordType;
-
-        return $this;
-    }
-
-    /**
-     * Remove wordType
-     *
-     * @param \AppBundle\Entity\WordType $wordType
-     */
-    public function removeWordType(\AppBundle\Entity\WordType $wordType)
-    {
-        $this->wordTypes->removeElement($wordType);
-    }
-
-    /**
-     * Get wordTypes
+     * Get points
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getWordTypes()
+    public function getPoints()
     {
-        return $this->wordTypes;
+        return $this->points;
     }
 }

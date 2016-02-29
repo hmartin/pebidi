@@ -21,6 +21,6 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: pebidi_live
+    database_name: pebidi_test
     database_user: root
     database_password: null
