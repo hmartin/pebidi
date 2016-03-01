@@ -1,10 +1,10 @@
 <?php
-namespace Main\DefaultBundle\Command;
+namespace AppBundle\Command;
 
-use Main\DefaultBundle\Entity\Suck;
-use Main\DefaultBundle\Entity\Sense;
-use Main\DefaultBundle\Entity\Word;
-use Main\DefaultBundle\Entity\Ww;
+use AppBundle\Entity\Suck;
+use AppBundle\Entity\Sense;
+use AppBundle\Entity\Word;
+use AppBundle\Entity\Ww;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

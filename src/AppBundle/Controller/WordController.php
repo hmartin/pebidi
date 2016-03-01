@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -16,6 +17,13 @@ use AppBundle\Entity\Word;
 
 class WordController extends FOSRestController implements ClassResourceInterface
 {
+    private $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+    
     /**
      * @ApiDoc(section="Word", description="Get word detail",
      *  parameters={
@@ -27,10 +35,10 @@ class WordController extends FOSRestController implements ClassResourceInterface
     public function getAction(Request $request, $w)
     {
         if (!is_int($w)) {
-            $w = $this->getDoctrine()->getRepository('AppBundle:Word')->findOneByWord($w);
+            $w = $this->em->getRepository('AppBundle:Word')->findOneByWord($w);
         }
 
-        $wordRepo = $this->getDoctrine()->getRepository('AppBundle:Word');
+        $wordRepo = $this->em->getRepository('AppBundle:Word');
         $results = $wordRepo->getWordTranslationConcat($w);
 
 
@@ -48,12 +56,10 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function postAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        if ($d = $this->em->getRepository('AppBundle:Dictionary')->find($request->get('id'))) {
 
-        if ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id'))) {
-
-            $edit = false;
-            if ($this->getUser()->hasRole('ROLE_USER')) {
+            $edit = true;
+            if ($this->getUser() && $this->getUser()->hasRole('ROLE_USER')) {
                 $edit = true;
             }
             // TODO: Check if expression
@@ -63,7 +69,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
                     $d->addWord($w);
                 }
     
-                $em->flush();
+                $this->em->flush();
             }
 
             return array('dic' => $d->getJsonArray());
@@ -73,20 +79,14 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
     private function getWord($word, $local, $createIfNotExist = false)
     {
-        $em = $this->getDoctrine()->getManager();
         $w = null;
-        if (!$w = $this->getDoctrine()->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => $local))) {
+        if (!$w = $this->em->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => $local))) {
             if ($createIfNotExist) {
                 $w = new Word();
                 $w->setWord($word);
                 $w->setLocal($local);
-                $em->persist($w);
-                $em->flush();
-                
-                // auto improve
-                if (true) {
-                    $this->suckOneFromWebAction($word);
-                }
+                $this->em->persist($w);
+                $this->em->flush();
             }
         }
 
@@ -104,13 +104,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function postRemoveAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        if ($w = $this->getDoctrine()->getRepository('AppBundle:Word')->find($request->request->get('id')) and
-            $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))
+        if ($w = $this->em->getRepository('AppBundle:Word')->find($request->request->get('id')) and
+            $d = $this->em->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))
         ) {
             $d->getWords()->removeElement($w);
-            $em->persist($d);
-            $em->flush();
+            $this->em->persist($d);
+            $this->em->flush();
 
             return array('dic' => $d->getJsonArray());
         }
@@ -132,7 +131,6 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
     public function postImprove($data)
     {
-        $em = $this->getDoctrine()->getManager();
         $data = array_values($data);
         $word = null;
         
@@ -157,14 +155,14 @@ class WordController extends FOSRestController implements ClassResourceInterface
             
             foreach($word->getSubWords() as $sw)
             {
-                $oldWw = $this->getDoctrine()->getRepository('AppBundle:Ww')->findBy(
+                $oldWw = $this->em->getRepository('AppBundle:Ww')->findBy(
                     array('word1' => $sw));
 
                 foreach ($oldWw as $ww) {
-                    $em->remove($ww);
+                    $this->em->remove($ww);
                 }
-                $em->remove($sw);
-                $em->flush();
+                $this->em->remove($sw);
+                $this->em->flush();
             }
 
             $category = '';
@@ -195,28 +193,27 @@ class WordController extends FOSRestController implements ClassResourceInterface
                 }
                 $tradWord = $this->getWord($wordString, 'fr', true);
                 $tradSubWord = $this->getSubWord($tradWord, '', $expression, '');
-                $ww = $this->getDoctrine()->getRepository('AppBundle:Ww')->findOneBy(array('word1' => $subWord, 'word2' => $tradSubWord));
+                $ww = $this->em->getRepository('AppBundle:Ww')->findOneBy(array('word1' => $subWord, 'word2' => $tradSubWord));
                 if (is_null($ww)) {
                     $ww = new Ww();
                     $ww->setWord1($subWord);
                     $ww->setWord2($tradSubWord);
                     $ww->setAdditional($sense['additional']);
                     $ww->setPriority($i++);
-                    $em->persist($ww);
+                    $this->em->persist($ww);
                 }
             }
         }
 
-        $em->flush();
-        $results = $this->getDoctrine()->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
+        $this->em->flush();
+        $results = $this->em->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
 
         return $results;
     }
 
     private function getSubWord($word, $category, $expression, $sense)
     {
-        $em = $this->getDoctrine()->getManager();
-        if (!$wt = $this->getDoctrine()->getRepository('AppBundle:SubWord')->findOneBy(
+        if (!$wt = $this->em->getRepository('AppBundle:SubWord')->findOneBy(
             array('word' => $word, 'category' => $category, 'expression' => $expression, 'sense' => $sense))
         ) {
             $wt = new SubWord();
@@ -224,8 +221,8 @@ class WordController extends FOSRestController implements ClassResourceInterface
             $wt->setCategory($category);
             $wt->setExpression($expression);
             $wt->setSense($sense);
-            $em->persist($wt);
-            $em->flush();
+            $this->em->persist($wt);
+            $this->em->flush();
         }
 
         return $wt;

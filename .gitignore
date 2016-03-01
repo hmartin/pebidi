@@ -1,6 +1,6 @@
 /app/bootstrap*
 /app/config/parameters.yml
-/app/config/config_dev.yml
+/app/config/config_test.yml
 /web/js/env.js
 
 vendor/*

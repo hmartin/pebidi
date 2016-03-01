@@ -2,6 +2,9 @@
 services:
     app.result_controller:
         class:     AppBundle\Controller\ResultController
+    app.word_controller:
+        class:     AppBundle\Controller\WordController
+        arguments: ["@doctrine.orm.default_entity_manager"]
         
     app.wr_suck:
         class:     AppBundle\DataFixtures\WrSuck

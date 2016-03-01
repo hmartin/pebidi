@@ -1,5 +1,5 @@
 <?php
-namespace Main\DefaultBundle\Command\once;
+namespace AppBundle\Command\once;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,10 +8,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
-use Main\DefaultBundle\Entity\Sense;
-use Main\DefaultBundle\Entity\Suck;
-use Main\DefaultBundle\Entity\Word;
-use Main\DefaultBundle\Entity\Ww;
+use AppBundle\Entity\Sense;
+use AppBundle\Entity\Suck;
+use AppBundle\Entity\Word;
+use AppBundle\Entity\Ww;
 
 class MostUsedCommand extends ContainerAwareCommand
 {
