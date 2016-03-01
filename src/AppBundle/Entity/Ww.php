@@ -38,6 +38,11 @@ class Ww
     protected $certified = 0;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $additional = 0;
+
+    /**
      * @ORM\Column(type="float")
      */
     protected $priority;
@@ -147,5 +152,29 @@ class Ww
     public function getWord2()
     {
         return $this->word2;
+    }
+
+    /**
+     * Set additional
+     *
+     * @param integer $additional
+     *
+     * @return Ww
+     */
+    public function setAdditional($additional)
+    {
+        $this->additional = $additional;
+
+        return $this;
+    }
+
+    /**
+     * Get additional
+     *
+     * @return integer
+     */
+    public function getAdditional()
+    {
+        return $this->additional;
     }
 }

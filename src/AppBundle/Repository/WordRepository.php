@@ -15,7 +15,7 @@ class WordRepository extends EntityRepository
     public function getWordTranslationConcat($w)
     {
         $qb = $this->getWordFullTranslationQuery($w)
-            ->addSelect(' wt.category, ' . self::selectGroupConcat)
+            ->addSelect(' wt.category, ww.additional,  ' . self::selectGroupConcat)
             ->groupBy('wt.id');
 
         return $qb->getQuery()->getResult();

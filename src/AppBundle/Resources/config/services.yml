@@ -1,9 +1,10 @@
 
-
-
 services:
-    api.result_controller:
+    app.result_controller:
         class:     AppBundle\Controller\ResultController
+        
+    app.wr_suck:
+        class:     AppBundle\DataFixtures\WrSuck
     mailer_manager:
         class:     AppBundle\Mailer\Manager
         arguments: ["@mailer", "@templating"]

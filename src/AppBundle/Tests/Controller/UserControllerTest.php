@@ -8,10 +8,6 @@ class UserControllerTest extends TestAbstract
 {
     public $words = ['first', 'phone', 'test', 'can'];
     
-    protected function setUp()
-    {
-    }
-    
     public function testIndex()
     {
         $this->loadFixtures(array('AppBundle\DataFixtures\UserData'));
@@ -34,6 +30,5 @@ class UserControllerTest extends TestAbstract
 
         $this->client->request('GET', '/dictionaries/'.$did.'/words');
         $decoded = $this->getArray();
-
     }
 }

@@ -11,14 +11,8 @@ Training (beta)
 table point
 
 micro todo:
-test api suck word ref
+test api suck word ref*
+Add additional  translation option*
 auto suck if word not exist
+command suck wr only
 cron 12h generate json dictionary
-
-
-
-SELECT * FROM Word w LEFT JOIN WordType wt ON w.id = wt.word_id WHERE w.local = 'fr';
-
-
-SELECT * FROM WordType wt JOIN Word w ON w.id = wt.word_id LEFT JOIN Ww ww ON wt.id = ww.word2_id WHERE w.local = 'en' AND ww.id IS NOT NULL;
-SELECT * FROM WordType wt JOIN Word w ON w.id = wt.word_id LEFT JOIN Ww ww ON wt.id = ww.word2_id WHERE wt.id = 44541;
