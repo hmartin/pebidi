@@ -2,28 +2,18 @@
 
 namespace AppBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
 use AppBundle\Entity\Ww;
 use AppBundle\Entity\SubWord;
-
 use AppBundle\Entity\Word;
 
 class WordController extends FOSRestController implements ClassResourceInterface
 {
-    private $em;
-
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-    
     /**
      * @ApiDoc(section="Word", description="Get word detail",
      *  parameters={
@@ -35,16 +25,14 @@ class WordController extends FOSRestController implements ClassResourceInterface
     public function getAction(Request $request, $w)
     {
         if (!is_int($w)) {
-            $w = $this->em->getRepository('AppBundle:Word')->findOneByWord($w);
+            $w = $this->getDoctrine()->getRepository('AppBundle:Word')->findOneByWord($w);
         }
-
-        $wordRepo = $this->em->getRepository('AppBundle:Word');
+        $wordRepo = $this->getDoctrine()->getRepository('AppBundle:Word');
         $results = $wordRepo->getWordTranslationConcat($w);
-
-
+        
         return $results;
     }
-
+    
     /**
      * @ApiDoc(section="Word", description="Post Word to Dic",
      *  requirements={
@@ -56,43 +44,27 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function postAction(Request $request)
     {
-        if ($d = $this->em->getRepository('AppBundle:Dictionary')->find($request->get('id'))) {
-
-            $edit = true;
-            if ($this->getUser() && $this->getUser()->hasRole('ROLE_USER')) {
+        $em = $this->getDoctrine()->getManager();
+        if ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id'))) {
+            $edit = false;
+            if ($this->getUser()->hasRole('ROLE_USER')) {
                 $edit = true;
             }
             // TODO: Check if expression
-            if ($w = $this->getWord($request->get('w'), 'en', $edit)) 
+            if ($w = $this->get('app.word_model')->getWord($request->get('w'), 'en', true)) 
             {
                 if (!$d->getWords()->contains($w)) {
                     $d->addWord($w);
                 }
     
-                $this->em->flush();
+                $em->flush();
             }
-
-            return array('dic' => $d->getJsonArray());
+            return array('msg' => 'valid', 'dic' => $d->getJsonArray());
         }
-        throw new \Exception('Something went wrong!');
+        
+        return array('msg' => 'error');
     }
-
-    private function getWord($word, $local, $createIfNotExist = false)
-    {
-        $w = null;
-        if (!$w = $this->em->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => $local))) {
-            if ($createIfNotExist) {
-                $w = new Word();
-                $w->setWord($word);
-                $w->setLocal($local);
-                $this->em->persist($w);
-                $this->em->flush();
-            }
-        }
-
-        return $w;
-    }
-
+    
     /**
      * @ApiDoc(section="Word", description="Remove Word to Dic",
      *  requirements={
@@ -104,18 +76,18 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function postRemoveAction(Request $request)
     {
-        if ($w = $this->em->getRepository('AppBundle:Word')->find($request->request->get('id')) and
-            $d = $this->em->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))
+        $em = $this->getDoctrine()->getManager();
+        if ($w = $this->getDoctrine()->getRepository('AppBundle:Word')->find($request->request->get('id')) and
+            $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))
         ) {
             $d->getWords()->removeElement($w);
-            $this->em->persist($d);
-            $this->em->flush();
-
+            $em->persist($d);
+            $em->flush();
             return array('dic' => $d->getJsonArray());
         }
         throw new \Exception('postDeleteWordAction went wrong!');
     }
-
+    
     /**
      * @ApiDoc(section="Word", description="Improve Word",
      *  requirements={
@@ -126,108 +98,9 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function postImproveAction(Request $request)
     {
-        return $this->postImprove($request->get('data'));
+        return $this->get('app.word_model')->postImprove($request->get('data'));
     }
-
-    public function postImprove($data)
-    {
-        $data = array_values($data);
-        $word = null;
-        
-        /* foreach post line */
-        foreach ($data as $sense) {
-
-            $w = $sense['w'];
-
-            $wordString = $w;
-            $expression = null;
-            //$kExplode = explode(' ', $w);
-            $kExplode =preg_split( "/( |-)/", $w);
-            // Check if composed word
-            if (count($kExplode) > 1) {
-                $expression = $w;
-                $wordString = $kExplode['0'];
-            }
-            
-            if(!$word) {
-                $word = $this->getWord($wordString, 'en', true);
-            }
-            
-            foreach($word->getSubWords() as $sw)
-            {
-                $oldWw = $this->em->getRepository('AppBundle:Ww')->findBy(
-                    array('word1' => $sw));
-
-                foreach ($oldWw as $ww) {
-                    $this->em->remove($ww);
-                }
-                $this->em->remove($sw);
-                $this->em->flush();
-            }
-
-            $category = '';
-            if (array_key_exists('category', $sense)) {
-                $category = $sense['category'];
-            }
-
-            $senseStr = '';
-            if (array_key_exists('sense', $sense)) {
-                $senseStr = $sense['sense'];
-            }
-            if (!array_key_exists('additional', $sense)) {
-                $sense['additional'] = 0;
-            }
-
-            $subWord = $this->getSubWord($word, $category, $expression, $senseStr);
-
-            $translations = explode(',', str_replace(array(', ', ' ,'), ',', $sense['concat']));
-
-            $i = 0;
-            foreach ($translations as $t) {
-                $wordString = trim($t);
-                $expression = null;
-                $kExplode = explode(' ', $w);
-                if (count($kExplode) > 1) {
-                    $expression = $w;
-                    $wordString = $kExplode['0'];
-                }
-                $tradWord = $this->getWord($wordString, 'fr', true);
-                $tradSubWord = $this->getSubWord($tradWord, '', $expression, '');
-                $ww = $this->em->getRepository('AppBundle:Ww')->findOneBy(array('word1' => $subWord, 'word2' => $tradSubWord));
-                if (is_null($ww)) {
-                    $ww = new Ww();
-                    $ww->setWord1($subWord);
-                    $ww->setWord2($tradSubWord);
-                    $ww->setAdditional($sense['additional']);
-                    $ww->setPriority($i++);
-                    $this->em->persist($ww);
-                }
-            }
-        }
-
-        $this->em->flush();
-        $results = $this->em->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
-
-        return $results;
-    }
-
-    private function getSubWord($word, $category, $expression, $sense)
-    {
-        if (!$wt = $this->em->getRepository('AppBundle:SubWord')->findOneBy(
-            array('word' => $word, 'category' => $category, 'expression' => $expression, 'sense' => $sense))
-        ) {
-            $wt = new SubWord();
-            $wt->setWord($word);
-            $wt->setCategory($category);
-            $wt->setExpression($expression);
-            $wt->setSense($sense);
-            $this->em->persist($wt);
-            $this->em->flush();
-        }
-
-        return $wt;
-    }
-
+    
     /**
      * @ApiDoc(section="Word", description="Suck Word",
      *  requirements={
@@ -238,18 +111,10 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function suckOneFromWebAction($word)
     {
-        $url = 'http://www.wordreference.com/enfr/' . $word;
-
-        $curl_handle = curl_init();
-        \curl_setopt($curl_handle, CURLOPT_URL, $url);
-        \curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
-        \curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-        \curl_setopt($curl_handle, CURLOPT_USERAGENT, 'googlebot');
-        $subhtml = \curl_exec($curl_handle);
-        \curl_close($curl_handle);
+        $html = $this->get('app.suck_model')->suckWithWr($word);
+        $senses = $this->get('app.suck_model')->htmlToArray($html);
+        //dump($senses);
         
-        $senses = $this->get('app.wr_suck')->htmlToArray($subhtml);
-        
-        return $this->postImprove($senses);
+        return $this->get('app.word_model')->postImprove($senses);
     }
 }

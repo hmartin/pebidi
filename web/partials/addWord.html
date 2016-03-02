@@ -48,7 +48,9 @@
 </div>
 
 <script type="text/ng-template" id="listWord.html">
-    <a style="text-align: left"><span style="width:120px;float: left"
-                                      bind-html-unsafe="match.model.w | typeaheadHighlight:query"></span>&nbsp;<=>&nbsp;
-        <span bind-html-unsafe="match.model.t | typeaheadHighlight:query"></span> </a>
+    <a style="text-align: left">
+        <span style="width:120px;float: left" ng-bind-html="match.model.w | typeaheadHighlight:query | to_trusted"></span>
+        &nbsp;<=>&nbsp;
+        <span ng-bind-html="match.model.t | typeaheadHighlight:query | to_trusted"></span>
+    </a>
 </script>

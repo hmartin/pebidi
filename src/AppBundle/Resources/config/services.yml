@@ -2,12 +2,12 @@
 services:
     app.result_controller:
         class:     AppBundle\Controller\ResultController
-    app.word_controller:
-        class:     AppBundle\Controller\WordController
+    app.word_model:
+        class:     AppBundle\Model\WordModel
         arguments: ["@doctrine.orm.default_entity_manager"]
         
-    app.wr_suck:
-        class:     AppBundle\DataFixtures\WrSuck
+    app.suck_model:
+        class:     AppBundle\Model\SuckModel
     mailer_manager:
         class:     AppBundle\Mailer\Manager
         arguments: ["@mailer", "@templating"]

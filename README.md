@@ -16,3 +16,9 @@ Add additional  translation option*
 auto suck if word not exist
 command suck wr only
 cron 12h generate json dictionary
+
+
+Functional test scenario:
+Post email new user
+Add words (exist and no-exist)
+Execute suck no-exist

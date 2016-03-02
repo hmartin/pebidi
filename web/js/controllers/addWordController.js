@@ -31,7 +31,14 @@ app
         };
 
         $scope.processWord = function () {
-            pediService.post($scope.formData.word.w, mainService.getDic());
+            var string;
+            console.log($scope.formData);
+            if (typeof $scope.formData.word === 'object') {
+                string = $scope.formData.word.w;
+            } else {
+                string = $scope.formData.word;
+            }
+            pediService.post(string, mainService.getDic());
             $scope.formData.word = '';
             $scope.formData.translation = '';
         };
