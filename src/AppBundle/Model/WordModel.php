@@ -27,7 +27,7 @@ class WordModel
                 $w->setWord($word);
                 $w->setLocal($local);
                 $this->em->persist($w);
-                $this->em->flush();
+                //$this->em->flush();
             }
         }
         return $w;
@@ -104,7 +104,7 @@ class WordModel
                 }
             }
         }
-        $this->em->flush();
+        //$this->em->flush();
         $results = $this->em->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
         
         return $results;
@@ -121,7 +121,7 @@ class WordModel
             $wt->setExpression($expression);
             $wt->setSense($sense);
             $this->em->persist($wt);
-            $this->em->flush();
+            //$this->em->flush();
         }
         
         return $wt;

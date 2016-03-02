@@ -30,41 +30,14 @@ class OneShot2Command extends InsertCommand
         /* origin */
         $output->writeln('count $entries:' . count($ss));
         foreach ($ss as $k => $s) {
-            $time_end = microtime_float();
-            $time = $time_end - $time_start;
-            if ($time > 3000) {
-                //$em->flush();
-                //exit;
-            }
-            $output->writeln("\n" . $k . '---------------         ' . $s->getUrl() . '    ------------------------------');
-            $senses = $this->getContainer()->get('app.wr_suck')->htmlToArray($s->getHmtl());
-            $this->getContainer()->get('app.word_controller')->postImprove($senses);
+            //$output->writeln("\n" . $k . '---------------         ' . $s->getUrl() . '    ------------------------------');
+            $senses[] = $this->getContainer()->get('app.suck_model')->htmlToArray($s->getHmtl());
+            //$this->getContainer()->get('app.word_controller')->postImprove($senses);
         }
 
-    }
+        $file = fopen($this->getContainer()->get('kernel')->getRootDir() . '/../doc/dictSource/arrayWr.json', "w");
+        $output->writeln(fwrite($file, json_encode($senses)));
+        fclose($file);
 
-    protected function clean()
-    {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        $connection = $em->getConnection();
-        $statement = $connection->prepare("
-         SET FOREIGN_KEY_CHECKS=0;
-        TRUNCATE `Category`;
-        TRUNCATE `DictionariesWord`;
-        TRUNCATE `Dictionary`;
-        TRUNCATE `DictionaryScore`;
-        TRUNCATE `Point`;
-        TRUNCATE `Result`;
-        TRUNCATE `Sense`;
-        TRUNCATE `Test`;
-        TRUNCATE `TestWord`;
-        TRUNCATE `User`;
-        TRUNCATE `Word`;
-        TRUNCATE `WordType`;
-        TRUNCATE `Ww`;
-        TRUNCATE `WwSenses`;
-         SET FOREIGN_KEY_CHECKS=1;");
-        $statement->execute();
-        $statement->closeCursor();
     }
 }

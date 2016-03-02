@@ -13,7 +13,7 @@ table point
 micro todo:
 test api suck word ref*
 Add additional  translation option*
-auto suck if word not exist
+command suck if word not exist*
 command suck wr only
 cron 12h generate json dictionary
 
