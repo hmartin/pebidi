@@ -32,16 +32,15 @@ class MergeCommand extends InsertCommand
         ini_set('memory_limit', '-1');
         $em = $this->getContainer()->get('doctrine')->getManager();
         $this->clean();
-        $a3 = $this->decode('/../doc/dictSource/arrayWr.json');
+        $result = $this->decode('/../doc/dictSource/arrayWr.json');
         $stopwatch = new Stopwatch();
         $stopwatch->start('eventName');
 
-        $result = $a3;
-
         echo 'merge: ' . count($result) . "\n";
-
+        //$this->getContainer()->get('app.word_model')->setFlush(false);
+        $i = 0;
         foreach ($result as $r) {
-
+            $output->writeln($i++);
             $senses[] = $this->getContainer()->get('app.word_model')->postImprove($r);
         }
         $output->writeln('Let\'s flush');
@@ -54,6 +53,17 @@ class MergeCommand extends InsertCommand
     private function decode($filepath)
     {
         $file = file_get_contents($this->getContainer()->get('kernel')->getRootDir() . $filepath);
+        //echo $file;
+        echo mb_detect_encoding ($file);
+//$file = mb_convert_encoding($file, "UTF-8", "ASCII");
+//$file = iconv('ASCII', 'UTF-8//IGNORE', $file);
+//$file = mb_convert_encoding($file, 'HTML-ENTITIES');
+        $file = utf8_decode ($file);
+        //echo "\n"."\n"."\n".$file;
+        //$file = iconv('ASCII', 'UTF-8', $file);
+        echo mb_detect_encoding ($file);
+        
+        sleep(2);
         $a = json_decode($file, true);
         echo $filepath . ': ' . count($a) . "\n";
         

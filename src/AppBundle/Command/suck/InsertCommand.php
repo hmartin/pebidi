@@ -27,20 +27,17 @@ abstract class InsertCommand extends ContainerAwareCommand
         $connection = $em->getConnection();
         $statement = $connection->prepare("
          SET FOREIGN_KEY_CHECKS=0;
-        TRUNCATE `Category`;
         TRUNCATE `DictionariesWord`;
         TRUNCATE `Dictionary`;
         TRUNCATE `DictionaryScore`;
         TRUNCATE `Point`;
         TRUNCATE `Result`;
-        TRUNCATE `Sense`;
         TRUNCATE `Test`;
         TRUNCATE `TestWord`;
         TRUNCATE `User`;
         TRUNCATE `Word`;
-        TRUNCATE `WordType`;
+        TRUNCATE `SubWord`;
         TRUNCATE `Ww`;
-        TRUNCATE `WwSenses`;
          SET FOREIGN_KEY_CHECKS=1;");
         $statement->execute();
         $statement->closeCursor();

@@ -60,7 +60,7 @@ class SuckModel
                             
                         }
                         $newWord = explode(',', $newWord->html());
-                        $w = $this->cleanString(utf8_decode($newWord['0']));
+                        $w = $this->cleanString($newWord['0']);
                     }
                     
                     
@@ -81,7 +81,7 @@ class SuckModel
                             $converted = strtr($sensesArrayValue['0'], array_flip(get_html_translation_table(HTML_ENTITIES, ENT_QUOTES)));
                             $converted = trim($converted, chr(0xC2).chr(0xA0));
     
-                            $sense = $this->cleanSense(utf8_encode($converted));
+                            $sense = $this->cleanSense($converted);
     
                         }
     
@@ -158,12 +158,6 @@ class SuckModel
         }
 
         return trim($string);
-    }
-
-    private function starts_with_upper($str)
-    {
-        $chr = mb_substr($str, 0, 1, "UTF-8");
-        return mb_strtolower($chr, "UTF-8") != $chr;
     }
 
     protected function cleanSense($string)

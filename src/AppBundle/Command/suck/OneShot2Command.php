@@ -29,15 +29,14 @@ class OneShot2Command extends InsertCommand
         $ss = $em->getRepository('AppBundle:Suck')->findAll();
         /* origin */
         $output->writeln('count $entries:' . count($ss));
+        $senses = [];
         foreach ($ss as $k => $s) {
             //$output->writeln("\n" . $k . '---------------         ' . $s->getUrl() . '    ------------------------------');
             $senses[] = $this->getContainer()->get('app.suck_model')->htmlToArray($s->getHmtl());
-            //$this->getContainer()->get('app.word_controller')->postImprove($senses);
         }
 
         $file = fopen($this->getContainer()->get('kernel')->getRootDir() . '/../doc/dictSource/arrayWr.json', "w");
-        $output->writeln(fwrite($file, json_encode($senses)));
+        $output->writeln(fwrite($file, json_encode($senses, JSON_UNESCAPED_UNICODE)));
         fclose($file);
-
     }
 }

@@ -12,10 +12,23 @@ use AppBundle\Entity\Word;
 class WordModel
 {
     private $em;
+    protected $flush = true;
 
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
+    }
+    
+    protected function flush()
+    {
+        if ($this->flush) {
+            $this->em->flush();
+        }
+    }
+    
+    public function setFlush($flush)
+    {
+        $this->flush = $flush;
     }
     
     public function getWord($word, $local, $createIfNotExist = false)
@@ -27,7 +40,7 @@ class WordModel
                 $w->setWord($word);
                 $w->setLocal($local);
                 $this->em->persist($w);
-                //$this->em->flush();
+                $this->flush();
             }
         }
         return $w;
@@ -63,7 +76,7 @@ class WordModel
                     $this->em->remove($ww);
                 }
                 $this->em->remove($sw);
-                $this->em->flush();
+                $this->flush();
             }
             $category = '';
             if (array_key_exists('category', $sense)) {
@@ -93,8 +106,9 @@ class WordModel
                 //dump($expression);
                 $tradWord = $this->getWord($wordString, 'fr', true);
                 $tradSubWord = $this->getSubWord($tradWord, '', $expression, '');
-                $ww = $this->em->getRepository('AppBundle:Ww')->findOneBy(array('word1' => $subWord, 'word2' => $tradSubWord));
-                if (is_null($ww)) {
+                
+                //$ww = $this->em->getRepository('AppBundle:Ww')->findOneBy(array('word1' => $subWord, 'word2' => $tradSubWord));
+                if (true) {
                     $ww = new Ww();
                     $ww->setWord1($subWord);
                     $ww->setWord2($tradSubWord);
@@ -104,16 +118,19 @@ class WordModel
                 }
             }
         }
-        //$this->em->flush();
-        $results = $this->em->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
         
-        return $results;
+        $this->flush();
+        if ($this->flush) {
+            $results = $this->em->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
+        
+            return $results;
+        }
     }
     
     private function getSubWord($word, $category, $expression, $sense)
     {
-        if (!$wt = $this->em->getRepository('AppBundle:SubWord')->findOneBy(
-            array('word' => $word, 'category' => $category, 'expression' => $expression, 'sense' => $sense))
+        if (!$word->getId() || (!$wt = $this->em->getRepository('AppBundle:SubWord')->findOneBy(
+            array('word' => $word, 'category' => $category, 'expression' => $expression, 'sense' => $sense)))
         ) {
             $wt = new SubWord();
             $wt->setWord($word);
@@ -121,7 +138,7 @@ class WordModel
             $wt->setExpression($expression);
             $wt->setSense($sense);
             $this->em->persist($wt);
-            //$this->em->flush();
+            $this->flush();
         }
         
         return $wt;
