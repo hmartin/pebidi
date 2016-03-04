@@ -118,7 +118,7 @@ app
         var dic = null;
         this.loadDic = function () {
             if (!dic) {
-                return $http.get(URL + 'dict/dict.json').then(function (res) {
+                return $http.get(URL + 'dict/dicten.json').then(function (res) {
                     dic = res.data;
 
 
