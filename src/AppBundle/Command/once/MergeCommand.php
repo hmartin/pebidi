@@ -53,14 +53,7 @@ class MergeCommand extends InsertCommand
     private function decode($filepath)
     {
         $file = file_get_contents($this->getContainer()->get('kernel')->getRootDir() . $filepath);
-        //echo $file;
-        echo mb_detect_encoding ($file);
-//$file = mb_convert_encoding($file, "UTF-8", "ASCII");
-//$file = iconv('ASCII', 'UTF-8//IGNORE', $file);
-//$file = mb_convert_encoding($file, 'HTML-ENTITIES');
         $file = utf8_decode ($file);
-        //echo "\n"."\n"."\n".$file;
-        //$file = iconv('ASCII', 'UTF-8', $file);
         echo mb_detect_encoding ($file);
         
         sleep(2);

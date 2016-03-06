@@ -11,65 +11,42 @@ use AppBundle\Entity\Word;
 
 class WordModel
 {
-    private $em;
     protected $flush = true;
+    private $em;
 
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
-    
-    protected function flush()
-    {
-        if ($this->flush) {
-            $this->em->flush();
-        }
-    }
-    
+
     public function setFlush($flush)
     {
         $this->flush = $flush;
     }
-    
-    public function getWord($word, $local, $createIfNotExist = false)
-    {
-        $w = null;
-        if (!$w = $this->em->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => $local))) {
-            if ($createIfNotExist) {
-                $w = new Word();
-                $w->setWord($word);
-                $w->setLocal($local);
-                $this->em->persist($w);
-                $this->flush();
-            }
-        }
-        return $w;
-    }
-    
+
     public function postImprove($data)
     {
         $data = array_values($data);
         $word = null;
-        
+
         /* foreach post line */
         foreach ($data as $sense) {
             $w = $sense['w'];
             $wordString = $w;
             $expression = null;
             //$kExplode = explode(' ', $w);
-            $kExplode =preg_split( "/( |-)/", $w);
+            $kExplode = preg_split("/( |-)/", $w);
             // Check if composed word
             if (count($kExplode) > 1) {
                 $expression = $w;
                 $wordString = $kExplode['0'];
             }
-            
-            if(!$word) {
+
+            if (!$word) {
                 $word = $this->getWord($wordString, 'en', true);
             }
-            
-            foreach($word->getSubWords() as $sw)
-            {
+
+            foreach ($word->getSubWords() as $sw) {
                 $oldWw = $this->em->getRepository('AppBundle:Ww')->findBy(
                     array('word1' => $sw));
                 foreach ($oldWw as $ww) {
@@ -89,11 +66,11 @@ class WordModel
             if (!array_key_exists('additional', $sense)) {
                 $sense['additional'] = 0;
             }
-            
+
             $subWord = $this->getSubWord($word, $category, $expression, $senseStr);
-            
+
             $translations = explode(',', $sense['concat']);
-            
+
             $i = 0;
             foreach ($translations as $t) {
                 $wordString = trim($t);
@@ -106,7 +83,7 @@ class WordModel
                 //dump($expression);
                 $tradWord = $this->getWord($wordString, 'fr', true);
                 $tradSubWord = $this->getSubWord($tradWord, '', $expression, '');
-                
+
                 //$ww = $this->em->getRepository('AppBundle:Ww')->findOneBy(array('word1' => $subWord, 'word2' => $tradSubWord));
                 if (true) {
                     $ww = new Ww();
@@ -118,19 +95,41 @@ class WordModel
                 }
             }
         }
-        
+
         $this->flush();
         if ($this->flush) {
             $results = $this->em->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
-        
+
             return $results;
         }
     }
-    
+
+    public function getWord($word, $local, $createIfNotExist = false)
+    {
+        $w = null;
+        if (!$w = $this->em->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => $local))) {
+            if ($createIfNotExist) {
+                $w = new Word();
+                $w->setWord($word);
+                $w->setLocal($local);
+                $this->em->persist($w);
+                $this->flush();
+            }
+        }
+        return $w;
+    }
+
+    protected function flush()
+    {
+        if ($this->flush) {
+            $this->em->flush();
+        }
+    }
+
     private function getSubWord($word, $category, $expression, $sense)
     {
         if (!$word->getId() || (!$wt = $this->em->getRepository('AppBundle:SubWord')->findOneBy(
-            array('word' => $word, 'category' => $category, 'expression' => $expression, 'sense' => $sense)))
+                array('word' => $word, 'category' => $category, 'expression' => $expression, 'sense' => $sense)))
         ) {
             $wt = new SubWord();
             $wt->setWord($word);
@@ -140,8 +139,8 @@ class WordModel
             $this->em->persist($wt);
             $this->flush();
         }
-        
+
         return $wt;
     }
-    
+
 }
