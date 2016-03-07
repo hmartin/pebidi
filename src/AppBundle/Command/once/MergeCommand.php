@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Process\Process;
 
 use AppBundle\Entity\Sense;
 use AppBundle\Entity\Category;
@@ -24,42 +24,38 @@ class MergeCommand extends InsertCommand
     protected function configure()
     {
         $this
-            ->setName('oneShot:merge');
+            ->setName('oneShot:merge')
+            ->addOption('start', 'i', InputOption::VALUE_OPTIONAL);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         ini_set('memory_limit', '-1');
+        $page = $input->getOption('start');
         $em = $this->getContainer()->get('doctrine')->getManager();
-        $this->clean();
-        $result = $this->decode('/../doc/dictSource/arrayWr.json');
-        $stopwatch = new Stopwatch();
-        $stopwatch->start('eventName');
-
-        echo 'merge: ' . count($result) . "\n";
-        //$this->getContainer()->get('app.word_model')->setFlush(false);
+        //$this->clean();
+        
+        $file = file_get_contents($this->getContainer()->get('kernel')->getRootDir() . '/../doc/dictSource/arrayWr.json');
+        $file = utf8_decode ($file);
+        $all =  array_chunk (json_decode($file, true), 30);
+        
+        $result = $all[$page];
+        echo 'arrayWs : ' . count($result) . "\n";
+        $this->getContainer()->get('app.word_model')->setDelete(false);
         $i = 0;
         foreach ($result as $r) {
+            if ($i>30) {break;}
             $output->writeln($i++);
             $senses[] = $this->getContainer()->get('app.word_model')->postImprove($r);
         }
-        $output->writeln('Let\'s flush');
         $em->flush();
-        $event = $stopwatch->stop('eventName');
-        $m = $event->getDuration() / 1000 / 60;
-        $output->writeln('Let\'s flush' . $m);
-    }
-
-    private function decode($filepath)
-    {
-        $file = file_get_contents($this->getContainer()->get('kernel')->getRootDir() . $filepath);
-        $file = utf8_decode ($file);
-        echo mb_detect_encoding ($file);
+        $next = $page +1;
+        $command = 'php '. $this->getContainer()->get('kernel')->getRootDir() .'/console oneShot:merge --start ' .$next;
         
-        sleep(2);
-        $a = json_decode($file, true);
-        echo $filepath . ': ' . count($a) . "\n";
+        $output->writeln($command);
+        $p = new Process($command);
+        $p->start();
+        $output->writeln($p->getPid());
         
-        return $a;
     }
 }

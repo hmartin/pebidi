@@ -11,7 +11,7 @@ use AppBundle\Entity\Word;
 
 class WordModel
 {
-    protected $flush = true;
+    protected $delete = false;
     private $em;
 
     public function __construct(EntityManager $em)
@@ -19,9 +19,9 @@ class WordModel
         $this->em = $em;
     }
 
-    public function setFlush($flush)
+    public function setDelete($delete)
     {
-        $this->flush = $flush;
+        $this->delete = $delete;
     }
 
     public function postImprove($data)
@@ -41,20 +41,22 @@ class WordModel
                 $expression = $w;
                 $wordString = $kExplode['0'];
             }
-
+            
             if (!$word) {
                 $word = $this->getWord($wordString, 'en', true);
             }
-
-            foreach ($word->getSubWords() as $sw) {
-                $oldWw = $this->em->getRepository('AppBundle:Ww')->findBy(
-                    array('word1' => $sw));
-                foreach ($oldWw as $ww) {
-                    $this->em->remove($ww);
+            if ($this->delete) {
+                foreach ($word->getSubWords() as $sw) {
+                    $oldWw = $this->em->getRepository('AppBundle:Ww')->findBy(
+                        array('word1' => $sw));
+                    foreach ($oldWw as $ww) {
+                        $this->em->remove($ww);
+                    }
+                    $this->em->remove($sw);
+                    $this->flush();
                 }
-                $this->em->remove($sw);
-                $this->flush();
             }
+            
             $category = '';
             if (array_key_exists('category', $sense)) {
                 $category = $sense['category'];
@@ -97,11 +99,9 @@ class WordModel
         }
 
         $this->flush();
-        if ($this->flush) {
-            $results = $this->em->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
+        $results = $this->em->getRepository('AppBundle:Word')->getWordTranslationConcat($word);
 
-            return $results;
-        }
+        return $results;
     }
 
     public function getWord($word, $local, $createIfNotExist = false)
@@ -121,9 +121,7 @@ class WordModel
 
     protected function flush()
     {
-        if ($this->flush) {
-            $this->em->flush();
-        }
+        $this->em->flush();
     }
 
     private function getSubWord($word, $category, $expression, $sense)
@@ -142,5 +140,4 @@ class WordModel
 
         return $wt;
     }
-
 }

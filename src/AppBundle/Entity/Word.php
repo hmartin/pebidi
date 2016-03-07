@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table()
+ * @ORM\Table(indexes={@ORM\Index(name="search_idx", columns={"word", "local"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\WordRepository")
  */
 class Word
