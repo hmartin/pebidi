@@ -37,14 +37,14 @@ class MergeCommand extends InsertCommand
         
         $file = file_get_contents($this->getContainer()->get('kernel')->getRootDir() . '/../doc/dictSource/arrayWr.json');
         $file = utf8_decode ($file);
-        $all =  array_chunk (json_decode($file, true), 10);
+        $all =  array_chunk (json_decode($file, true), 30);
         
         $result = $all[$page];
         echo 'arrayWs : ' . count($result) . "\n";
         $this->getContainer()->get('app.word_model')->setDelete(false);
         $i = 0;
         foreach ($result as $r) {
-            if ($i>10) {break;}
+            if ($i>30) {break;}
             $output->writeln($i++);
             $senses[] = $this->getContainer()->get('app.word_model')->postImprove($r);
         }
