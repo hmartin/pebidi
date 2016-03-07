@@ -37,25 +37,25 @@ class MergeCommand extends InsertCommand
         
         $file = file_get_contents($this->getContainer()->get('kernel')->getRootDir() . '/../doc/dictSource/arrayWr.json');
         $file = utf8_decode ($file);
-        $all =  array_chunk (json_decode($file, true), 30);
+        $all =  array_chunk (json_decode($file, true), 10);
         
         $result = $all[$page];
         echo 'arrayWs : ' . count($result) . "\n";
         $this->getContainer()->get('app.word_model')->setDelete(false);
         $i = 0;
         foreach ($result as $r) {
-            if ($i>30) {break;}
+            if ($i>10) {break;}
             $output->writeln($i++);
             $senses[] = $this->getContainer()->get('app.word_model')->postImprove($r);
         }
         $em->flush();
         $next = $page +1;
-        $command = 'php '. $this->getContainer()->get('kernel')->getRootDir() .'/console oneShot:merge --start ' .$next;
+        $command = 'php '. $this->getContainer()->get('kernel')->getRootDir() .'/console oneShot:merge --start ' .$next ." > /dev/null 2>/dev/null &";
         
         $output->writeln($command);
-        $p = new Process($command);
-        $p->start();
-        $output->writeln($p->getPid());
+        //$p = new Process($command);
+        //$p->start();
+        exec($command);
         
     }
 }
