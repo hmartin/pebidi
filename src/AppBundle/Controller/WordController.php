@@ -47,7 +47,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
         $em = $this->getDoctrine()->getManager();
         if ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id'))) {
             $edit = false;
-            if ($this->getUser()->hasRole('ROLE_USER')) {
+            if ($this->getUser() && $this->getUser()->hasRole('ROLE_USER')) {
                 $edit = true;
             }
             // TODO: Check if expression
@@ -113,7 +113,6 @@ class WordController extends FOSRestController implements ClassResourceInterface
     {
         $html = $this->get('app.suck_model')->suckWithWr($word);
         $senses = $this->get('app.suck_model')->htmlToArray($html);
-        //dump($senses);
         
         return $this->get('app.word_model')->postImprove($senses);
     }

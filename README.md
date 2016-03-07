@@ -11,11 +11,12 @@ Training (beta)
 table point
 
 micro todo:
-test api suck word ref*
-Add additional  translation option*
-command suck if word not exist*
-command suck wr only
-cron 12h generate json dictionary
+angular repair test
+no +1 if add word error
+add info "We don't find this word our db. If it exist we will find the translation and automaticaly add it to your pebidi."
+remove line edit word
+shortcuts for evry button
+
 
 
 Functional test scenario:

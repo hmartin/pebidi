@@ -86,3 +86,8 @@ name input *
 description*
 private checkbox*
 make my dictionary as group and create a new one*
+test api suck word ref*
+Add additional  translation option*
+command suck if word not exist*
+command suck wr only*
+cron 1h generate json dictionary*

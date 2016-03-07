@@ -1,0 +1,2 @@
+0 1 * * * php /var/www/vhosts/pebidi/app/console pebidi:updateNewWord >> /var/www/vhosts/pebidi/app/log/updateNewWord.txt
+30 1 * * * php /var/www/vhosts/pebidi/app/console oneShot:json >> /var/www/vhosts/pebidi/app/log/json.txt

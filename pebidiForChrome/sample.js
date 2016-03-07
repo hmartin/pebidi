@@ -1,4 +1,6 @@
 'use strict';
+/* global angular */
+/* global chrome */
 
 var exist = null;
 var dict = false;
@@ -19,6 +21,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 			}
 		}
 		else {
+			var title;
 			if (dict) {
 				var myInjector = angular.injector(["ng"]);
 				var $filter = myInjector.get("$filter");
@@ -30,21 +33,22 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 				if (trans && trans.t) {
 					trad = trans.t;
 				}
-				var title = "Insert " + type + " => " + trad + ' in your pebidi';
+				title = "Insert " + type + " => " + trad + ' in your pebidi';
 			}
 			else {
-				var title = "Insert " + type + "...  Retry Pebidi is loading...";
+				title = "Insert " + type + "...  Retry Pebidi is loading...";
 			}
 
+			var options;
 			if (exist) {
-				var options = {
+				options = {
 					title: title,
 					contexts: ['selection']
 				};
 				chrome.contextMenus.update('word', options);
 			}
 			else {
-				var options = {
+				options = {
 					id: 'word',
 					title: title,
 					contexts: ['selection']
@@ -71,7 +75,7 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
 				}, function() {
 					chrome.tabs.executeScript(tab.id, {
 						file: "notification.js"
-					})
+					});
 				});
 			});
 		}
