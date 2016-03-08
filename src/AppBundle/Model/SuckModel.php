@@ -6,7 +6,19 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class SuckModel
 {
-    public function suckWithWr($word)
+    public function wordToArray($word)
+    {
+        $html = $this->suckWithWr($word);
+        $array = $this->htmlToArray($html);
+        
+        if (count($array) > 0) {
+            return $array;
+        }
+        
+        return false;
+    }
+    
+    private function suckWithWr($word)
     {
         $url = 'http://www.wordreference.com/enfr/' . $word;
         $curl_handle = curl_init();
@@ -20,7 +32,7 @@ class SuckModel
         return $html;
     }
     
-    public function htmlToArray($html)
+    private function htmlToArray($html)
     {
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('table.WRD > tr');

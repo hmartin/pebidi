@@ -43,7 +43,9 @@ class WordRepository extends EntityRepository
             ->innerJoin('\AppBundle\Entity\SubWord', 'translation',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
                 'ww.word2 =  translation.id')
-            ->innerJoin('translation.word', 'trans_word');
+            ->innerJoin('translation.word', 'trans_word')
+            ->andWhere('word.disabled = 0')
+            ;
     }
 
     public function getWordFullTranslation($w)

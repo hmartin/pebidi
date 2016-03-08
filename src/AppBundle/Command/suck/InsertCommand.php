@@ -39,7 +39,7 @@ abstract class InsertCommand extends ContainerAwareCommand
         TRUNCATE `SubWord`;
         TRUNCATE `Ww`;
          SET FOREIGN_KEY_CHECKS=1;");
-        $statement->execute();
+        //$statement->execute();
         $statement->closeCursor();
     }
 

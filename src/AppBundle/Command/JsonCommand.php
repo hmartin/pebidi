@@ -38,7 +38,7 @@ class JsonCommand extends ContainerAwareCommand
 
             $results = $stmt->fetchAll();
             $file = fopen(__DIR__ . '/../../../web/dict/dict' . $l . '.json', "w");
-            echo fwrite($file, json_encode($results));
+            $output->writeLn(date("Y-m-d h:i:sa") . ' dict' . $l . '.json' . fwrite($file, json_encode($results)));
             fclose($file);
         }
     }

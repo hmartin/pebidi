@@ -26,18 +26,21 @@ class UpdateNewWordCommand extends ContainerAwareCommand
         
         $qb = $em->getRepository('AppBundle:Word')->createQueryBuilder('w')
                 ->leftJoin('w.subWords', 's')
-                ->where('s.id IS NULL');
-                
+                ->where('s.id IS NULL')
+                ->andWhere('w.disabled = 0')
+                ;
         $results = $qb->getQuery()->getResult();
+        $output->writeLn(date("Y-m-d h:i:sa") . ' Start with: ' .count($results). ' words');
         
         foreach($results as $r) {
             $output->writeLn($r->getWord());
             
-            $html = $this->getContainer()->get('app.suck_model')->suckWithWr($r->getWord());
-            
-            $senses = $this->getContainer()->get('app.suck_model')->htmlToArray($html);
-        
-            $this->getContainer()->get('app.word_model')->postImprove($senses);
+            if ($senses = $this->getContainer()->get('app.suck_model')->wordToArray($r->getWord())) {
+                $this->getContainer()->get('app.word_model')->postImprove($senses);
+            } else {
+                $r->setDisabled = 1;
+            }
         }
+        $em->flush();
     }
 }

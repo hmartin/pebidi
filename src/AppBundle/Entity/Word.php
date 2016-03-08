@@ -34,6 +34,11 @@ class Word
     protected $certified = 0;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $disableed = 0;
+
+    /**
      * @ORM\OneToMany(targetEntity="SubWord", mappedBy="word",cascade={"persist"})
      */
     protected $subWords;
@@ -315,5 +320,29 @@ class Word
     public function getPoints()
     {
         return $this->points;
+    }
+
+    /**
+     * Set disableed
+     *
+     * @param integer $disableed
+     *
+     * @return Word
+     */
+    public function setDisableed($disableed)
+    {
+        $this->disableed = $disableed;
+
+        return $this;
+    }
+
+    /**
+     * Get disableed
+     *
+     * @return integer
+     */
+    public function getDisableed()
+    {
+        return $this->disableed;
     }
 }

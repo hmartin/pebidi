@@ -16,7 +16,8 @@ no +1 if add word error
 add info "We don't find this word our db. If it exist we will find the translation and automaticaly add it to your pebidi."
 remove line edit word
 shortcuts for evry button
-
+Disabled word option
+Disable word if wr notnfound
 
 
 Functional test scenario:
