@@ -138,7 +138,7 @@ app
      * Get pedi (or gw)
      * Add word or delete word form pedi (or gw)
      */
-    .service('pediService', function ($http, $rootScope, $location, $timeout, mainService) {
+    .service('pediService', function ($http, $rootScope, $location, $timeout, $translate, Flash, mainService) {
 
         this.get = function (id) {
             var data = {};
@@ -168,6 +168,12 @@ app
                 'w': word,
                 'id': dic.id
             }).success(function (data) {
+                if (data.msg == 'notExistYet') {
+                    mainService.setCountWord(dic.countWord - 1);
++                   Flash.create('warning', $translate.instant('notExistYet'), 'custom-class');
+                    
+                }
+                
                 mainService.setDic(data.dic);
                 console.log(mainService.getUser().dic.id);
                 if (mainService.getUser().dic.id == data.dic.id) {

@@ -50,5 +50,6 @@
     "groupDescription": "Description de ce groupe",
     "privateGroup": "Groupe privé",
     "remarkCreateGroup": "Attention la création d'un groupe entraine d'avoir un nouveau dictionnaire vide. Si vous souhaitez garder vos mots actuels il faudra rajouter ce groupe à votre nouveau dictionnaire.",
-    "submitCreateGroup": "Créer le groupe"
+    "submitCreateGroup": "Créer le groupe",
+    "notExistYet" : "Nous ne trouvons pas ce mot. S'il existe nous trouverons la traduction et l'ajouterons automatiquement dans votre pebidi"
 }

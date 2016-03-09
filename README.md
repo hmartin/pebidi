@@ -13,11 +13,12 @@ table point
 micro todo:
 angular repair test*
 Disabled word option*
+Disable word if wr notnfound*
+
 no +1 if add word error
-add info "We don't find this word our db. If it exist we will find the translation and automaticaly add it to your pebidi."
-remove line edit word
+add info "..."
+remove one sense on edit word page
 shortcuts for evry button
-Disable word if wr notnfound
 
 
 Functional test scenario:

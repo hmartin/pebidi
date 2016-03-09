@@ -34,32 +34,39 @@ class WordController extends FOSRestController implements ClassResourceInterface
     }
     
     /**
-     * @ApiDoc(section="Word", description="Post Word to Dic",
+     * @ApiDoc(section="Word", description="Post Word to Dic return [msg => valid|notExistYet|error, dic => jsonDic]",
      *  requirements={
      *      { "name"="id", "dataType"="integer", "requirement"="\d+", "description"="dic id" },
      *      { "name"="w", "dataType"="string", "requirement"="\d+", "description"="Word" }
-     *  },
+     *  }
      * )
      * @Rest\View()
      */
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id'))) {
+        if ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id'))
+                && $word = $request->get('w')) {
             $edit = false;
             if ($this->getUser() && $this->getUser()->hasRole('ROLE_USER')) {
                 $edit = true;
             }
+            
+            $msg = 'valid';
+            
             // TODO: Check if expression
-            if ($w = $this->get('app.word_model')->getWord($request->get('w'), 'en', true)) 
+            if (false == ($w = $em->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => 'en')))) 
             {
-                if (!$d->getWords()->contains($w)) {
-                    $d->addWord($w);
-                }
-    
-                $em->flush();
+                $w = $this->get('app.word_model')->getWord($word, 'en', true);
+                $msg = 'notExistYet';    
             }
-            return array('msg' => 'valid', 'dic' => $d->getJsonArray());
+            
+            if (!$d->getWords()->contains($w)) {
+                $d->addWord($w);
+            }
+
+            $em->flush();
+            return ['msg' => $msg, 'dic' => $d->getJsonArray()];
         }
         
         return array('msg' => 'error');

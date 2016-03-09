@@ -50,5 +50,6 @@
     "groupDescription": "Group description",
     "privateGroup": "Private group",
     "remarkCreateGroup": "Warning, creating a group imply a new empty dictionary. If you want to keep your current words you have to add this group to your new dictionary.",
-    "submitCreateGroup": "Transform your pebidi to a group"
+    "submitCreateGroup": "Transform your pebidi to a group",
+    "notExistYet" : "We don't find this word. If it exist we will find the translation and automaticaly add it to your pebidi."
 }
