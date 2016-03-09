@@ -36,7 +36,7 @@ class Word
     /**
      * @ORM\Column(type="integer")
      */
-    protected $disableed = 0;
+    protected $disabled = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="SubWord", mappedBy="word",cascade={"persist"})
@@ -323,26 +323,26 @@ class Word
     }
 
     /**
-     * Set disableed
+     * Set disabled
      *
-     * @param integer $disableed
+     * @param integer $disabled
      *
      * @return Word
      */
-    public function setDisableed($disableed)
+    public function setDisabled($disabled)
     {
-        $this->disableed = $disableed;
+        $this->disabled = $disabled;
 
         return $this;
     }
 
     /**
-     * Get disableed
+     * Get disabled
      *
      * @return integer
      */
-    public function getDisableed()
+    public function getDisabled()
     {
-        return $this->disableed;
+        return $this->disabled;
     }
 }

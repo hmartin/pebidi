@@ -45,7 +45,7 @@ app
             this.nbQuestion = question;
             this.did = did;
             $http.post(API_URL + 'tests', {
-                uid: mainService.getUid(),
+                uid: mainService.getUser().id,
                 id: did,
                 nbQuestion: question,
                 type: 'new'

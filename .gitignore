@@ -8,6 +8,7 @@ vendor/*
 */logs/*
 */cache/*
 web/uploads/*
+web/dict/*
 web/bundles/*
 
 .idea
