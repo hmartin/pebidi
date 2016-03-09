@@ -11,12 +11,12 @@ Training (beta)
 table point
 
 micro todo:
-angular repair test
+angular repair test*
+Disabled word option*
 no +1 if add word error
 add info "We don't find this word our db. If it exist we will find the translation and automaticaly add it to your pebidi."
 remove line edit word
 shortcuts for evry button
-Disabled word option
 Disable word if wr notnfound
 
 
