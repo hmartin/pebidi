@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Dictionary;
 use Doctrine\ORM\EntityRepository;
 
 class DictionaryRepository extends EntityRepository
@@ -14,6 +15,16 @@ class DictionaryRepository extends EntityRepository
             ->setParameter('user', $user);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function createJson(Dictionary $d)
+    {
+        $a = $d->getJsonArray();
+
+        $a['countWord'] = $this->createQueryBuilder('d')->select('COUNT(words.id)')->leftJoin('d.words', 'words')
+            ->where('words.disabled = 0')->groupBy('d.id')->getQuery()->getSingleScalarResult();
+
+        return $a;
     }
 
 }

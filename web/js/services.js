@@ -169,9 +169,7 @@ app
                 'id': dic.id
             }).success(function (data) {
                 if (data.msg == 'notExistYet') {
-                    mainService.setCountWord(dic.countWord - 1);
-+                   Flash.create('warning', $translate.instant('notExistYet'), 'custom-class');
-                    
+                    Flash.create('warning', $translate.instant('notExistYet'), 'custom-class');
                 }
                 
                 mainService.setDic(data.dic);

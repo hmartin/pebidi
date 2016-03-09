@@ -45,8 +45,8 @@ class WordController extends FOSRestController implements ClassResourceInterface
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id'))
-                && $word = $request->get('w')) {
+        if (($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id')))
+                && ($word = $request->get('w'))) {
             $edit = false;
             if ($this->getUser() && $this->getUser()->hasRole('ROLE_USER')) {
                 $edit = true;
@@ -60,13 +60,14 @@ class WordController extends FOSRestController implements ClassResourceInterface
                 $w = $this->get('app.word_model')->getWord($word, 'en', true);
                 $msg = 'notExistYet';    
             }
-            
+
             if (!$d->getWords()->contains($w)) {
                 $d->addWord($w);
             }
 
             $em->flush();
-            return ['msg' => $msg, 'dic' => $d->getJsonArray()];
+
+            return ['msg' => $msg, 'dic' => $this->getDoctrine()->getRepository('AppBundle:Dictionary')->createJson($d)];
         }
         
         return array('msg' => 'error');
@@ -118,8 +119,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function suckOneFromWebAction($word)
     {
-        $html = $this->get('app.suck_model')->suckWithWr($word);
-        $senses = $this->get('app.suck_model')->htmlToArray($html);
+        $senses = $this->get('app.suck_model')->wordToArray($word);
         
         return $this->get('app.word_model')->postImprove($senses);
     }

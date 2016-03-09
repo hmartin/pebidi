@@ -87,7 +87,6 @@ class Dictionary
     public function getJsonArray()
     {
         $a = array('id' => $this->getId(),
-            'countWord' => count($this->getWords()),
             'wids' => $this->getWids(),
             'bitEmail' => $this->getUser()->getBitEmail(),
             'uid' => $this->getUser()->getId()
