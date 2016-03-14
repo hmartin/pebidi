@@ -54,20 +54,24 @@ class AddWordFromFileCommand extends ContainerAwareCommand
             
         }
         print_r($flipped);
-        echo count($flipped);
+        $output->writeLn(count($flipped));
         $found = $wrExist = $notFound = 0;
         foreach($flipped as $k => $fl) {
             
             if ($em->getRepository('AppBundle:Word')->findOneBy(array('word' => $k, 'local' => 'en'))) 
             {
-            
                 $found++;
             } elseif ($senses = $this->getContainer()->get('app.suck_model')->wordToArray($k)) {
                 $this->getContainer()->get('app.word_model')->postImprove($senses);
+                $output->writeLn( $wrExist .' | Just add:' . $k);
                 $wrExist++;
                 sleep(rand(5, 15));
             } else {
+                $output->writeLn( $notFound .' | not Found:' . $k);
                 $notFound++;
+            }
+            if ($wrExist > 100) {
+                exit;
             }
         }
         $output->writeLn( ' in db:'. $found .' exist on wr:'. $wrExist .' not found:'. $notFound);
