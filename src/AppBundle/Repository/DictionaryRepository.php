@@ -16,15 +16,4 @@ class DictionaryRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
-    public function createJson(Dictionary $d)
-    {
-        $a = $d->getJsonArray();
-
-        $a['countWord'] = $this->createQueryBuilder('d')->select('COUNT(words.id)')->leftJoin('d.words', 'words')
-            ->where('words.disabled = 0')->groupBy('d.id')->getQuery()->getSingleScalarResult();
-
-        return $a;
-    }
-
 }

@@ -67,7 +67,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
             $em->flush();
 
-            return ['msg' => $msg, 'dic' => $this->getDoctrine()->getRepository('AppBundle:Dictionary')->createJson($d)];
+            return ['msg' => $msg, 'dic' => $this->get('app.dictionary_model')->createJson($d)];
         }
         
         return array('msg' => 'error');

@@ -5,6 +5,9 @@ services:
     app.word_model:
         class:     AppBundle\Model\WordModel
         arguments: ["@doctrine.orm.default_entity_manager"]
+    app.dictionary_model:
+        class:     AppBundle\Model\WordModel
+        arguments: ["@doctrine.orm.default_entity_manager"]
         
     app.suck_model:
         class:     AppBundle\Model\SuckModel
