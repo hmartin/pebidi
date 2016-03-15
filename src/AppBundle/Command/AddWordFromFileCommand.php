@@ -61,16 +61,17 @@ class AddWordFromFileCommand extends ContainerAwareCommand
             if ($em->getRepository('AppBundle:Word')->findOneBy(array('word' => $k, 'local' => 'en'))) 
             {
                 $found++;
+                $output->writeLn( $found .' | found:' . $k);
             } elseif ($senses = $this->getContainer()->get('app.suck_model')->wordToArray($k)) {
                 $this->getContainer()->get('app.word_model')->postImprove($senses);
-                $output->writeLn( $wrExist .' | Just add:' . $k);
                 $wrExist++;
+                $output->writeLn( $wrExist .' | Just add:' . $k);
                 sleep(rand(0,2));
             } else {
-                $output->writeLn( $notFound .' | not Found:' . $k);
                 $notFound++;
+                $output->writeLn( $notFound .' | not Found:' . $k);
             }
-            if ($wrExist > 100) {
+            if ($wrExist > 10) {
                 $em->flush();
                 exit;
             }
