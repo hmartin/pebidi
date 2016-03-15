@@ -23,37 +23,11 @@ class AddWordFromFileCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em = $this->getContainer()->get('doctrine')->getManager();  
+        $this->output = $output;
         
-        $finder = new Finder();
-        $finder->files()->in(__DIR__.'/../../../doc/got');
-        $str = '';
-        foreach ($finder as $file) {
-            
-            $output->writeLn($file->getRealpath());
-            $str .= ' ' . file_get_contents($file->getRealpath());
-        }
-        $str = str_replace('--', '', $str);
-        $str = str_replace('-', ' ', $str);
-        $str = str_replace('\'', ' ', $str);
-        $a = str_word_count($str, 1);
-        $a = array_map('strtolower', $a);
-        sort($a);
-        $flipped = array_flip($a);
-        foreach ($flipped as $key => $v) 
-        {
-            if (substr($key, -1) == 's' && array_key_exists (mb_substr($key, 0, -1), $flipped)){
-                unset($flipped[$key]);
-            } elseif (substr($key, -2) == 'ed' && array_key_exists (mb_substr($key, 0, -2), $flipped)){
-                unset($flipped[$key]);
-            } elseif (substr($key, -1) == 'd' && array_key_exists (mb_substr($key, 0, -1), $flipped)){
-                unset($flipped[$key]);
-            } elseif (substr($key, -3) == 'ing' && array_key_exists (mb_substr($key, 0, -3), $flipped)){
-                unset($flipped[$key]);
-            }
-            
-        }
-        print_r($flipped);
+        
+        
         $output->writeLn(count($flipped));
         $found = $wrExist = $notFound = 0;
         foreach($flipped as $k => $fl) {
@@ -78,5 +52,41 @@ class AddWordFromFileCommand extends ContainerAwareCommand
         }
         $output->writeLn( ' in db:'. $found .' exist on wr:'. $wrExist .' not found:'. $notFound);
         $em->flush();
+    }
+    
+    protected function createJsonFromArray() 
+    {
+        $finder = new Finder();
+        $finder->files()->in(__DIR__.'/../../../doc/got');
+        $str = '';
+        foreach ($finder as $file) {
+            
+            $this->output ->writeLn($file->getRealpath());
+            $str .= ' ' . file_get_contents($file->getRealpath());
+        }
+        $str = str_replace('--', '', $str);
+        $str = str_replace('-', ' ', $str);
+        $str = str_replace('\'', ' ', $str);
+        $a = str_word_count($str, 1);
+        $a = array_map('strtolower', $a);
+        sort($a);
+        $flipped = array_flip($a);
+        foreach ($flipped as $key => $v) 
+        {
+            if (substr($key, -1) == 's' && array_key_exists (mb_substr($key, 0, -1), $flipped)){
+                unset($flipped[$key]);
+            } elseif (substr($key, -2) == 'ed' && array_key_exists (mb_substr($key, 0, -2), $flipped)){
+                unset($flipped[$key]);
+            } elseif (substr($key, -1) == 'd' && array_key_exists (mb_substr($key, 0, -1), $flipped)){
+                unset($flipped[$key]);
+            } elseif (substr($key, -3) == 'ing' && array_key_exists (mb_substr($key, 0, -3), $flipped)){
+                unset($flipped[$key]);
+            }
+            
+        }
+        
+        $file = fopen(__DIR__ . '/../../../doc/got.json', "w");
+        fwrite($file, json_encode($flipped, JSON_UNESCAPED_UNICODE));
+        fclose($file);
     }
 }
