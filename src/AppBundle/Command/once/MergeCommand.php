@@ -1,7 +1,7 @@
 <?php
 namespace AppBundle\Command\once;
 
-use AppBundle\Command\suck\InsertCommand;
+use AppBundle\Command\once\suck\InsertCommand;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

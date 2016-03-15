@@ -32,7 +32,7 @@ class SuckModel
         return $html;
     }
     
-    private function htmlToArray($html)
+    public function htmlToArray($html)
     {
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('table.WRD > tr');

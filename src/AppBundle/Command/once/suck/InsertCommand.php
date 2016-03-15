@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Command\suck;
+namespace AppBundle\Command\once\suck;
 
 use AppBundle\Entity\Sense;
 use AppBundle\Entity\Suck;
