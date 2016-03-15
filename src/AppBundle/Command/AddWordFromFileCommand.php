@@ -65,12 +65,13 @@ class AddWordFromFileCommand extends ContainerAwareCommand
                 $this->getContainer()->get('app.word_model')->postImprove($senses);
                 $output->writeLn( $wrExist .' | Just add:' . $k);
                 $wrExist++;
-                sleep(rand(5, 15));
+                sleep(rand(0,2));
             } else {
                 $output->writeLn( $notFound .' | not Found:' . $k);
                 $notFound++;
             }
             if ($wrExist > 100) {
+                $em->flush();
                 exit;
             }
         }
