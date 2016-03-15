@@ -63,7 +63,7 @@ class AddWordFromFileCommand extends ContainerAwareCommand
                 $found++;
                 $output->writeLn( $found .' | found:' . $k);
             } elseif ($senses = $this->getContainer()->get('app.suck_model')->wordToArray($k)) {
-                $this->getContainer()->get('app.word_model')->postImprove($senses);
+                $this->getContainer()->get('app.word_model')->postImprove($k, $senses);
                 $wrExist++;
                 $output->writeLn( $wrExist .' | Just add:' . $k);
                 sleep(rand(0,2));

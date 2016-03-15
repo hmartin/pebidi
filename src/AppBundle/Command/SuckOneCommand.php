@@ -30,9 +30,11 @@ class SuckOneCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
+        $word = $input->getOption('word');
             
-        if ($senses = $this->getContainer()->get('app.suck_model')->wordToArray($input->getOption('word'))) {
-            $this->getContainer()->get('app.word_model')->postImprove($senses);    
+        if ($senses = $this->getContainer()->get('app.suck_model')->wordToArray($word)) {
+            
+            $this->getContainer()->get('app.word_model')->postImprove($word, $senses);    
         }
         
     }

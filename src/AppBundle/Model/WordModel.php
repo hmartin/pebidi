@@ -24,10 +24,10 @@ class WordModel
         $this->delete = $delete;
     }
 
-    public function postImprove($data)
+    public function postImprove($wordString, $data)
     {
         $data = array_values($data);
-        $word = null;
+        $word = $this->getWord($wordString, 'en', true);
 
         /* foreach post line */
         foreach ($data as $sense) {
@@ -39,12 +39,8 @@ class WordModel
             // Check if composed word
             if (count($kExplode) > 1) {
                 $expression = $w;
-                $wordString = $kExplode['0'];
             }
             
-            if (!$word) {
-                $word = $this->getWord($wordString, 'en', true);
-            }
             if ($this->delete) {
                 foreach ($word->getSubWords() as $sw) {
                     $oldWw = $this->em->getRepository('AppBundle:Ww')->findBy(

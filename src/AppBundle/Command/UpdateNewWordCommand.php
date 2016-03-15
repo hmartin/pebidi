@@ -36,7 +36,7 @@ class UpdateNewWordCommand extends ContainerAwareCommand
             $output->writeLn($r->getWord());
             
             if ($senses = $this->getContainer()->get('app.suck_model')->wordToArray($r->getWord())) {
-                $this->getContainer()->get('app.word_model')->postImprove($senses);
+                $this->getContainer()->get('app.word_model')->postImprove($r->getWord(), $senses);
             } else {
                 $r->setDisabled(1);
             }
