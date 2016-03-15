@@ -71,7 +71,7 @@ class AddWordFromFileCommand extends ContainerAwareCommand
                 $notFound++;
                 $output->writeLn( $notFound .' | not Found:' . $k);
             }
-            if ($wrExist > 10) {
+            if ($wrExist > 100) {
                 $em->flush();
                 exit;
             }
