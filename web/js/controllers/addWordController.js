@@ -42,5 +42,10 @@ app
             $scope.formData.word = '';
             $scope.formData.translation = '';
         };
+        
+        
+        $scope.doATest = function () {
+            $location.path('/createTest/');
+        };
     })
 ;
