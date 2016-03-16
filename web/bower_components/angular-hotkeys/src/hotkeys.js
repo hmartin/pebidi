@@ -3,7 +3,7 @@
  *
  * Automatic keyboard shortcuts for your angular apps
  *
- * (c) 2014 Wes Cruver
+ * (c) 2016 Wes Cruver
  * License: MIT
  */
 
@@ -56,7 +56,7 @@
                         '</tr>' +
                       '</tbody></table>' +
                       '<div ng-bind-html="footer" ng-if="footer"></div>' +
-                      '<div class="cfp-hotkeys-close" ng-click="toggleCheatSheet()">×</div>' +
+                      '<div class="cfp-hotkeys-close" ng-click="toggleCheatSheet()">&#215;</div>' +
                     '</div></div>';
 
     /**
@@ -73,10 +73,24 @@
 
     this.$get = function ($rootElement, $rootScope, $compile, $window, $document) {
 
+      var mouseTrapEnabled = true;
+
+      function pause() {
+        mouseTrapEnabled = false;
+      }
+
+      function unpause() {
+        mouseTrapEnabled = true;
+      }
+
       // monkeypatch Mousetrap's stopCallback() function
       // this version doesn't return true when the element is an INPUT, SELECT, or TEXTAREA
       // (instead we will perform this check per-key in the _add() method)
       Mousetrap.prototype.stopCallback = function(event, element) {
+        if (!mouseTrapEnabled) {
+          return true;
+        }
+
         // if the element has the class "mousetrap" then no need to stop
         if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
           return false;
@@ -92,14 +106,14 @@
        */
       function symbolize (combo) {
         var map = {
-          command   : '⌘',
-          shift     : '⇧',
-          left      : '←',
-          right     : '→',
-          up        : '↑',
-          down      : '↓',
-          'return'  : '↩',
-          backspace : '⌫'
+          command   : '\u2318',     // ⌘
+          shift     : '\u21E7',     // ⇧
+          left      : '\u2190',     // ←
+          right     : '\u2192',     // →
+          up        : '\u2191',     // ↑
+          down      : '\u2193',     // ↓
+          'return'  : '\u23CE',     // ⏎
+          backspace : '\u232B'      // ⌫
         };
         combo = combo.split('+');
 
@@ -215,9 +229,9 @@
        * attached.  This is useful to catch when the scopes are `$destroy`d and
        * then automatically unbind the hotkey.
        *
-       * @type {Array}
+       * @type {Object}
        */
-      var boundScopes = [];
+      var boundScopes = {};
 
       if (this.useNgRoute) {
         $rootScope.$on('$routeChangeSuccess', function (event, route) {
@@ -557,7 +571,6 @@
         };
       }
 
-
       var publicApi = {
         add                   : _add,
         del                   : _del,
@@ -570,7 +583,9 @@
         cheatSheetDescription : this.cheatSheetDescription,
         useNgRoute            : this.useNgRoute,
         purgeHotkeys          : purgeHotkeys,
-        templateTitle         : this.templateTitle
+        templateTitle         : this.templateTitle,
+        pause                 : pause,
+        unpause               : unpause
       };
 
       return publicApi;
@@ -584,13 +599,14 @@
     return {
       restrict: 'A',
       link: function (scope, el, attrs) {
-        var key, allowIn;
+        var keys = [],
+            allowIn;
 
         angular.forEach(scope.$eval(attrs.hotkey), function (func, hotkey) {
           // split and trim the hotkeys string into array
           allowIn = typeof attrs.hotkeyAllowIn === "string" ? attrs.hotkeyAllowIn.split(/[\s,]+/) : [];
 
-          key = hotkey;
+          keys.push(hotkey);
 
           hotkeys.add({
             combo: hotkey,
@@ -603,7 +619,7 @@
 
         // remove the hotkey if the directive is destroyed:
         el.bind('$destroy', function() {
-          hotkeys.del(key);
+          angular.forEach(keys, hotkeys.del);
         });
       }
     };

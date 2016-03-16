@@ -17,6 +17,6 @@
     "angular-local-storage": "~0.1.5",
     "angular-translate-loader-static-files": "*",
     "angular-flash-alert": "*",
-    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.6.0"
+    "angular-hotkeys": "chieffancypants/angular-hotkeys"
   }
 }
