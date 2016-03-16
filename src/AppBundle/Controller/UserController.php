@@ -53,12 +53,6 @@ class UserController extends FOSRestController implements ClassResourceInterface
                 $u->setPassword($email);
                 $u->setRoles(array('ROLE_USER'));
                 $em->persist($u);
-                $token = new UsernamePasswordToken($u, $u->getPassword(), "public", $u->getRoles());
-                $this->get("security.token_storage")->setToken($token);
-
-                $event = new InteractiveLoginEvent($request, $token);
-                $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-
 
                 $d = new Dictionary();
                 $d->setUser($u);
@@ -70,6 +64,12 @@ class UserController extends FOSRestController implements ClassResourceInterface
                 $em->flush();
             }
             $em->refresh($u);
+            
+            $token = new UsernamePasswordToken($u, null, 'main', $u->getRoles());
+            $this->get("security.token_storage")->setToken($token);
+
+            //$event = new InteractiveLoginEvent($request, $token);
+            //$this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
             return $this->getUserAndDic($u);
         }
@@ -82,7 +82,7 @@ class UserController extends FOSRestController implements ClassResourceInterface
         $params = array();
         if ($d = $u->getDefaultDictionary()) {
             $params['user'] = $this->getDoctrine()->getRepository('AppBundle:User')->getArray($u);
-            $params['dic'] = $d->getJsonArray();
+            $params['dic'] =  $this->get('app.dictionary_model')->createJson($d);
             $words = $d->getWords();
             foreach ($words as $w) {
                 $params['user']['wids'][] = $w->getId();
