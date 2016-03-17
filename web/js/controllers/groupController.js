@@ -9,11 +9,11 @@ app
         });
 
         $scope.addGroupWord = function (id) {
-            $scope.data = {};
-            $scope.data.did = $scope.user.dic.id;
-            $scope.data.gid = id;
-            groupService.create($scope.data).then(function(data) {
-                mainService.getUser().dic = data.dic;
+            var data = {};
+            data.did = $scope.user.dic.id;
+            data.gid = id;
+            groupService.addGroupWord($scope.data).then(function(data) {
+                mainService.dic = data.dic;
                 var message = '<strong>'+$translate.instant('wellDone')+'!</strong> '+data.nbAdd+' '+$translate.instant('wordsAdded')+'.';
                 Flash.create('success', message, 'custom-class');
             });

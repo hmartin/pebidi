@@ -13,7 +13,7 @@ table point
 micro todo:
 angular repair test*
 Disabled word option*
-Disable word if wr notnfound*
+Disable word if wr not found*
 
 no +1 if add word error
 add info "..."

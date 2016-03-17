@@ -2,12 +2,14 @@
 /*global URL */
 /*global app */
 app
-    .service('mainService', function ($rootScope, localStorageService) {
+    .service('mainService', function ($rootScope, localStorageService) 
+    {
         var user = null;
         var dic = null;
 
         this.setDic = function (d) {
             dic = d;
+            localStorageService.set('dic', dic);
         };
         this.setScore = function (dicScore) {
             user.score = dicScore;
@@ -18,6 +20,9 @@ app
         };
 
         this.getDic = function () {
+            if (!dic && localStorageService.get('dic')) {
+                dic = localStorageService.get('dic');
+            }
             return dic;
         };
 
@@ -33,7 +38,8 @@ app
         };
     })
 
-    .service('testService', function ($http, $location, mainService) {
+    .service('testService', function ($http, $location, mainService) 
+    {
         this.words = {};
         this.nbQuestion = 0;
         this.id = 0;
@@ -85,7 +91,8 @@ app
     /*
      * Add or delete pebidi's word
      */
-    .service('wordService', function ($http, $rootScope, $timeout, $q) {
+    .service('wordService', function ($http, $rootScope, $timeout, $q) 
+    {
         var word = null;
 
         this.get = function (idOrWord) {
@@ -114,7 +121,8 @@ app
     /*
      * get fix dict.json
      */
-    .service('dicService', function ($http, localStorageService) {
+    .service('dicService', function ($http, localStorageService) 
+    {
         var dic = null;
         this.loadDic = function () {
             if (!dic) {
@@ -138,8 +146,8 @@ app
      * Get pedi (or gw)
      * Add word or delete word form pedi (or gw)
      */
-    .service('pediService', function ($http, $rootScope, $location, $timeout, $translate, Flash, mainService) {
-
+    .service('pediService', function ($http, $rootScope, $location, $timeout, $translate, Flash, mainService) 
+    {
         this.get = function (id) {
             var data = {};
             data.uid = mainService.getUser().id;
@@ -195,15 +203,15 @@ app
     /*
      * Manage group (create and delete)
      */
-    .service('groupService', function ($http, $rootScope, $location, $timeout, mainService) {
-
+    .service('groupService', function ($http, $rootScope, $location, $timeout, mainService) 
+    {
         this.get = function() {
             return $http.get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}});
-        }
+        };
 
-        this.create = function(data) {
+        this.addGroupWord = function(data) {
             return $http.post(API_URL + 'dictionaries/adds/groups/words', data);
-        }
+        };
 
         this.delete = function (id) {
             var promise = $http.post(API_URL + 'groups/removes', {

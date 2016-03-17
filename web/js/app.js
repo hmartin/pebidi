@@ -1,4 +1,5 @@
 'use strict';
+/*global angular*/
 
 var app = angular.module('app', [
     'ngRoute',
@@ -7,7 +8,7 @@ var app = angular.module('app', [
     'ngSanitize',
     'ui.bootstrap',
     'pascalprecht.translate',
-    'flash'
+    'ngFlash'
 
 ]);
 
@@ -67,10 +68,6 @@ app.config(['$routeProvider',
                 redirectTo: '/'
             });
     }]);
-
-function log(i) {
-    console.log(i);
-}
 
 app.config(function ($translateProvider) {
     $translateProvider.useSanitizeValueStrategy('sanitize');

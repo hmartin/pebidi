@@ -1,15 +1,13 @@
 /*global URL */
 /*global API_URL */
 /*global app */
+
 app
     .controller('AddWordCtrl', function ($scope, $http, $location, $routeParams, $filter, Flash, pediService, mainService, wordService, dicService) {
         $scope.formData = {};
 
-        if(!$routeParams.id && mainService.getUser()) {
-            mainService.setDic(mainService.getUser().dic);
-        } else if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {
+        if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             //pediService.get($routeParams.id);
-        } else {
         }
 
         dicService.loadDic();

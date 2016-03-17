@@ -14,7 +14,7 @@
     "allmighty-autocomplete": "*",
     "angular-sanitize": "*",
     "angular-translate": "*",
-    "angular-local-storage": "~0.1.5",
+    "angular-local-storage": "*",
     "angular-translate-loader-static-files": "*",
     "angular-flash-alert": "*",
     "angular-hotkeys": "chieffancypants/angular-hotkeys"

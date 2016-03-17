@@ -3,7 +3,8 @@
 /*global app */
 /*global ENV */
 app
-    .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService, pediService) {
+    .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService, pediService) 
+    {
         $scope.lang = ['en', 'es', 'fr'];
         $scope.count = $scope.lang.length;
         $scope.ip = 0;
@@ -25,13 +26,9 @@ app
         };
     })
 
-    .controller('CreateTestCtrl', function ($scope, mainService, testService) {
-        // TODO do test for group
-        if (true) {
-            mainService.setDic(mainService.getUser().dic);
-        }
-
-        if ($scope.user.dic.countWord > 20) {
+    .controller('CreateTestCtrl', function ($scope, mainService, testService) 
+    {
+        if ($scope.dic.countWord > 20) {
             $scope.nbquestion = 20;
         } else {
             $scope.nbquestion = $scope.dic.countWord;
@@ -50,7 +47,8 @@ app
         };
     })
 
-    .controller('TestCtrl', function ($scope, $http, $location, testService) {
+    .controller('TestCtrl', function ($scope, $http, $location, testService) 
+    {
         $scope.step = 1;
         $scope.points = [];
         $scope.i = 0;
@@ -80,19 +78,20 @@ app
         };
     })
 
-    .controller('CongratsTestCtrl', function ($scope, testService) {
+    .controller('CongratsTestCtrl', function ($scope, testService) 
+    {
         $scope.doItAgain = function () {
             testService.doItAgain();
         };
         $scope.testScore = testService.getTestScore();
     })
 
-    .controller('WordListCtrl', function ($scope, $http, $route, $routeParams, mainService, wordService, pediService) {
-
+    .controller('WordListCtrl', function ($scope, $http, $route, $routeParams, mainService, wordService, pediService) 
+    {
         if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
             pediService.get($routeParams.id);
         } else {
-            $scope.dic = $scope.user.dic
+            //$scope.dic = $scope.user.dic;
         }
 
         pediService.getWords($routeParams.id).then(function (data) {
