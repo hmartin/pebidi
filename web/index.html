@@ -38,9 +38,10 @@
     <div class="site-wrapper-inner">
         <div class="cover-container">
             <div class="masthead clearfix">
-                <div class="">
-                    <div class="logo masthead-brand"><a href="#/dictionary"><img src="logo.png"><img src="pebidi.png"></a></div>
-                    <div class="nav masthead-nav">
+                <div class="row">
+                    <div class="logo col-xs-6 col-md-10"><a href="#/dictionary"><img src="logo.png"><img src="pebidi.png"></a></div>
+                    
+                    <div class="nav col-xs-6 col-md-2">
                         <div ng-if="env == 'DEV'">dic.id:{{dic.id}}/uid:{{user.id}}/user.dic.id:{{ user.dic.id }}</div>
                         <div ng-if="user.id" class="animate-if">
                             <div ng-if="dic.uid == user.id" class="animate-if">
@@ -51,11 +52,10 @@
                             </div>
                             <br><a ng-click="clearLocalStorage()">{{ 'logout'|translate }}</a>
                         </div>
-
-                    </div>
-                    <div>
-                        <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href=""
-                                                                                         ng-click="changeLanguage('en')">en</a>
+                        <div>
+                            <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href=""
+                                                                                             ng-click="changeLanguage('en')">en</a>
+                        </div>
                     </div>
                 </div>
             </div>

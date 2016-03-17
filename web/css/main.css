@@ -137,22 +137,28 @@ input, select,textarea {
 /*
  * Cover
  */
-
 .cover {
-    padding: 0 20px;
-    margin-bottom: 30px;
-    margin-top: 50px;
+    padding: 0 2px;
+    margin-bottom: 3px;
+    margin-top: 5px;
 }
-.cover .btn-lg {
-    padding: 10px 20px;
-    font-weight: bold;
+@media (min-width: 800px) { 
+    .cover {
+        padding: 0 20px;
+        margin-bottom: 30px;
+        margin-top: 50px;
+    }
+    .cover .btn-lg {
+        padding: 10px 20px;
+        font-weight: bold;
+    }
 }
 
 /*
  * Affix and center
  */
 
-@media (min-width: 768px) {
+@media (min-width: @screen-sm-min) {
     /* Pull out the header and footer */
     .masthead {
         position: fixed;
