@@ -9,7 +9,7 @@
                 <input type="text" ng-model="formData.word" placeholder="{{ 'addWord.word'|translate  }}"
                        uib-typeahead-min-length="2" uib-typeahead-wait-ms="100"
                        uib-typeahead="word as word.w for word in getWords($viewValue) | filter:{$:$viewValue}"
-                       uib-typeahead-loading="loading" uib-typeahead-template-url="listWord.html" class="form-control" required
+                       uib-typeahead-loading="loading" typeahead-template-url="listWord.html" class="form-control" required
                        auto-focus>
 
                 <span ng-show="loading" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
@@ -49,8 +49,8 @@
 
 <script type="text/ng-template" id="listWord.html">
     <a style="text-align: left">
-        <span style="width:120px;float: left" ng-bind-html="match.model.w | typeaheadHighlight:query | to_trusted"></span>
+        <span style="width:120px;float: left" ng-bind-html="match.model.w | uibTypeaheadHighlight:query:query | to_trusted"></span>
         &nbsp;<=>&nbsp;
-        <span ng-bind-html="match.model.t | typeaheadHighlight:query | to_trusted"></span>
+        <span ng-bind-html="match.model.t | uibTypeaheadHighlight:query:query | to_trusted"></span>
     </a>
 </script>
