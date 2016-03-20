@@ -99,14 +99,15 @@ class WordController extends FOSRestController implements ClassResourceInterface
     /**
      * @ApiDoc(section="Word", description="Improve Word",
      *  requirements={
-     *      { "name"="data", "dataType"="string", "requirement"="\d+", "description"="word id" }
+     *      { "name"="word", "dataType"="string", "requirement"="\d+", "description"="Word" },
+     *      { "name"="data", "dataType"="string", "requirement"="\d+", "description"="Array of senses" }
      *  },
      * )
      * @Rest\View()
      */
     public function postImproveAction(Request $request)
     {
-        return $this->get('app.word_model')->postImprove($request->get('data'));
+        return $this->get('app.word_model')->postImprove($request->get('word'), $request->get('data'));
     }
     
     /**
@@ -121,6 +122,6 @@ class WordController extends FOSRestController implements ClassResourceInterface
     {
         $senses = $this->get('app.suck_model')->wordToArray($word);
         
-        return $this->get('app.word_model')->postImprove($senses);
+        return $this->get('app.word_model')->postImprove($word, $senses);
     }
 }

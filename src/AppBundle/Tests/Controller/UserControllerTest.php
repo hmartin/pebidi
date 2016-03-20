@@ -26,7 +26,7 @@ class UserControllerTest extends TestAbstract
         }
 
         $decoded = $this->getArray();
-        $this->assertTrue($decoded['dic']['countWord'] == 4);
+        $this->assertTrue(count($decoded['dic']['wids']) == 4);
 
         $this->client->request('GET', '/dictionaries/'.$did.'/words');
         $decoded = $this->getArray();

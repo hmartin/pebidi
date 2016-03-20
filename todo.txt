@@ -7,12 +7,11 @@ Real close question test (1d)
 Inverse definition test (0.5d)
 chrome extension in the cloud (0.5)
 Did in Session for chrome extension (1d)
-remove typehead mobile
 Fixture GW 500/20/90 words
 full help
 Remove personal gw
 add word to a group
-Limit words (mini 15 words)
+Limit words for gw (mini 15 words) 
 
 v4 college:
 uniqu type/expression
@@ -91,3 +90,7 @@ Add additional  translation option*
 command suck if word not exist*
 command suck wr only*
 cron 1h generate json dictionary*
+angular repair test*
+Disabled word option*
+Disable word if wr not found*
+remove typehead mobile*

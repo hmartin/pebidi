@@ -12,7 +12,7 @@ class WordControllerTest extends TestAbstract
     {
         $this->loadFixtures(array('AppBundle\DataFixtures\WordData'));
         $this->client = static::createClient();
-        $data = [ 'data' => [
+        $data = [ 'word' => 'can', 'data' => [
             ['w' => 'can', 'category' => 'verb', 'concat' => 'pouvoir, savoir'],
             ['w' => 'can', 'category' => 'verb', 'concat' => 'virer'],
             ['w' => 'can', 'category' => 'noum', 'concat' => 'cannette'],

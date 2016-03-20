@@ -11,10 +11,6 @@ Training (beta)
 table point
 
 micro todo:
-angular repair test*
-Disabled word option*
-Disable word if wr not found*
-
 no +1 if add word error
 add info "..."
 remove one sense on edit word page
