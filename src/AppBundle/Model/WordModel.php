@@ -32,9 +32,8 @@ class WordModel
         /* foreach post line */
         foreach ($data as $sense) {
             $w = $sense['w'];
-            $wordString = $w;
             $expression = null;
-            //$kExplode = explode(' ', $w);
+
             $kExplode = preg_split("/( |-)/", $w);
             // Check if composed word
             if (count($kExplode) > 1) {

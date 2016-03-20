@@ -11,10 +11,7 @@ Training (beta)
 table point
 
 micro todo:
-no +1 if add word error
-add info "..."
-remove one sense on edit word page
-shortcuts for evry button
+shortcuts for every button
 
 
 Functional test scenario:

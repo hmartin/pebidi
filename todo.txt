@@ -94,3 +94,6 @@ angular repair test*
 Disabled word option*
 Disable word if wr not found*
 remove typehead mobile*
+no +1 if add word error*
+add info "...*
+remove one sense on edit word page*

@@ -107,6 +107,8 @@ class WordController extends FOSRestController implements ClassResourceInterface
      */
     public function postImproveAction(Request $request)
     {
+        $this->get('app.word_model')->setDelete(true);
+
         return $this->get('app.word_model')->postImprove($request->get('word'), $request->get('data'));
     }
     

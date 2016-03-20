@@ -15,11 +15,11 @@ app
 
         $scope.improve = function () {
             console.log($scope.wordSenses);
-            wordService.improve($scope.wordSenses);
+            wordService.improve($scope.word, $scope.wordSenses);
         };
         
-        $scope.deleteSense = function (item) {
-            var index = $scope.wordSenses.indexOf(item);
+        $scope.deleteSense = function (index) {
+            console.log(index);
             $scope.wordSenses.splice(index, 1);  
         };
     })

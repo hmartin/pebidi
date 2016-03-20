@@ -111,8 +111,8 @@ app
         };
         
 
-        this.improve = function (data) {
-            $http.post(API_URL + 'words/improves', {'data' : data}).success(function (data) {
+        this.improve = function (word, data) {
+            $http.post(API_URL + 'words/improves', {'word' : word, 'data' : data}).success(function (data) {
                 console.log(data);
             });
         };
@@ -177,11 +177,11 @@ app
                 'id': dic.id
             }).success(function (data) {
                 if (data.msg == 'notExistYet') {
-                    Flash.create('warning', $translate.instant('notExistYet'), 'custom-class');
+                    Flash.create('warning', $translate.instant('notExistYet'));
                 }
                 
                 mainService.setDic(data.dic);
-                console.log(mainService.getUser().dic.id);
+
                 if (mainService.getUser().dic.id == data.dic.id) {
                     mainService.getUser().dic = data.dic;
                 }
