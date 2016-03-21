@@ -32,7 +32,7 @@ class UserController extends FOSRestController implements ClassResourceInterface
     /**
      * @ApiDoc(section="User", description="Create user & Dictionary with email",
      *  requirements={
-     *      { "name"="email", "dataType"="string", "requirement"="\d+", "description"="word id" }
+     *      { "name"="email", "dataType"="string", "requirement"="\d+", "description"="Return Email's user" }
      *  },
      * )
      * @Rest\View()

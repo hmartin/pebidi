@@ -85,7 +85,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
     public function postRemoveAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if ($w = $this->getDoctrine()->getRepository('AppBundle:Word')->find($request->request->get('id')) and
+        if ($w = $this->getDoctrine()->getRepository('AppBundle:Word')->find($request->request->get('id')) &&
             $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))
         ) {
             $d->getWords()->removeElement($w);

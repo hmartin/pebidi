@@ -60,7 +60,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
     }
   
     /**
-     * @ApiDoc(section="Dictionary", description="Post Dic to group and new dic",
+     * @ApiDoc(section="Dictionary", description="Transform Dic to group and return new user dic",
      *  requirements={
      *      { "name"="did", "dataType"="integer", "requirement"="\d+", "description"="dic id" },
      *      { "name"="title", "dataType"="string", "requirement"="\d+", "description"="Group title" },
@@ -75,18 +75,15 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
         $em = $this->getDoctrine()->getManager();
 
         if ($dGroup = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))) {
-            $dGroup->setGroupWord(1);
-            $dGroup->setMain(0);
-            $dGroup->setTitle($request->get('title'));
-            $dGroup->setDescription($request->get('description'));
-            $dGroup->setPrivate($request->get('private'));
+            $dGroup->transformToGroup(
+                $request->get('title'),
+                $request->get('description'),
+                $request->get('private')
+            );
             
             $em->persist($dGroup);
               
-            $d = new Dictionary();
-            $d->setUser($dGroup->getUser());
-            $d->setLang($dGroup->getLang());
-            $d->setOriginLang($dGroup->getOriginLang());
+            $d = new Dictionary($dGroup->getUser(), $dGroup->getLang(), $dGroup->getOriginLang());
               
             $em->persist($d);
                 
@@ -108,9 +105,8 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
      */
     public function postAddGroupWordAction(Request $request)
     {
-        if ($gid = $request->request->get('gid') and $did = $request->request->get('did')
-            and $gw = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($gid)
-            and $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($did))
+        if (($gw = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('gid')))
+            && ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))))
         {
             $i = 0;
             foreach($gw->getWords() as $w) {

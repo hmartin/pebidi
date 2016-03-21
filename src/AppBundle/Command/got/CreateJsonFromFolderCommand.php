@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Command;
+namespace AppBundle\Command\got;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -31,7 +31,7 @@ class CreateJsonFromFolderCommand extends ContainerAwareCommand
     protected function createJsonFromArray() 
     {
         $finder = new Finder();
-        $finder->files()->in(__DIR__.'/../../../doc/got');
+        $finder->files()->in(__DIR__.'/../../../../doc/got');
         $str = '';
         foreach ($finder as $file) {
             
@@ -63,7 +63,7 @@ class CreateJsonFromFolderCommand extends ContainerAwareCommand
 
     protected function reWriteFile($array)
     {
-        $file = __DIR__ . '/../../../doc/got.json';
+        $file = __DIR__ . '/../..../../doc/got.json';
         unlink($file);
 
         $file = fopen($file, "w");

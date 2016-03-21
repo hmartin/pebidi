@@ -4,7 +4,7 @@
 <a ng-if="user.dic.id != dic.id" ng-href="#/wordList/{{ user.dic.id }}">-&nbsp;&nbsp;{{ 'backToYourDictionary'|translate }}</a>
 <input class="form-control" type="search" ng-model="q" placeholder="filter words..."/>
 <br>
-<div ng-cloak id="wordList" class="text-left animate-repeat" ng-repeat="word in words | filter:q | limitTo: 20">
+<div ng-cloak id="wordList" class="text-left animate-repeat" ng-repeat="word in words | orderBy:w | filter:q | limitTo: 20  track by word.id">
     <div class="row" ng-hide="delete" ng-class-odd="'odd'">
         <div class="col-md-2"><a href="#/word/{{ word.w }}">{{word.w| capitalize }}</a></div>
         <div class="col-md-5">{{word.concat| capitalize }}</div>

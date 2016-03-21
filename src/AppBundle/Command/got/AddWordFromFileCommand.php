@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Command;
+namespace AppBundle\Command\got;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -26,7 +26,7 @@ class AddWordFromFileCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();  
         $this->output = $output;
 
-        $file = file_get_contents(__DIR__ . '/../../../doc/got.json');
+        $file = file_get_contents(__DIR__ . '/../../../../doc/got.json');
         $flipped = json_decode($file, true);
         
         $output->writeLn(count($flipped));
@@ -93,7 +93,7 @@ class AddWordFromFileCommand extends ContainerAwareCommand
 
     protected function reWriteFile($array)
     {
-        $file = __DIR__ . '/../../../doc/got.json';
+        $file = __DIR__ . '/../../../../doc/got.json';
         unlink($file);
 
         $file = fopen($file, "w");

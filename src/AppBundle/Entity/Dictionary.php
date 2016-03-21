@@ -100,14 +100,26 @@ class Dictionary
 
         return $a;
     }
+    
+    public function transformToGroup($title, $description, $private)
+    {
+        $this->setGroupWord(1);
+        $this->setMain(0);
+        $this->setTitle($title);
+        $this->setDescription($description);
+        $this->setPrivate($private);
+    }
 
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($user, $lang, $originLang)
     {
         $this->words = new \Doctrine\Common\Collections\ArrayCollection();
         $this->main = 1;
+        $this->setUser($user);
+        $this->setLang($lang);
+        $this->setOriginLang($originLang);
     }
 
     /**
