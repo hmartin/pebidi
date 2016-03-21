@@ -9,10 +9,7 @@ app
         });
 
         $scope.addGroupWord = function (id) {
-            var data = {};
-            data.did = $scope.user.dic.id;
-            data.gid = id;
-            groupService.addGroupWord($scope.data).then(function(data) {
+            groupService.addGroupWord({'did' : $scope.user.dic.id, 'gid' : id}).then(function(data) {
                 mainService.dic = data.dic;
                 var message = '<strong>'+$translate.instant('wellDone')+'!</strong> '+data.nbAdd+' '+$translate.instant('wordsAdded')+'.';
                 Flash.create('success', message, 'custom-class');

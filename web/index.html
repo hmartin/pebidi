@@ -39,8 +39,9 @@
         <div class="cover-container">
             <div class="masthead clearfix">
                 <div class="row">
-                    <div class="logo col-xs-6 col-md-10"><a href="#/dictionary"><img src="logo.png"><img src="pebidi.png"></a></div>
-                    
+                    <div class="logo col-xs-6 col-md-10"><a href="#/dictionary"><img src="logo.png"><img
+                            src="pebidi.png"></a></div>
+
                     <div class="nav col-xs-6 col-md-2">
                         <div ng-if="env == 'DEV'">dic.id:{{dic.id}}/uid:{{user.id}}/user.dic.id:{{ user.dic.id }}</div>
                         <div ng-if="user.id" class="animate-if">
@@ -58,7 +59,8 @@
                         </div>
                     </div>
                 </div>
-            <flash-message duration="3000" show-close="true" ></flash-message>
+                <flash-message duration="3000" show-close="true"></flash-message>
+            </div>
             <div class="inner cover">
                 <div class="view-animate-container">
                     <div ng-view class="view-animate"></div>
@@ -68,11 +70,9 @@
             <div class="mastfoot">
                 <div class="inner">
                     Contact and Follow us on <a href="https://twitter.com/pe_bi_di">Twitter</a>.
-                    </p>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

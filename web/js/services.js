@@ -210,6 +210,7 @@ app
         };
 
         this.addGroupWord = function(data) {
+            console.log(data);
             return $http.post(API_URL + 'dictionaries/adds/groups/words', data);
         };
 

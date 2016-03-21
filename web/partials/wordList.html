@@ -5,7 +5,7 @@
 <input class="form-control" type="search" ng-model="q" placeholder="filter words..."/>
 <br>
 <div ng-cloak id="wordList" class="text-left animate-repeat" ng-repeat="word in words | orderBy:w | filter:q | limitTo: 20  track by word.id">
-    <div class="row" ng-hide="delete" ng-class-odd="'odd'">
+    <div class="row wordList" ng-hide="delete" ng-class-odd="'odd'">
         <div class="col-md-2"><a href="#/word/{{ word.w }}">{{word.w| capitalize }}</a></div>
         <div class="col-md-5">{{word.concat| capitalize }}</div>
         <div class="col-md-1"><score percent="word.stat_sum_realised"></score></div>
