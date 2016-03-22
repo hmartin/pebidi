@@ -7,5 +7,4 @@ app.controller('WordCtrl', function($scope, $routeParams, $http, wordService) {
     wordService.get($routeParams.word).then(function(data) {
         $scope.wordSenses = data;
     });
-    
 });

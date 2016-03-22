@@ -106,6 +106,14 @@ app
             $scope.words.splice($scope.words.indexOf(word), 1);
             pediService.delete(word.id);
         };
+    
+        $scope.predicate = 'w';
+        $scope.reverse = false;
+        $scope.order = function(predicate) {
+            console.log(predicate);
+            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+            $scope.predicate = predicate;
+        };
     })
 
     .controller('rootCtrl', function ($scope, $rootScope, $http, localStorageService, $translate, $location, mainService) {

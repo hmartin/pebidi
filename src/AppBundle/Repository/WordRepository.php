@@ -65,7 +65,7 @@ class WordRepository extends EntityRepository
 
     public function getDictionaryWords($d, $u = null)
     {
-
+        // TODO : optim query and start by select dictionary
         $qb = $this->initQueryBuilder()
             ->addSelect('SUM(p.point)/COUNT(p.id) AS stat_sum_realised, ' . self::selectGroupConcat)
             ->innerJoin('word.dictionaries', 'd')

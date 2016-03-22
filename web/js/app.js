@@ -8,7 +8,8 @@ var app = angular.module('app', [
     'ngSanitize',
     'ui.bootstrap',
     'pascalprecht.translate',
-    'ngFlash'
+    'ngFlash',
+    'cfp.hotkeys'
 
 ]);
 

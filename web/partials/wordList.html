@@ -4,7 +4,25 @@
 <a ng-if="user.dic.id != dic.id" ng-href="#/wordList/{{ user.dic.id }}">-&nbsp;&nbsp;{{ 'backToYourDictionary'|translate }}</a>
 <input class="form-control" type="search" ng-model="q" placeholder="filter words..."/>
 <br>
-<div ng-cloak id="wordList" class="text-left animate-repeat" ng-repeat="word in words | orderBy:w | filter:q | limitTo: 20  track by word.id">
+    <div class="visible-lg-block row wordListHead" >
+        <div class="col-md-2">
+         <span ng-click="order('w')" ng-class="{dropup:reverse}">{{ 'word'|translate| capitalize }}
+             <span class="caret" ng-show="predicate === 'w'" ></span>
+         </span>
+         </div>
+        <div class="col-md-5"></div>
+        <div class="col-md-1">
+         <span ng-click="order('stat_sum_realised')" ng-class="{dropup:reverse}">{{ 'score'|translate }}
+             <span class="caret" ng-show="predicate === 'stat_sum_realised'" ></span>
+         </span></div>
+        <div class="col-md-1">
+         <span ng-click="order('global')" ng-class="{dropup:reverse}">{{ 'globalScore'|translate }}
+             <span class="caret" ng-show="predicate === 'global'" ></span>
+         </span></div>
+        <div class="col-md-2 col-md-offset-1"></div></div>
+    </div>
+    
+<div ng-cloak id="wordList" class="text-left animate-repeat" ng-repeat="word in words | orderBy:predicate:reverse | filter:q | limitTo: 20  track by word.id">
     <div class="row wordList" ng-hide="delete" ng-class-odd="'odd'">
         <div class="col-md-2"><a href="#/word/{{ word.w }}">{{word.w| capitalize }}</a></div>
         <div class="col-md-5">{{word.concat| capitalize }}</div>
