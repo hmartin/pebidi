@@ -2,8 +2,7 @@
 /*global URL */
 /*global app */
 app
-    .service('mainService', function ($rootScope, localStorageService) 
-    {
+    .service('mainService', function ($rootScope, localStorageService) {
         var user = null;
         var dic = null;
 
@@ -11,6 +10,11 @@ app
             dic = d;
             localStorageService.set('dic', dic);
         };
+
+        this.setUserDic = function (d) {
+            user.dic = d;
+        };
+
         this.setScore = function (dicScore) {
             user.score = dicScore;
 
@@ -34,12 +38,20 @@ app
         };
         this.setUser = function (u) {
             user = u;
+            console.log(u);
             localStorageService.set('user', user);
         };
+
+        this.isMainDic = function () {
+            if (user.dic.id == dic.id) {
+                return true;
+            }
+
+            return false;
+        }
     })
 
-    .service('testService', function ($http, $location, mainService) 
-    {
+    .service('testService', function ($http, $location, mainService) {
         this.words = {};
         this.nbQuestion = 0;
         this.id = 0;
@@ -55,19 +67,19 @@ app
                 id: did,
                 nbQuestion: question,
                 type: 'new'
-            })
-                .success(function (data) {
-                    this.words = data.words;
-                    this.id = data.id;
-                    this.rid = data.rid;
-                    $location.path('/questions');
-                }.bind(this));
+            }).success(function (data) {
+                this.words = data.words;
+                this.id = data.id;
+                this.rid = data.rid;
+                $location.path('/questions');
+            }.bind(this));
         };
+
         this.saveResults = function (points) {
             $http.post(API_URL + 'results/' + this.rid + '/saves', {points: points})
                 .success(function (data) {
-                    mainService.setUser(data.user);
-                }.bind(this));
+                    mainService.getUser().score = data.score;
+                });
 
             this.testScore = points.reduce(function (a, b) {
                 return a + b.p;
@@ -79,10 +91,10 @@ app
             $http.get(API_URL + 'tests/' + this.id)
                 .success(function (data) {
                     $location.path('/questions');
-                }.bind(this));
+                });
         };
+
         this.getTestScore = function () {
-            console.log('getTestScore ');
             return this.testScore;
         };
     })
@@ -91,14 +103,13 @@ app
     /*
      * Add or delete pebidi's word
      */
-    .service('wordService', function ($http, $rootScope, $timeout, $q) 
-    {
+    .service('wordService', function ($http, $rootScope, $timeout, $q) {
         var word = null;
 
         this.get = function (idOrWord) {
             var deferred = $q.defer();
 
-            if (word && (word[0].id  == idOrWord || word[0].w == idOrWord)) {
+            if (word && (word[0].id == idOrWord || word[0].w == idOrWord)) {
                 deferred.resolve(word);
             } else {
                 $http.get(API_URL + 'words/' + idOrWord).then(function (data) {
@@ -109,10 +120,10 @@ app
 
             return deferred.promise;
         };
-        
+
 
         this.improve = function (word, data) {
-            $http.post(API_URL + 'words/improves', {'word' : word, 'data' : data}).success(function (data) {
+            $http.post(API_URL + 'words/improves', {'word': word, 'data': data}).success(function (data) {
                 console.log(data);
             });
         };
@@ -121,8 +132,7 @@ app
     /*
      * get fix dict.json
      */
-    .service('dicService', function ($http, localStorageService) 
-    {
+    .service('dicService', function ($http, localStorageService) {
         var dic = null;
         this.loadDic = function () {
             if (!dic) {
@@ -146,8 +156,7 @@ app
      * Get pedi (or gw)
      * Add word or delete word form pedi (or gw)
      */
-    .service('pediService', function ($http, $rootScope, $location, $timeout, $translate, Flash, mainService) 
-    {
+    .service('pediService', function ($http, $rootScope, $location, $timeout, $translate, Flash, mainService) {
         this.get = function (id) {
             var data = {};
             data.uid = mainService.getUser().id;
@@ -170,7 +179,9 @@ app
 
         this.post = function (word, dic) {
 
-            mainService.setCountWord(dic.countWord + 1);
+            if (mainService.isMainDic()) {
+                mainService.setCountWord(dic.countWord + 1);
+            }
 
             $http.post(API_URL + 'words', {
                 'w': word,
@@ -179,11 +190,16 @@ app
                 if (data.msg == 'notExistYet') {
                     Flash.create('warning', $translate.instant('notExistYet'));
                 }
-                
-                mainService.setDic(data.dic);
 
+                console.log(data);
+                console.log(data.dic);
+                if (mainService.isMainDic()) {
+                    mainService.setDic(data.dic);
+                }
                 if (mainService.getUser().dic.id == data.dic.id) {
+
                     mainService.getUser().dic = data.dic;
+                    console.log(mainService.getUser().dic);
                 }
             });
         };
@@ -203,24 +219,23 @@ app
     /*
      * Manage group (create and delete)
      */
-    .service('groupService', function ($http, $rootScope, $location, $timeout, mainService) 
-    {
-        this.get = function() {
+    .service('groupService', function ($http, $rootScope, $location, $timeout, mainService) {
+        this.get = function () {
             return $http.get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}});
         };
 
-        this.addGroupWord = function(data) {
+        this.addGroupWord = function (data) {
             console.log(data);
             return $http.post(API_URL + 'dictionaries/adds/groups/words', data);
         };
 
         this.delete = function (id) {
             var promise = $http.post(API_URL + 'groups/removes', {
-                    'id': id,
-                    'did': mainService.getUser().dic.id
-                }).then(function (data) {
-                    return data.groupsWords;
-                });
+                'id': id,
+                'did': mainService.getUser().dic.id
+            }).then(function (data) {
+                return data.groupsWords;
+            });
 
             return promise;
         };

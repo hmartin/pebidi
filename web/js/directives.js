@@ -17,10 +17,18 @@ app
         };
     })
 
-    .directive('goHome', function () {
+    .directive('goHome', function ($translate, mainService, $location) {
+
         return {
-            template: '<a ng-href="#/dictionary"><span class="glyphicon glyphicon-arrow-left"></span> {{ "goHome"|translate }}</a>'
-        };
+            template:'<span ng-click="goHome()" ><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;{{ "goHome"|translate }}</span>',
+                link: function(scope, element, attr) {
+                scope.goHome = function() {
+                    mainService.setDic(mainService.getUser().dic);
+                    console.log(mainService.getDic());
+                    $location.path('/dictionary');
+                };
+            }
+        }
     })
     .directive('score', function ($filter) {
       return {

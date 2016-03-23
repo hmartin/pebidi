@@ -10,9 +10,14 @@ class DictionaryRepository extends EntityRepository
     public function getGroupsWords($user)
     {
         $qb = $this->createQueryBuilder('d')
-            ->where('d.groupWord = 1')
-            ->andWhere('d.private = 0 OR d.user = :user')
-            ->setParameter('user', $user);
+            ->where('d.groupWord = 1');
+
+        if ($user) {
+            $qb->andWhere('d.private = 0 OR d.user = :user')
+                ->setParameter('user', $user);
+        } else {
+            $qb->andWhere('d.private = 0');
+        }
 
         return $qb->getQuery()->getResult();
     }

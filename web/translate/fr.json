@@ -1,6 +1,5 @@
 {
     "goHome": "Retour accueil",
-    "wellDone": "Well Done",
     "itYourDictionary": "C'est votre dictionnaire",
     "dictionaryOf": "Dictionnaire de:",
     "logout": "Déconnexion",
@@ -26,10 +25,15 @@
     "homepage.explication1": "Entrez juste votre email, et n'oubliez plus ce que vous savez",
     "homepage.explication2": "PeBiDi vous permet d'enregistrer les mots que vous avez appris",
     "improve.newWord": "Ajouter",
+    "addSense": "Ajouter un sense",
     "needHelp": "Besoin d'aide?",
     "viewExample": "Voir un exemple",
     "en": "Anglais",
     "fr": "Français",
+    "notExistYet": "Ce mot n'est pas encore dans notre base mais nous y travaillons, il sera automatiquement ajouter à votre dictionnaire une fois la traduction trouver.",
+    "showBeta.lang": "Pebidi est en développement actuelement seul le dictionnaire anglais fraçais est disponible",
+    "wellDone": "Bien joué",
+    "wordsAdded": "mots ajoutés",
     "WhatDoesItMeans": "Définition",
     "getAnswer": "Afficher la réponse",
     "goodAnswer": "Bonne réponse",
@@ -40,7 +44,10 @@
     "yourDictionary": "Votre dictionnaire",
     "group": "Groupe de mots",
     "backToYourDictionary": "Retour à votre dictionnaire",
+    "score": "Score",
+    "globalScore": "Score mondial",
     "addWord": "Ajouter un mot",
+    "remove": "Supprimer",
     "noun": "nom",
     "adjective": "adjectif",
     "verb": "verbe",
@@ -51,5 +58,6 @@
     "privateGroup": "Groupe privé",
     "remarkCreateGroup": "Attention la création d'un groupe entraine d'avoir un nouveau dictionnaire vide. Si vous souhaitez garder vos mots actuels il faudra rajouter ce groupe à votre nouveau dictionnaire.",
     "submitCreateGroup": "Créer le groupe",
-    "notExistYet" : "Nous ne trouvons pas ce mot. S'il existe nous trouverons la traduction et l'ajouterons automatiquement dans votre pebidi"
+    "addGroupWordExplication": "Pour gagner du temps vous pouvez ajouter un groupe de mots (ou une partie), mais aussi en créant à partir de votre pebidi actuel",
+    "words": "Words"
 }

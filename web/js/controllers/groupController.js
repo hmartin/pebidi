@@ -32,6 +32,7 @@ app
             // Create group and return new dic
             $http.post(API_URL + 'dictionaries/creates/groups', $scope.formData).success(function (data) {
                 mainService.setDic(data.dic);
+                mainService.getUser().dic = data.dic;
             });
         };
     })

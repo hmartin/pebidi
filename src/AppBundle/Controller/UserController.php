@@ -54,10 +54,7 @@ class UserController extends FOSRestController implements ClassResourceInterface
                 $u->setRoles(array('ROLE_USER'));
                 $em->persist($u);
 
-                $d = new Dictionary();
-                $d->setUser($u);
-                $d->setLang($request->request->get('destLang'));
-                $d->setOriginLang($request->request->get('originLang'));
+                $d = new Dictionary($u, $request->request->get('from'), $request->request->get('to'));
 
                 $em->persist($d);
 

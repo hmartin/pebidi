@@ -1,4 +1,4 @@
-
+v1 family: online!
 
 v2 social network:
 Real close question test (1d)
@@ -92,6 +92,7 @@ remove typehead mobile*
 no +1 if add word error*
 add info "...*
 remove one sense on edit word page*
-
-v1 family:
+Home inform: only english to french in beta*
+Check Edit group*
+Remove add when the word is in main dictionary*
 Create & Edit best translation (2d)*

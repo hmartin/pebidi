@@ -3,21 +3,30 @@
 /*global app */
 /*global ENV */
 app
-    .controller('HomeCtrl', function ($scope, $http, $location, localStorageService, mainService, pediService) 
+    .controller('HomeCtrl', function ($scope, $http, $location, $translate, localStorageService, Flash, mainService)
     {
         $scope.lang = ['en', 'es', 'fr'];
         $scope.count = $scope.lang.length;
         $scope.ip = 0;
         $scope.ia = 2;
+
         if (localStorageService.get('user')) {
             $http.get(API_URL + 'users/' + localStorageService.get('user').id).success(function (data) {
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
             });
-            $location.path('/dictionary/');
+            $location.path('/dictionary');
         }
+
+        $scope.showBeta = function () {
+            Flash.create('warning', $translate.instant('showBeta.lang'));
+        };
+
         $scope.processForm = function () {
+            $scope.formData.from =  $scope.lang[$scope.ip];
+            $scope.formData.to =  $scope.lang[$scope.ia];
             $http.post(API_URL + 'users/emails', $scope.formData).success(function (data) {
+                data.user.dic = data.dic;
                 console.log(data);
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
@@ -110,7 +119,6 @@ app
         $scope.predicate = 'w';
         $scope.reverse = false;
         $scope.order = function(predicate) {
-            console.log(predicate);
             $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
             $scope.predicate = predicate;
         };

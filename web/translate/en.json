@@ -1,6 +1,5 @@
 {
     "goHome": "Back to home",
-    "wellDone": "Well done",
     "itYourDictionary": "It's your dictionary",
     "dictionaryOf": "It's the dictionary of",
     "logout": "Log out",
@@ -26,10 +25,15 @@
     "homepage.explication1": "You just have to enter your email, then you can save words you just have learn.",
     "homepage.explication2": "PeBiDi permits you to don't forget all essential word",
     "improve.newWord": "Improve Pebidi by adding a new word",
+    "addSense": "Add sense",
     "needHelp": "Need help?",
     "viewExample": "View example",
     "en": "English",
     "fr": "French",
+    "notExistYet": "We don't find this word. If it exist we will find the translation and automaticaly add it to your pebidi.",
+    "showBeta.lang": "Sorry but in beta version the only possibility is english to french dictionary. Tweet us to have new language!",
+    "wellDone": "Well done",
+    "wordsAdded": "words added",
     "WhatDoesItMeans": "Definition",
     "getAnswer": "Get answer",
     "goodAnswer": "Answer is",
@@ -40,7 +44,10 @@
     "yourDictionary": "Your dictionary",
     "group": "Group",
     "backToYourDictionary": "Back to your dictionary",
+    "score": "Score",
+    "globalScore": "World score",
     "addWord": "Add word",
+    "remove": "remove",
     "noun": "noun",
     "adjective": "adjective",
     "verb": "verb",
@@ -51,5 +58,6 @@
     "privateGroup": "Private group",
     "remarkCreateGroup": "Warning, creating a group imply a new empty dictionary. If you want to keep your current words you have to add this group to your new dictionary.",
     "submitCreateGroup": "Transform your pebidi to a group",
-    "notExistYet" : "We don't find this word. If it exist we will find the translation and automaticaly add it to your pebidi."
+    "addGroupWordExplication": "To save time you can add group of words (or a part of it), and you can also create yours with your actual pebidi!",
+    "words": "Words"
 }

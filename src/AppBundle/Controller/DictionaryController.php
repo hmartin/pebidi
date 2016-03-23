@@ -89,7 +89,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
                 
             $em->flush();
 
-            return array('dic' => $d->getJsonArray());
+            return ['dic' =>  $this->get('app.dictionary_model')->createJson($d)];
         }
         throw new \Exception('Something went wrong!');
     }
@@ -118,7 +118,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
 
             $this->get('persist')->persistAndFlush($d);
 
-            return array('dic' => $d->getJsonArray(), 'nbAdd' => $i);
+            return ['dic' => $this->get('app.dictionary_model')->createJson($d), 'nbAdd' => $i];
         }
         throw new \Exception('AddGroupWord went wrong!');
     }
