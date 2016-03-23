@@ -77,8 +77,9 @@ class WordRepository extends EntityRepository
 
         if (is_object($u)) {
             $qb
-                ->andWhere('d.user = :uid')
-                ->setParameter('uid', $u);
+                ->leftJoin('p.result', 'r',
+                    \Doctrine\ORM\Query\Expr\Join::WITH, 'r.user = :uid')
+                ->setParameter('uid', 3);
         }
 
         return $qb;
