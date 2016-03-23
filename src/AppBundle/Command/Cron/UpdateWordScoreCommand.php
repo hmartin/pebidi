@@ -22,8 +22,7 @@ class UpdateWordScoreCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $query = '
-            UPDATE Word w SET w.score = (SELECT SUM(p.point)/COUNT(p.id) FROM Point p WHERE p.word_id = w.id);';
+        $query = 'UPDATE Word w SET w.score = (SELECT SUM(p.point)/COUNT(p.id) FROM Point p WHERE p.word_id = w.id);';
         $em = $this->getContainer()->get('doctrine');
         $connection = $em->getConnection();
         $stmt = $connection->prepare($query);

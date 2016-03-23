@@ -35,7 +35,7 @@ class WordRepository extends EntityRepository
     private function initQueryBuilder()
     {
         return $this->createQueryBuilder('word')
-            ->select('word.id, IFNULL(wt.expression, word.word) as w, trans_word.word as t')
+            ->select('word.id, IFNULL(wt.expression, word.word) as w, trans_word.word as t, word.score as global')
             ->innerJoin('word.subWords', 'wt')
             ->innerJoin('\AppBundle\Entity\Ww', 'ww',
                 \Doctrine\ORM\Query\Expr\Join::WITH,
