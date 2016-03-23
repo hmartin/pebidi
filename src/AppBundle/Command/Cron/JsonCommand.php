@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Command;
+namespace AppBundle\Command\Cron;
 
 use AppBundle\Entity\Suck;
 use AppBundle\Entity\Sense;
