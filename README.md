@@ -9,7 +9,9 @@ Front: AngularJs + Bootsrap 3
 
 
 micro todo:
-worldwide stat
+worldwide stat*
+repair personal stat
+Think security
 Remove personal gw
 add word to a group
 Limit words for gw (mini 15 words)
@@ -24,3 +26,12 @@ Functional test scenario:
 Post email new user
 Add words (exist and no-exist)
 Execute suck no-exist
+
+Security:
+Pass user id
+auto log if not secure user
+
+Case:
+Your pebidi
+Pebidi of : (no edit) 
+Group of: (no edit except it's yours)

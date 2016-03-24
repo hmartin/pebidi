@@ -47,9 +47,14 @@ class UserController extends FOSRestController implements ClassResourceInterface
             if ($u = $this->getDoctrine()->getRepository('AppBundle:User')->findOneByEmail($email)) {
 
             } else {
+                $username = explode('@', $email)['0'];
+                if ($this->getDoctrine()->getRepository('AppBundle:User')->findOneByUsername($username)) {
+                    $username = $username . uniqid();
+                }
+                
                 $u = new User();
                 $u->setEmail($email);
-                $u->setUsername($email);
+                $u->setUsername($username);
                 $u->setPassword($email);
                 $u->setRoles(array('ROLE_USER'));
                 $em->persist($u);
@@ -64,9 +69,6 @@ class UserController extends FOSRestController implements ClassResourceInterface
             
             $token = new UsernamePasswordToken($u, null, 'main', $u->getRoles());
             $this->get("security.token_storage")->setToken($token);
-
-            //$event = new InteractiveLoginEvent($request, $token);
-            //$this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
             return $this->getUserAndDic($u);
         }

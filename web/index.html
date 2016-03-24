@@ -46,13 +46,13 @@
                     <div class="nav col-xs-6 col-md-2">
                         <div ng-if="env == 'DEV'">dic.id:{{dic.id}}/uid:{{user.id}}/user.dic.id:{{ user.dic.id }}</div>
                         <div ng-if="user.id" class="animate-if">
-                            <div ng-if="dic.uid == user.id" class="animate-if">
-                                {{ 'itYourDictionary'|translate }}
-                            </div>
-                            <div ng-if="dic.uid != user.id" class="animate-if">
-                                {{ 'dictionaryOf'|translate }} {{ dic.bitEmail }}
+                            <div>
+                                {{ 'welcome'|translate }} {{ user.username }}
                             </div>
                             <div><a ng-click="clearLocalStorage()">{{ 'logout'|translate }}</a></div>
+                            <div ng-if="dic.uid != user.id" class="animate-if">
+                                {{ 'youAreViewingDictionaryOf'|translate }}: {{ dic.author }}
+                            </div>
                         </div>
                         <div>
                             <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href=""

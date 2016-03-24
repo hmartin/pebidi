@@ -88,7 +88,6 @@ class Dictionary
     {
         $a = array('id' => $this->getId(),
             'wids' => $this->getWids(),
-            'bitEmail' => $this->getUser()->getBitEmail(),
             'uid' => $this->getUser()->getId()
         );
 
