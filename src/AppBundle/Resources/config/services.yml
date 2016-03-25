@@ -8,6 +8,9 @@ services:
     app.dictionary_model:
         class:     AppBundle\Model\DictionaryModel
         arguments: ["@doctrine.orm.default_entity_manager"]
+    app.user_model:
+        class:     AppBundle\Model\UserModel
+        arguments: ["@doctrine.orm.default_entity_manager", "@security.token_storage"]
         
     app.suck_model:
         class:     AppBundle\Model\SuckModel

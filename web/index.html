@@ -50,13 +50,10 @@
                                 {{ 'welcome'|translate }} {{ user.username }}
                             </div>
                             <div><a ng-click="clearLocalStorage()">{{ 'logout'|translate }}</a></div>
-                            <div ng-if="dic.uid != user.id" class="animate-if">
-                                {{ 'youAreViewingDictionaryOf'|translate }}: {{ dic.author }}
-                            </div>
                         </div>
                         <div>
-                            <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;<a href=""
-                                                                                             ng-click="changeLanguage('en')">en</a>
+                            <a href="" ng-click="changeLanguage('fr')">fr</a>&nbsp;-&nbsp;
+                            <a href="" ng-click="changeLanguage('en')">en</a>
                         </div>
                     </div>
                 </div>

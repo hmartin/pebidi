@@ -61,7 +61,6 @@ class User extends BaseUser
         return $a['0'].'@....'.$b['1'];
     }
 
-
     /**
      * Get id
      *

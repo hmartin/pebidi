@@ -15,6 +15,6 @@ class UserRepository extends EntityRepository
         $score = $this
             ->getEntityManager()->getRepository('AppBundle:Result')->getAvgScore($u);
 
-        return array('id' => $u->getId(), 'score' => $score);
+        return array('id' => $u->getId(), 'username' => $u->getUsername(), 'score' => $score);
     }
 }

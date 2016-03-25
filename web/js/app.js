@@ -28,7 +28,7 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/addWord.html',
                 controller: 'AddWordCtrl'
             }).
-            when('/createTest', {
+            when('/createTest/:slug?', {
                 templateUrl: 'partials/createTest.html',
                 controller: 'CreateTestCtrl'
             }).

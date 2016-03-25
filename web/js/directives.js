@@ -28,7 +28,7 @@ app
                     $location.path('/dictionary');
                 };
             }
-        }
+        };
     })
     .directive('score', function ($filter) {
       return {

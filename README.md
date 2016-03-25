@@ -11,6 +11,7 @@ Front: AngularJs + Bootsrap 3
 micro todo:
 worldwide stat*
 repair personal stat
+if no user on page who need user then redirect
 Think security
 Remove personal gw
 add word to a group

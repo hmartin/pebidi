@@ -34,12 +34,12 @@ class Dictionary
     private $words;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=191, nullable=true)
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=191, nullable=true)
      */
     protected $description;
 
@@ -49,12 +49,12 @@ class Dictionary
     protected $dictionaryScores;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=191, nullable=true)
      */
     protected $originLang;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=191, nullable=true)
      */
     protected $lang;
 
@@ -86,15 +86,16 @@ class Dictionary
 
     public function getJsonArray()
     {
-        $a = array('id' => $this->getId(),
+        $a = ['id' => $this->getId(),
             'wids' => $this->getWids(),
-            'uid' => $this->getUser()->getId()
-        );
+            'uid' => $this->getUser()->getId(),
+            'group' => $this->getGroupWord(),
+            'author' => $this->getUser()->getUsername()
+        ];
 
         if ($this->getGroupWord()) {
             $a['title'] = $this->getTitle();
             $a['description'] = $this->getDescription();
-            $a['author'] = $this->getUser()->getUsername();
         }
 
         return $a;

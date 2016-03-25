@@ -15,15 +15,19 @@
                 <span ng-show="loading" class="glyphicon glyphicon-refresh  form-control-feedback"></span>
             </div>
 
-            <div ng-if="dic">
+            <div ng-if="dic && (dic.uid == user.id)">
                 <div class="form-group" ng-show="submitCreate">
                     {{ 'addWord.oops'|translate }}
-                    <a href="#/improve/{{ formData.word }}" class="btn btn-info btn-sm">{{ 'addWord.improve'|translate
-                        }}</a>
+                    <a href="#/improve/{{ formData.word }}" class="btn btn-info btn-sm">{{ 'addWord.improve'|translate }}</a>
                 </div>
                 <div class="form-group" ng-show="!submitCreate">
-                    <button type="submit" class="btn btn-success btn-lg">{{ 'save'|translate }}</button>
+                    <button type="submit" class="btn btn-success btn-lg">
+                        {{ 'save'|translate }}<span ng-if="dic.group" > {{ 'in'|translate }} {{ dic.title }}</span></button>
                 </div>
+            </div>
+            <div ng-if="dic && (dic.uid != user.id)" class="animate-if">
+                {{ 'itIsNotYours'|translate }}: {{ dic.author }}
+                <go-home></go-home>
             </div>
         </form>
     </div>
@@ -39,12 +43,7 @@
 </div>
 
 <div ng-if="!dic">
-    <div ng-if="!dic.id">
-        <p class="lead">{{ 'wantToSave'|translate }} <a href="#/" >{{ 'createYourPebidi'|translate }}</a></p>
-    </div>
-    <div ng-if="dic.id">
-        <p class="lead">We're loading your Pebidi...</p>
-    </div>
+    <p class="lead">{{ 'wantToSave'|translate }} <a href="#/" >{{ 'createYourPebidi'|translate }}</a></p>
 </div>
 
 <script type="text/ng-template" id="listWord.html">
