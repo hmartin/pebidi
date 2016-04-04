@@ -87,7 +87,9 @@ input, select,textarea {
 
 .logo {text-align: left;
     padding: 10px;}
-
+.pointer {
+    cursor: pointer;
+}
 .mastfoot .inner {
     padding-left: 30px;
     padding-right: 30px;

@@ -20,7 +20,7 @@ app
     .directive('goHome', function ($translate, mainService, $location) {
 
         return {
-            template:'<span ng-click="goHome()" ><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;{{ "goHome"|translate }}</span>',
+            template:'<span ng-click="goHome()" class="pointer" ><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;{{ "goHome"|translate }}</span>',
                 link: function(scope, element, attr) {
                 scope.goHome = function() {
                     mainService.setDic(mainService.getUser().dic);

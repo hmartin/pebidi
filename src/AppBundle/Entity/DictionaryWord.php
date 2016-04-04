@@ -111,4 +111,28 @@ class DictionaryWord
     {
         return $this->dictionary;
     }
+
+    /**
+     * Set word
+     *
+     * @param \AppBundle\Entity\Word $word
+     *
+     * @return DictionaryWord
+     */
+    public function setWord(\AppBundle\Entity\Word $word = null)
+    {
+        $this->word = $word;
+
+        return $this;
+    }
+
+    /**
+     * Get word
+     *
+     * @return \AppBundle\Entity\Word
+     */
+    public function getWord()
+    {
+        return $this->word;
+    }
 }

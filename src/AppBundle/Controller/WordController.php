@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\DictionaryWord;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -61,8 +62,8 @@ class WordController extends FOSRestController implements ClassResourceInterface
                 $msg = 'notExistYet';    
             }
 
-            if (!$d->getWords()->contains($w)) {
-                $d->addWord($w);
+            if (!$this->get('app.dictionary_word_model')->addWord($d, $w)) {
+                $msg = 'alreadyIn';
             }
 
             $em->flush();

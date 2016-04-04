@@ -167,39 +167,6 @@ class User extends BaseUser
     }
 
     /**
-     * Add dictionaryScores
-     *
-     * @param \AppBundle\Entity\DictionaryScore $dictionaryScores
-     * @return User
-     */
-    public function addDictionaryScore(\AppBundle\Entity\DictionaryScore $dictionaryScores)
-    {
-        $this->dictionaryScores[] = $dictionaryScores;
-
-        return $this;
-    }
-
-    /**
-     * Remove dictionaryScores
-     *
-     * @param \AppBundle\Entity\DictionaryScore $dictionaryScores
-     */
-    public function removeDictionaryScore(\AppBundle\Entity\DictionaryScore $dictionaryScores)
-    {
-        $this->dictionaryScores->removeElement($dictionaryScores);
-    }
-
-    /**
-     * Get dictionaryScores
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getDictionaryScores()
-    {
-        return $this->dictionaryScores;
-    }
-
-    /**
      * Add result
      *
      * @param \AppBundle\Entity\Result $result

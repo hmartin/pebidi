@@ -120,6 +120,7 @@ class Dictionary
         $this->setUser($user);
         $this->setLang($lang);
         $this->setOriginLang($originLang);
+        $this->setTitle(uniqid());
     }
 
     /**
@@ -347,46 +348,14 @@ class Dictionary
     {
         return $this->user;
     }
-
-    /**
-     * Add word
-     *
-     * @param \AppBundle\Entity\Word $word
-     *
-     * @return Dictionary
-     */
-    public function addWord(\AppBundle\Entity\Word $word)
-    {
-        $this->words[] = $word;
-
-        return $this;
-    }
-
-    /**
-     * Remove word
-     *
-     * @param \AppBundle\Entity\Word $word
-     */
-    public function removeWord(\AppBundle\Entity\Word $word)
-    {
-        $this->words->removeElement($word);
-    }
-
-    /**
-     * Get words
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getWords()
-    {
-        return $this->words;
-    }
     
     public function getWids()
     {
         $a = array();
-        foreach($this->words as $w) {
-            $a[] = $w->getId();
+        if ($this->dictionaryWords) {
+            foreach($this->dictionaryWords as $w) {
+                $a[] = $w->getWord()->getId();
+            }
         }
         
         return $a;
@@ -448,5 +417,63 @@ class Dictionary
     public function getMain()
     {
         return $this->main;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Dictionary
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Add dictionaryWord
+     *
+     * @param \AppBundle\Entity\DictionaryWord $dictionaryWord
+     *
+     * @return Dictionary
+     */
+    public function addDictionaryWord(\AppBundle\Entity\DictionaryWord $dictionaryWord)
+    {
+        $this->dictionaryWords[] = $dictionaryWord;
+
+        return $this;
+    }
+
+    /**
+     * Remove dictionaryWord
+     *
+     * @param \AppBundle\Entity\DictionaryWord $dictionaryWord
+     */
+    public function removeDictionaryWord(\AppBundle\Entity\DictionaryWord $dictionaryWord)
+    {
+        $this->dictionaryWords->removeElement($dictionaryWord);
+    }
+
+    /**
+     * Get dictionaryWords
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDictionaryWords()
+    {
+        return $this->dictionaryWords;
     }
 }

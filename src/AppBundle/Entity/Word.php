@@ -350,4 +350,62 @@ class Word
     {
         return $this->disabled;
     }
+
+    /**
+     * Set score
+     *
+     * @param float $score
+     *
+     * @return Word
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return float
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * Add dictionaryWord
+     *
+     * @param \AppBundle\Entity\DictionaryWord $dictionaryWord
+     *
+     * @return Word
+     */
+    public function addDictionaryWord(\AppBundle\Entity\DictionaryWord $dictionaryWord)
+    {
+        $this->dictionaryWords[] = $dictionaryWord;
+
+        return $this;
+    }
+
+    /**
+     * Remove dictionaryWord
+     *
+     * @param \AppBundle\Entity\DictionaryWord $dictionaryWord
+     */
+    public function removeDictionaryWord(\AppBundle\Entity\DictionaryWord $dictionaryWord)
+    {
+        $this->dictionaryWords->removeElement($dictionaryWord);
+    }
+
+    /**
+     * Get dictionaryWords
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDictionaryWords()
+    {
+        return $this->dictionaryWords;
+    }
 }

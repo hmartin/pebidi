@@ -20,6 +20,7 @@ tips dont add more 100w
 slug group
 add word to a group
 Special page for got
+slug group
 optim with json in db
 new count point system last 5 with ponderation
 chrome extension in the cloud (0.5)
@@ -40,6 +41,5 @@ Your pebidi
 Pebidi of : (no edit) 
 Group of: (no edit except it's yours)
 
-INSERT INTO DictionaryWord ( word_id, dictionary_id )
-SELECT  word_id, dictionary_id 
-FROM    DictionariesWord  
+UPDATE Dictionary SET slug = id;
+INSERT INTO DictionaryWord (word_id, dictionary_id) SELECT  word_id, dictionary_id FROM DictionariesWord;

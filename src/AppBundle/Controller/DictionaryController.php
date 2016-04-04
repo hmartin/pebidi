@@ -109,10 +109,9 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
             && ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))))
         {
             $i = 0;
-            foreach($gw->getWords() as $w) {
-                if(!$d->getWords()->contains($w)) {
+            foreach($gw->getDictionaryWords() as $dw) {
+                if ($this->get('app.dictionary_word_model')->addWord($d, $dw->getWord())) {
                     $i++;
-                    $d->addWord($w);
                 }
             }
 
