@@ -45,9 +45,9 @@ class Word
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Dictionary", mappedBy="words")
+     * @ORM\OneToMany(targetEntity="DictionaryWord", mappedBy="word")
      **/
-    private $dictionaries;
+    private $dictionaryWords;
 
     /**
      * @ORM\ManyToMany(targetEntity="Test", mappedBy="words")

@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\DictionaryScoreRepository")
  */
-class DictionaryScore
+class DictionaryWord
 {
     /**
      * @ORM\Id
@@ -19,14 +19,12 @@ class DictionaryScore
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="dictionaryScores")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Word", inversedBy="dictionaryWords")
      */
-    protected $user;
+    protected $word;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="dictionaryScores",cascade={"persist"})
-     * @ORM\JoinColumn(name="dictionary_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="dictionaryWords",cascade={"persist"})
      */
     protected $dictionary;
 

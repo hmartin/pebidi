@@ -32,11 +32,6 @@ class User extends BaseUser
     protected $dictionaries;
 
     /**
-     * @ORM\OneToMany(targetEntity="DictionaryScore", mappedBy="user")
-     */
-    protected $dictionaryScores;
-
-    /**
      * @ORM\OneToMany(targetEntity="Result", mappedBy="user")
      */
     protected $results;

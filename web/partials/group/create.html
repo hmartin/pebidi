@@ -24,9 +24,13 @@
             <p class="alert alert-info" role="alert">{{ 'remarkCreateGroup'|translate }}</p>
 
             <p>&nbsp;</p>
-            <span class="input-group-btn">
+            
+            <span ng-if="dic.countWord > 14" class="input-group-btn">
                 <button class="btn btn-success input-lg" ng-click="processForm()">{{ 'submitCreateGroup'|translate }}
                 </button>
+            </span>
+            <span ng-if="dic.countWord < 15" class=" ">
+                <h2>{{ 'atLeast15Words'|translate }}</h2>
             </span>
         </div>
         <go-home></go-home>

@@ -28,10 +28,9 @@ class Dictionary
     protected $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Word", inversedBy="dictionaries")
-     * @ORM\JoinTable(name="DictionariesWord")
+     * @ORM\OneToMany(targetEntity="DictionaryWord", mappedBy="dictionary")
      **/
-    private $words;
+    private $dictionaryWords;
 
     /**
      * @ORM\Column(type="string", length=191, nullable=true)
@@ -39,14 +38,15 @@ class Dictionary
     protected $title;
 
     /**
+     * @Gedmo\Slug(fields={"id", "title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="string", length=191, nullable=true)
      */
     protected $description;
-
-    /**
-     * @ORM\OneToMany(targetEntity="DictionaryScore", mappedBy="dictionary")
-     */
-    protected $dictionaryScores;
 
     /**
      * @ORM\Column(type="string", length=191, nullable=true)

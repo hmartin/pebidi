@@ -10,12 +10,15 @@ Front: AngularJs + Bootsrap 3
 
 micro todo:
 worldwide stat*
+Limit words for gw (mini 15 words)*
 repair personal stat
 if no user on page who need user then redirect
 Think security
 Remove personal gw
+pager wordlist
+tips dont add more 100w
+slug group
 add word to a group
-Limit words for gw (mini 15 words)
 Special page for got
 optim with json in db
 new count point system last 5 with ponderation
@@ -36,3 +39,7 @@ Case:
 Your pebidi
 Pebidi of : (no edit) 
 Group of: (no edit except it's yours)
+
+INSERT INTO DictionaryWord ( word_id, dictionary_id )
+SELECT  word_id, dictionary_id 
+FROM    DictionariesWord  
