@@ -22,7 +22,7 @@
         <div class="col-md-1"></div></div>
     </div>
     
-<div ng-cloak id="wordList" class="text-left animate-repeat" dir-paginate="word in words | orderBy:predicate:reverse | filter:q | itemsPerPage: 5  track by word.id">
+<div ng-cloak id="wordList" class="text-left animate-repeat" dir-paginate="word in words | orderBy:predicate:reverse | filter:q | itemsPerPage: 10  track by word.id">
     <div class="row wordList" ng-hide="delete" ng-class-odd="'odd'">
         <div class="col-md-2"><a href="#/word/{{ word.w }}">{{word.w| capitalize }}</a></div>
         <div class="col-md-5">{{word.concat| capitalize }}</div>

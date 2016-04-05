@@ -53,7 +53,7 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
         $results = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->getGroupsWords($user);
         $r = array();
         foreach($results as $d) {
-            $r[] = $d->getJsonArray();
+            $r[] = $this->get('app.dictionary_model')->createJson($d);
         }
 
         return array('groupsWords' => $r);
