@@ -82,12 +82,9 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
             );
             
             $em->persist($dGroup);
-              
-            $d = new Dictionary($dGroup->getUser(), $dGroup->getLang(), $dGroup->getOriginLang());
-              
-            $em->persist($d);
-                
-            $em->flush();
+            
+            $d = $this->get('app.dictionary_model')
+                    ->createDictionary($dGroup->getUser(), $dGroup->getLang(), $dGroup->getOriginLang());
 
             return ['dic' =>  $this->get('app.dictionary_model')->createJson($d)];
         }

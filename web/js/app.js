@@ -9,7 +9,8 @@ var app = angular.module('app', [
     'ui.bootstrap',
     'pascalprecht.translate',
     'ngFlash',
-    'cfp.hotkeys'
+    'cfp.hotkeys',
+    'angularUtils.directives.dirPagination'
 
 ]);
 

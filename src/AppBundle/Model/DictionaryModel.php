@@ -27,4 +27,21 @@ class DictionaryModel
         
         return $a;
     }
+    
+    public function createDictionary($user, $lang, $originLang)
+    {
+        $d = new Dictionary();
+
+        $d->setMain(1);
+        $d->setUser($user);
+        $d->setLang($lang);
+        $d->setOriginLang($originLang);
+        $this->em->persist($d);
+
+        $this->em->flush();
+        $d->setSlug($d->getId());
+        $this->em->flush();
+        
+        return $d;
+    }
 }

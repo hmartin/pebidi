@@ -11,16 +11,16 @@ Front: AngularJs + Bootsrap 3
 micro todo:
 worldwide stat*
 Limit words for gw (mini 15 words)*
+slug group*
+pager wordlist*
 repair personal stat
 if no user on page who need user then redirect
 Think security
 Remove personal gw
-pager wordlist
 tips dont add more 100w
-slug group
+use slug in link
 add word to a group
 Special page for got
-slug group
 optim with json in db
 new count point system last 5 with ponderation
 chrome extension in the cloud (0.5)

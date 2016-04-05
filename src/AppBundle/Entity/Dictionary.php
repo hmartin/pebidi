@@ -113,14 +113,9 @@ class Dictionary
     /**
      * Constructor
      */
-    public function __construct($user, $lang, $originLang)
+    public function __construct()
     {
         $this->words = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->main = 1;
-        $this->setUser($user);
-        $this->setLang($lang);
-        $this->setOriginLang($originLang);
-        $this->setTitle(uniqid());
     }
 
     /**
