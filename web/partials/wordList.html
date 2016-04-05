@@ -23,7 +23,7 @@
     </div>
     
 <div ng-cloak id="wordList" class="text-left animate-repeat" dir-paginate="word in words | orderBy:predicate:reverse | filter:q | itemsPerPage: 10  track by word.id">
-    <div class="row wordList" ng-hide="delete" ng-class-odd="'odd'">
+    <div class="row oddList" ng-hide="delete" ng-class-odd="'odd'">
         <div class="col-md-2"><a href="#/word/{{ word.w }}">{{word.w| capitalize }}</a></div>
         <div class="col-md-5">{{word.concat| capitalize }}</div>
         <div class="col-md-2"><score percent="word.stat_sum_realised"></score></div>
@@ -33,7 +33,7 @@
                   ng-click="addWord(word.w)" tooltip="{{ 'addWord'|translate }}" class="pointer glyphicon glyphicon-plus"></span>
             <!-- delete from dic.id (dictionary or group) -->
             <span ng-if="user.dic.id == dic.id || (user.dic.id != dic.id && user.id == dic.uid)" 
-                  ng-click="deleteWord(word)" tooltip="{{ 'remove'|translate }}" class="pointer glyphicon glyphicon-bin"></span>
+                  ng-click="deleteWord(word)" tooltip="{{ 'remove'|translate }}" class="pointer glyphicon glyphicon-trash"></span>
         </div>
     </div>
 </div>

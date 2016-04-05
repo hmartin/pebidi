@@ -1,7 +1,7 @@
 <h1>{{ 'addGroupWord'|translate }}</h1>
 <p>{{ 'addGroupWordExplication'|translate }}</p>
 <p>&nbsp;</p>
-<div class="text-left row animate-repeat" ng-repeat="group in groupsWords" ng-class-odd="'odd'">
+<div class="text-left row animate-repeat oddList" ng-repeat="group in groupsWords" ng-class-odd="'odd'">
     <div class="col-md-2">{{ group.title }}</div>
     <div class="col-md-2">{{ group.author }}</div>
     <div class="col-md-4">{{ group.description }}</div>
@@ -9,9 +9,10 @@
     <div class="col-md-2">
         <span class="pointer glyphicon glyphicon-download" tooltip="{{ 'addGroupWord'|translate }}"
               ng-click="addGroupWord(group.id)"></span>
-        <a ng-href="#/wordList/{{ group.id }}" class="glyphicon glyphicon-eye-open"></a>
-        
-        <span ng-if="group.uid == user.id" class="pointer glyphicon glyphicon-bin"
+        &nbsp;
+        <a ng-href="#/wordList/{{ group.slug }}" class="pointer glyphicon glyphicon-eye-open"></a>
+        &nbsp;
+        <span ng-if="group.uid == user.id" class="pointer glyphicon glyphicon-trash"
               ng-click="delete(group.id)"></span>
     </div>
 </div>

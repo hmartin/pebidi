@@ -77,14 +77,6 @@ input, select,textarea {
     padding: 30px;
 }
 
-.wordList.odd {
-    background-color: #562B8E;
-}
-
-.wordList {
-    background-color: #461B7E;
-}
-
 .logo {text-align: left;
     padding: 10px;}
 .pointer {
@@ -203,9 +195,18 @@ input, select,textarea {
     }
 }
 
-#wordList .row {
+.oddList.row {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+
+.oddList.odd {
+    background-color: #562B8E;
+}
+
+.oddList {
+    background-color: #461B7E;
 }
 
 .wordListHead {

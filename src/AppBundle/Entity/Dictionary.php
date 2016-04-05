@@ -79,6 +79,11 @@ class Dictionary
     protected $groupWord = 0;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $disabled = 0;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
