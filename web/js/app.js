@@ -41,7 +41,7 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/congrats.html',
                 controller: 'CongratsTestCtrl'
             }).
-            when('/wordList/:id', {
+            when('/wordList/:id/:slug?', {
                 templateUrl: 'partials/wordList.html',
                 controller: 'WordListCtrl'
             }).

@@ -13,12 +13,12 @@ worldwide stat*
 Limit words for gw (mini 15 words)*
 slug group*
 pager wordlist*
+Remove personal gw*
+use slug in link
 repair personal stat
 if no user on page who need user then redirect
 Think security
-Remove personal gw
 tips dont add more 100w
-use slug in link
 add word to a group
 Special page for got
 optim with json in db

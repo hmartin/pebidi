@@ -101,6 +101,7 @@ class Dictionary
         if ($this->getGroupWord()) {
             $a['title'] = $this->getTitle();
             $a['description'] = $this->getDescription();
+            $a['slug'] = $this->getSlug();
         }
 
         return $a;
