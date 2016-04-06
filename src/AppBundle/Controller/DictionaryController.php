@@ -118,4 +118,20 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
         }
         throw new \Exception('AddGroupWord went wrong!');
     }
+  
+    /**
+     * @ApiDoc(section="Dictionary", description="Disabled group",
+     *  requirements={
+     *      { "name"="d", "dataType"="integer", "requirement"="\d+", "description"="dic id" }
+     *  },
+     * )
+     * @Rest\View()
+     */
+    public function deleteAction(Dictionary $d)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $d->setDisabled(1);
+        $em->flush();
+    }
 }

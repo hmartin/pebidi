@@ -18,7 +18,7 @@ app
         
         $scope.delete = function (group) {
             $scope.groupsWords.splice($scope.groupsWords.indexOf(group), 1);
-            groupService.delete(group.id);
+            $http.delete(API_URL + 'dictionaries/' + group.id);
         };
     })
     .controller('GroupCreateCtrl', function ($scope, $http, $location, mainService) {

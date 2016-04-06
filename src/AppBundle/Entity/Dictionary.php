@@ -476,4 +476,28 @@ class Dictionary
     {
         return $this->dictionaryWords;
     }
+
+    /**
+     * Set disabled
+     *
+     * @param integer $disabled
+     *
+     * @return Dictionary
+     */
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+
+        return $this;
+    }
+
+    /**
+     * Get disabled
+     *
+     * @return integer
+     */
+    public function getDisabled()
+    {
+        return $this->disabled;
+    }
 }

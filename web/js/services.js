@@ -228,16 +228,5 @@ app
             console.log(data);
             return $http.post(API_URL + 'dictionaries/adds/groups/words', data);
         };
-
-        this.delete = function (id) {
-            var promise = $http.post(API_URL + 'groups/removes', {
-                'id': id,
-                'did': mainService.getUser().dic.id
-            }).then(function (data) {
-                return data.groupsWords;
-            });
-
-            return promise;
-        };
     });
     
