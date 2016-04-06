@@ -23,6 +23,7 @@ app
             template:'<span ng-click="goHome()" class="pointer" ><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;{{ "goHome"|translate }}</span>',
                 link: function(scope, element, attr) {
                 scope.goHome = function() {
+                    console.log(mainService.getUser().dic);
                     mainService.setDic(mainService.getUser().dic);
                     console.log(mainService.getDic());
                     $location.path('/dictionary');

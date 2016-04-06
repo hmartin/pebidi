@@ -79,7 +79,6 @@ class UserController extends FOSRestController implements ClassResourceInterface
         if ($d = $u->getDefaultDictionary()) {
             $params['user'] = $this->getDoctrine()->getRepository('AppBundle:User')->getArray($u);
             $params['dic'] =  $this->get('app.dictionary_model')->createJson($d);
-            $params['user']['wids'] = $d->getWids();
         }
 
         return $params;

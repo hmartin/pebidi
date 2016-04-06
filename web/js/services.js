@@ -9,10 +9,11 @@ app
         this.setDic = function (d) {
             dic = d;
             localStorageService.set('dic', dic);
-        };
 
-        this.setUserDic = function (d) {
-            user.dic = d;
+            if (d && this.getUser().dic.id == d.id) {
+                user.dic = d;
+                localStorageService.set('user', user);
+            }
         };
 
         this.setScore = function (dicScore) {
@@ -20,7 +21,7 @@ app
 
         };
         this.setCountWord = function (countWord) {
-            user.dic.countWord = countWord;
+            dic.countWord = countWord;
         };
 
         this.getDic = function () {
@@ -38,17 +39,8 @@ app
         };
         this.setUser = function (u) {
             user = u;
-            console.log(u);
             localStorageService.set('user', user);
         };
-
-        this.isMainDic = function () {
-            if (user.dic.id == dic.id) {
-                return true;
-            }
-
-            return false;
-        }
     })
 
     .service('testService', function ($http, $location, mainService) {
@@ -179,9 +171,7 @@ app
 
         this.post = function (word, dic) {
 
-            if (mainService.isMainDic()) {
-                mainService.setCountWord(dic.countWord + 1);
-            }
+            mainService.setCountWord(dic.countWord + 1);
 
             $http.post(API_URL + 'words', {
                 'w': word,
@@ -191,16 +181,7 @@ app
                     Flash.create('warning', $translate.instant('notExistYet'));
                 }
 
-                console.log(data);
-                console.log(data.dic);
-                if (mainService.isMainDic()) {
-                    mainService.setDic(data.dic);
-                }
-                if (mainService.getUser().dic.id == data.dic.id) {
-
-                    mainService.getUser().dic = data.dic;
-                    console.log(mainService.getUser().dic);
-                }
+                mainService.setDic(data.dic);
             });
         };
 
@@ -209,7 +190,7 @@ app
                 'id': id,
                 'did': mainService.getDic().id
             }).success(function (data) {
-                mainService.getUser().dic = data.dic;
+                mainService.setDic(data.dic);
 
             });
         };
@@ -219,7 +200,7 @@ app
     /*
      * Manage group (create and delete)
      */
-    .service('groupService', function ($http, $rootScope, $location, $timeout, mainService) {
+    .service('groupService', function ($http) {
         this.get = function () {
             return $http.get(API_URL + 'dictionary/groups/words', {params: {lang: 'en'}});
         };

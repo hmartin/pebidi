@@ -67,6 +67,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
             }
 
             $em->flush();
+            $em->refresh($d);
 
             return ['msg' => $msg, 'dic' => $this->get('app.dictionary_model')->createJson($d)];
         }
@@ -86,12 +87,16 @@ class WordController extends FOSRestController implements ClassResourceInterface
     public function postRemoveAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if ($w = $this->getDoctrine()->getRepository('AppBundle:Word')->find($request->request->get('id')) &&
-            $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))
+        if (($w = $this->getDoctrine()->getRepository('AppBundle:Word')->find($request->request->get('id'))) &&
+            ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did')))
         ) {
-            $d->getWords()->removeElement($w);
-            $em->persist($d);
-            $em->flush();
+            if ($dw = $this->getDoctrine()->getRepository('AppBundle:DictionaryWord')->findOneBy(array('dictionary' => $d, 'word' => $w))) {
+
+                $em->remove($dw);
+                $em->flush();
+            }
+            $em->refresh($d);
+
             return array('dic' => $d->getJsonArray());
         }
         throw new \Exception('postDeleteWordAction went wrong!');

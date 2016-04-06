@@ -14,17 +14,17 @@ Limit words for gw (mini 15 words)*
 slug group*
 pager wordlist*
 Remove personal gw*
-use slug in link
+add slug in link*
 repair personal stat
-if no user on page who need user then redirect
-Think security
-tips dont add more 100w
+tips dont add more 20w
 add word to a group
 Special page for got
 optim with json in db
 new count point system last 5 with ponderation
 chrome extension in the cloud (0.5)
 Did in Session for chrome extension (1d)
+if no user on page who need user then redirect
+Think security
 
 
 Functional test scenario:
