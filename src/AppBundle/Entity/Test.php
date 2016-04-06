@@ -25,7 +25,7 @@ class Test
     private $words;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="dictionaryScores",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Dictionary")
      * @ORM\JoinColumn(name="dictionary_id", referencedColumnName="id", nullable=true)
      */
     protected $dictionary;

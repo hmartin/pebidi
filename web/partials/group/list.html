@@ -8,14 +8,14 @@
     <div class="col-md-2">{{ group.countWord }} {{ 'words'|translate }}</div>
     <div class="col-md-2">
         <span class="pointer glyphicon glyphicon-download" tooltip="{{ 'addGroupWord'|translate }}"
-              ng-click="addGroupWord(group.id)"></span>
+              ng-click="addGroupWord(group)"></span>
         &nbsp;
         <a ng-href="#/wordList/{{ group.id }}/{{ group.slug }}" class="pointer glyphicon glyphicon-eye-open"></a>
         &nbsp;
+        <span class="pointer glyphicon glyphicon-list-alt" ng-click="createTest(group)"></span>
+        &nbsp;
         <span ng-if="group.uid == user.id" class="pointer glyphicon glyphicon-trash"
               ng-click="delete(group)"></span>
-        &nbsp;
-        <span class="pointer glyphicon glyphicon-list-alt" ng-click="createTest(group)"></span>
     </div>
 </div>
 
@@ -23,3 +23,16 @@
 <go-home></go-home>
 &nbsp;&nbsp;-&nbsp;&nbsp;
 <a ng-href="#/group/create"><span class="glyphicon glyphicon-new-window"></span> {{ 'createGroup'|translate }}</a>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{ 'areYouSure'|translate }}</h3>
+    </div>
+    <div class="modal-body"><b>
+        {{ 'bigAddNotRecommend'|translate }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="addConfirm(-1)">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="addConfirm(20)">OK</button>
+    </div>
+</script>

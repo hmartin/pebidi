@@ -20,9 +20,7 @@ class DictionaryWordModel
     public function addWord(Dictionary $d, Word $word)
     {
         if (!in_array($word->getId(), $d->getWids())) {
-            $dw = new DictionaryWord();
-            $dw->setDictionary($d);
-            $dw->setWord($word);
+            $dw = new DictionaryWord($d, $word);
             $this->em->persist($dw);
 
             return true;

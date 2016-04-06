@@ -15,9 +15,9 @@ slug group*
 pager wordlist*
 Remove personal gw*
 add slug in link*
+add word to a group*
 repair personal stat
 tips dont add more 20w
-add word to a group
 Special page for got
 optim with json in db
 new count point system last 5 with ponderation

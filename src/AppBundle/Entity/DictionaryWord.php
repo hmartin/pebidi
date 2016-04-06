@@ -33,6 +33,12 @@ class DictionaryWord
      */
     protected $score = 0;
 
+    public function __construct(Dictionary $d, Word $w)
+    {
+        $this->dictionary = $d;
+        $this->word = $w;
+    }
+
     /**
      * Get id
      *

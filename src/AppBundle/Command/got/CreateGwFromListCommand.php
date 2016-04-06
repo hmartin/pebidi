@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Command\got;
 
+use AppBundle\Entity\DictionaryWord;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,11 +45,13 @@ class CreateGwFromListCommand extends ContainerAwareCommand
         {
             if ($w = $em->getRepository('AppBundle:Word')->findOneBy(array('word' => $k, 'local' => 'en'))) 
             {
-                $d->addWord($w);
+                $dw = new DictionaryWord($d, $w);
+                $em->persist($dw);
+                $found++;
             }
         }
         
-        $output->writeLn( ' in db:'. $found);
+        $output->writeLn( 'added in gw:'. $found);
         $em->flush();
     }
 }
