@@ -3,7 +3,7 @@
 /*global app */
 
 app
-    .controller('AddWordCtrl', function ($scope, $http, $location, $routeParams, $filter, Flash, pediService, mainService, wordService, dicService) {
+    .controller('AddWordCtrl', function ($scope, $http, $location, $routeParams, $filter, pediService, mainService, wordService, dicService) {
         $scope.formData = {};
 
         if (($scope.dic && $routeParams.id && $routeParams.id != $scope.dic.id) || !$scope.dic) {

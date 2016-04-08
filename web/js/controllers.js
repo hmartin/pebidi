@@ -35,14 +35,25 @@ app
         };
     })
 
-    .controller('CreateTestCtrl', function ($scope, mainService, testService) 
+    .controller('CreateTestCtrl', function ($scope, $routeParams, pediService, mainService, testService) 
     {
-        if ($scope.dic.countWord > 20) {
-            $scope.nbquestion = 20;
+        $scope.initNbQuestion = function () {
+            if ($scope.dic.countWord > 20) {
+                $scope.nbquestion = 20;
+            } else {
+                $scope.nbquestion = $scope.dic.countWord;
+            }
+        };
+        
+        if (($scope.dic && $routeParams.id != $scope.dic.id) || !$scope.dic) {
+            pediService.get($routeParams.id).success(function (data) {
+                $scope.dic = data;
+                $scope.initNbQuestion();
+            });
         } else {
-            $scope.nbquestion = $scope.dic.countWord;
+            $scope.initNbQuestion();
         }
-
+        
         $scope.changeNbQuestion = function (n) {
             $scope.nbquestion = $scope.nbquestion + n;
             if ($scope.nbquestion < 1) {
@@ -64,7 +75,7 @@ app
         $scope.progress = 0;
 
         $scope.words = testService.words;
-
+        
         $scope.word = $scope.words[$scope.i];
 
         $scope.getAnswer = function () {

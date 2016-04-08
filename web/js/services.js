@@ -10,7 +10,7 @@ app
             dic = d;
             localStorageService.set('dic', dic);
 
-            if (d && this.getUser().dic.id == d.id) {
+            if (d && this.getUser() && this.getUser().dic.id == d.id) {
                 user.dic = d;
                 localStorageService.set('user', user);
             }
@@ -32,7 +32,9 @@ app
         };
 
         this.getUser = function () {
-            if (!user && localStorageService.get('user')) {
+            if (!user && !localStorageService.get('user')) {
+                return { 'uid' : null };
+            } else if (!user && localStorageService.get('user')) {
                 user = localStorageService.get('user');
             }
             return user;
@@ -151,12 +153,12 @@ app
     .service('pediService', function ($http, $rootScope, $location, $timeout, $translate, Flash, mainService) {
         this.get = function (id) {
             var data = {};
-            data.uid = mainService.getUser().id;
+            if (mainService.getUser()) {
+                data.uid = mainService.getUser().id;
+            }
 
-            $http.get(API_URL + 'dictionaries/' + id, {params: data}).success(function (data) {
-                $timeout(function () {
-                    mainService.setDic(data);
-                }, 0);
+            return $http.get(API_URL + 'dictionaries/' + id, {params: data}).success(function (data) {
+                mainService.setDic(data);
             });
         };
 
@@ -206,8 +208,12 @@ app
         };
 
         this.addGroupWord = function (data) {
-            console.log(data);
-            return $http.post(API_URL + 'dictionaries/adds/groups/words', data);
+            var promise = $http
+                .post(API_URL + 'dictionaries/adds/groups/words', data)
+                .then(function (data) {
+                    return data.data;
+                });
+            return promise;
         };
     });
     

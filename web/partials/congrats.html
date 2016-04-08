@@ -19,9 +19,8 @@
         <p><a class="btn btn-primary btn-block" ng-href="#/addGroupWord">{{ 'addGroupWord'|translate }}</a></p>
     </div>
 
-    <div class="col-md-8 col-md-offset-2 align-center">
+    <div ng-if="user.id" class="col-md-8 col-md-offset-2 align-center">
         <h2>{{ 'globalResult'|translate }}:</h2>
-
         <div ng-include="'blocs/knowledge.html'"></div>
     </div>
 </div>

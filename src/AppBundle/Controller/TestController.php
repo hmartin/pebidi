@@ -39,12 +39,15 @@ class TestController extends FOSRestController implements ClassResourceInterface
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ((null !== ($u = $this->getDoctrine()->getRepository('AppBundle:User')->find($request->get('uid')))) &&
-            (null !== ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id')))) &&
-            $nb = $request->get('nbQuestion')
-        ) {
-            $results = $this->getDoctrine()->getRepository('AppBundle:Word')->getWordsForTest($nb, $d, $u);
+        if (!$request->get('uid') || !($u = $em->getRepository('AppBundle:User')->find($request->get('uid')))) {
+            $u = null;
         }
+        
+        $d = $em->getRepository('AppBundle:Dictionary')->find($request->get('id'));
+        $nb = $request->get('nbQuestion');
+            
+        $results = $this->getDoctrine()->getRepository('AppBundle:Word')->getWordsForTest($nb, $d, $u);
+            
         shuffle($results);
 
         $t = new Test();

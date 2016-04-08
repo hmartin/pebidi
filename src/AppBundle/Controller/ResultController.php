@@ -55,17 +55,18 @@ class ResultController extends FOSRestController implements ClassResourceInterfa
         $em->persist($r);
 
         $em->flush();
-        
-        $subQuery = 'SELECT SUM(p.point)/COUNT(p.id) FROM Point p ' . 
-            'JOIN Result r ON p.result_id = r.id AND r.user_id = ' .  $r->getUser()->getId() .
-            ' WHERE p.word_id = dw.word_id ORDER BY r.created DESC LIMIT 5';
-        $query = 'UPDATE DictionaryWord dw SET dw.score = ('.$subQuery.');';
-        $connection = $em->getConnection();
-        $stmt = $connection->prepare($query);
-        $stmt->execute();
-
-        $score = $this->getDoctrine()->getRepository('AppBundle:Result')->getAvgScore($r->getUser());
-
-        return ['score' => $score];
+        if ($r->getUser()) {
+            $subQuery = 'SELECT SUM(p.point)/COUNT(p.id) FROM Point p ' . 
+                'JOIN Result r ON p.result_id = r.id AND r.user_id = ' .  $r->getUser()->getId() .
+                ' WHERE p.word_id = dw.word_id ORDER BY r.created DESC LIMIT 5';
+            $query = 'UPDATE DictionaryWord dw SET dw.score = ('.$subQuery.');';
+            $connection = $em->getConnection();
+            $stmt = $connection->prepare($query);
+            $stmt->execute();
+    
+            $score = $this->getDoctrine()->getRepository('AppBundle:Result')->getAvgScore($r->getUser());
+    
+            return ['score' => $score];
+        }
     }
 }

@@ -28,11 +28,14 @@
     <div class="modal-header">
         <h3 class="modal-title">{{ 'areYouSure'|translate }}</h3>
     </div>
-    <div class="modal-body"><b>
-        {{ 'bigAddNotRecommend'|translate }}</b>
+    <div class="modal-body">
+        <b>
+        {{ 'bigAddNotRecommend'|translate }}
+        <input class="col-xs-2" type="text" ng-model="limit" >
+        </b>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-warning" type="button" ng-click="addConfirm(-1)">Cancel</button>
-        <button class="btn btn-primary" type="button" ng-click="addConfirm(20)">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="addConfirm(3000)">{{ 'addAllAnyway' }}</button>
+        <button class="btn btn-primary" type="button" ng-click="addConfirm(limit)">{{ 'add'|translate }} {{ limit }} {{ 'words'|translate }}</button>
     </div>
 </script>

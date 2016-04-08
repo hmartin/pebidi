@@ -4,7 +4,7 @@ parameters:
 services:
   persist:
     class: Main\DefaultBundle\Service\PersistService
-    arguments: [ @doctrine.orm.entity_manager ]
+    arguments: [ "@doctrine.orm.entity_manager" ]
   cookie:
     class: Main\DefaultBundle\Service\CookieService
-    arguments: [@request_stack]
+    arguments: ["@request_stack"]

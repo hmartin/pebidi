@@ -9,16 +9,6 @@ Front: AngularJs + Bootsrap 3
 
 
 micro todo:
-worldwide stat*
-Limit words for gw (mini 15 words)*
-slug group*
-pager wordlist*
-Remove personal gw*
-add slug in link*
-add word to a group*
-new count point system*
-repair personal stat*
-tips dont add more 20w
 Special page for got
 chrome extension in the cloud (0.5)
 Did in Session for chrome extension (1d)

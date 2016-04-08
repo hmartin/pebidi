@@ -95,13 +95,15 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
      * @ApiDoc(section="Dictionary", description="Add group to a dic",
      *  requirements={
      *      { "name"="did", "dataType"="integer", "requirement"="\d+", "description"="dic id" },
-     *      { "name"="gid", "dataType"="integer", "requirement"="\d+", "description"="Group (dic) id" }
+     *      { "name"="gid", "dataType"="integer", "requirement"="\d+", "description"="Group (dic) id" },
+     *      { "name"="limit", "dataType"="integer", "requirement"="\d+", "description"="Limit" }
      *  },
      * )
      * @Rest\View()
      */
     public function postAddGroupWordAction(Request $request)
     {
+        $limit = $request->request->get('limit');
         if (($gw = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('gid')))
             && ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))))
         {
@@ -109,6 +111,9 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
             foreach($gw->getDictionaryWords() as $dw) {
                 if ($this->get('app.dictionary_word_model')->addWord($d, $dw->getWord())) {
                     $i++;
+                    if ($limit != -1 && $i >= $limit) {
+                        break;
+                    }
                 }
             }
 

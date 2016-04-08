@@ -9,28 +9,29 @@ app
 
         $scope.addGroupWord = function (group) {
 
-            if (group.countWord > 3) {
+            if (group.countWord > 10) {
                 $scope.tempGroupId = group.id;
-                var modalInstance = $uibModal.open({
+                $scope.limit = 10;
+                $scope.modalInstance = $uibModal.open({
                     templateUrl: 'myModalContent.html',
                     controller: 'GroupListCtrl',
                     scope: $scope
                 });
             } else {
-                addGroup(group.id, 20);
+                addGroup(group.id, 10);
             }
         };
 
         $scope.addConfirm = function (limit) {
             addGroup($scope.tempGroupId, limit);
-        }
+            $scope.modalInstance.close();
+        };
 
         var addGroup = function (id, limit) {
-
             groupService.addGroupWord({'did': $scope.user.dic.id, 'gid': id, 'limit': limit}).then(function (data) {
                 mainService.setDic(data.dic);
                 var message = '<strong>' + $translate.instant('wellDone') + '!</strong> ' + data.nbAdd + ' ' + $translate.instant('wordsAdded') + '.';
-                Flash.create('success', message, 'custom-class');
+                Flash.create('success', message);
             });
         };
 
