@@ -16,15 +16,12 @@ pager wordlist*
 Remove personal gw*
 add slug in link*
 add word to a group*
-repair personal stat
+new count point system*
+repair personal stat*
 tips dont add more 20w
 Special page for got
-optim with json in db
-new count point system last 5 with ponderation
 chrome extension in the cloud (0.5)
 Did in Session for chrome extension (1d)
-if no user on page who need user then redirect
-Think security
 
 
 Functional test scenario:

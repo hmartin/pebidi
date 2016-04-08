@@ -6,6 +6,10 @@ Inverse definition test (0.5d)
 Fixture GW 500/20/90 words
 full help and amazing interaction
 shortcuts for every button
+if no user on page who need user then redirect
+Think security
+optim with json in db
+Point system last 5 with ponderation
 
 v4 college:
 uniqu type/expression
