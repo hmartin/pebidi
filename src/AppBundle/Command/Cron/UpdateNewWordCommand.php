@@ -25,9 +25,11 @@ class UpdateNewWordCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
         
         $qb = $em->getRepository('AppBundle:Word')->createQueryBuilder('w')
-                ->leftJoin('w.subWords', 's')
+                ->leftJoin('w.subWords', 's',
+                    \Doctrine\ORM\Query\Expr\Join::WITH, 's.expression IS NULL')
                 ->where('s.id IS NULL')
                 ->andWhere('w.disabled = 0')
+                ->andWhere('w.local = \'en\'')
                 ;
         $results = $qb->getQuery()->getResult();
         $output->writeLn(date("Y-m-d h:i:sa") . ' Start with: ' .count($results). ' words');
@@ -39,6 +41,7 @@ class UpdateNewWordCommand extends ContainerAwareCommand
                 $this->getContainer()->get('app.word_model')->postImprove($r->getWord(), $senses);
             } else {
                 $r->setDisabled(1);
+                $output->writeLn('disabled!');
             }
         }
         $em->flush();

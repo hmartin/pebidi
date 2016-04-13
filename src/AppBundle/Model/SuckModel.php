@@ -8,19 +8,35 @@ class SuckModel
 {
     public function wordToArray($word)
     {
-        $html = $this->suckWithWr($word);
-        $array = $this->htmlToArray($html);
-        
+        $array = $this->suckWithGoogleApi($word);
+
         if (count($array) > 0) {
             return $array;
         }
-        
+
         return false;
     }
-    
-    private function suckWithWr($word)
+
+    private function suckWithGoogleApi($word)
     {
-        $url = 'http://www.wordreference.com/enfr/' . $word;
+        $key = 'AIzaSyAaQLDYMaHe5gCiiF2a_DpXrlzeQZk1WKs';
+        $url = 'https://www.googleapis.com/language/translate/v2?key=' . $key . '&q=' . $word . '&source=en&target=fr';
+
+        $array = json_decode($this->curlIt($url), true);
+
+        if (isset($array['data']) && isset($array['data']['translations'][0]['translatedText'])) {
+            $trad = $array['data']['translations'][0]['translatedText'];
+            $data = [['w' => $word, 'category' => '', 'concat' => $trad]];
+
+            return $data;
+        }
+
+        return false;
+    }
+
+    private function curlIt($url)
+    {
+
         $curl_handle = curl_init();
         \curl_setopt($curl_handle, CURLOPT_URL, $url);
         \curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
@@ -28,10 +44,29 @@ class SuckModel
         \curl_setopt($curl_handle, CURLOPT_USERAGENT, 'googlebot');
         $html = \curl_exec($curl_handle);
         \curl_close($curl_handle);
-        
+
         return $html;
     }
-    
+
+    public function wordToArrayWithWr($word)
+    {
+        $html = $this->suckWithWr($word);
+        $array = $this->htmlToArray($html);
+
+        if (count($array) > 0) {
+            return $array;
+        }
+
+        return false;
+    }
+
+    private function suckWithWr($word)
+    {
+        $url = 'http://www.wordreference.com/enfr/' . $word;
+
+        return $this->curlIt($url);
+    }
+
     public function htmlToArray($html)
     {
         $crawler = new Crawler($html);
@@ -69,16 +104,16 @@ class SuckModel
                             if (count($type)) {
                                 $t = $type->html();
                             }
-                            
+
                         }
                         $newWord = explode(',', $newWord->html());
                         $w = $this->cleanString($newWord['0']);
                     }
-                    
-                    
-                    if($w){
+
+
+                    if ($w) {
                         if ((null !== ($senseValue = $tr->filter('td')->eq(1))) && count($senseValue) > 0) {
-    
+
                             $senseValue->filter('span')->each(function (Crawler $crawler) {
                                 foreach ($crawler as $node) {
                                     $node->parentNode->removeChild($node);
@@ -91,17 +126,17 @@ class SuckModel
                             });
                             $sensesArrayValue = explode(',', $senseValue->html());
                             $converted = strtr($sensesArrayValue['0'], array_flip(get_html_translation_table(HTML_ENTITIES, ENT_QUOTES)));
-                            $converted = trim($converted, chr(0xC2).chr(0xA0));
-    
+                            $converted = trim($converted, chr(0xC2) . chr(0xA0));
+
                             $sense = $this->cleanSense($converted);
-    
+
                         }
-    
+
                         if (null !== ($trans = $tr->filter('td.ToWrd')->eq(0)) && count($trans)) {
                             if (null == $trans->filter('span[title*="translation unavailable"]')->eq(0)) {
                                 continue;
                             }
-    
+
                             $t_trans = '';
                             if (null !== ($type_trans = $trans->filter('em')->eq(0))) {
                                 $type_trans->filter('span')->each(function (Crawler $crawler) {
@@ -111,7 +146,7 @@ class SuckModel
                                 });
                                 $t_trans = $type->html();
                             }
-    
+
                             $trans->filter('em')->each(function (Crawler $crawler) {
                                 foreach ($crawler as $node) {
                                     $node->parentNode->removeChild($node);
@@ -122,7 +157,7 @@ class SuckModel
                                     $node->parentNode->removeChild($node);
                                 }
                             });
-                            
+
                             $concat = $trans->html();
                             $senses[$key] = array('w' => $w, 'additional' => $additional, 'category' => $t, 'sense' => $sense, 'concat' => $trans->html());
                         }
@@ -139,8 +174,8 @@ class SuckModel
                         }
                     });
                     if (count($trans)) {
-                            $senses[$key]['concat'] = $senses[$key]['concat'] . ',' . $trans->html();
-                        
+                        $senses[$key]['concat'] = $senses[$key]['concat'] . ',' . $trans->html();
+
                     }
                 }
             }
@@ -154,7 +189,7 @@ class SuckModel
         if (mb_detect_encoding($string) != 'UTF-8') {
             $string = iconv('ASCII', 'UTF-8', $string);
         }
-        
+
         $endash = html_entity_decode('&#x2013;', ENT_COMPAT, 'UTF-8');
         $string = str_replace('*', '', $string);
         $string = str_replace('...', '', $string);

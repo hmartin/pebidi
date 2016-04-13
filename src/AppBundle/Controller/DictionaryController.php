@@ -103,15 +103,25 @@ class DictionaryController extends FOSRestController implements ClassResourceInt
      */
     public function postAddGroupWordAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $limit = $request->request->get('limit');
         if (($gw = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('gid')))
             && ($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->request->get('did'))))
         {
             $i = 0;
-            foreach($gw->getDictionaryWords() as $dw) {
-                if ($this->get('app.dictionary_word_model')->addWord($d, $dw->getWord())) {
+            $words = $em->getRepository('AppBundle:Word')->getDictionaryAllWords($gw);
+            shuffle($words);
+            foreach($words as $w) {
+                $a[] = $w['id'];
+            }
+            $groupWids = array_diff($a, $d->getWids());
+
+            foreach($groupWids as $wid) {
+                $word = $this->getDoctrine()->getRepository('AppBundle:Word')->find($wid);
+                if ($this->get('app.dictionary_word_model')->addWord($d, $word)) {
                     $i++;
-                    if ($limit != -1 && $i >= $limit) {
+                    if ($i >= $limit) {
                         break;
                     }
                 }
