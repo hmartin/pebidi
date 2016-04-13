@@ -1,10 +1,14 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "hmartin/pebidi",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "PeBbidi Personal",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": { "": "src/" },
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" }
     },
     "require": {
         "php": ">=5.3.3",

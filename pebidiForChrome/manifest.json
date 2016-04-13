@@ -1,6 +1,9 @@
 {
   "name": "Pebidi from Chrome",
-  "description": "Translate evryword",
+  "description": "Translate evryword in one click",
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
   "version": "0.7",
   "permissions": ["contextMenus",
         "tabs",

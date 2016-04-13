@@ -4,7 +4,8 @@ if (selection) {
 
 	var parentNode = selection.anchorNode.parentNode;
 	var node = document.createElement("span");
-	var textnode = document.createTextNode("great");
-	node.appendChild(textnode);        // Append the text to <li>
+	node.style.cssText = 'background-color: red;';
+	var textnode = document.createTextNode(" Word " + selection +" added! ");
+	node.appendChild(textnode);
 	parentNode.appendChild(node);
 }
