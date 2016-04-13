@@ -63,6 +63,7 @@ doctrine:
 
              string_functions:
                  GROUP_CONCAT_IF_NULL: Main\DefaultBundle\Query\GroupConcat
+                 RAND: Main\DefaultBundle\Query\Rand
                  char_length: DoctrineExtensions\Query\Mysql\CharLength
                  concat_ws: DoctrineExtensions\Query\Mysql\ConcatWs
                  countif: DoctrineExtensions\Query\Mysql\CountIf

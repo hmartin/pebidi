@@ -1,13 +1,15 @@
-<h1>{{'createTest'|translate }}</h1>
+<h1 ng-if="!dic.group">{{'createTest'|translate }}</h1>
+<h1 ng-if="dic.group">{{'testYourKnowledgeOn'|translate }}: {{ dic.title }}</h1>
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2 align-center">
-        <h2>Check your knowledge on<br>
-        <span ng-click="changeNbQuestion(-5)" class="pointer glyphicon glyphicon-minus"></span>
+        <h2 ng-if="!dic.group">{{'checkYourKnowledge'|translate }}</h2>
+        <h2><span ng-click="changeNbQuestion(-5)" class="pointer glyphicon glyphicon-minus"></span>
             &nbsp;{{ nbquestion }}&nbsp;
-        <span ng-click="changeNbQuestion(5)" class="pointer glyphicon glyphicon-plus"></span>
-        <br>
-        words</h2>
-    <button ng-click="startTest()" class="btn btn-success input-lg">{{ 'start'|translate }}</button>
+            <span ng-click="changeNbQuestion(5)" class="pointer glyphicon glyphicon-plus"></span>
+            <br>
+            {{ 'words'|translate }}
+        </h2>
+        <button ng-click="startTest()" class="btn btn-success input-lg">{{ 'start'|translate }}</button>
     </div>
 </div>

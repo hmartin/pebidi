@@ -57,8 +57,13 @@ class WordRepository extends EntityRepository
     {
         $qb = $this->getDictionaryWords($d, $u)
             ->addSelect('word as object')
-            ->setMaxResults($nb)
-            ->orderBy('stat_sum_realised', 'ASC');
+            ->setMaxResults($nb);
+
+        if ($u) {
+            $qb->orderBy('stat_sum_realised', 'ASC');
+        } else {
+            $qb->addSelect('RAND() as HIDDEN rand')->orderBy('rand');
+        }
 
         return $qb->getQuery()->getResult();
     }
