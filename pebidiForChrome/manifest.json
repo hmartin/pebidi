@@ -12,7 +12,8 @@
         "https://*/"],
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
-    "js": ["content_script.js"]
+    "js": ["content_script.js"],
+    "run_at": "document_end",
   }],
   "background": {
     "persistent": false,
