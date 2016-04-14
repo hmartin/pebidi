@@ -30,17 +30,16 @@
         
         "braincrafted/bootstrap-bundle": "~2.0",
         "twbs/bootstrap": "3.0.*",
-        "jquery/jquery":  "1.10.*",
-        "gedmo/doctrine-extensions": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "cspoo/swiftmailer-mailgun-bundle": "dev-master",
         "mailgun/mailgun-php": "~1.7.2",
         "stof/doctrine-extensions-bundle": "*",
         "beberlei/DoctrineExtensions": "*",
-        "liip/functional-test-bundle": "^1.5",
+        "liip/functional-test-bundle": "~1",
         "doctrine/doctrine-fixtures-bundle": "*",
         "nelmio/alice": "*",
-        "hautelook/alice-bundle": "*"
+        "hautelook/alice-bundle": "*",
+        "sbk/cron-bundle": "dev-master"
         
 
     },

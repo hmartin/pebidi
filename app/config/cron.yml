@@ -1,0 +1,8 @@
+sbk_cron:
+    tasks:
+        updateNewWord:
+            command:    'pebidi:updateNewWord >> /var/www/vhosts/pebidi/app/log/updateNewWord.txt'
+            expression: '0 1 * * *'
+        updateJson:
+            command:    'oneShot:json >> /var/www/vhosts/pebidi/app/log/json.txt'
+            expression: '30 1 * * *'

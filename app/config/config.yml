@@ -1,7 +1,9 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: cron.yml }
     - { resource: doctrine_extensions.yml }
+    - { resource: "@SbkCronBundle/Resources/config/services.yml" }
 
 framework:
     #esi:             ~
@@ -92,7 +94,7 @@ fos_user:
 
 sensio_framework_extra:
     view:
-        annotations: false
+        annotations: true
 
 fos_rest:
     view:
