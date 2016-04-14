@@ -15,6 +15,7 @@ class TestRepository extends EntityRepository
     {
         $sql = 'SELECT (sum(t.score*t.nbQuestion)/sum(t.nbQuestion)) as avg FROM Test t WHERE t.dictionary_id = :did and t.user_id = :uid';
         $a = $this->getEntityManager()->getConnection()->executeQuery($sql, $a)->fetchAll();
+        
         return $a[0]['avg'];
     }
 }

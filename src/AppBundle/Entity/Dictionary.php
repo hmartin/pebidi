@@ -364,40 +364,6 @@ class Dictionary
     }
 
     /**
-     * Add dictionaryScore
-     *
-     * @param \AppBundle\Entity\DictionaryScore $dictionaryScore
-     *
-     * @return Dictionary
-     */
-    public function addDictionaryScore(\AppBundle\Entity\DictionaryScore $dictionaryScore)
-    {
-        $this->dictionaryScores[] = $dictionaryScore;
-
-        return $this;
-    }
-
-    /**
-     * Remove dictionaryScore
-     *
-     * @param \AppBundle\Entity\DictionaryScore $dictionaryScore
-     */
-    public function removeDictionaryScore(\AppBundle\Entity\DictionaryScore $dictionaryScore)
-    {
-        $this->dictionaryScores->removeElement($dictionaryScore);
-    }
-
-    /**
-     * Get dictionaryScores
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getDictionaryScores()
-    {
-        return $this->dictionaryScores;
-    }
-
-    /**
      * Set main
      *
      * @param integer $main

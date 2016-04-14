@@ -38,8 +38,8 @@ app
     .controller('CreateTestCtrl', function ($scope, $routeParams, pediService, mainService, testService) 
     {
         $scope.initNbQuestion = function () {
-            if ($scope.dic.countWord > 20) {
-                $scope.nbquestion = 20;
+            if ($scope.dic.countWord > 10) {
+                $scope.nbquestion = 10;
             } else {
                 $scope.nbquestion = $scope.dic.countWord;
             }

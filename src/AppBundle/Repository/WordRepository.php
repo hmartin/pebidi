@@ -93,14 +93,11 @@ class WordRepository extends EntityRepository
 
     public function getWordsForSameTest($t)
     {
-        $a = array(
-            'tid' => $t
-        );
         $qb = $this->initQueryBuilder()
             ->innerJoin('word.testsWords', 'test')
             ->where('test.id = :tid')
             ->groupBy('word.id')
-            ->setParameters($a);
+            ->setParameter('tid', $t);
 
         return $qb->getQuery()->getResult();
     }

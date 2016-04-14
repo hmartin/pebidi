@@ -83,12 +83,4 @@ class UserController extends FOSRestController implements ClassResourceInterface
 
         return $params;
     }
-
-    protected function getScore($u, $d)
-    {
-        $a = array('user' => $u, 'dictionary' => $d);
-        $ds = $this->getDoctrine()->getRepository('AppBundle:DictionaryScore')->findOneBy($a);
-
-        return $ds->getScore();
-    }
 }
