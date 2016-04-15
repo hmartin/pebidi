@@ -66,6 +66,10 @@ app.config(['$routeProvider',
                 controller: 'DictionaryCtrl',
                 type: 'group'
             }).
+            when('/chromeExtension', {
+                templateUrl: 'partials/chromeExtension.html',
+                controller: 'GroupCreateCtrl'
+            }).
             otherwise({
                 redirectTo: '/'
             });

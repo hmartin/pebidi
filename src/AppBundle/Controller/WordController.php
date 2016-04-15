@@ -46,13 +46,17 @@ class WordController extends FOSRestController implements ClassResourceInterface
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if (($d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($request->get('id')))
-                && ($word = $request->get('w'))) {
-            $edit = false;
-            if ($this->getUser() && $this->getUser()->hasRole('ROLE_USER')) {
-                $edit = true;
-            }
-            
+        
+        $edit = false;
+        if ($id = $request->get('id')) {
+            $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($id);
+        } 
+        elseif ($this->getUser()) {
+            $d = $u->getDefaultDictionary();
+            $edit = true;
+        }
+        
+        if (isset($d) && $word = $request->get('w')) {
             $msg = 'valid';
             
             // TODO: Check if expression
