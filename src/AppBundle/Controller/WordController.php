@@ -51,11 +51,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
         if ($id = $request->get('id')) {
             $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($id);
         } 
-        elseif ($this->getUser()) {
+        elseif ($u = $this->getUser()) {
             $d = $u->getDefaultDictionary();
             $edit = true;
         }
-        
+        else {
+         
         if (isset($d) && $word = $request->get('w')) {
             $msg = 'valid';
             

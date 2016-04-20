@@ -68,17 +68,19 @@ chrome.contextMenus.onClicked.addListener(function(info, tab)
 		var intRegex = /^[a-zA-Z]+$/;
 		if (intRegex.test(info.selectionText)) {
 			$http.post('http://pebidi.com/api_dev.php/words', {
-				'w': sText,
-				'id': 1
+				'w': sText
 			}).success(function(data, tab) {
-				console.log('success');
-				chrome.tabs.executeScript(tab.id, {
-					code: 'var config = ' + JSON.stringify(data)
-				}, function() {
+				if (data.msg == "reconnect") {
+					alert('Please reconnect on pebidi');
+				} else {
 					chrome.tabs.executeScript(tab.id, {
-						file: "notification.js"
+						code: 'var config = ' + JSON.stringify(data)
+					}, function() {
+						chrome.tabs.executeScript(tab.id, {
+							file: "notification.js"
+						});
 					});
-				});
+				}
 			});
 		}
 	}

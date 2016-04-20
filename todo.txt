@@ -110,3 +110,5 @@ add word to a group*
 new count point system*
 repair personal stat*
 tips dont add more 20w*
+chrome extension in the cloud (0.5)*
+Did in Session for chrome extension (1d)*
