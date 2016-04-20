@@ -30,12 +30,18 @@
     </div>
     <div class="modal-body">
         <b>
-        {{ 'bigAddNotRecommend'|translate }}
-        <input class="col-xs-2" type="text" ng-model="limit" >
+            {{ 'bigAddNotRecommend'|translate }}<br>
         </b>
+        <div class="form-group">
+            <input class="col-xs-2 col-xs-offset-5" type="text" ng-model="limit">
+        </div>
+        <br>&nbsp;
     </div>
     <div class="modal-footer">
-        <button class="btn btn-warning" type="button" ng-click="addConfirm(5000)">{{ 'addAllAnyway' }}</button>
-        <button class="btn btn-primary" type="button" ng-click="addConfirm(limit)">{{ 'add'|translate }} {{ limit }} {{ 'words'|translate }}</button>
+        <button class="btn btn-warning" type="button" ng-click="addConfirm(5000)">{{ 'addAllAnyway'|translate }}
+        </button>
+        <button class="btn btn-primary" type="button" ng-click="addConfirm(limit)">{{ 'add'|translate }} {{ limit }} {{
+            'words'|translate }}
+        </button>
     </div>
 </script>

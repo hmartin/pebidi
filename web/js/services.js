@@ -97,7 +97,7 @@ app
     /*
      * Add or delete pebidi's word
      */
-    .service('wordService', function ($http, $rootScope, $timeout, $q) {
+    .service('wordService', function ($http, $rootScope, $timeout, $translate, Flash, $q) {
         var word = null;
 
         this.get = function (idOrWord) {
@@ -118,7 +118,7 @@ app
 
         this.improve = function (word, data) {
             $http.post(API_URL + 'words/improves', {'word': word, 'data': data}).success(function (data) {
-                console.log(data);
+                Flash.create('warning', $translate.instant('Congrats'));
             });
         };
     })
@@ -132,7 +132,6 @@ app
             if (!dic) {
                 return $http.get(URL + 'dict/dicten.json').then(function (res) {
                     dic = res.data;
-
 
                     return dic;
                 });

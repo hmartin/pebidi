@@ -27,7 +27,6 @@ app
             $scope.formData.to =  $scope.lang[$scope.ia];
             $http.post(API_URL + 'users/emails', $scope.formData).success(function (data) {
                 data.user.dic = data.dic;
-                console.log(data);
                 mainService.setUser(data.user);
                 mainService.setDic(data.dic);
             });

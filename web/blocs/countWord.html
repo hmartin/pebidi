@@ -1,4 +1,4 @@
 <div class="col-md-6">
-    <h2><a ng-href="#/dictionary/{{ dic.id }}" >{{ dic.countWord }} Words</a></h2>
+    <h2><a ng-href="#/dictionary/{{ dic.id }}" >{{ dic.countWord }} {{ 'words'|translate| capitalize  }}</a></h2>
     <a class="btn btn-primary btn-lg" ng-href="#/wordList/{{ dic.id }}" >{{ 'yourDictionary'|translate  }}</a>
 </div>

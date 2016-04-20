@@ -76,7 +76,8 @@ app.config(['$routeProvider',
     }]);
 
 app.config(function ($translateProvider) {
-    $translateProvider.useSanitizeValueStrategy('sanitize');
+    //$translateProvider.useSanitizeValueStrategy('sanitize');
+    $translateProvider.useSanitizeValueStrategy(null);
 
     $translateProvider.useStaticFilesLoader({
         prefix: 'translate/',

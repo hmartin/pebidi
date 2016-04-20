@@ -20,17 +20,17 @@ app
             if (sug.length == 0) {
                 $scope.submitCreate = true;
             }
-            
+
             sug.sort(function sortMultiDimensional(a, b) {
-                return((a.w.length < b.w.length) ? -1 : ((a.w.length > b.w.length) ? 1 : 0));
+                return ((a.w.length < b.w.length) ? -1 : ((a.w.length > b.w.length) ? 1 : 0));
             });
-              
+
             return sug;
         };
 
         $scope.processWord = function () {
             var string;
-            console.log($scope.formData);
+
             if (typeof $scope.formData.word === 'object') {
                 string = $scope.formData.word.w;
             } else {
@@ -40,8 +40,7 @@ app
             $scope.formData.word = '';
             $scope.formData.translation = '';
         };
-        
-        
+
         $scope.doATest = function () {
             $location.path('/createTest/');
         };

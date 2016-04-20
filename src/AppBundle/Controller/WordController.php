@@ -30,10 +30,10 @@ class WordController extends FOSRestController implements ClassResourceInterface
         }
         $wordRepo = $this->getDoctrine()->getRepository('AppBundle:Word');
         $results = $wordRepo->getWordTranslationConcat($w);
-        
+
         return $results;
     }
-    
+
     /**
      * @ApiDoc(section="Word", description="Post Word to Dic return [msg => valid|notExistYet|error, dic => jsonDic]",
      *  requirements={
@@ -46,25 +46,24 @@ class WordController extends FOSRestController implements ClassResourceInterface
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        
+
         $edit = false;
         if ($id = $request->get('id')) {
             $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($id);
-        } 
-        elseif ($u = $this->getUser()) {
+        } elseif ($u = $this->getUser()) {
             $d = $u->getDefaultDictionary();
             $edit = true;
+        } else {
+            return array('msg' => 'reconnect');
         }
-        else {
-         
+
         if (isset($d) && $word = $request->get('w')) {
             $msg = 'valid';
-            
+
             // TODO: Check if expression
-            if (false == ($w = $em->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => 'en')))) 
-            {
+            if (false == ($w = $em->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => 'en')))) {
                 $w = $this->get('app.word_model')->getWord($word, 'en', true);
-                $msg = 'notExistYet';    
+                $msg = 'notExistYet';
             }
 
             if (!$this->get('app.dictionary_word_model')->addWord($d, $w)) {
@@ -76,10 +75,11 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
             return ['msg' => $msg, 'dic' => $this->get('app.dictionary_model')->createJson($d)];
         }
-        
+
         return array('msg' => 'error');
     }
-    
+
+
     /**
      * @ApiDoc(section="Word", description="Remove Word to Dic",
      *  requirements={
@@ -102,11 +102,12 @@ class WordController extends FOSRestController implements ClassResourceInterface
             }
             $em->refresh($d);
 
-            return array('dic' => $d->getJsonArray());
+            return ['msg' => 'ok', 'dic' => $this->get('app.dictionary_model')->createJson($d)];
         }
+
         throw new \Exception('postDeleteWordAction went wrong!');
     }
-    
+
     /**
      * @ApiDoc(section="Word", description="Improve Word",
      *  requirements={
@@ -122,7 +123,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
         return $this->get('app.word_model')->postImprove($request->get('word'), $request->get('data'));
     }
-    
+
     /**
      * @ApiDoc(section="Word", description="Suck Word",
      *  requirements={
@@ -134,7 +135,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
     public function suckOneFromWebAction($word)
     {
         $senses = $this->get('app.suck_model')->wordToArray($word);
-        
+
         return $this->get('app.word_model')->postImprove($word, $senses);
     }
 }

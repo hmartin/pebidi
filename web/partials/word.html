@@ -1,12 +1,12 @@
 <div>
     <h1>{{ word| capitalize }}</h1>
-        <div class="text-left row animate-repeat" ng-class-odd="'odd'" ng-repeat="wordSense in wordSenses">
-            <div ng-class-odd="'odd'" >
-                <div class="col-xs-9 col-md-3 no-gutter">
+        <div class="text-left animate-repeat" ng-repeat="wordSense in wordSenses">
+            <div class="row" ng-class-odd="'odd'" >
+                <div class="col-xs-9 col-md-3">
                     {{ wordSense.w| capitalize }}
                 </div>
 
-                <div class="col-xs-3 col-md-1 no-gutter">
+                <div class="col-xs-3 col-md-1">
                 </div>
                 <div class="col-xs-12 col-md-4">
                     {{ wordSense.sense }}
