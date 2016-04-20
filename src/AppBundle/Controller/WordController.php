@@ -47,7 +47,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
     {
         $em = $this->getDoctrine()->getManager();
 
-        $edit = false;
+        $edit = true;
         if ($id = $request->get('id')) {
             $d = $this->getDoctrine()->getRepository('AppBundle:Dictionary')->find($id);
         } elseif ($u = $this->getUser()) {
@@ -62,7 +62,7 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
             // TODO: Check if expression
             if (false == ($w = $em->getRepository('AppBundle:Word')->findOneBy(array('word' => $word, 'local' => 'en')))) {
-                $w = $this->get('app.word_model')->getWord($word, 'en', true);
+                $w = $this->get('app.word_model')->getWord($word, 'en', $edit);
                 $msg = 'notExistYet';
             }
 
@@ -78,7 +78,6 @@ class WordController extends FOSRestController implements ClassResourceInterface
 
         return array('msg' => 'error');
     }
-
 
     /**
      * @ApiDoc(section="Word", description="Remove Word to Dic",

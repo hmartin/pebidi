@@ -4,6 +4,6 @@ sbk_cron:
             command:    'pebidi:updateNewWord >> /var/www/vhosts/pebidi/app/log/updateNewWord.txt'
             expression: '* * * * *'
         updateJson:
-            command:    'oneShot:json >> /var/www/vhosts/pebidi/app/log/json.txt'
+            command:    'pebidi:json >> /var/www/vhosts/pebidi/app/log/json.txt'
             expression: '30 * * * *'
 

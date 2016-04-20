@@ -10,6 +10,7 @@ app
             dic = d;
             localStorageService.set('dic', dic);
 
+            //bug if no id
             if (d && this.getUser() && this.getUser().dic.id == d.id) {
                 user.dic = d;
                 localStorageService.set('user', user);
