@@ -34,7 +34,7 @@
         "cspoo/swiftmailer-mailgun-bundle": "dev-master",
         "mailgun/mailgun-php": "~1.7.2",
         "stof/doctrine-extensions-bundle": "*",
-        "beberlei/DoctrineExtensions": "*",
+        "beberlei/doctrineextensions": "*",
         "liip/functional-test-bundle": "~1",
         "doctrine/doctrine-fixtures-bundle": "*",
         "nelmio/alice": "*",
